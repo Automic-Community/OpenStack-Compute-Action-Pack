@@ -1,0 +1,14 @@
+# Package Build Configuration
+name: PCK.AUTOMIC_OPENSTACK
+
+source: ae
+
+# binary object resource mapping will be defined here
+# please add resources here
+binaries:
+  - object: RESOURCES/LIBS/PCK.AUTOMIC_OPENSTACK.PRV.STORE
+    resources:
+      - name: OPENSTACK 
+        type: BINARY
+        path: tools/target/openstacktool.jar
+        version: 1.0.0 
