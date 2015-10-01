@@ -15,6 +15,8 @@ public final class Constants {
     public static final String CONNECTION_TIMEOUT = "connectiontimeout";
     public static final String READ_TIMEOUT = "readtimeout";
     public static final String ACTION = "action";
+	public static final String PASSWORD = "password";
+	public static final String HTTPS = "https";
 
     private Constants() {
     }

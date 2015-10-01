@@ -31,7 +31,8 @@ public final class ActionFactory {
         AbstractAction action = null;
 
         switch (enumAction) {
-			case VERSION:
+			case GET_TOKEN:
+				action = new GetTokenAction();
 			    break;
             default:
                 String msg = "Invalid Action.. Please enter valid action " + Action.getActionNames();

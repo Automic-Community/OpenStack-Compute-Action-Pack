@@ -1,6 +1,8 @@
 package com.automic.openstack.constants;
 
 
+
+
 /**
  * Constant class containing messages to describe Exception Scenarios.
  *
@@ -27,6 +29,15 @@ public final class ExceptionConstants {
 
     public static final String OPTION_VALUE_MISSING = "Value for option %s [%s]is missing";
     public static final String INVALID_ARGS = "Improper Args. Possible cause : %s";
+
+	public static final String EMPTY_SERVICE_ENDPOINT = "Service endpoint must not be empty";
+
+	public static final String  EMPTY_USERNAME = "Username must not be empty";
+	public static final String  EMPTY_PASSWORD = "Password must not be empty";
+	public static final String  EMPTY_TENANT_NAME = "Tenant/Project must not be empty";
+
+	public static final String INVALID_BASE_URL = "Invalid service endpont [ %s ]";
+	
 
     private ExceptionConstants() {
     }

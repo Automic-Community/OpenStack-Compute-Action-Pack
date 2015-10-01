@@ -6,7 +6,7 @@ package com.automic.openstack.constants;
  */
 public enum Action {
 
-    VERSION;
+    GET_TOKEN;
 
     public static String getActionNames() {
         Action[] actions = Action.values();

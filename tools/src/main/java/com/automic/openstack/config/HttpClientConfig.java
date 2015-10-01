@@ -1,6 +1,8 @@
 package com.automic.openstack.config;
 
+import com.automic.openstack.constants.Constants;
 import com.automic.openstack.exception.AutomicException;
+import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.client.urlconnection.HTTPSProperties;
@@ -13,6 +15,25 @@ import com.sun.jersey.client.urlconnection.HTTPSProperties;
 public final class HttpClientConfig {
 
     private HttpClientConfig() {
+    }
+    
+    
+    public static Client getClient(String protocol, String certificatePath, int connectionTimeOut, int readTimeOut)
+            throws AutomicException {
+        Client client;
+
+        ClientConfig config = new DefaultClientConfig();
+
+       
+        config.getProperties().put(ClientConfig.PROPERTY_CONNECT_TIMEOUT, connectionTimeOut);
+        config.getProperties().put(ClientConfig.PROPERTY_READ_TIMEOUT, readTimeOut);
+
+        if (Constants.HTTPS.equalsIgnoreCase(protocol)) {
+            //https code goes here
+        }
+        client = Client.create(config);
+
+        return client;
     }
 
     /**
