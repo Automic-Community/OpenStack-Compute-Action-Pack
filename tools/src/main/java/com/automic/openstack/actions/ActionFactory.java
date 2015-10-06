@@ -20,7 +20,7 @@ public final class ActionFactory {
     /**
      * Method to return instance of implementation of {@link AbstractAction} based on value of enum {@link Action}
      * passed.
-     *
+     * 
      * @param enumAction
      * @return an implementation of {@link AbstractAction}
      * @throws AutomicException
@@ -31,9 +31,9 @@ public final class ActionFactory {
         AbstractAction action = null;
 
         switch (enumAction) {
-			case OPENSTACK_LOGIN:
-				action = new GetTokenAction();
-			    break;
+            case OPENSTACK_LOGIN:
+                action = new GetTokenAction();
+                break;
             default:
                 String msg = "Invalid Action.. Please enter valid action " + Action.getActionNames();
                 LOGGER.error(msg);

@@ -21,126 +21,119 @@ import com.automic.openstack.util.CommonUtil;
 import com.sun.jersey.api.client.Client;
 
 /**
- * An abstract action which parses the command line parameters using apache cli
- * and further calls the execute method. The implementation of execute method
- * will be provided by the subclass of this class. This class also provides the
+ * An abstract action which parses the command line parameters using apache cli and further calls the execute method.
+ * The implementation of execute method will be provided by the subclass of this class. This class also provides the
  * method to retrieve the arguments which can be used inside execute method.
  */
 public abstract class AbstractAction {
 
-	private static final Logger LOGGER = LogManager
-			.getLogger(AbstractAction.class);
+    private static final Logger LOGGER = LogManager.getLogger(AbstractAction.class);
 
-	private CliOptions actionOptions;
-	private Cli cli;
+    /**
+     * Service end point
+     */
+    protected String baseUrl;
 
-	/**
-	 * Service endpoint
-	 */
-	protected String baseUrl;
+    protected Client client;
 
-	/**
-	 * Connection timeout in milliseconds
-	 */
-	private int connectionTimeOut;
+    protected String certFilePath;
 
-	/**
-	 * Read timeout in milliseconds
-	 */
-	private int readTimeOut;
+    private CliOptions actionOptions;
+    private Cli cli;
+    /**
+     * Connection timeout in milliseconds
+     */
+    private int connectionTimeOut;
 
-	protected Client client;
+    /**
+     * Read timeout in milliseconds
+     */
+    private int readTimeOut;
 
-	protected String certFilePath;
+    public AbstractAction() {
+        actionOptions = new CliOptions();
+        addOption(Constants.READ_TIMEOUT, true, "Read timeout");
+        addOption(Constants.CONNECTION_TIMEOUT, true, "connection timeout");
+    }
 
-	public AbstractAction() {
-		actionOptions = new CliOptions();
-		 addOption(Constants.READ_TIMEOUT, true, "Read timeout");
-	     addOption(Constants.CONNECTION_TIMEOUT, true, "connection timeout");
-	}
+    /**
+     * This method is used to add the argument.
+     * 
+     * @param optionName
+     *            argument key used to identify the argument.
+     * @param isRequired
+     *            true/false. True means argument is mandatory otherwise it is optional.
+     * @param description
+     *            represents argument description.
+     */
+    public final void addOption(String optionName, boolean isRequired, String description) {
+        actionOptions.addOption(optionName, isRequired, description);
+    }
 
-	/**
-	 * This method is used to add the argument.
-	 * 
-	 * @param optionName
-	 *            argument key used to identify the argument.
-	 * @param isRequired
-	 *            true/false. True means argument is mandatory otherwise it is
-	 *            optional.
-	 * @param description
-	 *            represents argument description.
-	 */
-	public final void addOption(String optionName, boolean isRequired,
-			String description) {
-		actionOptions.addOption(optionName, isRequired, description);
-	}
+    /**
+     * This method is used to retrieve the value of specified argument.
+     * 
+     * @param arg
+     *            argument key for which you want to get the value.
+     * @return argument value for the specified argument key.
+     */
+    public final String getOptionValue(String arg) {
+        return cli.getOptionValue(arg);
+    }
 
-	/**
-	 * This method is used to retrieve the value of specified argument.
-	 * 
-	 * @param arg
-	 *            argument key for which you want to get the value.
-	 * @return argument value for the specified argument key.
-	 */
-	public final String getOptionValue(String arg) {
-		return cli.getOptionValue(arg);
-	}
+    /**
+     * This method initializes the arguments and calls the execute method.
+     * 
+     * @throws AutomicException
+     *             exception while executing an action
+     */
+    public final void executeAction(String[] commandLineArgs) throws AutomicException {
+        try {
+            cli = new Cli(actionOptions, commandLineArgs);
+            cli.log(noLogging());
+            initializeCommonInputs();
+            initialize();
+            validate();
+            client = getClient();
+            client.addFilter(new GenericResponseFilter());
+            execute();
+        } finally {
+            if (client != null) {
+                client.destroy();
+            }
+        }
+    }
 
-	/**
-	 * This method initializes the arguments and calls the execute method.
-	 * 
-	 * @throws AutomicException
-	 *             exception while executing an action
-	 */
-	public final void executeAction(String[] commandLineArgs)
-			throws AutomicException {
-		try {
-			cli = new Cli(actionOptions, commandLineArgs);
-			cli.log(noLogging());
-			initializeCommoninputs();
-			initialize();
-			validate();
-			client = getClient();
-			client.addFilter(new GenericResponseFilter());
-			execute();
-		} finally {
-			if (client != null) {
-				client.destroy();
-			}
-		}
-	}
-
-	private void initializeCommoninputs() {
-	    this.connectionTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.CONNECTION_TIMEOUT));
+    private void initializeCommonInputs() {
+        this.connectionTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.CONNECTION_TIMEOUT));
         this.readTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.READ_TIMEOUT));
     }
 
     private Client getClient() throws AutomicException {
-		try {
-			return HttpClientConfig.getClient(new URL(baseUrl).getProtocol(),
-					this.certFilePath, this.connectionTimeOut, this.readTimeOut);
-		} catch (MalformedURLException ex) {
-			String msg = String.format(ExceptionConstants.INVALID_BASE_URL,
-					baseUrl);
-			LOGGER.error(msg, ex);
-			throw new AutomicException(msg);
-		}
-	}
+        try {
+            return HttpClientConfig.getClient(new URL(baseUrl).getProtocol(), this.certFilePath,
+                    this.connectionTimeOut, this.readTimeOut);
+        } catch (MalformedURLException ex) {
+            String msg = String.format(ExceptionConstants.INVALID_BASE_URL, baseUrl);
+            LOGGER.error(msg, ex);
+            throw new AutomicException(msg);
+        }
+    }
 
-	/**
-	 * Method to retrieve the argument keys that we don't need to log.
-	 */
-	protected abstract List<String> noLogging();
+    /**
+     * Method to retrieve the argument keys that we don't need to log.
+     */
+    protected abstract List<String> noLogging();
 
-	protected abstract void initialize();
+    protected abstract void initialize();
 
-	protected abstract void validate() throws AutomicException;
+    protected abstract void validate() throws AutomicException;
 
-	/**
-	 * Method to execute the action.
-	 * 
-	 * @throws AutomicException
-	 */
-	protected abstract void execute() throws AutomicException;
+    /**
+     * Method to execute the action.
+     * 
+     * @throws AutomicException
+     */
+    protected abstract void execute() throws AutomicException;
 
 }
