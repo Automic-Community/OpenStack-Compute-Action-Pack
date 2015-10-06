@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
+<VARA OVD_VRName="FREI" data_type="STATIC" name="PCK.AUTOMIC_OPENSTACK.PUB.VARA.LOGIN_SESSIONS" replacementmode="2">
+<HEADER state="1">
+<Title>vara object containing authentication xml for openstack login sessions</Title>
+<ArchiveKey1/>
+<ArchiveKey2/>
+<OH_SubType>STATIC</OH_SubType>
+</HEADER>
+<ATTR_VARA state="1">
+<Type>C|Text</Type>
+<lblSource>Static</lblSource>
+<source>STATIC</source>
+<VRName>FREI|Freely selected</VRName>
+<NotFoundErr>0</NotFoundErr>
+<NotFoundDef>1</NotFoundDef>
+<ShareN>0</ShareN>
+<ShareL>0</ShareL>
+<ShareR>0</ShareR>
+<MaxValue_C>1024</MaxValue_C>
+<CheckMax_C>0</CheckMax_C>
+<uppercase>0</uppercase>
+<sortColumn>0</sortColumn>
+<sortDirection>0</sortDirection>
+</ATTR_VARA>
+<VARA state="1">
+<Variables>
+<row Name="0001076049" Value="&lt;CREATE_CONTAINER&gt;&lt;Id&gt;143bbbaec19fba0507d777422692f9c3ae5a00bb943bf83716232229fadf3412&lt;/Id&gt;&lt;Warnings&gt;null&lt;/Warnings&gt;&lt;/CREATE_CONTAINER&gt;" Value1="" Value2="" Value3="" Value4=""/>
+</Variables>
+</VARA>
+<DOCU_Docu state="1" type="text">
+<DOC/>
+</DOCU_Docu>
+</VARA>
+</uc-export>
