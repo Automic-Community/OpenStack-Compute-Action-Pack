@@ -13,8 +13,11 @@ import org.apache.logging.log4j.Logger;
 import com.automic.openstack.cli.Cli;
 import com.automic.openstack.cli.CliOptions;
 import com.automic.openstack.config.HttpClientConfig;
+import com.automic.openstack.constants.Constants;
 import com.automic.openstack.constants.ExceptionConstants;
 import com.automic.openstack.exception.AutomicException;
+import com.automic.openstack.filter.GenericResponseFilter;
+import com.automic.openstack.util.CommonUtil;
 import com.sun.jersey.api.client.Client;
 
 /**
@@ -52,6 +55,8 @@ public abstract class AbstractAction {
 
 	public AbstractAction() {
 		actionOptions = new CliOptions();
+		 addOption(Constants.READ_TIMEOUT, true, "Read timeout");
+	     addOption(Constants.CONNECTION_TIMEOUT, true, "connection timeout");
 	}
 
 	/**
@@ -92,9 +97,11 @@ public abstract class AbstractAction {
 		try {
 			cli = new Cli(actionOptions, commandLineArgs);
 			cli.log(noLogging());
+			initializeCommoninputs();
 			initialize();
 			validate();
 			client = getClient();
+			client.addFilter(new GenericResponseFilter());
 			execute();
 		} finally {
 			if (client != null) {
@@ -103,10 +110,15 @@ public abstract class AbstractAction {
 		}
 	}
 
-	private Client getClient() throws AutomicException {
+	private void initializeCommoninputs() {
+	    this.connectionTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.CONNECTION_TIMEOUT));
+        this.readTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.READ_TIMEOUT));
+    }
+
+    private Client getClient() throws AutomicException {
 		try {
 			return HttpClientConfig.getClient(new URL(baseUrl).getProtocol(),
-					this.certFilePath, connectionTimeOut, readTimeOut);
+					this.certFilePath, this.connectionTimeOut, this.readTimeOut);
 		} catch (MalformedURLException ex) {
 			String msg = String.format(ExceptionConstants.INVALID_BASE_URL,
 					baseUrl);

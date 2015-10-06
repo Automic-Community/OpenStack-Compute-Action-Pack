@@ -1,0 +1,20 @@
+05-Oct-2015 22:53:21 - INFO  ClientHelper[executeAction]: Execution starts for action [OPENSTACK_LOGIN]...
+05-Oct-2015 22:53:21 - INFO  Cli[log]: Input params 
+05-Oct-2015 22:53:21 - INFO  Cli[log]: Action Name[action] = OPENSTACK_LOGIN
+05-Oct-2015 22:53:21 - INFO  Cli[log]: Identity service endpoint[baseurl] = http://127.0.0.1:5000/v2.0
+05-Oct-2015 22:53:21 - INFO  Cli[log]: Username for openstack[username] = admin
+05-Oct-2015 22:53:21 - INFO  Cli[log]: Tenant/Project name[tenantname] = admin
+05-Oct-2015 22:53:21 - INFO  Cli[log]: Path where file needs to written[filepath] = C:\Users\sumitsamson\Desktop\Temp\xml\login.xml
+05-Oct-2015 22:53:21 - INFO  GetTokenAction[execute]: Calling url http://127.0.0.1:5000/v2.0/tokens
+05-Oct-2015 22:53:21 - ERROR GenericResponseFilter[handle]: Response code for http://127.0.0.1:5000/v2.0/tokens is 401
+05-Oct-2015 22:53:21 - ERROR GenericResponseFilter[handle]: {"error":{"message":"Invalid user / password (Disable debug mode to suppress these details.)","title":"Unauthorized","code":401}}
+05-Oct-2015 22:53:21 - INFO  Client[main]: @@@@@@@ Execution ends for action  with response code : 1
+05-Oct-2015 22:53:32 - INFO  ClientHelper[executeAction]: Execution starts for action [OPENSTACK_LOGIN]...
+05-Oct-2015 22:53:32 - INFO  Cli[log]: Input params 
+05-Oct-2015 22:53:32 - INFO  Cli[log]: Action Name[action] = OPENSTACK_LOGIN
+05-Oct-2015 22:53:32 - INFO  Cli[log]: Identity service endpoint[baseurl] = http://127.0.0.1:5000/v2.0
+05-Oct-2015 22:53:32 - INFO  Cli[log]: Username for openstack[username] = admin
+05-Oct-2015 22:53:32 - INFO  Cli[log]: Tenant/Project name[tenantname] = admin
+05-Oct-2015 22:53:32 - INFO  Cli[log]: Path where file needs to written[filepath] = C:\Users\sumitsamson\Desktop\Temp\xml\login.xml
+05-Oct-2015 22:53:32 - INFO  GetTokenAction[execute]: Calling url http://127.0.0.1:5000/v2.0/tokens
+05-Oct-2015 22:53:32 - INFO  Client[main]: @@@@@@@ Execution ends for action  with response code : 0

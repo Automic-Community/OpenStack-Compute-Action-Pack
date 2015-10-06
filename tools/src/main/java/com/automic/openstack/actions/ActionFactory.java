@@ -31,7 +31,7 @@ public final class ActionFactory {
         AbstractAction action = null;
 
         switch (enumAction) {
-			case GET_TOKEN:
+			case OPENSTACK_LOGIN:
 				action = new GetTokenAction();
 			    break;
             default:

@@ -1,15 +1,21 @@
 package com.automic.openstack.util;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import com.automic.openstack.constants.Constants;
 import com.automic.openstack.constants.ExceptionConstants;
 import com.automic.openstack.exception.AutomicException;
+
+
 
 /**
  * OpenStack utility class
@@ -109,6 +115,69 @@ public final class CommonUtil {
             }
 
         }
+    }
+    
+    
+    /**
+     * Method to create file at location filePath. If some error occurs it will delete the file
+     * 
+     * @param filePath
+     * @param content
+     * @throws IOException
+     */
+    public static void createFile(String filePath, String content) throws AutomicException {
+
+        File file = new File(filePath);
+        boolean success = true;
+        try (FileWriter fr = new FileWriter(file)) {
+            fr.write(content);
+        } catch (IOException e) {
+            success = false;
+            LOGGER.error("Error while writing file ", e);
+            throw new AutomicException(String.format(ExceptionConstants.UNABLE_TO_WRITE_FILE, filePath));
+        } finally {
+            if (!success && !file.delete()) {
+                LOGGER.error("Error deleting file " + file.getName());
+            }
+        }
+    }
+    
+    
+    /**
+     * Method to convert a stream into Json object
+     * 
+     * @param is
+     *            input stream
+     * @return JSONObject
+     */
+    public static JSONObject jsonResponse(InputStream is) {
+        return new JSONObject(new JSONTokener(is));
+
+    }
+    
+    
+    /**
+     * Method to convert a json to xml and then write it to a File specified. It also appends a Root tag to xml.
+     * 
+     * @param json
+     * @param filePath
+     * @param rootTag
+     * @throws DockerException
+     */
+    public static void json2xml(JSONObject json, String filePath) throws AutomicException {
+        createFile(filePath, org.json.XML.toString(json));
+    }
+    
+    /**
+     * Method to convert a stream to xml and then write it to a File specified. It also appends a Root tag to xml.
+     * 
+     * @param is
+     * @param filePath
+     * @param rootTag
+     * @throws DockerException
+     */
+    public static void jsonResponse2xml(InputStream is, String filePath) throws AutomicException {
+        json2xml(jsonResponse(is), filePath);
     }
 
 }
