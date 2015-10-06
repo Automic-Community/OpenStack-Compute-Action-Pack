@@ -24,9 +24,7 @@
 <sortDirection>0</sortDirection>
 </ATTR_VARA>
 <VARA state="1">
-<Variables>
-<row Name="0001076049" Value="&lt;CREATE_CONTAINER&gt;&lt;Id&gt;143bbbaec19fba0507d777422692f9c3ae5a00bb943bf83716232229fadf3412&lt;/Id&gt;&lt;Warnings&gt;null&lt;/Warnings&gt;&lt;/CREATE_CONTAINER&gt;" Value1="" Value2="" Value3="" Value4=""/>
-</Variables>
+<Variables/>
 </VARA>
 <DOCU_Docu state="1" type="text">
 <DOC/>

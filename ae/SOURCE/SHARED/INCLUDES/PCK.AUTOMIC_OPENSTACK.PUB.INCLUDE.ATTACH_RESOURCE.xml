@@ -11,7 +11,7 @@
 <MSCRI><![CDATA[:ATTACH_RES "PCK.AUTOMIC_OPENSTACK.PUB.STORE" ,"OPENSTACK", C, N
 
 ! Setting jar class path into variable
-:SET &UC4RB_OPS_PATH_JAR#= STR_CAT(&$AGENT_RESOURCES_CLIENT#,"openstack.jar")]]></MSCRI>
+:SET &UC4RB_OPS_PATH_JAR#= STR_CAT(&$AGENT_RESOURCES_CLIENT#,"openstacktool.jar")]]></MSCRI>
 </SCRIPT>
 <DOCU_Docu state="1" type="text">
 <DOC/>
