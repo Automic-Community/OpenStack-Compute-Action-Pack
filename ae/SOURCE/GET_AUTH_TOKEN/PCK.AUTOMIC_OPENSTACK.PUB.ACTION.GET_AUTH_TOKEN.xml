@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<JOBP AllowExternal="1" name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.LOGIN">
+<JOBP AllowExternal="1" name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.GET_AUTH_TOKEN">
 <XHEADER state="1">
 <Title>Log into Openstack and generate service catalogue</Title>
 <ArchiveKey1/>
@@ -81,7 +81,7 @@
 </PostCon>
 </postconditions>
 </task>
-<task Alias="LOGIN" BranchType="0" Col="2" Lnr="2" OType="JOBS" Object="PCK.AUTOMIC_OPENSTACK.PRV.JOB.LOGIN@GENERIC" ParentAlias="" ParentObject="" Row="1" Text2="">
+<task Alias="LOGIN" BranchType="0" Col="2" Lnr="2" OType="JOBS" Object="PCK.AUTOMIC_OPENSTACK.PRV.JOB.GET_AUTH_TOKEN@GENERIC" ParentAlias="" ParentObject="" Row="1" Text2="">
 <checkpoint RollbackFlag="1" RunPerPatch="0" RunPerTarget="0" TcpADays="0" TcpATime="00:00" TcpATimeTZ="" TcpExecute="" TcpOn="0" promptatgen="0" showprompt="0"/>
 <after ActFlg="1" AtimOn="0" ErlstStDays="0" ErlstStTime="00:00" ErlstStTimeTZ="" HoldFlg="0"/>
 <when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="1" WElseH="0" WElseS="0" WElseX="0" WhenExecute="" WtimOn="0"/>
