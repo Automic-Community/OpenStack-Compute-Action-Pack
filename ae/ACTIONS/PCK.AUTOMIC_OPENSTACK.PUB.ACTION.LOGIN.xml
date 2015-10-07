@@ -265,7 +265,46 @@
 <MSCRI/>
 </SCRIPT>
 <DOCU_Docu state="1" type="text">
-<DOC/>
+<DOC><![CDATA[= Action name =
+PCK.AUTOMIC_OPENSTACK.PUB.ACTION.LOGIN
+= General description =
+This action is the entry point to all the Openstack services and is used to generate a token.To access the Identity service, user must know its URL.
+This token is further send as an authorization header to access any other Openstack service.The result of this action will be an XML which will contain the following information :
+* expiration time of the token
+* tenant id
+* authorization token
+* service endpoints for other openstack services 
+
+This XML will be stored in the VARA PCK.AUTOMIC_OPENSTACK.PUB.VARA.LOGIN_SESSIONS against the key (which will also gets published incase of success) as UC4RB_OPS_LOGIN_INFO_KEY 
+ 
+
+= Inputs =
+* OpenStack URL : OpenStack API URL. Example http://openstack.com:5000/v2.0
+* Username : Name of the user
+* Password : Password for the above user 
+* Tenant Name : Tenant name (a group of users is referred to as a project or tenant. These terms are interchangeable.)
+* Overwrite Agent: Overwrites the default agent
+* Overwrite Login: Overwrites the default login
+
+= Behavior =
+
+
+=Return Value=
+The response will contain the key (UC4RB_OPS_LOGIN_INFO_KEY).
+= Outputs =
+* Return code is 0 in case of success.
+* Return code is 1 in case of failure.
+* Return code is 2 in case of connection timed out !!
+
+= Rollback =
+(none)
+
+= Logging =
+AE logs will be displayed in the AE report.
+Java logs will be created at \temp\openstack.log under agent installation directory.
+
+= Example =
+(none)]]></DOC>
 </DOCU_Docu>
 </JOBP>
 </uc-export>
