@@ -124,7 +124,7 @@
 
 
 ! Action name
-: SET &UC4RB_OPS_ACTION_NAME# = "OPENSTACK_LOGIN"
+: SET &UC4RB_OPS_ACTION_NAME# = "GET_AUTH_TOKEN"
 
 ! Define java options and values
 : DEFINE &UC4RB_OPS_OPTIONS#, string, 10
@@ -170,8 +170,8 @@ java -jar &UC4RB_OPS_PATH_JAR# &UC4RB_OPS_JAVA_ARGUMENTS# -password $UC4_DECRYPT
 :ENDIF
 
 ! Status messages
-:SET &UC4RB_LOGGING_INFO# = "******** OPENSTACK LOGIN ACTION EXECUTED SUCCESSFULLY ********"
-:SET &UC4RB_LOGGING_ERROR# = "******** OPENSTACK LOGIN ACTION FAILED ********" 
+:SET &UC4RB_LOGGING_INFO# = "******** GET AUTH TOKEN ACTION EXECUTED SUCCESSFULLY ********"
+:SET &UC4RB_LOGGING_ERROR# = "******** GET AUTH TOKEN ACTION FAILED ********" 
 
 
 !------------------------------------------ Error Handling -----------------------------------------------------------------------------------------------------

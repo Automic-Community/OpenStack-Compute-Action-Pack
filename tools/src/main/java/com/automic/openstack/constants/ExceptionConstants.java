@@ -33,7 +33,7 @@ public final class ExceptionConstants {
     public static final String EMPTY_PASSWORD = "Password must not be empty";
     public static final String EMPTY_TENANT_NAME = "Tenant/Project must not be empty";
 
-    public static final String INVALID_BASE_URL = "Invalid service endpont [ %s ]";
+    public static final String INVALID_BASE_URL = "Invalid service endpoint [ %s ]";
 
     public static final String UNABLE_TO_WRITE_FILE = "Unable to write into file [%s]";
 
