@@ -12,7 +12,7 @@
 
 Following actions are supported for Openstack.
 
-* Action Name: PCK.AUTOMIC_OPENSTACK.PUB.ACTION.LOGIN
+* Action Name: PCK.AUTOMIC_OPENSTACK.PUB.ACTION.GET_AUTH_TOKEN
 Action Description: This action is the entry point to all the Openstack services and is used to generate a token.To access the Identity service, user must know its URL.
 This token is further send as an authorization header to access any other Openstack service.The result of this action will be an XML which will be stored in the 
 VARA PCK.AUTOMIC_OPENSTACK.PUB.VARA.LOGIN_SESSIONS against the key (which will also gets published incase of success) as UC4RB_OPS_LOGIN_INFO_KEY ]]></DOC>
