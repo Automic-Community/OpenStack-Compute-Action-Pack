@@ -16,7 +16,6 @@ import com.automic.openstack.util.ConsoleWriter;
 
 public final class ExceptionHandler {
 
-
     private static final Logger LOGGER = LogManager.getLogger(ExceptionHandler.class);
 
     private static final int RESPONSE_NOT_OK = 1;
@@ -31,8 +30,8 @@ public final class ExceptionHandler {
     }
 
     /**
-     * This method handles some specific cases like connection timeout/unable to connect and return the response code. In
-     * addition to this, it also writes the exception message to console.
+     * This method handles some specific cases like connection timeout/unable to connect and return the response code.
+     * In addition to this, it also writes the exception message to console.
      */
     public static int handleException(Exception ex) {
         int responseCode = RESPONSE_NOT_OK;
@@ -46,13 +45,11 @@ public final class ExceptionHandler {
         } else {
             LOGGER.error(ExceptionConstants.GENERIC_ERROR_MSG, ex);
             errorMsg = th.getMessage();
-            if (th instanceof java.net.SocketTimeoutException || th instanceof java.net.SocketException) {
+            if (th instanceof java.net.ConnectException || th instanceof java.net.UnknownHostException) {
+                errorMsg = UNABLE_TO_CONNECT;
+            } else if (th instanceof java.net.SocketTimeoutException) {
                 errorMsg = CONNECTION_TIMEOUT;
                 responseCode = RESPONSE_CONNECT_TIMEOUT;
-            } else if (th instanceof java.net.ConnectException) {
-                errorMsg = UNABLE_TO_CONNECT;
-            } else if (th instanceof java.net.UnknownHostException) {
-                errorMsg = UNABLE_TO_CONNECT;
             }
         }
         ConsoleWriter.writeln(CommonUtil.formatErrorMessage((errorMsg == null) ? "System Error Occured" : errorMsg));
