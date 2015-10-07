@@ -30,7 +30,10 @@ public final class ExceptionHandler {
 
     }
 
-
+    /**
+     * This method handles some specific cases like connection timeout/unable to connect and return the response code. In
+     * addition to this, it also writes the exception message to console.
+     */
     public static int handleException(Exception ex) {
         int responseCode = RESPONSE_NOT_OK;
         String errorMsg;
