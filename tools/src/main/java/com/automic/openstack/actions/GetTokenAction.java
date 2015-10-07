@@ -24,6 +24,11 @@ import com.sun.jersey.api.client.WebResource;
  * @author sumitsamson
  * 
  */
+/**
+ * This class is used to do authentication and generate the authorization token which will send as request header in all
+ * the other Openstack service requests.Along with the token it provides the service end points which along with the
+ * above information is written in the xml file at the path mentioned in the filePath
+ */
 public class GetTokenAction extends AbstractAction {
 
     private static final Logger LOGGER = LogManager.getLogger(GetTokenAction.class);
@@ -44,9 +49,12 @@ public class GetTokenAction extends AbstractAction {
     }
 
     @Override
+    /**
+     * Preventing password to be logged
+     * */
     protected List<String> noLogging() {
 
-        return Arrays.asList(new String[] { Constants.PASSWORD });
+        return Arrays.asList(Constants.PASSWORD);
     }
 
     @Override
@@ -84,6 +92,9 @@ public class GetTokenAction extends AbstractAction {
     }
 
     @Override
+    /**
+     * Authenticates and generates a token by calling http://baseUrl/tokens
+     * */
     protected void execute() throws AutomicException {
 
         ClientResponse response = null;

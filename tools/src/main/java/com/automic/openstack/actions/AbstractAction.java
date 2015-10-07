@@ -36,8 +36,6 @@ public abstract class AbstractAction {
 
     protected Client client;
 
-    protected String certFilePath;
-
     private CliOptions actionOptions;
     private Cli cli;
     /**
@@ -111,8 +109,7 @@ public abstract class AbstractAction {
 
     private Client getClient() throws AutomicException {
         try {
-            return HttpClientConfig.getClient(new URL(baseUrl).getProtocol(), this.certFilePath,
-                    this.connectionTimeOut, this.readTimeOut);
+            return HttpClientConfig.getClient(new URL(baseUrl).getProtocol(),this.connectionTimeOut, this.readTimeOut);
         } catch (MalformedURLException ex) {
             String msg = String.format(ExceptionConstants.INVALID_BASE_URL, baseUrl);
             LOGGER.error(msg, ex);
