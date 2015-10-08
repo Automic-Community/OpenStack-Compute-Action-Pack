@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<JOBP AllowExternal="1" name="PCK.AUTOMIC_OPENSTACK.TEMPLATE.CONN_CONFIG">
+<JOBP AllowExternal="1" name="PCK.AUTOMIC_OPENSTACK.PUB.TEMPLATE.CONN_CONFIG">
 <XHEADER state="1">
-<Title>Store connection details</Title>
+<Title>Interactive mode to store connection details</Title>
 <ArchiveKey1/>
 <ArchiveKey2/>
 <Active>1</Active>
@@ -53,15 +53,15 @@
 <result ChkRExec="0" RElseHalt="0" RElseIgn="0" RElseJPAbend="0" RExecFlag="0" RExecute="" RRepMTimes="0" RRepOn="0" RRepWait="0" RWhen=""/>
 <dynvalues>
 <dyntree>
-<node content="1" id="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG" name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG" parent="PPRPTS" type="PPROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG">
-<PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG">
-<UC4RB_OS_CONN_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_CONN_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG"/>
-<UC4RB_OS_OVERWRITE_CONNs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_OVERWRITE_CONN#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG">FALSE</UC4RB_OS_OVERWRITE_CONNs.00>
-<UC4RB_OS_PASSWORDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_PASSWORD#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG"/>
-<UC4RB_OS_TENANT_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_TENANT_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG"/>
-<UC4RB_OS_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG"/>
-<UC4RB_OS_USERNAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_USERNAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG"/>
+<node content="1" id="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG" name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG">
+<PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG">
+<UC4RB_OS_CONN_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_CONN_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG"/>
+<UC4RB_OS_ENDPOINT_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_ENDPOINT_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG"/>
+<UC4RB_OS_OVERWRITE_CONNs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_OVERWRITE_CONN#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG">NO</UC4RB_OS_OVERWRITE_CONNs.00>
+<UC4RB_OS_PASSWORDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_PASSWORD#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG"/>
+<UC4RB_OS_TENANT_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_TENANT_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG"/>
+<UC4RB_OS_USERNAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_USERNAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -118,7 +118,7 @@
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION">
 <UC4RB_OPS_PASSWORDs.00 ReadFromTable="JPPV" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_PASSWORD#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION">&amp;UC4RB_OS_PASSWORD#</UC4RB_OPS_PASSWORDs.00>
 <UC4RB_OPS_TENANT_NAMEs.00 ReadFromTable="JPPV" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TENANT_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION">&amp;UC4RB_OS_TENANT_NAME#</UC4RB_OPS_TENANT_NAMEs.00>
-<UC4RB_OPS_URL_ENDPOINTs.00 ReadFromTable="JPPV" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_URL_ENDPOINT#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION">&amp;UC4RB_OS_URL#</UC4RB_OPS_URL_ENDPOINTs.00>
+<UC4RB_OPS_URL_ENDPOINTs.00 ReadFromTable="JPPV" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_URL_ENDPOINT#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION">&amp;UC4RB_OS_ENDPOINT_URL#</UC4RB_OPS_URL_ENDPOINTs.00>
 <UC4RB_OPS_USERNAMEs.00 ReadFromTable="JPPV" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_USERNAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION">&amp;UC4RB_OS_USERNAME#</UC4RB_OPS_USERNAMEs.00>
 </PRPTBOX>
 </PROMPTSET>
@@ -131,15 +131,15 @@
 </PRPTBOX>
 </PROMPTSET>
 </node>
-<node content="1" id="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG" name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG" parent="PPRPTS" type="PPROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG">
-<PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG">
-<UC4RB_OS_CONN_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_CONN_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG"/>
-<UC4RB_OS_OVERWRITE_CONNs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_OVERWRITE_CONN#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG">FALSE</UC4RB_OS_OVERWRITE_CONNs.00>
-<UC4RB_OS_PASSWORDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_PASSWORD#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG"/>
-<UC4RB_OS_TENANT_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_TENANT_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG"/>
-<UC4RB_OS_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG"/>
-<UC4RB_OS_USERNAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_USERNAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG"/>
+<node content="1" id="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG" name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG">
+<PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG">
+<UC4RB_OS_CONN_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_CONN_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG"/>
+<UC4RB_OS_ENDPOINT_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_ENDPOINT_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG"/>
+<UC4RB_OS_OVERWRITE_CONNs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_OVERWRITE_CONN#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG">NO</UC4RB_OS_OVERWRITE_CONNs.00>
+<UC4RB_OS_PASSWORDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_PASSWORD#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG"/>
+<UC4RB_OS_TENANT_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_TENANT_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG"/>
+<UC4RB_OS_USERNAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_USERNAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -161,7 +161,7 @@
 </PostCon>
 </postconditions>
 </task>
-<task Alias="STORE_CONN_DETAILS" BranchType="0" Col="3" Lnr="3" OType="SCRI" Object="PCK.AUTOMIC_OPENSTACK.PUB.SCRIPT.STORE_CONN_SETTINGS" ParentAlias="" ParentObject="" Row="2" Text2="">
+<task Alias="STORE_CONN_DETAILS" BranchType="0" Col="3" Lnr="3" OType="SCRI" Object="PCK.AUTOMIC_OPENSTACK.PRV.SCRIPT.STORE_CONN_SETTINGS" ParentAlias="" ParentObject="" Row="2" Text2="">
 <checkpoint RollbackFlag="1" RunPerPatch="0" RunPerTarget="0" TcpADays="0" TcpATime="00:00" TcpATimeTZ="" TcpExecute="" TcpOn="0" promptatgen="0" showprompt="0"/>
 <after ActFlg="1" AtimOn="0" ErlstStDays="0" ErlstStTime="00:00" ErlstStTimeTZ="" HoldFlg="0"/>
 <when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="1" WElseH="0" WElseS="0" WElseX="0" WhenExecute="" WtimOn="0"/>
@@ -191,15 +191,15 @@
 </node>
 <node content="1" id="PRPTS" name="PromptSets" parent="" pref="1" type="PROMPTSET"/>
 <node content="0" id="PPRPTS" name="Parent PromptSets" parent="" type="PPROMPTSET"/>
-<node content="1" id="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG" name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG" parent="PPRPTS" type="PPROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG">
-<PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG">
-<UC4RB_OS_CONN_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_CONN_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG"/>
-<UC4RB_OS_OVERWRITE_CONNs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_OVERWRITE_CONN#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG">FALSE</UC4RB_OS_OVERWRITE_CONNs.00>
-<UC4RB_OS_PASSWORDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_PASSWORD#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG"/>
-<UC4RB_OS_TENANT_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_TENANT_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG"/>
-<UC4RB_OS_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG"/>
-<UC4RB_OS_USERNAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_USERNAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG"/>
+<node content="1" id="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG" name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG">
+<PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG">
+<UC4RB_OS_CONN_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_CONN_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG"/>
+<UC4RB_OS_ENDPOINT_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_ENDPOINT_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG"/>
+<UC4RB_OS_OVERWRITE_CONNs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_OVERWRITE_CONN#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG">NO</UC4RB_OS_OVERWRITE_CONNs.00>
+<UC4RB_OS_PASSWORDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_PASSWORD#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG"/>
+<UC4RB_OS_TENANT_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_TENANT_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG"/>
+<UC4RB_OS_USERNAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_USERNAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -237,15 +237,15 @@
 <result ChkRExec="0" RElseHalt="0" RElseIgn="0" RElseJPAbend="0" RExecFlag="0" RExecute="" RRepMTimes="0" RRepOn="0" RRepWait="0" RWhen=""/>
 <dynvalues>
 <dyntree>
-<node content="1" id="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG" name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG" parent="PPRPTS" type="PPROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG">
-<PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG">
-<UC4RB_OS_CONN_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_CONN_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG"/>
-<UC4RB_OS_OVERWRITE_CONNs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_OVERWRITE_CONN#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG">FALSE</UC4RB_OS_OVERWRITE_CONNs.00>
-<UC4RB_OS_PASSWORDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_PASSWORD#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG"/>
-<UC4RB_OS_TENANT_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_TENANT_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG"/>
-<UC4RB_OS_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG"/>
-<UC4RB_OS_USERNAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_USERNAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG"/>
+<node content="1" id="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG" name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG">
+<PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG">
+<UC4RB_OS_CONN_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_CONN_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG"/>
+<UC4RB_OS_ENDPOINT_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_ENDPOINT_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG"/>
+<UC4RB_OS_OVERWRITE_CONNs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_OVERWRITE_CONN#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG">NO</UC4RB_OS_OVERWRITE_CONNs.00>
+<UC4RB_OS_PASSWORDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_PASSWORD#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG"/>
+<UC4RB_OS_TENANT_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_TENANT_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG"/>
+<UC4RB_OS_USERNAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OS_USERNAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -312,9 +312,9 @@
 <Mode>0</Mode>
 </VALUE>
 </node>
-<node content="1" id="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG" name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG" parent="PRPTS" type="PROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG" ontop="1">
-<PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG" prptmode="1"/>
+<node content="1" id="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG" name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG" parent="PRPTS" type="PROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG" ontop="1">
+<PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG" prptmode="1"/>
 </PROMPTSET>
 </node>
 <node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PRPTS" type="PROMPTSET">
