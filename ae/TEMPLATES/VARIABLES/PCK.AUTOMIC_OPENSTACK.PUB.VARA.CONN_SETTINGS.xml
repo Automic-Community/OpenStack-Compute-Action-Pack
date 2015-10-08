@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<VARA OVD_VRName="FREI" data_type="STATIC" name="PCK.AUTOMIC_OPENSTACK.PRV.VARA.CONN_SETTINGS" replacementmode="2">
+<VARA OVD_VRName="FREI" data_type="STATIC" name="PCK.AUTOMIC_OPENSTACK.PUB.VARA.CONN_SETTINGS" replacementmode="2">
 <HEADER state="1">
 <Title>Connection configuration details of OpenStack</Title>
 <ArchiveKey1/>
@@ -24,11 +24,7 @@
 <sortDirection>0</sortDirection>
 </ATTR_VARA>
 <VARA state="1">
-<Variables>
-<row Name="T1" Value="http://anurag4043:5000/v2.0" Value1="admin" Value2="--10B5ED3272BD9E28E7" Value3="admin" Value4=""/>
-<row Name="T12" Value="http://10.0.2.15:5000/v2.0" Value1="admin" Value2="--10F292809F6F76E81D" Value3="admin" Value4=""/>
-<row Name="T3" Value="http://192.168.112.48:5000/v2.0" Value1="admin" Value2="--10F292809F6F76E81D" Value3="admin" Value4=""/>
-</Variables>
+<Variables/>
 </VARA>
 <DOCU_Docu state="1" type="text">
 <DOC/>
