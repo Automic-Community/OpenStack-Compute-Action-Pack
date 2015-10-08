@@ -113,15 +113,13 @@ public class GetTokenAction extends AbstractAction {
 
         JSONObject tokenJson = jsonObj.getJSONObject("access").getJSONObject("token");
 
-        LOGGER.info("Token Json " + tokenJson.toString());
-
         if (tokenJson.has("tenant")) {
             JSONObject tenantJson = tokenJson.getJSONObject("tenant");
             ConsoleWriter.writeln("UC4RB_OPS_TENANT_ID ::=" + tenantJson.get("id").toString());
         }
 
         ConsoleWriter.writeln("UC4RB_OPS_TOKEN_ID ::=" + CommonUtil.encrypt(tokenJson.get("id").toString()));
-        ConsoleWriter.writeln("UC4RB_OPS_TOKEN_EXPIRY  ::=" + tokenJson.get("expires").toString());
+        ConsoleWriter.writeln("UC4RB_OPS_TOKEN_EXPIRY ::=" + tokenJson.get("expires").toString());
 
     }
 
