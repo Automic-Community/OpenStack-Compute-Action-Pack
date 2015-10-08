@@ -44,7 +44,6 @@ public class GetTokenAction extends AbstractAction {
         addOption("username", true, "Username for openstack");
         addOption("password", true, "password for openstack");
         addOption("tenantname", false, "Tenant/Project name");
-        addOption("filepath", true, "Path where file needs to written");
 
     }
 
