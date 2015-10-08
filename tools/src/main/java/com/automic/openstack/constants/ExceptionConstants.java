@@ -37,6 +37,8 @@ public final class ExceptionConstants {
 
     public static final String UNABLE_TO_WRITE_FILE = "Unable to write into file [%s]";
 
+    public static final String INVALID_AUTH_TOKEN = "Invalid token id ";
+
     private ExceptionConstants() {
     }
 
