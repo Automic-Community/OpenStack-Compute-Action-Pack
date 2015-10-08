@@ -46,7 +46,7 @@
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
 <FcstStatus>0|U00000000 ??? ""</FcstStatus>
-<Ert>2</Ert>
+<Ert>3</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
 <ErtFix>0</ErtFix>
@@ -204,6 +204,10 @@ java -jar &UC4RB_OPS_PATH_JAR# &UC4RB_OPS_JAVA_ARGUMENTS# -password $UC4_DECRYPT
 : ENDIF
 :ENDPROCESS
 :CLOSE_PROCESS &HND#
+:ELSE
+:  PSET &UC4RB_OPS_TOKEN_ID# = ""
+:  PSET &UC4RB_OPS_TENANT_ID# = ""
+:  PSET &UC4RB_OPS_TOKEN_EXPIRY# = ""
 :ENDIF]]></OSCRI>
 </POST_SCRIPT>
 <DOCU_Docu state="1" type="text">
