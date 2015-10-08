@@ -1,7 +1,7 @@
 *** Settings ***
 Suite Setup       Startup
 Suite Teardown    Teardown
-Force Tags        login
+Force Tags        get_auth_token
 Default Tags
 Test Template     Get Auth Token Template
 Library           com.automic.robot.itpa.ItpaLibrary
@@ -11,9 +11,12 @@ Resource          ../../Resources/variables.txt
 Resource          ../../Resources/actions.txt
 
 *** Test Cases ***    OK_NOK    OpenStackURL            Username          Password          TenantName
-Login with Valid Inputs
+Get Auth Token with Valid Inputs
                       [Tags]    main_scenarios
                       OK        ${OS_Identity_URL}      ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
+
+Get Auth Token and Asserting Tenant Name as an Optional Field
+                      OK        ${OS_Identity_URL}      ${UserName_OS}    ${Password_OS}    ${EMPTY}
 
 Assertion with Invalid OS URL
                       NOK       https://162.123.12.3    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
@@ -36,9 +39,6 @@ Assert Username as a mandatory field
 Assert Password as a mandatory field
                       OTHER     ${OS_Identity_URL}      ${UserName_OS}    ${EMPTY}          ${Name_Tenant}
 
-Assert Tenant Name as a mandatory field
-                      OTHER     ${OS_Identity_URL}      ${UserName_OS}    ${Password_OS}    ${EMPTY}
-
 *** Keywords ***
 Startup
     Log    *******Start Test "GET AUTH TOKEN"*******
@@ -48,7 +48,6 @@ Startup
 Get Auth Token Template
     [Arguments]    ${OK_NOK}    ${Open_Stack_URL}    ${Username}    ${Password}    ${Tenant_Name}
     [Documentation]    This test generates a new token for openstack connection.
-    ...    -Precondition:
     ...    -${OK_NOK}: Boolean value indicate if the action is ENDED_OK or ENDED_NOT_OK. Value of this variable should be OK, NOK or OTHER.
     ...    -${Open_Stack_URL}: This field specifies OpenStack API URL.
     ...    -${Username}: This field specifies Username for Open Stack.
@@ -60,8 +59,9 @@ Get Auth Token Template
     Action Execute
     Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
     ...    Assert Mandatory
-    Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable Should Be Found    &UC4RB_OPS_LOGIN_INFO_KEY#    ELSE    Action Object Variable Should Not Be Found    &UC4RB_OPS_LOGIN_INFO_KEY#
-    Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable Should Be Found    &UC4RB_OPS_LOGIN_SESSION_FILE#    ELSE    Action Object Variable Should Not Be Found    &UC4RB_OPS_LOGIN_SESSION_FILE#
+    Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable Should Be Found    &UC4RB_OPS_TOKEN_ID#    ELSE    Action Object Variable Should Not Be Found    &UC4RB_OPS_TOKEN_ID#
+    Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable Should Be Found    &UC4RB_OPS_TOKEN_EXPIRY#    ELSE    Action Object Variable Should Not Be Found    &UC4RB_OPS_TOKEN_EXPIRY#
+    Run Keyword If    '${Tenant_Name}' == '${Name_Tenant}' and '${OK_NOK}' == 'OK'    Action Object Variable Should Be Found    &UC4RB_OPS_TENANT_ID#    ELSE    Action Object Variable Should Not Be Found    &UC4RB_OPS_TENANT_ID#
 
 Teardown
     Log    *******End Test "GET AUTH TOKEN"*******
