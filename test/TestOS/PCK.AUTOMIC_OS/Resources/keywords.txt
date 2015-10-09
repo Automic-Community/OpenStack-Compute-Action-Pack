@@ -102,3 +102,7 @@ Get Auth Token
     Action Set    &UC4RB_OPS_USERNAME#    ${UserName}
     Action Set    &UC4RB_OPS_PASSWORD#    ${Password}
     Action Set    &UC4RB_OPS_TENANT_NAME#    ${Tenant_Name}
+    ${Generated_Token_ID}=    Action Get Variable    &UC4RB_OPS_TOKEN_ID#
+    Set Global Variable    ${Generated_Token_ID}
+    ${Generated_Tenant_ID}=    Action Get Variable    &UC4RB_OPS_TENANT_ID#
+    Set Global Variable    ${Generated_Tenant_ID}
