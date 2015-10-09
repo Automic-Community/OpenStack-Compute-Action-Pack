@@ -73,8 +73,8 @@ public class ListServersAction extends AbstractAction{
         if (!Validator.checkNotEmpty(tenantId)) {
             LOGGER.error(ExceptionConstants.EMPTY_TENANTID);
             throw new AutomicException(ExceptionConstants.EMPTY_TENANTID);
-        }
-        if (!Validator.checkFileExists(filePath)) {
+        }       
+        if (!Validator.checkNotEmpty(filePath)) {
             String errMsg = String.format(ExceptionConstants.INVALID_FILE, filePath);
             LOGGER.error(errMsg);
             throw new AutomicException(errMsg);
