@@ -97,8 +97,8 @@ Genarate String
     Set Global Variable    ${Generated_Name}
 
 Get Auth Token
-    [Arguments]    ${Open_Stack_URL}    ${Username}    ${Password}    ${Tenant_Name}
-    Action Set    &UC4RB_OPS_URL_ENDPOINT#    ${Open_Stack_URL}
+    [Arguments]    ${Identity_URL}    ${Username}    ${Password}    ${Tenant_Name}
+    Action Set    &UC4RB_OPS_IDENTITY_URL#    ${Identity_URL}
     Action Set    &UC4RB_OPS_USERNAME#    ${UserName}
     Action Set    &UC4RB_OPS_PASSWORD#    ${Password}
     Action Set    &UC4RB_OPS_TENANT_NAME#    ${Tenant_Name}

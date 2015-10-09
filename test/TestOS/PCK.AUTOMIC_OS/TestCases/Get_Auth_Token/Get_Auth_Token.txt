@@ -10,7 +10,7 @@ Resource          ../../Resources/keywords.txt
 Resource          ../../Resources/variables.txt
 Resource          ../../Resources/actions.txt
 
-*** Test Cases ***    OK_NOK    OpenStackURL            Username          Password          TenantName
+*** Test Cases ***    OK_NOK    IdentityURL             Username          Password          TenantName
 Get Auth Token with Valid Inputs
                       [Tags]    main_scenarios
                       OK        ${OS_Identity_URL}      ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
@@ -46,15 +46,15 @@ Startup
     Connect AE
 
 Get Auth Token Template
-    [Arguments]    ${OK_NOK}    ${Open_Stack_URL}    ${Username}    ${Password}    ${Tenant_Name}
+    [Arguments]    ${OK_NOK}    ${Identity_URL}    ${Username}    ${Password}    ${Tenant_Name}
     [Documentation]    This test generates a new token for openstack connection.
     ...    -${OK_NOK}: Boolean value indicate if the action is ENDED_OK or ENDED_NOT_OK. Value of this variable should be OK, NOK or OTHER.
-    ...    -${Open_Stack_URL}: This field specifies OpenStack API URL.
+    ...    -${Identity_URL}: This field specifies OpenStack Identity URL.
     ...    -${Username}: This field specifies Username for Open Stack.
     ...    -${Password}: This field specifies the password for Open Stack user.
     ...    -${Tenant_Name}: This field specifies the tenant name whose token is generated.
     Action Create    ${_GET_AUTH_TOKEN_ACTION}
-    Get Auth Token    ${Open_Stack_URL}    ${Username}    ${Password}    ${Tenant_Name}
+    Get Auth Token    ${Identity_URL}    ${Username}    ${Password}    ${Tenant_Name}
     Set Overwrite Agent
     Action Execute
     Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
