@@ -16,6 +16,7 @@ import com.automic.openstack.constants.Constants;
 import com.automic.openstack.constants.ExceptionConstants;
 import com.automic.openstack.exception.AutomicException;
 import com.automic.openstack.util.CommonUtil;
+import com.automic.openstack.util.ConsoleWriter;
 import com.automic.openstack.util.Validator;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -36,15 +37,13 @@ public class GetTokenAction extends AbstractAction {
     private String username;
     private String password;
     private String tenantName;
-    private String filePath;
 
     public GetTokenAction() {
 
         addOption("baseurl", true, "Identity service endpoint");
         addOption("username", true, "Username for openstack");
         addOption("password", true, "password for openstack");
-        addOption("tenantname", true, "Tenant/Project name");
-        addOption("filepath", true, "Path where file needs to written");
+        addOption("tenantname", false, "Tenant/Project name");
 
     }
 
@@ -63,7 +62,7 @@ public class GetTokenAction extends AbstractAction {
         username = getOptionValue("username");
         password = getOptionValue("password");
         tenantName = getOptionValue("tenantname");
-        filePath = getOptionValue("filepath");
+
     }
 
     @Override
@@ -79,14 +78,6 @@ public class GetTokenAction extends AbstractAction {
         if (!Validator.checkNotEmpty(this.password)) {
             LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
             throw new AutomicException(ExceptionConstants.EMPTY_PASSWORD);
-        }
-        if (!Validator.checkNotEmpty(tenantName)) {
-            LOGGER.error(ExceptionConstants.EMPTY_TENANT_NAME);
-            throw new AutomicException(ExceptionConstants.EMPTY_TENANT_NAME);
-        }
-        if (!Validator.checkFileDirectoryExists(filePath)) {
-            LOGGER.error(String.format(ExceptionConstants.INVALID_FILE, filePath));
-            throw new AutomicException(String.format(ExceptionConstants.INVALID_FILE, filePath));
         }
 
     }
@@ -117,7 +108,19 @@ public class GetTokenAction extends AbstractAction {
      */
 
     private void prepareOutput(ClientResponse response) throws AutomicException {
-        CommonUtil.jsonResponse2xml(response.getEntityInputStream(), filePath);
+
+        JSONObject jsonObj = CommonUtil.jsonResponse(response.getEntityInputStream());
+
+        JSONObject tokenJson = jsonObj.getJSONObject("access").getJSONObject("token");
+
+        if (tokenJson.has("tenant")) {
+            JSONObject tenantJson = tokenJson.getJSONObject("tenant");
+            ConsoleWriter.writeln("UC4RB_OPS_TENANT_ID ::=" + tenantJson.get("id").toString());
+        }
+
+        ConsoleWriter.writeln("UC4RB_OPS_TOKEN_ID ::=" + CommonUtil.encrypt(tokenJson.get("id").toString()));
+        ConsoleWriter.writeln("UC4RB_OPS_TOKEN_EXPIRY ::=" + tokenJson.get("expires").toString());
+
     }
 
     private JSONObject getAuthenticationJson(String username, String password, String tenantName) {
@@ -129,7 +132,9 @@ public class GetTokenAction extends AbstractAction {
         JSONObject auth = new JSONObject();
 
         auth.put("passwordCredentials", passwordCreds);
-        auth.put("tenantName", tenantName);
+        if (tenantName != null && !tenantName.isEmpty()) {
+            auth.put("tenantName", tenantName);
+        }
 
         JSONObject json = new JSONObject();
         json.put("auth", auth);

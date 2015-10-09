@@ -35,6 +35,8 @@ public abstract class AbstractAction {
     protected String baseUrl;
 
     protected Client client;
+    
+    protected String token_id;
 
     private CliOptions actionOptions;
     private Cli cli;
