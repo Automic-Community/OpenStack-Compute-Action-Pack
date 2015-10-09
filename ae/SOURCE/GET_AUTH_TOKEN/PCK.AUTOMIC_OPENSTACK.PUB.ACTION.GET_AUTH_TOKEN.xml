@@ -56,6 +56,7 @@
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION" name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION">
+<UC4RB_OPS_IDENTITY_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_IDENTITY_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 <UC4RB_OPS_PASSWORDs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_PASSWORD#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 <UC4RB_OPS_TENANT_NAMEs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TENANT_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 <UC4RB_OPS_URL_ENDPOINTs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_URL_ENDPOINT#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
@@ -114,6 +115,7 @@
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION" name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION">
+<UC4RB_OPS_IDENTITY_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_IDENTITY_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 <UC4RB_OPS_PASSWORDs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_PASSWORD#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 <UC4RB_OPS_TENANT_NAMEs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TENANT_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 <UC4RB_OPS_URL_ENDPOINTs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_URL_ENDPOINT#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
@@ -158,6 +160,7 @@
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION" name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION">
+<UC4RB_OPS_IDENTITY_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_IDENTITY_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 <UC4RB_OPS_PASSWORDs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_PASSWORD#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 <UC4RB_OPS_TENANT_NAMEs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TENANT_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 <UC4RB_OPS_URL_ENDPOINTs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_URL_ENDPOINT#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
@@ -231,7 +234,6 @@
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION" name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION" parent="PRPTS" type="PROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION" ontop="1">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION" prptmode="1">
-<UC4RB_OPS_URL_ENDPOINTs.00 altview="1" haslist="0"/>
 <UC4RB_OPS_TENANT_NAMEs.00 altview="1" haslist="0"/>
 <UC4RB_OPS_USERNAMEs.00 altview="1" haslist="0"/>
 <UC4RB_OPS_PASSWORDs.00 altview="1" haslist="0"/>
@@ -277,13 +279,12 @@ The result of this action will be the following information published as AE vari
 * expiration time of the token
  
 = Inputs =
-* OpenStack URL : OpenStack API URL. Example http://openstack.com:5000/v2.0
+* Identity URL : OpenStack Identity URL. Example http://openstack.com:5000/v2.0
 * Username : Name of the user
 * Password : Password for the above user 
 * Tenant Name : Tenant name (a group of users is referred to as a project or tenant. These terms are interchangeable.)
 * Overwrite Agent: Overwrites the default agent
 * Overwrite Login: Overwrites the default login
-
 = Behavior =
 If user provides valid Openstack connection details but does not give tenant name then tenant id is not published
 
@@ -299,7 +300,6 @@ The response will contain the following AE variables
 * Return code is 2 in case of connection timed out !!
 = Rollback =
 (none)
-
 = Logging =
 AE logs will be displayed in the AE report.
 Java logs will be created at \temp\openstack.log under agent installation directory.
