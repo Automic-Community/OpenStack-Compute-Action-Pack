@@ -18,7 +18,7 @@ public final class HttpClientConfig {
     }
     
     
-    public static Client getClient(String protocol, String certificatePath, int connectionTimeOut, int readTimeOut)
+    public static Client getClient(String protocol,int connectionTimeOut, int readTimeOut)
             throws AutomicException {
         Client client;
 
