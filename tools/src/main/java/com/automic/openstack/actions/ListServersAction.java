@@ -24,15 +24,21 @@ import com.automic.openstack.util.Validator;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
+/**
+ * @author Anurag Upadhyay
+ * 
+ */
+/**
+ * This class is used lists all servers and shows server details. Includes server usage information.
+ * above information is written in the xml file at the path mentioned in the filePath
+ * 
+ */
 public class ListServersAction extends AbstractAction{
 	
 
 
     private static final Logger LOGGER = LogManager.getLogger(ListServersAction.class);
 
-    //private String computeURL;
-    //private String tokenId;
-   // private String tenantId;
     private String filePath;
     
     public ListServersAction() {
@@ -44,11 +50,6 @@ public class ListServersAction extends AbstractAction{
 
     }
 
-   /* 
-    protected List<String> noLogging() {
-
-        return Arrays.asList(Constants.PASSWORD);
-    }*/
 
     @Override
     protected void initialize() {
@@ -83,29 +84,18 @@ public class ListServersAction extends AbstractAction{
 
     @Override
     /**
-     * Authenticates and generates a token by calling http://baseUrl/tokens
+     * Authenticates and generates a token by calling http://baseUrl/servers/detail
      * */
     protected void execute() throws AutomicException {
 
         ClientResponse response = null;
         try {
         tenantId = AESEncryptDecrypt.decrypt(tokenId);
-				} catch (InvalidKeyException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchPaddingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalBlockSizeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (BadPaddingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+				} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException e) {
+			
+			
+			throw new AutomicException(e.getMessage());
+		} 
         WebResource webResource = client.resource(baseUrl).path(tenantId).path("servers").path("detail");
 
         LOGGER.info("Calling url " + webResource.getURI());
@@ -133,9 +123,11 @@ public class ListServersAction extends AbstractAction{
     }
 
 	@Override
+	  /**
+     * Preventing password to be logged
+     * */
 	protected List<String> noLogging() {
-		// TODO Auto-generated method stub
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
  
 }
