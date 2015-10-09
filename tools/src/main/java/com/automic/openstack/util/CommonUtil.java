@@ -1,25 +1,21 @@
 package com.automic.openstack.util;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import com.automic.openstack.constants.Constants;
 import com.automic.openstack.constants.ExceptionConstants;
@@ -27,7 +23,7 @@ import com.automic.openstack.exception.AutomicException;
 
 /**
  * OpenStack utility class
- *
+ * 
  */
 public final class CommonUtil {
 
@@ -44,7 +40,7 @@ public final class CommonUtil {
 
     /**
      * Method to append type to message in format "type | message"
-     *
+     * 
      * @param type
      * @param message
      * @return
@@ -56,9 +52,9 @@ public final class CommonUtil {
     }
 
     /**
-     *
+     * 
      * Method to get unsigned integer value if presented by a string literal.
-     *
+     * 
      * @param value
      * @return
      */
@@ -76,7 +72,7 @@ public final class CommonUtil {
 
     /**
      * Method to convert YES/NO values to boolean true or false
-     *
+     * 
      * @param value
      * @return true if YES, 1
      */
@@ -91,7 +87,7 @@ public final class CommonUtil {
 
     /**
      * Method to copy contents of an {@link InputStream} to a {@link OutputStream}
-     *
+     * 
      * @param source
      *            {@link InputStream} to read from
      * @param dest
@@ -123,6 +119,91 @@ public final class CommonUtil {
             }
 
         }
+    }
+
+    /**
+     * Method to create file at location filePath. If some error occurs it will delete the file
+     * 
+     * @param filePath
+     * @param content
+     * @throws IOException
+     */
+    public static void createFile(String filePath, String content) throws AutomicException {
+
+        File file = new File(filePath);
+        boolean success = true;
+        try (FileWriter fr = new FileWriter(file)) {
+            fr.write(content);
+        } catch (IOException e) {
+            success = false;
+            LOGGER.error("Error while writing file ", e);
+            throw new AutomicException(String.format(ExceptionConstants.UNABLE_TO_WRITE_FILE, filePath));
+        } finally {
+            if (!success && !file.delete()) {
+                LOGGER.error("Error deleting file " + file.getName());
+            }
+        }
+    }
+
+    /**
+     * Method to convert a stream into Json object
+     * 
+     * @param is
+     *            input stream
+     * @return JSONObject
+     */
+    public static JSONObject jsonResponse(InputStream is) {
+        return new JSONObject(new JSONTokener(is));
+
+    }
+
+    /**
+     * Method to convert a json to xml and then write it to a File specified. It also appends a Root tag to xml.
+     * 
+     * @param json
+     * @param filePath
+     * @param rootTag
+     * @throws DockerException
+     */
+    public static void json2xml(JSONObject json, String filePath) throws AutomicException {
+        createFile(filePath, org.json.XML.toString(json));
+    }
+
+    /**
+     * Method to convert a stream to xml and then write it to a File specified. It also appends a Root tag to xml.
+     * 
+     * @param is
+     * @param filePath
+     * @param rootTag
+     * @throws DockerException
+     */
+    public static void jsonResponse2xml(InputStream is, String filePath) throws AutomicException {
+        json2xml(jsonResponse(is), filePath);
+    }
+
+    public static String encrypt(String input) throws AutomicException {
+
+        try {
+            input = AESEncryptDecrypt.encrypt(input);
+        } catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
+                | BadPaddingException e) {
+
+            LOGGER.error("Error while encryption ", e);
+            throw new AutomicException(ExceptionConstants.GENERIC_ERROR_MSG);
+
+        }
+
+        return input;
+    }
+
+    public static String decrypt(String input) throws AutomicException {
+        try {
+            input = AESEncryptDecrypt.decrypt(input);
+        } catch (Exception e) {
+            LOGGER.error("Error while decryption ", e);
+            throw new AutomicException(ExceptionConstants.INVALID_AUTH_TOKEN);
+        }
+        return input;
     }
 
 }
