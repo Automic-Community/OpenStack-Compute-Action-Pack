@@ -88,9 +88,9 @@ public class ListServersAction extends AbstractAction{
     protected void execute() throws AutomicException {
 
         ClientResponse response = null;
-        //try {
-        tenantId = "1633557d743a49f0887993dd7643a20d";//AESEncryptDecrypt.decrypt(tokenId);
-			/*	} catch (InvalidKeyException e) {
+        try {
+        tenantId = AESEncryptDecrypt.decrypt(tokenId);
+				} catch (InvalidKeyException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NoSuchAlgorithmException e) {
@@ -105,7 +105,7 @@ public class ListServersAction extends AbstractAction{
 		} catch (BadPaddingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
         WebResource webResource = client.resource(baseUrl).path(tenantId).path("servers").path("detail");
 
         LOGGER.info("Calling url " + webResource.getURI());
