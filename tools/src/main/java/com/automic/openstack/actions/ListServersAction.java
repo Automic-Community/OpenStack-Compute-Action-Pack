@@ -90,7 +90,7 @@ public class ListServersAction extends AbstractAction{
 
         ClientResponse response = null;
         try {
-        tenantId = AESEncryptDecrypt.decrypt(tenantId);
+        	tokenId = AESEncryptDecrypt.decrypt(tokenId);
 				} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException e) {
 			
 			
