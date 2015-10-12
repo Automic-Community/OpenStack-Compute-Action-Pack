@@ -33,15 +33,10 @@ public abstract class AbstractAction {
      * Service end point
      */
     protected String baseUrl;
-
     protected Client client;
-    
-    protected String tokenId;
-    
-    protected String tenantId;
-
     private CliOptions actionOptions;
     private Cli cli;
+    
     /**
      * Connection timeout in milliseconds
      */

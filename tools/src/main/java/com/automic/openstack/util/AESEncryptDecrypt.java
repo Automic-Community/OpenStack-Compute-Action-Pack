@@ -14,6 +14,8 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
 
+import com.automic.openstack.exception.AutomicRuntimeException;
+
 /**
  * @author sumitsamson
  * 
@@ -33,15 +35,17 @@ public class AESEncryptDecrypt {
         return encryptedString;
     }
 
-    public static String decrypt(String strToDecrypt) throws NoSuchAlgorithmException, NoSuchPaddingException,
-            InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-
-        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
-        final SecretKeySpec secretKey = new SecretKeySpec(KEY, "AES");
-        cipher.init(Cipher.DECRYPT_MODE, secretKey);
-        final String decryptedString = new String(cipher.doFinal(Base64.decodeBase64(strToDecrypt)));
+    public static String decrypt(String strToDecrypt) throws AutomicRuntimeException {
+    	 String decryptedString = null;
+        try {
+			Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
+			final SecretKeySpec secretKey = new SecretKeySpec(KEY, "AES");
+			cipher.init(Cipher.DECRYPT_MODE, secretKey);
+			 decryptedString = new String(cipher.doFinal(Base64.decodeBase64(strToDecrypt)));			
+        } catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException e) {
+			 throw new AutomicRuntimeException(e.getMessage());
+		}
         return decryptedString;
-
     }
 
 }
