@@ -67,7 +67,6 @@
 <UC4RB_OPS_IDENTITY_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_IDENTITY_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 <UC4RB_OPS_PASSWORDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_PASSWORD#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 <UC4RB_OPS_TENANT_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TENANT_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
-<UC4RB_OPS_URL_ENDPOINTs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_URL_ENDPOINT#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 <UC4RB_OPS_USERNAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_USERNAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 </PRPTBOX>
 </PROMPTSET>
@@ -90,7 +89,7 @@
 </PostCon>
 </postconditions>
 </task>
-<task Alias="AUTH_CONN" BranchType="0" Col="2" Lnr="2" OType="JOBP" Object="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.GET_AUTH_TOKEN" ParentAlias="" ParentObject="" Row="2" Text2="">
+<task Alias="AUTH_CONN" BranchType="0" Col="2" Lnr="2" OType="JOBP" Object="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.GET_AUTH_TOKEN" ParentAlias="" ParentObject="" Row="1" Text2="">
 <checkpoint RollbackFlag="1" RunPerPatch="0" RunPerTarget="0" TcpADays="0" TcpATime="00:00" TcpATimeTZ="" TcpExecute="" TcpOn="0" promptatgen="0" showprompt="0"/>
 <after ActFlg="1" AtimOn="0" ErlstStDays="0" ErlstStTime="00:00" ErlstStTimeTZ="" HoldFlg="0"/>
 <when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="1" WElseH="0" WElseS="0" WElseX="0" WhenExecute="" WtimOn="0"/>
@@ -153,7 +152,6 @@
 <UC4RB_OPS_IDENTITY_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_IDENTITY_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 <UC4RB_OPS_PASSWORDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_PASSWORD#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 <UC4RB_OPS_TENANT_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TENANT_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
-<UC4RB_OPS_URL_ENDPOINTs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_URL_ENDPOINT#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 <UC4RB_OPS_USERNAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_USERNAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 </PRPTBOX>
 </PROMPTSET>
@@ -176,7 +174,7 @@
 </PostCon>
 </postconditions>
 </task>
-<task Alias="STORE_CONN_DETAILS" BranchType="0" Col="3" Lnr="3" OType="SCRI" Object="PCK.AUTOMIC_OPENSTACK.PUB.SCRIPT.STORE_CONN_SETTINGS" ParentAlias="" ParentObject="" Row="2" Text2="">
+<task Alias="STORE_CONN_DETAILS" BranchType="0" Col="3" Lnr="3" OType="SCRI" Object="PCK.AUTOMIC_OPENSTACK.PUB.SCRIPT.STORE_CONN_SETTINGS" ParentAlias="" ParentObject="" Row="1" Text2="">
 <checkpoint RollbackFlag="1" RunPerPatch="0" RunPerTarget="0" TcpADays="0" TcpATime="00:00" TcpATimeTZ="" TcpExecute="" TcpOn="0" promptatgen="0" showprompt="0"/>
 <after ActFlg="1" AtimOn="0" ErlstStDays="0" ErlstStTime="00:00" ErlstStTimeTZ="" HoldFlg="0"/>
 <when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="1" WElseH="0" WElseS="0" WElseX="0" WhenExecute="" WtimOn="0"/>
@@ -220,7 +218,6 @@
 <UC4RB_OPS_IDENTITY_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_IDENTITY_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 <UC4RB_OPS_PASSWORDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_PASSWORD#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 <UC4RB_OPS_TENANT_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TENANT_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
-<UC4RB_OPS_URL_ENDPOINTs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_URL_ENDPOINT#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 <UC4RB_OPS_USERNAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_USERNAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 </PRPTBOX>
 </PROMPTSET>
@@ -273,7 +270,6 @@
 <UC4RB_OPS_IDENTITY_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_IDENTITY_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 <UC4RB_OPS_PASSWORDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_PASSWORD#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 <UC4RB_OPS_TENANT_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TENANT_NAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
-<UC4RB_OPS_URL_ENDPOINTs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_URL_ENDPOINT#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 <UC4RB_OPS_USERNAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_USERNAME#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.OPENSTACK_CONNECTION"/>
 </PRPTBOX>
 </PROMPTSET>
@@ -304,7 +300,7 @@
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
 <FcstStatus>0|U00000000 ??? ""</FcstStatus>
-<Ert>0</Ert>
+<Ert>2</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
 <ErtFix>0</ErtFix>

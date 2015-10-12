@@ -2,7 +2,7 @@
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
 <PRPT name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
 <HEADER state="1">
-<Title/>
+<Title>OpenStack Compute service parameters</Title>
 <ArchiveKey1/>
 <ArchiveKey2/>
 <OH_SubType/>
