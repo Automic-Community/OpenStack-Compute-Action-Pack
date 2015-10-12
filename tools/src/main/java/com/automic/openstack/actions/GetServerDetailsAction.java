@@ -30,8 +30,8 @@ import com.sun.jersey.api.client.WebResource;
  */
 /**
  * This class is used to retrieve server details as per the specified server id.
- * Retrieved server information is written in the xml file at the
- * path mentioned in the filePath
+ * Retrieved server information is written in the xml file at the path mentioned
+ * in the filePath
  * 
  */
 public class GetServerDetailsAction extends AbstractAction {
@@ -46,7 +46,7 @@ public class GetServerDetailsAction extends AbstractAction {
 
 		addOption("computeurl", true, "Compute service endpoint");
 		addOption("tokenid", true, "Token Id for authentication");
-		addOption("tenantid", false, "Tenant/Project name");
+		addOption("tenantid", false, "Tenant/Project id");
 		addOption("serverid", false, "Server id");
 		addOption("filepath", false, "Xml file path ");
 
@@ -81,7 +81,7 @@ public class GetServerDetailsAction extends AbstractAction {
 			LOGGER.error(ExceptionConstants.EMPTY_SERVERID);
 			throw new AutomicException(ExceptionConstants.EMPTY_SERVERID);
 		}
-		if (!Validator.checkFileExists(filePath)) {
+		if (!Validator.checkFileDirectoryExists(filePath)) {
 			String errMsg = String.format(ExceptionConstants.INVALID_FILE,
 					filePath);
 			LOGGER.error(errMsg);
@@ -124,14 +124,14 @@ public class GetServerDetailsAction extends AbstractAction {
 	 */
 
 	private void prepareOutput(ClientResponse response) throws AutomicException {
-		
+
 		JSONObject jsonObj = CommonUtil.jsonResponse(response
 				.getEntityInputStream());
-		LOGGER.info("Json :" + jsonObj.toString() );
-		
-		CommonUtil.json2xml(jsonObj, filePath);
+		LOGGER.info("Json :" + jsonObj.toString());
 
-		ConsoleWriter.writeln("UC4RB_OPS_SERVER_INFO_FILEPATH ::=" + filePath);
+		CommonUtil.json2xml(jsonObj, filePath, "server_details");
+
+		ConsoleWriter.writeln("SERVER_INFO_FILEPATH ::=" + filePath);
 
 	}
 

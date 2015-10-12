@@ -8,7 +8,9 @@
 <OH_SubType/>
 </HEADER>
 <STORE>
-<resourceList/>
+<resourceList>
+<row checksum="A916CD1C8DCFDB065ABC000785918F2BD8EF4467E8CDEE60FFCAAEEAD6B56837" fileType="BINARY" filename="openstacktool.jar" hw="*" id="OPENSTACK-ALL-ALL-ALL" name="OPENSTACK" platform="*" resname="PCK.AUTOMIC_OPENSTACK.PRV.STORE-OPENSTACK-ALL-ALL-ALL" size="3076792" sw="*" type="3" version="1.0.0.201510121430"/>
+</resourceList>
 </STORE>
 <DOCU_Docu state="1" type="text">
 <DOC/>
