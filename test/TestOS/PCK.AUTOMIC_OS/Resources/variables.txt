@@ -4,6 +4,9 @@ Resource          ../../../Env/default.txt
 *** Variables ***
 #---- Promptset Fields --------------------------------------------------------------------------------------
 ${OS_Identity_URL}    http://128.136.179.2:5000/v2.0
+${OS_Compute_URL}    http://128.136.179.2:8774/v2
 ${UserName_OS}    facebook1162754143740305
 ${Password_OS}    z7I51t3ifWmzHwKM
 ${Name_Tenant}    facebook1162754143740305
+${Invalid_Token_ID}    124355
+${Invalid_Tenant_ID}    1234566

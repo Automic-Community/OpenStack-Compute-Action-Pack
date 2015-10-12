@@ -5,3 +5,4 @@ tools/.checkstyle
 tools/.classpath
 tools/.project
 tools/.settings
+config.yml

@@ -34,6 +34,9 @@ public final class ActionFactory {
             case GET_AUTH_TOKEN:
                 action = new GetTokenAction();
                 break;
+            case LIST_SERVERS:
+                action = new ListServersAction();
+                break;
             default:
                 String msg = "Invalid Action.. Please enter valid action " + Action.getActionNames();
                 LOGGER.error(msg);

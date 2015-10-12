@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<STORE name="PCK.AUTOMIC_OPENSTACK.PRV.STORE">
+<STORE name="PCK.AUTOMIC_OPENSTACK.PUB.STORE">
 <HEADER state="1">
 <Title>Storage object to store openstack binary file</Title>
 <ArchiveKey1/>
@@ -9,7 +9,7 @@
 </HEADER>
 <STORE>
 <resourceList>
-<row checksum="21D2DE9C96DA49B2BC77F4C3CF15148088CDF6853022D958318B3D24F838E350" fileType="BINARY" filename="openstacktool.jar" hw="*" id="OPENSTACK-ALL-ALL-ALL" name="OPENSTACK" platform="*" resname="PCK.AUTOMIC_OPENSTACK.PRV.STORE-OPENSTACK-ALL-ALL-ALL" size="3070139" sw="*" type="3" version="1.0.0"/>
+<row checksum="62EB7522393CB07595F44FF232DBDDD717D513DC2DA0D3BE28DFA7AE243E1B60" fileType="BINARY" filename="openstacktool.jar" hw="*" id="OPENSTACK-ALL-ALL-ALL" name="OPENSTACK" platform="*" resname="PCK.AUTOMIC_OPENSTACK.PUB.STORE-OPENSTACK-ALL-ALL-ALL" size="3072740" sw="*" type="3" version="1.0.0"/>
 </resourceList>
 </STORE>
 <DOCU_Docu state="1" type="text">

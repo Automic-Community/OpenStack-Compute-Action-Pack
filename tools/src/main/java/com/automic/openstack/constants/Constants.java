@@ -16,6 +16,7 @@ public final class Constants {
     public static final String ACTION = "action";
     public static final String PASSWORD = "password";
     public static final String HTTPS = "https";
+    public static final String X_AUTH_TOKEN = "X-Auth-Token";
 
     private Constants() {
     }
