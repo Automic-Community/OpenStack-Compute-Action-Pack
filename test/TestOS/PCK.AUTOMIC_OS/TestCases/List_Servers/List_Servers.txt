@@ -15,7 +15,7 @@ List Servers with Valid Inputs
                       [Tags]    main_scenarios
                       OK        ${OS_Compute_URL}       blank                  blank
 
-Assertion with Invalid OS URL
+Assertion with Invalid Coompute URL
                       NOK       https://162.123.12.3    blank                  blank
 
 Assertion with Invalid Token ID
@@ -24,7 +24,7 @@ Assertion with Invalid Token ID
 Assertion with Invalid Tenant ID
                       NOK       ${OS_Compute_URL}       blank                  ${Invalid_Tenant_ID}
 
-Assert Open Stack URL as a mandatory field
+Assert Compute URL as a mandatory field
                       OTHER     ${EMPTY}                blank                  blank
 
 Assert Token ID as a mandatory field

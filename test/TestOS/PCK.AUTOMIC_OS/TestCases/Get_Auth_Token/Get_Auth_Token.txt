@@ -18,7 +18,7 @@ Get Auth Token with Valid Inputs
 Get Auth Token and Asserting Tenant Name as an Optional Field
                       OK        ${OS_Identity_URL}      ${UserName_OS}    ${Password_OS}    ${EMPTY}
 
-Assertion with Invalid OS URL
+Assertion with Invalid Identity URL
                       NOK       https://162.123.12.3    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
 
 Assertion with Invalid OS Username
@@ -30,7 +30,7 @@ Assertion with Invalid OS Password
 Assertion with Invalid Tenant Name
                       NOK       ${OS_Identity_URL}      ${UserName_OS}    ${Password_OS}    testing
 
-Assert Open Stack URL as a mandatory field
+Assert Identity URL as a mandatory field
                       OTHER     ${EMPTY}                ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
 
 Assert Username as a mandatory field
