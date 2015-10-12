@@ -17,7 +17,8 @@ public final class ExceptionConstants {
     public static final String SSLCONTEXT_ERROR = "Unable to build secured context.";
 
     public static final String INVALID_FILE = " File [%s] is invalid. Possibly file does not exist ";
-
+    public static final String INVALID_DIRECTORY = " Directory [%s] is invalid ";
+    
     public static final String UNABLE_TO_WRITEFILE = "Error writing file ";
 
     public static final String UNABLE_TO_CLOSE_STREAM = "Error while closing stream";
@@ -38,6 +39,8 @@ public final class ExceptionConstants {
     public static final String UNABLE_TO_WRITE_FILE = "Unable to write into file [%s]";
 
     public static final String INVALID_AUTH_TOKEN = "Invalid token id ";
+    public static final String EMPTY_TOKENID = "Token Id must not be empty";
+    public static final String EMPTY_TENANTID = "Tenant Id must not be empty";
 
     private ExceptionConstants() {
     }

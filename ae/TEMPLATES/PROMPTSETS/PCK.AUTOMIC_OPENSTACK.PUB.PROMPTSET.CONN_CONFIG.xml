@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<PRPT name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CONN_CONFIG">
+<PRPT name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.CONN_CONFIG">
 <HEADER state="1">
 <Title>Store new OpenStack connection details</Title>
 <ArchiveKey1/>

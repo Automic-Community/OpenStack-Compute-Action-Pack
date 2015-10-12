@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import com.automic.openstack.util.JSON2XMLAdapter;
 import com.automic.openstack.constants.Constants;
 import com.automic.openstack.constants.ExceptionConstants;
 import com.automic.openstack.exception.AutomicException;
@@ -165,8 +166,8 @@ public final class CommonUtil {
      * @param rootTag
      * @throws DockerException
      */
-    public static void json2xml(JSONObject json, String filePath) throws AutomicException {
-        createFile(filePath, org.json.XML.toString(json));
+    public static void json2xml(JSONObject json, String filePath, String rootTag) throws AutomicException {
+        createFile(filePath, org.json.XML.toString(JSON2XMLAdapter.adoptJsonToXml(json), rootTag));
     }
 
     /**
@@ -177,8 +178,8 @@ public final class CommonUtil {
      * @param rootTag
      * @throws DockerException
      */
-    public static void jsonResponse2xml(InputStream is, String filePath) throws AutomicException {
-        json2xml(jsonResponse(is), filePath);
+    public static void jsonResponse2xml(InputStream is, String filePath, String rootTag) throws AutomicException {
+        json2xml(jsonResponse(is), filePath, rootTag);
     }
 
     public static String encrypt(String input) throws AutomicException {
