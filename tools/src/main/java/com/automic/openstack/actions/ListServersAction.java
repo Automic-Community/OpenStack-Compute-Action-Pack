@@ -93,7 +93,6 @@ public class ListServersAction extends AbstractAction{
         	tokenId = AESEncryptDecrypt.decrypt(tokenId);
 				} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException e) {
 			
-			
 			throw new AutomicException(e.getMessage());
 		} 
         WebResource webResource = client.resource(baseUrl).path(tenantId).path("servers").path("detail");
