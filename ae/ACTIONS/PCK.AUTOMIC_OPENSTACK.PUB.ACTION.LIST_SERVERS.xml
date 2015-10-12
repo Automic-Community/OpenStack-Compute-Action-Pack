@@ -56,7 +56,6 @@
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
-<ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_COMPUTE_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_COMPUTE_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_TENANT_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TENANT_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_TOKEN_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TOKEN_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
@@ -114,7 +113,6 @@
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
-<ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_COMPUTE_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_COMPUTE_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_TENANT_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TENANT_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_TOKEN_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TOKEN_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
@@ -158,7 +156,6 @@
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
-<ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_COMPUTE_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_COMPUTE_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_TENANT_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TENANT_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_TOKEN_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TOKEN_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
@@ -191,7 +188,7 @@
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
 <FcstStatus>0|U00000000 ??? ""</FcstStatus>
-<Ert>1</Ert>
+<Ert>2</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
 <ErtFix>0</ErtFix>
@@ -260,7 +257,42 @@
 <MSCRI/>
 </SCRIPT>
 <DOCU_Docu state="1" type="text">
-<DOC/>
+<DOC><![CDATA[= Action name =
+PCK.AUTOMIC_OPENSTACK.PUB.ACTION.LIST_SERVERS
+
+= General description =
+This action is used to get list of all the servers with corresponding server details from OpenStack cloud and Save the details to 
+provides file path.
+The result of this action will be the following information published as AE variables:
+* Xml file path 
+* Server count
+ 
+= Inputs =
+* Compute URL : OpenStack Compute URL. Example http://openstack.com:8774/v2.1
+* Token Id    : Token id for authentication. 
+* Tenant Id : Tenant name (a group of users is referred to as a project or tenant. These terms are interchangeable.)
+* Overwrite Agent: Overwrites the default agent
+* Overwrite Login: Overwrites the default login
+= Behavior =
+(None)
+
+=Return Value=
+The response will contain the following AE variables
+* UC4RB_OPS_LIST_SERVERS_XML : Xml File Path
+* UC4RB_OPS_SERVER_COUNT : Number of available servers 
+
+
+= Outputs =
+* Return code is 0 in case of success.
+* Return code is 1 in case of failure.
+* Return code is 2 in case of connection timed out !!
+= Rollback =
+(none)
+= Logging =
+AE logs will be displayed in the AE report.
+Java logs will be created at \temp\openstack.log under agent installation directory.
+= Example =
+(none)]]></DOC>
 </DOCU_Docu>
 </JOBP>
 </uc-export>
