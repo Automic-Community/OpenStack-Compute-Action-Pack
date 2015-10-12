@@ -58,6 +58,7 @@ List Servers Template
     Action Execute
     Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
     ...    Assert Mandatory
+    Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable Should Be Found    &UC4RB_OPS_SERVER_COUNT#    ELSE    Action Object Variable Should Not Be Found    &UC4RB_OPS_SERVER_COUNT#
     Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable File Path Should Be    &UC4RB_OPS_LIST_SERVERS_XML#    .xml    ELSE    Action Object Variable Should Not Be Found
     ...    &UC4RB_OPS_LIST_SERVERS_XML#
     Run Keyword If    '${OK_NOK}' == 'OK'    Delete File
