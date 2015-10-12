@@ -24,7 +24,9 @@
 <sortDirection>0</sortDirection>
 </ATTR_VARA>
 <VARA state="1">
-<Variables/>
+<Variables>
+<row Name="t5" Value="http://192.168.112.48:5000/v2.0" Value1="admin" Value2="--10F292809F6F76E81D" Value3="" Value4=""/>
+</Variables>
 </VARA>
 <DOCU_Docu state="1" type="text">
 <DOC/>
