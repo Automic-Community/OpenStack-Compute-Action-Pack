@@ -97,11 +97,14 @@ Genarate String
     Set Global Variable    ${Generated_Name}
 
 Get Auth Token
-    [Arguments]    ${Identity_URL}    ${Username}    ${Password}    ${Tenant_Name}
+    [Arguments]    ${_GET_AUTH_TOKEN_ACTION}    ${Identity_URL}    ${Username}    ${Password}    ${Tenant_Name}
+    Action Create    ${_GET_AUTH_TOKEN_ACTION}
     Action Set    &UC4RB_OPS_IDENTITY_URL#    ${Identity_URL}
     Action Set    &UC4RB_OPS_USERNAME#    ${UserName}
     Action Set    &UC4RB_OPS_PASSWORD#    ${Password}
     Action Set    &UC4RB_OPS_TENANT_NAME#    ${Tenant_Name}
+    Set Overwrite Agent
+    Action Execute
     ${Generated_Token_ID}=    Action Get Variable    &UC4RB_OPS_TOKEN_ID#
     Set Global Variable    ${Generated_Token_ID}
     ${Generated_Tenant_ID}=    Action Get Variable    &UC4RB_OPS_TENANT_ID#
