@@ -39,16 +39,18 @@ public class GetServerDetailsAction extends AbstractAction {
 	private static final Logger LOGGER = LogManager
 			.getLogger(GetServerDetailsAction.class);
 
-	private String filePath;
+	private String tokenId;
+	private String tenantId;
 	private String serverId;
+	private String filePath;
 
 	public GetServerDetailsAction() {
 
 		addOption("computeurl", true, "Compute service endpoint");
 		addOption("tokenid", true, "Token Id for authentication");
-		addOption("tenantid", false, "Tenant/Project id");
-		addOption("serverid", false, "Server id");
-		addOption("filepath", false, "Xml file path ");
+		addOption("tenantid", true, "Tenant/Project id");
+		addOption("serverid", true, "Server id");
+		addOption("filepath", true, "Xml file path ");
 
 	}
 
@@ -129,7 +131,7 @@ public class GetServerDetailsAction extends AbstractAction {
 				.getEntityInputStream());
 		LOGGER.info("Json :" + jsonObj.toString());
 
-		CommonUtil.json2xml(jsonObj, filePath, "server_details");
+		CommonUtil.json2xml(jsonObj, filePath, "");
 
 		ConsoleWriter.writeln("SERVER_INFO_FILEPATH ::=" + filePath);
 
