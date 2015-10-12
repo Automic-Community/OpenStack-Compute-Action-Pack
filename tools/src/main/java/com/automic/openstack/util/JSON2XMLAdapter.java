@@ -31,13 +31,7 @@ public class JSON2XMLAdapter {
 				    JSONObject temp = new JSONObject();
 				    temp.put("jsonkey", names[i]);
 				    temp.put("jsonvalue", jsonObject);
-				    json.put("jsonobject"+(cnt++), temp);
-				    
-				    //System.out.println(names[i]);
-					//String temp = json.toString();
-					//emptyJson(json);
-					//json.put("value", temp);
-					//break;
+				    json.put("jsonobject"+(cnt++), temp);				    
 				    iterateObject(jsonObject);
 				} else {
 					// If key is valid then recursively iterate it.
@@ -64,12 +58,4 @@ public class JSON2XMLAdapter {
 		}
 	}
 
-	private static void emptyJson(JSONObject json) {
-		String[] names = JSONObject.getNames(json);
-		if (names != null) {
-			for (int i = 0; i < names.length; i++) {
-				json.remove(names[i]);
-			}
-		}
-	}
 }
