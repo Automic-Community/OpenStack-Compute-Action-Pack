@@ -70,5 +70,5 @@ Get Server Details Template
     ...    &UC4RB_OPS_SERVER_INFO_FILEPATH#
     Run Keyword If    '${OK_NOK}' == 'OK'    Delete File
 
-Tededeleteardown
+Teardown
     Log    *******End Test "GET SERVER DETAILS"*******
