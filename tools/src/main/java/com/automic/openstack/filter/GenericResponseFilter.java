@@ -27,9 +27,9 @@ public class GenericResponseFilter extends ClientFilter {
         ClientResponse response = getNext().handle(request);
         if (!(response.getStatus() >= HTTP_SUCCESS_START && response.getStatus() <= HTTP_SUCCESS_END)) {
             LOGGER.error("Response code for " + request.getURI() + " is " + response.getStatus());
-            JSONObject errorJson = new JSONObject(new JSONTokener(response.getEntityInputStream()));
-            LOGGER.error(errorJson);
-            throw new AutomicRuntimeException(errorJson.toString());
+            String errorMsg = response.getEntity(String.class);
+            LOGGER.error(errorMsg);
+            throw new AutomicRuntimeException(errorMsg);
 
         }
         return response;

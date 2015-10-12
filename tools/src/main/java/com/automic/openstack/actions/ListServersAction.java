@@ -114,10 +114,8 @@ public class ListServersAction extends AbstractAction{
      */
 
     private void prepareOutput(ClientResponse response) throws AutomicException {
-
-        JSONObject jsonObj = CommonUtil.jsonResponse(response.getEntityInputStream());
-        CommonUtil.json2xml(jsonObj, filePath);      
-       
+   
+        CommonUtil.jsonResponse2xml(response.getEntityInputStream(), filePath, "ListServers");
         ConsoleWriter.writeln("UC4RB_OPS_LIST_SERVERS_XML ::=" + filePath);
 
     }
