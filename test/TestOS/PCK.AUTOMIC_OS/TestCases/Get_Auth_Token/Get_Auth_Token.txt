@@ -53,8 +53,7 @@ Get Auth Token Template
     ...    -${Username}: This field specifies Username for Open Stack.
     ...    -${Password}: This field specifies the password for Open Stack user.
     ...    -${Tenant_Name}: This field specifies the tenant name whose token is generated.
-    Action Create    ${_GET_AUTH_TOKEN_ACTION}
-    Get Auth Token    ${Identity_URL}    ${Username}    ${Password}    ${Tenant_Name}
+    Get Auth Token    ${_GET_AUTH_TOKEN_ACTION}    ${Identity_URL}    ${Username}    ${Password}    ${Tenant_Name}
     Set Overwrite Agent
     Action Execute
     Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
