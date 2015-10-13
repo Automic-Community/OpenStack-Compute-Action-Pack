@@ -2,8 +2,6 @@ package com.automic.openstack.filter;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import com.automic.openstack.exception.AutomicRuntimeException;
 import com.sun.jersey.api.client.ClientRequest;

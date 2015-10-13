@@ -181,6 +181,10 @@ public final class CommonUtil {
     public static void jsonResponse2xml(InputStream is, String filePath, String rootTag) throws AutomicException {
         json2xml(jsonResponse(is), filePath, rootTag);
     }
+    
+    public static void jsonResponse2xml(InputStream is, String filePath) throws AutomicException {
+        json2xml(jsonResponse(is), filePath, null);
+    }
 
     public static String encrypt(String input) throws AutomicException {
 

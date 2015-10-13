@@ -87,8 +87,8 @@ Assert Mandatory
 
 Delete File
     Action Create    ${_DELETE_FILE_ACTION}
-    Action Set    &UC4RB_DIR_FILE_RM_NAME#    ${File_path}
-    Action Set    &UC4RB_DIR_FILE_RM_FAIL#    Yes
+    Action Set    &UC4RB_OPS_FILE_PATH#    ${File_path}
+    Action Set    &UC4RB_OPS_STATUS#    YES
     Set Overwrite Agent
     Action Execute
 

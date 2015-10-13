@@ -37,6 +37,12 @@ public final class ActionFactory {
             case LIST_SERVERS:
                 action = new ListServersAction();
                 break;
+            case GET_SERVER_DETAILS:
+                action = new GetServerDetailsAction();
+                break;
+            case DELETE_FILE:
+                action = new DeleteFileAction();
+                break;
             default:
                 String msg = "Invalid Action.. Please enter valid action " + Action.getActionNames();
                 LOGGER.error(msg);

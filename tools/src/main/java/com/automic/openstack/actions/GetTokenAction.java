@@ -3,16 +3,12 @@
  */
 package com.automic.openstack.actions;
 
-import java.util.Arrays;
-import java.util.List;
-
 import javax.ws.rs.core.MediaType;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
-import com.automic.openstack.constants.Constants;
 import com.automic.openstack.constants.ExceptionConstants;
 import com.automic.openstack.exception.AutomicException;
 import com.automic.openstack.util.CommonUtil;
@@ -30,7 +26,7 @@ import com.sun.jersey.api.client.WebResource;
  * the other Openstack service requests.Along with the token it provides the service end points which along with the
  * above information is written in the xml file at the path mentioned in the filePath
  */
-public class GetTokenAction extends AbstractAction {
+public class GetTokenAction extends AbstractHttpAction {
 
     private static final Logger LOGGER = LogManager.getLogger(GetTokenAction.class);
 
@@ -45,15 +41,6 @@ public class GetTokenAction extends AbstractAction {
         addOption("password", true, "password for openstack");
         addOption("tenantname", false, "Tenant/Project name");
 
-    }
-
-    @Override
-    /**
-     * Preventing password to be logged
-     * */
-    protected List<String> noLogging() {
-
-        return Arrays.asList(Constants.PASSWORD);
     }
 
     @Override
@@ -86,7 +73,7 @@ public class GetTokenAction extends AbstractAction {
     /**
      * Authenticates and generates a token by calling http://baseUrl/tokens
      * */
-    protected void execute() throws AutomicException {
+    protected void executeSpecific() throws AutomicException {
 
         ClientResponse response = null;
 

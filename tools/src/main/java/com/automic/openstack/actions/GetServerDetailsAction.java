@@ -10,33 +10,34 @@ import com.automic.openstack.constants.ExceptionConstants;
 import com.automic.openstack.exception.AutomicException;
 import com.automic.openstack.util.AESEncryptDecrypt;
 import com.automic.openstack.util.CommonUtil;
-import com.automic.openstack.util.ConsoleWriter;
 import com.automic.openstack.util.Validator;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 /**
- * @author Anurag Upadhyay
+ * @author Kamal Garg
  * 
  */
 /**
- * This class is used to get all the servers with corresponding server details. It also includes server usage
- * information. It generates all the information in the XML format and store the xml file at the specified path.
+ * This class is used to retrieve server details as per the specified server id. Retrieved server information is written
+ * in the xml file at the path mentioned in the filePath
  * 
  */
-public class ListServersAction extends AbstractHttpAction {
+public class GetServerDetailsAction extends AbstractHttpAction {
 
-    private static final Logger LOGGER = LogManager.getLogger(ListServersAction.class);
+    private static final Logger LOGGER = LogManager.getLogger(GetServerDetailsAction.class);
 
+    private String tokenId;
+    private String tenantId;
+    private String serverId;
     private String filePath;
-    protected String tokenId;
-    protected String tenantId;
 
-    public ListServersAction() {
+    public GetServerDetailsAction() {
 
         addOption("computeurl", true, "Compute service endpoint");
         addOption("tokenid", true, "Token Id for authentication");
-        addOption("tenantid", true, "Tenant/Project name");
+        addOption("tenantid", true, "Tenant/Project id");
+        addOption("serverid", true, "Server id");
         addOption("filepath", true, "Xml file path ");
 
     }
@@ -46,13 +47,17 @@ public class ListServersAction extends AbstractHttpAction {
         baseUrl = getOptionValue("computeurl");
         tokenId = getOptionValue("tokenid");
         tenantId = getOptionValue("tenantid");
+        serverId = getOptionValue("serverid");
         filePath = getOptionValue("filepath");
 
     }
 
     @Override
     protected void validate() throws AutomicException {
-
+        if (!Validator.checkNotEmpty(baseUrl)) {
+            LOGGER.error(ExceptionConstants.EMPTY_SERVICE_ENDPOINT);
+            throw new AutomicException(ExceptionConstants.EMPTY_SERVICE_ENDPOINT);
+        }
         if (!Validator.checkNotEmpty(tokenId)) {
             LOGGER.error(ExceptionConstants.EMPTY_TOKENID);
             throw new AutomicException(ExceptionConstants.EMPTY_TOKENID);
@@ -61,8 +66,12 @@ public class ListServersAction extends AbstractHttpAction {
             LOGGER.error(ExceptionConstants.EMPTY_TENANTID);
             throw new AutomicException(ExceptionConstants.EMPTY_TENANTID);
         }
+        if (!Validator.checkNotEmpty(serverId)) {
+            LOGGER.error(ExceptionConstants.EMPTY_SERVERID);
+            throw new AutomicException(ExceptionConstants.EMPTY_SERVERID);
+        }
         if (!Validator.checkFileDirectoryExists(filePath)) {
-            String errMsg = String.format(ExceptionConstants.INVALID_DIRECTORY, filePath);
+            String errMsg = String.format(ExceptionConstants.INVALID_FILE, filePath);
             LOGGER.error(errMsg);
             throw new AutomicException(errMsg);
         }
@@ -79,7 +88,7 @@ public class ListServersAction extends AbstractHttpAction {
 
         tokenId = AESEncryptDecrypt.decrypt(tokenId);
 
-        WebResource webResource = client.resource(baseUrl).path(tenantId).path("servers").path("detail");
+        WebResource webResource = client.resource(baseUrl).path(tenantId).path("servers").path(serverId);
 
         LOGGER.info("Calling url " + webResource.getURI());
 
@@ -97,8 +106,7 @@ public class ListServersAction extends AbstractHttpAction {
 
     private void prepareOutput(ClientResponse response) throws AutomicException {
 
-        CommonUtil.jsonResponse2xml(response.getEntityInputStream(), filePath, "ListServers");
-        ConsoleWriter.writeln("UC4RB_OPS_LIST_SERVERS_XML ::=" + filePath);
+        CommonUtil.jsonResponse2xml(response.getEntityInputStream(), filePath);
 
     }
 
