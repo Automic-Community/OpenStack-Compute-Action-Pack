@@ -65,7 +65,6 @@
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.GET_SERVER_DETAILS" name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.GET_SERVER_DETAILS" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.GET_SERVER_DETAILS">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.GET_SERVER_DETAILS">
-<ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.GET_SERVER_DETAILS"/>
 <UC4RB_OPS_SERVER_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_SERVER_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.GET_SERVER_DETAILS"/>
 </PRPTBOX>
 </PROMPTSET>
@@ -130,7 +129,6 @@
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.GET_SERVER_DETAILS" name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.GET_SERVER_DETAILS" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.GET_SERVER_DETAILS">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.GET_SERVER_DETAILS">
-<ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.GET_SERVER_DETAILS"/>
 <UC4RB_OPS_SERVER_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_SERVER_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.GET_SERVER_DETAILS"/>
 </PRPTBOX>
 </PROMPTSET>
@@ -181,7 +179,6 @@
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.GET_SERVER_DETAILS" name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.GET_SERVER_DETAILS" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.GET_SERVER_DETAILS">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.GET_SERVER_DETAILS">
-<ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.GET_SERVER_DETAILS"/>
 <UC4RB_OPS_SERVER_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_SERVER_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.GET_SERVER_DETAILS"/>
 </PRPTBOX>
 </PROMPTSET>
@@ -286,7 +283,145 @@
 <MSCRI/>
 </SCRIPT>
 <DOCU_Docu state="1" type="text">
-<DOC/>
+<DOC><![CDATA[= Action name =
+PCK.AUTOMIC_OPENSTACK.PUB.ACTION.GET_SERVER_DETAILS
+= General description =
+This action is used to get the server details from OpenStack cloud as per the specified server id. Output of this action will an xml file path consisting the server information.
+<server>
+    <progress>0</progress>
+    <key_name>null</key_name>
+    <hostId>96625243dfebce0d53d7ca381e984d80c75034df73b364909a528709</hostId>
+    <tenant_id>ee47abe5c72844dfa70c65267e37dd69</tenant_id>
+    <accessIPv4/>
+    <accessIPv6/>
+    <security_groups>
+        <name>default</name>
+    </security_groups>
+    <id>58518467-9bbe-41fb-ab2c-818bd00cf08c</id>
+    <updated>2015-09-29T08:46:41Z</updated>
+    <created>2015-09-29T08:46:31Z</created>
+    <name>t</name>
+    <user_id>b9fd434b8de049299d0aefcadc61b5d0</user_id>
+    <metadata></metadata>
+    <jsonobject6>
+        <jsonvalue>instance-00000004</jsonvalue>
+        <jsonkey>OS-EXT-SRV-ATTR:instance_name</jsonkey>
+    </jsonobject6>
+    <jsonobject5>
+        <jsonvalue>ubuntu</jsonvalue>
+        <jsonkey>OS-EXT-SRV-ATTR:hypervisor_hostname</jsonkey>
+    </jsonobject5>
+    <jsonobject4>
+        <jsonvalue>null</jsonvalue>
+        <jsonkey>OS-EXT-STS:task_state</jsonkey>
+    </jsonobject4>
+    <jsonobject3>
+        <jsonvalue>nova</jsonvalue>
+        <jsonkey>OS-EXT-AZ:availability_zone</jsonkey>
+    </jsonobject3>
+    <jsonobject2>
+        <jsonvalue>ubuntu</jsonvalue>
+        <jsonkey>OS-EXT-SRV-ATTR:host</jsonkey>
+    </jsonobject2>
+    <jsonobject1>
+        <jsonvalue>2015-09-29T08:46:40.000000</jsonvalue>
+        <jsonkey>OS-SRV-USG:launched_at</jsonkey>
+    </jsonobject1>
+    <status>ACTIVE</status>
+    <jsonobject0>
+        <jsonvalue>active</jsonvalue>
+        <jsonkey>OS-EXT-STS:vm_state</jsonkey>
+    </jsonobject0>
+    <config_drive/>
+    <flavor>
+        <id>2</id>
+        <links>
+            <rel>bookmark</rel>
+            <href>http://127.0.0.1:8774/ee47abe5c72844dfa70c65267e37dd69/flavors/2</href>
+        </links>
+    </flavor>
+    <image>
+        <id>17512647-e4b3-4a6d-9f85-2010e0bfef8e</id>
+        <links>
+            <rel>bookmark</rel>
+            <href>http://127.0.0.1:8774/ee47abe5c72844dfa70c65267e37dd69/images/17512647-e4b3-4a6d-9f85-2010e0bfef8e</href>
+        </links>
+    </image>
+    <links>
+        <rel>self</rel>
+        <href>http://127.0.0.1:8774/v2/ee47abe5c72844dfa70c65267e37dd69/servers/58518467-9bbe-41fb-ab2c-818bd00cf08c</href>
+    </links>
+    <links>
+        <rel>bookmark</rel>
+        <href>http://127.0.0.1:8774/ee47abe5c72844dfa70c65267e37dd69/servers/58518467-9bbe-41fb-ab2c-818bd00cf08c</href>
+    </links>
+    <jsonobject9>
+        <jsonvalue>1</jsonvalue>
+        <jsonkey>OS-EXT-STS:power_state</jsonkey>
+    </jsonobject9>
+    <addresses>
+        <testnet>
+            <jsonobject1>
+                <jsonvalue>fa:16:3e:2d:2d:5b</jsonvalue>
+                <jsonkey>OS-EXT-IPS-MAC:mac_addr</jsonkey>
+            </jsonobject1>
+            <jsonobject0>
+                <jsonvalue>fixed</jsonvalue>
+                <jsonkey>OS-EXT-IPS:type</jsonkey>
+            </jsonobject0>
+            <addr>127.0.0.4</addr>
+            <version>4</version>
+        </testnet>
+        <testnet>
+            <jsonobject1>
+                <jsonvalue>fa:16:3e:2d:2d:5b</jsonvalue>
+                <jsonkey>OS-EXT-IPS-MAC:mac_addr</jsonkey>
+            </jsonobject1>
+            <jsonobject0>
+                <jsonvalue>floating</jsonvalue>
+                <jsonkey>OS-EXT-IPS:type</jsonkey>
+            </jsonobject0>
+            <addr>172.24.4.13</addr>
+            <version>4</version>
+        </testnet>
+    </addresses>
+    <jsonobject10>
+        <jsonkey>os-extended-volumes:volumes_attached</jsonkey>
+    </jsonobject10>
+    <jsonobject7>
+        <jsonvalue>AUTO</jsonvalue>
+        <jsonkey>OS-DCF:diskConfig</jsonkey>
+    </jsonobject7>
+    <jsonobject8>
+        <jsonvalue>null</jsonvalue>
+        <jsonkey>OS-SRV-USG:terminated_at</jsonkey>
+    </jsonobject8>
+</server>
+
+= Inputs =
+* Compute URL : OpenStack Compute URL. Example http://openstack.com:8774/v2.1
+* Token Id : Token Id for authentication. It is AES encoded. 
+* Tenant Id : Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
+* Server Id : Server id of the server 
+* Overwrite Agent: Overwrites the default agent
+* Overwrite Login: Overwrites the default login
+= Behavior =
+(None)
+=Return Value=
+The response will contain the following AE variables
+* UC4RB_OPS_SERVER_INFO_FILEPATH : Xml File Path
+
+= Outputs =
+* Return code is 0 in case of success.
+* Return code is 1 in case of failure.
+* Return code is 2 in case of connection timed out !!
+= Rollback =
+(none)
+= Logging =
+AE logs will be displayed in the AE report.
+Java logs will be created at \temp\openstack.log under agent installation directory.
+= Example =
+(none)]]></DOC>
 </DOCU_Docu>
 </JOBP>
 </uc-export>
