@@ -34,7 +34,7 @@ public class ChangeServerState extends AbstractHttpAction {
     private String serverId;
     private String action;
 
-    ChangeServerState() {
+    public ChangeServerState() {
 
         addOption("computeurl", true, "Compute service endpoint");
         addOption("tokenid", true, "Token Id for authentication");
@@ -71,6 +71,10 @@ public class ChangeServerState extends AbstractHttpAction {
         if (!Validator.checkNotEmpty(serverId)) {
             LOGGER.error(ExceptionConstants.EMPTY_SERVERID);
             throw new AutomicException(ExceptionConstants.EMPTY_SERVERID);
+        }
+        if (!Validator.checkNotEmpty(action)) {
+            LOGGER.error(ExceptionConstants.EMPTY_SERVER_ACTION);
+            throw new AutomicException(ExceptionConstants.EMPTY_SERVER_ACTION);
         }
 
     }

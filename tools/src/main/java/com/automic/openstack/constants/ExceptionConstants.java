@@ -1,5 +1,6 @@
 package com.automic.openstack.constants;
 
+
 /**
  * Constant class containing messages to describe Exception Scenarios.
  * 
@@ -43,6 +44,8 @@ public final class ExceptionConstants {
     public static final String EMPTY_TENANTID = "Tenant Id must not be empty";
  
     public static final String EMPTY_SERVERID = "Server Id must not be empty";
+
+    public static final String EMPTY_SERVER_ACTION = "Server action cannot be empty";
 
     private ExceptionConstants() {
     }
