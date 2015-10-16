@@ -46,6 +46,9 @@ public final class ActionFactory {
             case CHANGE_SERVER_STATE:
                 action = new ChangeServerState();
                 break;
+            case CREATE_SERVER:
+                action = new CreateServerAction();
+                break;
             default:
                 String msg = "Invalid Action.. Please enter valid action " + Action.getActionNames();
                 LOGGER.error(msg);
