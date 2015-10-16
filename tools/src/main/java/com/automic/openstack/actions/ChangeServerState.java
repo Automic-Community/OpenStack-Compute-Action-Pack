@@ -93,8 +93,8 @@ public class ChangeServerState extends AbstractHttpAction {
 
         LOGGER.info("Calling url " + webResource.getURI());
 
-        webResource.entity(getActionJson(), MediaType.APPLICATION_JSON).header(Constants.X_AUTH_TOKEN, tokenId)
-                .post(ClientResponse.class);
+        webResource.entity(getActionJson(), MediaType.APPLICATION_JSON)
+                .header(Constants.X_AUTH_TOKEN, tokenId).post(ClientResponse.class);
 
     }
 

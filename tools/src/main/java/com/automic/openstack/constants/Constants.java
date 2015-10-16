@@ -17,6 +17,7 @@ public final class Constants {
     public static final String PASSWORD = "password";
     public static final String HTTPS = "https";
     public static final String X_AUTH_TOKEN = "X-Auth-Token";
+    public static final String REQUEST_TOKENID_KEY = "X-Compute-Request-Id";
 
     private Constants() {
     }
