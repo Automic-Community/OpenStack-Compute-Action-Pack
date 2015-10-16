@@ -4,7 +4,6 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.JSONObject;
 
 import com.automic.openstack.constants.Constants;
 import com.automic.openstack.constants.ExceptionConstants;
