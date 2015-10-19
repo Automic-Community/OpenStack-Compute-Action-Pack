@@ -44,7 +44,7 @@ public final class ActionFactory {
                 action = new DeleteFileAction();
                 break;
             case CHANGE_SERVER_STATE:
-                action = new ChangeServerState();
+                action = new ChangeServerStateAction();
                 break;
             default:
                 String msg = "Invalid Action.. Please enter valid action " + Action.getActionNames();

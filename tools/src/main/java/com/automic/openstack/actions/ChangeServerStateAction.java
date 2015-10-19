@@ -25,16 +25,16 @@ import com.sun.jersey.api.client.WebResource;
  * This class is used to change the server state.The possible states are
  * start,stop,pause,un-pause,suspend,resume,lock,unlock,soft-reboot,hard-reboot
  */
-public class ChangeServerState extends AbstractHttpAction {
+public class ChangeServerStateAction extends AbstractHttpAction {
 
-    private static final Logger LOGGER = LogManager.getLogger(GetServerDetailsAction.class);
+    private static final Logger LOGGER = LogManager.getLogger(ChangeServerStateAction.class);
 
     private String tokenId;
     private String tenantId;
     private String serverId;
     private String action;
 
-    public ChangeServerState() {
+    public ChangeServerStateAction() {
 
         addOption("computeurl", true, "Compute service endpoint");
         addOption("tokenid", true, "Token Id for authentication");
@@ -51,7 +51,7 @@ public class ChangeServerState extends AbstractHttpAction {
         tokenId = getOptionValue("tokenid");
         tenantId = getOptionValue("tenantid");
         serverId = getOptionValue("serverid");
-        action = getOptionValue("serveraction").toLowerCase();
+        action = getOptionValue("serveraction").toUpperCase();
     }
 
     @Override
@@ -93,44 +93,44 @@ public class ChangeServerState extends AbstractHttpAction {
 
         LOGGER.info("Calling url " + webResource.getURI());
 
-        webResource.entity(getActionJson(), MediaType.APPLICATION_JSON)
+        webResource.entity(getServerActionJson(), MediaType.APPLICATION_JSON)
                 .header(Constants.X_AUTH_TOKEN, tokenId).post(ClientResponse.class);
 
     }
 
-    private String getActionJson() throws AutomicException {
+    private String getServerActionJson() throws AutomicException {
 
         JSONObject actionJson = new JSONObject();
 
         switch (action) {
-            case "start":
+            case "START":
                 actionJson.put("os-start", "null");
                 break;
-            case "stop":
+            case "STOP":
                 actionJson.put("os-stop", "null");
                 break;
-            case "pause":
+            case "PAUSE":
                 actionJson.put("pause", "null");
                 break;
-            case "unpause":
+            case "UNPAUSE":
                 actionJson.put("unpause", "null");
                 break;
-            case "suspend":
+            case "SUSPEND":
                 actionJson.put("suspend", "null");
                 break;
-            case "resume":
+            case "RESUME":
                 actionJson.put("resume", "null");
                 break;
-            case "lock":
+            case "LOCK":
                 actionJson.put("lock", "null");
                 break;
-            case "unlock":
+            case "UNLOCK":
                 actionJson.put("unlock", "null");
                 break;
-            case "reboot_soft":
+            case "REBOOT_SOFT":
                 actionJson.put("reboot", new JSONObject().put("type", "SOFT"));
                 break;
-            case "reboot_hard":
+            case "REBOOT_HARD":
                 actionJson.put("reboot", new JSONObject().put("type", "HARD"));
                 break;
             default:
