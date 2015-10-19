@@ -109,7 +109,7 @@ public class CreateServerSnapshotAction extends AbstractHttpAction {
     private void prepareOutput(ClientResponse response) throws AutomicException {
 
         List<String> tokenid = response.getHeaders().get("Location");
-        ConsoleWriter.writeln("UC4RB_OPS_IMAGE_LOCATION ::= " + tokenid.get(0));
+        ConsoleWriter.writeln("UC4RB_OPS_IMAGE_URL ::= " + tokenid.get(0));
 
     }
 
