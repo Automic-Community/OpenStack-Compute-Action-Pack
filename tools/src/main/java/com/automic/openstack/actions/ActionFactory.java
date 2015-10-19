@@ -43,6 +43,9 @@ public final class ActionFactory {
             case DELETE_FILE:
                 action = new DeleteFileAction();
                 break;
+            case CREATE_SERVER_SNAPSHOT:
+                action = new CreateServerSnapshotAction();
+                break;
             default:
                 String msg = "Invalid Action.. Please enter valid action " + Action.getActionNames();
                 LOGGER.error(msg);

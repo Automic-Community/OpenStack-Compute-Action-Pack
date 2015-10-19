@@ -1,5 +1,8 @@
 package com.automic.openstack.actions;
 
+import java.io.File;
+import java.util.List;
+
 import javax.ws.rs.core.MediaType;
 
 import org.apache.logging.log4j.LogManager;
@@ -9,7 +12,7 @@ import com.automic.openstack.constants.Constants;
 import com.automic.openstack.constants.ExceptionConstants;
 import com.automic.openstack.exception.AutomicException;
 import com.automic.openstack.util.AESEncryptDecrypt;
-import com.automic.openstack.util.CommonUtil;
+import com.automic.openstack.util.ConsoleWriter;
 import com.automic.openstack.util.Validator;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -19,26 +22,26 @@ import com.sun.jersey.api.client.WebResource;
  * 
  */
 /**
- * This class is used to retrieve server details as per the specified server id. Retrieved server information is written
- * in the xml file at the path mentioned in the filePath
+ * This class is used to create server snapshot as per the specified server id. Created server snapshot image location
+ * will be published.
  * 
  */
-public class GetServerDetailsAction extends AbstractHttpAction {
+public class CreateServerSnapshotAction extends AbstractHttpAction {
 
-    private static final Logger LOGGER = LogManager.getLogger(GetServerDetailsAction.class);
+    private static final Logger LOGGER = LogManager.getLogger(CreateServerSnapshotAction.class);
 
     private String tokenId;
     private String tenantId;
     private String serverId;
-    private String filePath;
+    private String parameterFile;
 
-    public GetServerDetailsAction() {
+    public CreateServerSnapshotAction() {
 
         addOption("computeurl", true, "Compute service endpoint");
         addOption("tokenid", true, "Token Id for authentication");
         addOption("tenantid", true, "Tenant/Project id");
         addOption("serverid", true, "Server id");
-        addOption("filepath", true, "Xml file path ");
+        addOption("parameterfile", true, "Param file to create snapshot");
 
     }
 
@@ -48,7 +51,7 @@ public class GetServerDetailsAction extends AbstractHttpAction {
         tokenId = getOptionValue("tokenid");
         tenantId = getOptionValue("tenantid");
         serverId = getOptionValue("serverid");
-        filePath = getOptionValue("filepath");
+        parameterFile = getOptionValue("parameterfile");
 
     }
 
@@ -70,8 +73,8 @@ public class GetServerDetailsAction extends AbstractHttpAction {
             LOGGER.error(ExceptionConstants.EMPTY_SERVERID);
             throw new AutomicException(ExceptionConstants.EMPTY_SERVERID);
         }
-        if (!Validator.checkFileDirectoryExists(filePath)) {
-            String errMsg = String.format(ExceptionConstants.INVALID_FILE, filePath);
+        if (!Validator.checkFileExists(parameterFile)) {
+            String errMsg = String.format(ExceptionConstants.INVALID_FILE, parameterFile);
             LOGGER.error(errMsg);
             throw new AutomicException(errMsg);
         }
@@ -80,8 +83,7 @@ public class GetServerDetailsAction extends AbstractHttpAction {
 
     @Override
     /**
-     *  Retrieves server details for the specified server id by 
-     *  calling http://baseUrl/servers/{serverId}
+     * Create server snapshot for specified server id by calling http://baseUrl/servers/{serverId}/action
      * */
     protected void executeSpecific() throws AutomicException {
 
@@ -89,25 +91,25 @@ public class GetServerDetailsAction extends AbstractHttpAction {
 
         tokenId = AESEncryptDecrypt.decrypt(tokenId);
 
-        WebResource webResource = client.resource(baseUrl).path(tenantId).path("servers").path(serverId);
+        WebResource webResource = client.resource(baseUrl).path(tenantId).path("servers").path(serverId).path("action");
 
         LOGGER.info("Calling url " + webResource.getURI());
 
-        response = webResource.accept(MediaType.APPLICATION_JSON).header(Constants.X_AUTH_TOKEN, tokenId)
-                .get(ClientResponse.class);
+        response = webResource.entity(new File(parameterFile), MediaType.APPLICATION_JSON)
+                .header(Constants.X_AUTH_TOKEN, tokenId).get(ClientResponse.class);
 
         prepareOutput(response);
 
     }
 
     /**
-     * This method prepare the output xml by converting the json response into xml which is then written to the file at
-     * the path provided
+     * This method prints the server snapshot image url to AE job report
      */
 
     private void prepareOutput(ClientResponse response) throws AutomicException {
 
-        CommonUtil.jsonResponse2xml(response.getEntityInputStream(), filePath);
+        List<String> tokenid = response.getHeaders().get("Location");
+        ConsoleWriter.writeln("UC4RB_OPS_IMAGE_LOCATION ::= " + tokenid.get(0));
 
     }
 
