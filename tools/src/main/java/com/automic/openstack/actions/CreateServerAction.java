@@ -96,14 +96,16 @@ public class CreateServerAction extends AbstractHttpAction{
     	
     	 JSONObject jsonObj = CommonUtil.jsonResponse(response.getEntityInputStream());
     	 
-    	 if(jsonObj.has("server")){
+    	 if(jsonObj != null && jsonObj.has("server")){
     		 JSONObject  server = jsonObj.getJSONObject("server");
     		 ConsoleWriter.writeln("UC4RB_OPS_SERVER_ID_LIST ::=" + server.getString("id"));
     		 
-    	 }else{
+    	 }else if(jsonObj != null && jsonObj.has("reservation_id")){
     		 
-    		 response =  ResponseProcessService.getResponseProcessService(client).executeListServerFilter(baseUrl, tenantId, tokenId, jsonObj.getString("reservation_id"));
+    		 ResponseProcessService listServerFilter =  ResponseProcessService.getResponseProcessService(client);
+    		 jsonObj = listServerFilter.executeListServerFilter(baseUrl, tenantId, tokenId, jsonObj.getString("reservation_id"));
     		 jsonObj = CommonUtil.jsonResponse(response.getEntityInputStream());
+    		 if(jsonObj != null && jsonObj.has("servers")){
     		 JSONArray servers = jsonObj.getJSONArray("servers");
     		 
     		 if(servers!=null && servers.length()>0){
@@ -112,7 +114,11 @@ public class CreateServerAction extends AbstractHttpAction{
                 	 ConsoleWriter.writeln("UC4RB_OPS_SERVER_ID_LIST["+i+"] ::=" + server.getString("id"));
                  }
              }
+    	 }
     		 
+    	 }else{
+    		// LOGGER.info("Calling url " + webResource.getURI());
+    	      
     	 }
 
     }
