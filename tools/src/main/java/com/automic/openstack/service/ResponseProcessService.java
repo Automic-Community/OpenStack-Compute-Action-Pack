@@ -16,7 +16,7 @@ import com.sun.jersey.api.client.WebResource;
 public class ResponseProcessService {
 	  private static final Logger LOGGER = LogManager.getLogger(ResponseProcessService.class);
 	
-	  protected Client client;
+	  private final Client client;	  
 	
 	 private ResponseProcessService(Client client) {
 		
@@ -29,7 +29,7 @@ public class ResponseProcessService {
 	   }
 	 
 	    /**
-	     * Authenticates and generates a token by calling http://baseUrl/servers/detail
+	     * Get server details using reservation id by calling http://baseUrl/{tenant_id}​/servers/detail
 	     * */
 	    public JSONObject executeListServerFilter(String baseUrl, String tenantId, String tokenId, String reservationId) throws AutomicException {
 
@@ -41,9 +41,9 @@ public class ResponseProcessService {
 	        LOGGER.info("Calling url " + webResource.getURI());
 
 	        response = webResource.accept(MediaType.APPLICATION_JSON).header(Constants.X_AUTH_TOKEN, tokenId)
-	                .get(ClientResponse.class);
-	        
+	                .get(ClientResponse.class);	        
 	         jsonObj = CommonUtil.jsonResponse(response.getEntityInputStream());
+	         
 	        return jsonObj;
 
 	    }

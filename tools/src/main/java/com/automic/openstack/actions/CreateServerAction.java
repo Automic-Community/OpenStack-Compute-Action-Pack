@@ -29,7 +29,8 @@ public class CreateServerAction extends AbstractHttpAction{
     private String tenantId;
     private final String SERVER_ID="id";
     private final String RESERVATION_ID ="reservation_id";
-    
+    private final String SERVER_KEY="server";
+    private final String SERVERS_KEY="servers";
 
     public CreateServerAction() {
 
@@ -76,7 +77,7 @@ public class CreateServerAction extends AbstractHttpAction{
 
         ClientResponse response = null;
 
-       // tokenId = AESEncryptDecrypt.decrypt(tokenId);
+        tokenId = AESEncryptDecrypt.decrypt(tokenId);
 
         WebResource webResource = client.resource(baseUrl).path(tenantId).path("servers");
 
@@ -95,21 +96,19 @@ public class CreateServerAction extends AbstractHttpAction{
      * the path provided
      */
 
-    private void prepareOutput(ClientResponse response) throws AutomicException {
-    	
+    private void prepareOutput(ClientResponse response) throws AutomicException {    	
     	 JSONObject jsonObj = CommonUtil.jsonResponse(response.getEntityInputStream());
     	 
-    	 if(jsonObj != null && jsonObj.has("server")){
-    		 JSONObject  server = jsonObj.getJSONObject("server");
+    	 if(jsonObj != null && jsonObj.has(SERVER_KEY)){
+    		 JSONObject  server = jsonObj.getJSONObject(SERVER_KEY);
     		 ConsoleWriter.writeln("UC4RB_OPS_SERVER_ID_LIST ::=" + server.getString(SERVER_ID));
     		 
-    	 }else if(jsonObj != null && jsonObj.has(RESERVATION_ID)){
-    		 
+    	 }else if(jsonObj != null && jsonObj.has(RESERVATION_ID)){    		 
     		 ResponseProcessService listServerFilter =  ResponseProcessService.getResponseProcessService(client);
-    		 jsonObj = listServerFilter.executeListServerFilter(baseUrl, tenantId, tokenId, jsonObj.getString(RESERVATION_ID));
-    		 jsonObj = CommonUtil.jsonResponse(response.getEntityInputStream());
-    		 if(jsonObj != null && jsonObj.has("servers")){
-    		 JSONArray servers = jsonObj.getJSONArray("servers");
+    		 jsonObj = listServerFilter.executeListServerFilter(baseUrl, tenantId, tokenId, jsonObj.getString(RESERVATION_ID));		
+    		 
+    		 if(jsonObj != null && jsonObj.has(SERVERS_KEY)){    			 
+    		 JSONArray servers = jsonObj.getJSONArray(SERVERS_KEY);
     		 
     		 if(servers!=null && servers.length()>0){
                  for (int i = 0; i < servers.length(); i++) {
@@ -117,11 +116,12 @@ public class CreateServerAction extends AbstractHttpAction{
                 	 ConsoleWriter.writeln("UC4RB_OPS_SERVER_ID_LIST["+i+"] ::=" + server.getString(SERVER_ID));
                  }
              }
+    	 }else{
+    		 LOGGER.info(" Unable to find Json key[servers] in json object :" + jsonObj); 
     	 }
     		 
     	 }else{
-    		 LOGGER.info(" Unable to find Json keys[server, reservation_id] in json object :" + jsonObj);
-    	      
+    		 LOGGER.info(" Unable to find Json keys[server, reservation_id] in json object :" + jsonObj);    	      
     	 }
 
     }
