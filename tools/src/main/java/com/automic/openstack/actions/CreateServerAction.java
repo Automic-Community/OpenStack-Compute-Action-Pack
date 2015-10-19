@@ -1,13 +1,18 @@
 package com.automic.openstack.actions;
 
+import java.io.File;
+
 import javax.ws.rs.core.MediaType;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import com.automic.openstack.constants.Constants;
 import com.automic.openstack.constants.ExceptionConstants;
 import com.automic.openstack.exception.AutomicException;
+import com.automic.openstack.service.ResponseProcessService;
 import com.automic.openstack.util.AESEncryptDecrypt;
 import com.automic.openstack.util.CommonUtil;
 import com.automic.openstack.util.ConsoleWriter;
@@ -19,7 +24,7 @@ public class CreateServerAction extends AbstractHttpAction{
 
     private static final Logger LOGGER = LogManager.getLogger(CreateServerAction.class);
 
-    private String filePath;
+    private String paramterFilePath;
     protected String tokenId;
     protected String tenantId;
 
@@ -37,7 +42,7 @@ public class CreateServerAction extends AbstractHttpAction{
         baseUrl = getOptionValue("computeurl");
         tokenId = getOptionValue("tokenid");
         tenantId = getOptionValue("tenantid");
-        filePath = getOptionValue("filepath");
+        paramterFilePath = getOptionValue("filepath");
 
     }
 
@@ -52,8 +57,8 @@ public class CreateServerAction extends AbstractHttpAction{
             LOGGER.error(ExceptionConstants.EMPTY_TENANTID);
             throw new AutomicException(ExceptionConstants.EMPTY_TENANTID);
         }
-        if (!Validator.checkFileExists(filePath)) {
-            String errMsg = String.format(ExceptionConstants.INVALID_FILE, filePath);
+        if (!Validator.checkFileExists(paramterFilePath)) {
+            String errMsg = String.format(ExceptionConstants.INVALID_FILE, paramterFilePath);
             LOGGER.error(errMsg);
             throw new AutomicException(errMsg);
         }
@@ -62,19 +67,20 @@ public class CreateServerAction extends AbstractHttpAction{
 
     @Override
     /**
-     * Authenticates and generates a token by calling http://baseUrl/v2.1/​{tenant_id}​/servers
+     * Authenticates and Create Servers by  http://baseUrl/v2/​{tenant_id}​/servers
      * */
     protected void executeSpecific() throws AutomicException {
 
         ClientResponse response = null;
 
-        tokenId = AESEncryptDecrypt.decrypt(tokenId);
+       // tokenId = AESEncryptDecrypt.decrypt(tokenId);
 
         WebResource webResource = client.resource(baseUrl).path(tenantId).path("servers");
 
         LOGGER.info("Calling url " + webResource.getURI());
+      
 
-        response = webResource.accept(MediaType.APPLICATION_JSON).header(Constants.X_AUTH_TOKEN, tokenId)
+        response = webResource.entity(new File(paramterFilePath), MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).header(Constants.X_AUTH_TOKEN, tokenId)
                 .post(ClientResponse.class);
 
         prepareOutput(response);
@@ -88,11 +94,26 @@ public class CreateServerAction extends AbstractHttpAction{
 
     private void prepareOutput(ClientResponse response) throws AutomicException {
     	
-    	// JSONObject jsonObj = CommonUtil.jsonResponse(response.getEntityInputStream());
-
-    	// System.out.println(jsonObj);
-        CommonUtil.jsonResponse2xml(response.getEntityInputStream(), filePath, "CreateServer");
-        ConsoleWriter.writeln("UC4RB_OPS_CREATE_SERVERS_XML ::=" + filePath);
+    	 JSONObject jsonObj = CommonUtil.jsonResponse(response.getEntityInputStream());
+    	 
+    	 if(jsonObj.has("server")){
+    		 JSONObject  server = jsonObj.getJSONObject("server");
+    		 ConsoleWriter.writeln("UC4RB_OPS_SERVER_ID_LIST ::=" + server.getString("id"));
+    		 
+    	 }else{
+    		 
+    		 response =  ResponseProcessService.getResponseProcessService(client).executeListServerFilter(baseUrl, tenantId, tokenId, jsonObj.getString("reservation_id"));
+    		 jsonObj = CommonUtil.jsonResponse(response.getEntityInputStream());
+    		 JSONArray servers = jsonObj.getJSONArray("servers");
+    		 
+    		 if(servers!=null && servers.length()>0){
+                 for (int i = 0; i < servers.length(); i++) {
+                	 JSONObject  server = servers.getJSONObject(i);
+                	 ConsoleWriter.writeln("UC4RB_OPS_SERVER_ID_LIST["+i+"] ::=" + server.getString("id"));
+                 }
+             }
+    		 
+    	 }
 
     }
 
