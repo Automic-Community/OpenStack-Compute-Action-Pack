@@ -71,7 +71,7 @@ public class ListServersAction extends AbstractHttpAction {
 
     @Override
     /**
-     * Authenticates and generates a token by calling http://baseUrl/servers/detail
+     * Authenticates and generates a token by calling http://baseUrl/{tenantId}/servers/detail
      * */
     protected void executeSpecific() throws AutomicException {
 

@@ -38,7 +38,7 @@ public class ResponseProcessService {
 	        
 	        WebResource webResource = client.resource(baseUrl).path(tenantId).path("servers").path("detail").queryParam("reservation_id", reservationId);
 
-	        LOGGER.info("Calling url " + webResource.getURI());
+	        LOGGER.info("List servers Calling url " + webResource.getURI());
 
 	        response = webResource.accept(MediaType.APPLICATION_JSON).header(Constants.X_AUTH_TOKEN, tokenId)
 	                .get(ClientResponse.class);	        

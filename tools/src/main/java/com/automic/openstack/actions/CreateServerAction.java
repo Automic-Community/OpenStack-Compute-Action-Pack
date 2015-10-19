@@ -20,6 +20,15 @@ import com.automic.openstack.util.Validator;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
+/**
+ * @author Anurag Upadhyay
+ * 
+ */
+/**
+ * This class is used to Creates one or more servers with an optional reservation ID.
+ * It publish one or more created server id.
+ * 
+ */
 public class CreateServerAction extends AbstractHttpAction{
 
     private static final Logger LOGGER = LogManager.getLogger(CreateServerAction.class);
@@ -77,7 +86,7 @@ public class CreateServerAction extends AbstractHttpAction{
 
         ClientResponse response = null;
 
-        tokenId = AESEncryptDecrypt.decrypt(tokenId);
+        //tokenId = AESEncryptDecrypt.decrypt(tokenId);
 
         WebResource webResource = client.resource(baseUrl).path(tenantId).path("servers");
 
@@ -92,8 +101,7 @@ public class CreateServerAction extends AbstractHttpAction{
     }
 
     /**
-     * This method prepare the output xml by converting the json response into xml which is then written to the file at
-     * the path provided
+     * This method publish one or more created server ids
      */
 
     private void prepareOutput(ClientResponse response) throws AutomicException {    	
