@@ -109,7 +109,7 @@ public class CreateServerAction extends AbstractHttpAction{
     	 
     	 if(jsonObj != null && jsonObj.has(SERVER_KEY)){
     		 JSONObject  server = jsonObj.getJSONObject(SERVER_KEY);
-    		 ConsoleWriter.writeln("UC4RB_OPS_SERVER_ID_LIST ::=" + server.getString(SERVER_ID));
+    		 ConsoleWriter.writeln("UC4RB_OPS_SERVER_IDS ::=" + server.getString(SERVER_ID));
     		 
     	 }else if(jsonObj != null && jsonObj.has(RESERVATION_ID)){    		 
     		 ResponseProcessService listServerFilter =  ResponseProcessService.getResponseProcessService(client);
@@ -121,7 +121,7 @@ public class CreateServerAction extends AbstractHttpAction{
     		 if(servers!=null && servers.length()>0){
                  for (int i = 0; i < servers.length(); i++) {
                 	 JSONObject  server = servers.getJSONObject(i);
-                	 ConsoleWriter.writeln("UC4RB_OPS_SERVER_ID_LIST["+i+"] ::=" + server.getString(SERVER_ID));
+                	 ConsoleWriter.writeln("UC4RB_OPS_SERVER_IDS["+i+"] ::=" + server.getString(SERVER_ID));
                  }
              }
     	 }else{
