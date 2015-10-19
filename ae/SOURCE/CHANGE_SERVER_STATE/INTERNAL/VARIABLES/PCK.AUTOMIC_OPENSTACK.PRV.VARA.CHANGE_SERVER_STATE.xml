@@ -25,16 +25,16 @@
 </ATTR_VARA>
 <VARA state="1">
 <Variables>
-<row Name="Lock" Value="LOCK" Value1="" Value2="" Value3="" Value4=""/>
-<row Name="Pause" Value="PAUSE" Value1="" Value2="" Value3="" Value4=""/>
-<row Name="Reboot hard" Value="REBOOT_HARD" Value1="" Value2="" Value3="" Value4=""/>
-<row Name="Reboot soft" Value="REBOOT_SOFT" Value1="" Value2="" Value3="" Value4=""/>
-<row Name="Resume" Value="RESUME" Value1="" Value2="" Value3="" Value4=""/>
-<row Name="Start" Value="START" Value1="" Value2="" Value3="" Value4=""/>
-<row Name="Stop" Value="STOP" Value1="" Value2="" Value3="" Value4=""/>
-<row Name="Suspend" Value="SUSPEND" Value1="" Value2="" Value3="" Value4=""/>
-<row Name="Unlock" Value="UNLOCK" Value1="" Value2="" Value3="" Value4=""/>
-<row Name="Unpause" Value="UNPAUSE" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="LOCK" Value="LOCK" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PAUSE" Value="PAUSE" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="REBOOT_HARD" Value="REBOOT_HARD" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="REBOOT_SOFT" Value="REBOOT_SOFT" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="RESUME" Value="RESUME" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="START" Value="START" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="STOP" Value="STOP" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="SUSPEND" Value="SUSPEND" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="UNLOCK" Value="UNLOCK" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="UNPAUSE" Value="UNPAUSE" Value1="" Value2="" Value3="" Value4=""/>
 </Variables>
 </VARA>
 <DOCU_Docu state="1" type="text">
