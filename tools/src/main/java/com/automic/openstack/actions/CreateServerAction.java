@@ -25,8 +25,11 @@ public class CreateServerAction extends AbstractHttpAction{
     private static final Logger LOGGER = LogManager.getLogger(CreateServerAction.class);
 
     private String paramterFilePath;
-    protected String tokenId;
-    protected String tenantId;
+    private String tokenId;
+    private String tenantId;
+    private final String SERVER_ID="id";
+    private final String RESERVATION_ID ="reservation_id";
+    
 
     public CreateServerAction() {
 
@@ -98,12 +101,12 @@ public class CreateServerAction extends AbstractHttpAction{
     	 
     	 if(jsonObj != null && jsonObj.has("server")){
     		 JSONObject  server = jsonObj.getJSONObject("server");
-    		 ConsoleWriter.writeln("UC4RB_OPS_SERVER_ID_LIST ::=" + server.getString("id"));
+    		 ConsoleWriter.writeln("UC4RB_OPS_SERVER_ID_LIST ::=" + server.getString(SERVER_ID));
     		 
-    	 }else if(jsonObj != null && jsonObj.has("reservation_id")){
+    	 }else if(jsonObj != null && jsonObj.has(RESERVATION_ID)){
     		 
     		 ResponseProcessService listServerFilter =  ResponseProcessService.getResponseProcessService(client);
-    		 jsonObj = listServerFilter.executeListServerFilter(baseUrl, tenantId, tokenId, jsonObj.getString("reservation_id"));
+    		 jsonObj = listServerFilter.executeListServerFilter(baseUrl, tenantId, tokenId, jsonObj.getString(RESERVATION_ID));
     		 jsonObj = CommonUtil.jsonResponse(response.getEntityInputStream());
     		 if(jsonObj != null && jsonObj.has("servers")){
     		 JSONArray servers = jsonObj.getJSONArray("servers");
@@ -111,13 +114,13 @@ public class CreateServerAction extends AbstractHttpAction{
     		 if(servers!=null && servers.length()>0){
                  for (int i = 0; i < servers.length(); i++) {
                 	 JSONObject  server = servers.getJSONObject(i);
-                	 ConsoleWriter.writeln("UC4RB_OPS_SERVER_ID_LIST["+i+"] ::=" + server.getString("id"));
+                	 ConsoleWriter.writeln("UC4RB_OPS_SERVER_ID_LIST["+i+"] ::=" + server.getString(SERVER_ID));
                  }
              }
     	 }
     		 
     	 }else{
-    		// LOGGER.info("Calling url " + webResource.getURI());
+    		 LOGGER.info(" Unable to find Json keys[server, reservation_id] in json object :" + jsonObj);
     	      
     	 }
 

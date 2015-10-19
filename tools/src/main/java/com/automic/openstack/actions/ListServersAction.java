@@ -29,8 +29,8 @@ public class ListServersAction extends AbstractHttpAction {
     private static final Logger LOGGER = LogManager.getLogger(ListServersAction.class);
 
     private String filePath;
-    protected String tokenId;
-    protected String tenantId;
+    private String tokenId;
+    private String tenantId;
 
     public ListServersAction() {
 
