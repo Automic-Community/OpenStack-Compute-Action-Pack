@@ -51,7 +51,7 @@ public class ChangeServerStateAction extends AbstractHttpAction {
         tokenId = getOptionValue("tokenid");
         tenantId = getOptionValue("tenantid");
         serverId = getOptionValue("serverid");
-        action = getOptionValue("serveraction").toLowerCase();
+        action = getOptionValue("serveraction").toUpperCase();
     }
 
     @Override
@@ -103,34 +103,34 @@ public class ChangeServerStateAction extends AbstractHttpAction {
         JSONObject actionJson = new JSONObject();
 
         switch (action) {
-            case "start":
+            case "START":
                 actionJson.put("os-start", "null");
                 break;
-            case "stop":
+            case "STOP":
                 actionJson.put("os-stop", "null");
                 break;
-            case "pause":
+            case "PAUSE":
                 actionJson.put("pause", "null");
                 break;
-            case "unpause":
+            case "UNPAUSE":
                 actionJson.put("unpause", "null");
                 break;
-            case "suspend":
+            case "SUSPEND":
                 actionJson.put("suspend", "null");
                 break;
-            case "resume":
+            case "RESUME":
                 actionJson.put("resume", "null");
                 break;
-            case "lock":
+            case "LOCK":
                 actionJson.put("lock", "null");
                 break;
-            case "unlock":
+            case "UNLOCK":
                 actionJson.put("unlock", "null");
                 break;
-            case "reboot_soft":
+            case "REBOOT_SOFT":
                 actionJson.put("reboot", new JSONObject().put("type", "SOFT"));
                 break;
-            case "reboot_hard":
+            case "REBOOT_HARD":
                 actionJson.put("reboot", new JSONObject().put("type", "HARD"));
                 break;
             default:
