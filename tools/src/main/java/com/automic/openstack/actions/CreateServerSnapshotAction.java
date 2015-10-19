@@ -96,7 +96,7 @@ public class CreateServerSnapshotAction extends AbstractHttpAction {
         LOGGER.info("Calling url " + webResource.getURI());
 
         response = webResource.entity(new File(parameterFile), MediaType.APPLICATION_JSON)
-                .header(Constants.X_AUTH_TOKEN, tokenId).get(ClientResponse.class);
+                .header(Constants.X_AUTH_TOKEN, tokenId).post(ClientResponse.class);
 
         prepareOutput(response);
 

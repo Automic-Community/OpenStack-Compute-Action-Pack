@@ -8,11 +8,20 @@
         <Description>Specify server Id.</Description>
       </Property>
     </Group>
+	<Group name="CreateServerSnapshot" displayName="Create Server Snapshot">
+      <Property name="parameter_file" displayName="Parameter File" mode="EDITABLE" type="SingleLineText">
+        <Description>Specify full parameter file path to create server snapshot.</Description>
+      </Property>
+    </Group>
   </Properties>
   <DynamicProperties>
     <Property name="/openstack/server_param/server_id" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
       <Value>{/custom/server_id}</Value>
       <Description>Specify server Id.</Description>
+    </Property>
+	<Property name="/openstack/create_snapshot/parameter_file" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+      <Value>{/custom/parameter_file}</Value>
+      <Description>Specify full parameter file path to create server snapshot.</Description>
     </Property>
     <Property name="/openstack/endpoints/identity_url" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
       <Value>{@target/custom/identity_url}</Value>
