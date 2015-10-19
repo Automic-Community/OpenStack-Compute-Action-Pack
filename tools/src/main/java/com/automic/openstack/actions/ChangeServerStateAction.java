@@ -25,16 +25,16 @@ import com.sun.jersey.api.client.WebResource;
  * This class is used to change the server state.The possible states are
  * start,stop,pause,un-pause,suspend,resume,lock,unlock,soft-reboot,hard-reboot
  */
-public class ChangeServerState extends AbstractHttpAction {
+public class ChangeServerStateAction extends AbstractHttpAction {
 
-    private static final Logger LOGGER = LogManager.getLogger(GetServerDetailsAction.class);
+    private static final Logger LOGGER = LogManager.getLogger(ChangeServerStateAction.class);
 
     private String tokenId;
     private String tenantId;
     private String serverId;
     private String action;
 
-    public ChangeServerState() {
+    public ChangeServerStateAction() {
 
         addOption("computeurl", true, "Compute service endpoint");
         addOption("tokenid", true, "Token Id for authentication");
@@ -93,12 +93,12 @@ public class ChangeServerState extends AbstractHttpAction {
 
         LOGGER.info("Calling url " + webResource.getURI());
 
-        webResource.entity(getActionJson(), MediaType.APPLICATION_JSON)
+        webResource.entity(getServerActionJson(), MediaType.APPLICATION_JSON)
                 .header(Constants.X_AUTH_TOKEN, tokenId).post(ClientResponse.class);
 
     }
 
-    private String getActionJson() throws AutomicException {
+    private String getServerActionJson() throws AutomicException {
 
         JSONObject actionJson = new JSONObject();
 
