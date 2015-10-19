@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ComponentType attachedToTarget="true">
+  <Name>OpenStack</Name>
+  <DefaultDeploymentTargetType>OpenStack</DefaultDeploymentTargetType>
+  <Properties>
+    <Group name="ServerParameters" displayName="Server Parameters">
+      <Property name="server_id" displayName="Server ID" mode="EDITABLE" type="SingleLineText">
+        <Description>Specify server Id.</Description>
+      </Property>
+    </Group>
+  </Properties>
+  <DynamicProperties>
+    <Property name="/openstack/server_param/server_id" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+      <Value>{/custom/server_id}</Value>
+      <Description>Specify server Id.</Description>
+    </Property>
+    <Property name="/openstack/endpoints/identity_url" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+      <Value>{@target/custom/identity_url}</Value>
+      <Description>Specify your OpenStack Identity URL.
+</Description>
+    </Property>
+    <Property name="/openstack/endpoints/compute_url" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+      <Value>{@target/custom/compute_url}</Value>
+      <Description>Specify your OpenStack Compute URL.
+</Description>
+    </Property>
+    <Property name="/openstack/auth/user_name" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+      <Value>{@target/custom/user_name}</Value>
+      <Description>Specify your OpenStack username.
+</Description>
+    </Property>
+    <Property name="/openstack/auth/password" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+      <Value>{@target/custom/password}</Value>
+      <Description>Specify your OpenStack password.</Description>
+    </Property>
+    <Property name="/openstack/auth/tenant_name" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+      <Value>{@target/custom/tenant_name}</Value>
+      <Description>Specify tenant name.</Description>
+    </Property>
+  </DynamicProperties>
+</ComponentType>
