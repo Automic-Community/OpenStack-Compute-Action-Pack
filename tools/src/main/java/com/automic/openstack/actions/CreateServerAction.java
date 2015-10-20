@@ -21,14 +21,12 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 /**
- * @author Anurag Upadhyay
- * 
- */
-/**
  * This class is used to Creates one or more servers with an optional reservation ID.
  * It publish one or more created server id.
  * 
+ *  @author Anurag Upadhyay
  */
+
 public class CreateServerAction extends AbstractHttpAction{
 
     private static final Logger LOGGER = LogManager.getLogger(CreateServerAction.class);
@@ -102,8 +100,10 @@ public class CreateServerAction extends AbstractHttpAction{
 
     /**
      * This method publish one or more created server ids
+     * 
+     * @param response
+     * @throws AutomicException
      */
-
     private void prepareOutput(ClientResponse response) throws AutomicException {    	
     	 JSONObject jsonObj = CommonUtil.jsonResponse(response.getEntityInputStream());
     	 
@@ -112,8 +112,8 @@ public class CreateServerAction extends AbstractHttpAction{
     		 ConsoleWriter.writeln("UC4RB_OPS_SERVER_IDS ::=" + server.getString(SERVER_ID));
     		 
     	 }else if(jsonObj != null && jsonObj.has(RESERVATION_ID)){    		 
-    		 ResponseProcessService listServerFilter =  ResponseProcessService.getResponseProcessService(client);
-    		 jsonObj = listServerFilter.executeListServerFilter(baseUrl, tenantId, tokenId, jsonObj.getString(RESERVATION_ID));		
+    		 ResponseProcessService rps =  ResponseProcessService.getResponseProcessService(client);
+    		 jsonObj = rps.executeListServerService(baseUrl, tenantId, tokenId, jsonObj.getString(RESERVATION_ID));		
     		 
     		 if(jsonObj != null && jsonObj.has(SERVERS_KEY)){    			 
     		 JSONArray servers = jsonObj.getJSONArray(SERVERS_KEY);
