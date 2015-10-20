@@ -296,15 +296,14 @@ You can only create a new image from the server when its status is ACTIVE, SHUTO
 * Token Id : Token Id for authentication. It is AES encoded. 
 * Tenant Id : Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
 * Server Id : Server id of the server.
-* Parameter File : Specify full parameter file path to create server snapshot. 
- * Overwrite Agent: Overwrites the default agent
+* Image Name : Specify image name for snapshot
+* Overwrite Agent: Overwrites the default agent
 * Overwrite Login: Overwrites the default login
 = Behavior =
 If specified server id does not exist the action will fail.
 =Return Value=
 The response will contain the following AE variable
 * UC4RB_OPS_IMAGE_URL : Created server snapshot image URL
-Successful completion of action will return 202 as response code
 = Outputs =
 * Return code is 0 in case of success.
 * Return code is 1 in case of failure.
