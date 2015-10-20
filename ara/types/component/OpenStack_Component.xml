@@ -9,7 +9,7 @@
       </Property>
     </Group>
 	 <Group name="ChangeServerState" displayName="Change Server State">
-      <Property name="action" displayName="Action" mode="EDITABLE" type="SingleLineText">
+      <Property name="action" displayName="Action" mode="EDITABLE" type="SingleChoice">
           <List>START#;#STOP#;#PAUSE#;#UNPAUSE#;#RESUME#;#SUSPEND#;#REBOOT_SOFT#;#REBOOT_HARD#;#LOCK#;#UNLOCK</List>
 		  <Description>Provide information to change server state</Description>
 	</Property>	
@@ -43,7 +43,7 @@
       <Value>{@target/custom/tenant_name}</Value>
       <Description>Specify tenant name.</Description>
     </Property>
-	<Property name="/openstack/server_param/server_action" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+	<Property name="/openstack/server/server_action" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
 	<Value>{/custom/action}</Value>
 	<Description>Provide information to change server state</Description>
 	</Property> 
