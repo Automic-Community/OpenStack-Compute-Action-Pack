@@ -172,8 +172,8 @@ java -jar &UC4RB_OPS_PATH_JAR# &UC4RB_OPS_JAVA_ARGUMENTS#
 <OSCRI><![CDATA[! Publishing server id list to object variable in case of success
 :SET &STATUS# = GET_UC_OBJECT_STATUS(,,"RETCODE")
 
+:DEFINE &UC4RB_OPS_SERVER_IDS#, string, 30
 :IF &STATUS# EQ 0
-:  DEFINE &UC4RB_OPS_SERVER_IDS#, string, 30
 :  SET &IDX# = 1
 :  SET &HND# = PREP_PROCESS_REPORT("JOBS",, "REP",,"COL=DELIMITER", 'DELIMITER=*::=*')
 :  PROCESS &HND#
