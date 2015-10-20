@@ -1,12 +1,12 @@
 package com.automic.openstack.actions;
 
-import java.io.File;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
 
 import com.automic.openstack.constants.Constants;
 import com.automic.openstack.constants.ExceptionConstants;
@@ -22,8 +22,8 @@ import com.sun.jersey.api.client.WebResource;
  * 
  */
 /**
- * This class is used to create server snapshot as per the specified server id. Created server snapshot image location
- * will be published.
+ * This class is used to create server snapshot as per the specified server id. Created server snapshot image url will
+ * be published.
  * 
  */
 public class CreateServerSnapshotAction extends AbstractHttpAction {
@@ -33,7 +33,7 @@ public class CreateServerSnapshotAction extends AbstractHttpAction {
     private String tokenId;
     private String tenantId;
     private String serverId;
-    private String parameterFile;
+    private String imageName;
 
     public CreateServerSnapshotAction() {
 
@@ -41,7 +41,7 @@ public class CreateServerSnapshotAction extends AbstractHttpAction {
         addOption("tokenid", true, "Token Id for authentication");
         addOption("tenantid", true, "Tenant/Project id");
         addOption("serverid", true, "Server id");
-        addOption("parameterfile", true, "Param file to create snapshot");
+        addOption("imagename", true, "Image name to create snapshot");
 
     }
 
@@ -51,7 +51,7 @@ public class CreateServerSnapshotAction extends AbstractHttpAction {
         tokenId = getOptionValue("tokenid");
         tenantId = getOptionValue("tenantid");
         serverId = getOptionValue("serverid");
-        parameterFile = getOptionValue("parameterfile");
+        imageName = getOptionValue("imagename");
 
     }
 
@@ -73,10 +73,9 @@ public class CreateServerSnapshotAction extends AbstractHttpAction {
             LOGGER.error(ExceptionConstants.EMPTY_SERVERID);
             throw new AutomicException(ExceptionConstants.EMPTY_SERVERID);
         }
-        if (!Validator.checkFileExists(parameterFile)) {
-            String errMsg = String.format(ExceptionConstants.INVALID_FILE, parameterFile);
-            LOGGER.error(errMsg);
-            throw new AutomicException(errMsg);
+        if (!Validator.checkNotEmpty(imageName)) {
+            LOGGER.error(ExceptionConstants.EMPTY_IMAGE_NAME);
+            throw new AutomicException(ExceptionConstants.EMPTY_IMAGE_NAME);
         }
 
     }
@@ -95,7 +94,7 @@ public class CreateServerSnapshotAction extends AbstractHttpAction {
 
         LOGGER.info("Calling url " + webResource.getURI());
 
-        response = webResource.entity(new File(parameterFile), MediaType.APPLICATION_JSON)
+        response = webResource.entity(createServerSnapshotJson(imageName).toString(), MediaType.APPLICATION_JSON)
                 .header(Constants.X_AUTH_TOKEN, tokenId).post(ClientResponse.class);
 
         prepareOutput(response);
@@ -111,6 +110,22 @@ public class CreateServerSnapshotAction extends AbstractHttpAction {
         List<String> tokenid = response.getHeaders().get("Location");
         ConsoleWriter.writeln("UC4RB_OPS_IMAGE_URL ::= " + tokenid.get(0));
 
+    }
+
+    private JSONObject createServerSnapshotJson(String imageName) {
+
+        JSONObject metadata = new JSONObject();
+        metadata.put("meta_var", "meta_val");
+
+        JSONObject createImage = new JSONObject();
+
+        createImage.put("metadata", metadata);
+        createImage.put("name", imageName);
+
+        JSONObject json = new JSONObject();
+        json.put("createImage", createImage);
+
+        return json;
     }
 
 }
