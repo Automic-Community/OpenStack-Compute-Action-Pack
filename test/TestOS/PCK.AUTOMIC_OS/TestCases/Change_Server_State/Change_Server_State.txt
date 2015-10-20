@@ -74,6 +74,8 @@ Change Server State Template
     ...    -${Tenant_ID}: This field specifies Tenant ID generated as the output of Get Auth Token action.
     ...    -${Server_ID}: This field specifies Server ID whose state is to be changed.
     ...    -${Action}: This field specifies the target action which user wants to perform on an instance.
+    #    blank input means Token ID and Tenant ID will get values from the output of Get Auth Token.
+    #    Empty input means that field is left empty.
     Run Keyword If    '${Action}' == 'STOP'    Get Auth Token    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
     Action Create    ${_CHANGE_SERVER_STATE_ACTION}
     Action Set    &UC4RB_OPS_COMPUTE_URL#    ${Compute_URL}
@@ -82,11 +84,12 @@ Change Server State Template
     Run Keyword If    '${Tenant_ID}' == 'blank'    Action Set    &UC4RB_OPS_TENANT_ID#    ${Generated_Tenant_ID}
     Run Keyword If    '${Tenant_ID}' != 'blank'    Action Set    &UC4RB_OPS_TENANT_ID#    ${Tenant_ID}
     Action Set    &UC4RB_OPS_SERVER_ID#    ${Server_ID}
-    Action Set    &UC4RB_OPS_ACTION#    ${Action}
+    Action Set    &UC4RB_OPS_SERVER_ACTION#    ${Action}
     Set Overwrite Agent
     Action Execute
     Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
     ...    Assert Mandatory
+    Run Keyword If    '${OK_NOK}' == 'OK'    Sleep    60s
 
 Teardown
     Log    *******End Test "CHANGE SERVER STATE"*******
