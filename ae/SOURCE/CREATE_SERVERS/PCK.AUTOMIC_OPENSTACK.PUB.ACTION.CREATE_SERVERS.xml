@@ -285,7 +285,71 @@
 <MSCRI/>
 </SCRIPT>
 <DOCU_Docu state="1" type="text">
-<DOC/>
+<DOC><![CDATA[= Action name =
+PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CREATE_SERVERS
+
+= General description =
+This action is used to create one or more servers in OpenStack. Since creating servers is an asynchronous operation the action returns a list of server ids in an AE array variable. These server ids could be iterated over with Get Server Details action to check whether server provisioning was successful. When creating multiple servers in Compute service v2.1 please provide "return_reservation_id": "True" in parameter file to get server ids of all the servers created otherwise the action publishes the server id of the first instance.
+The action will fail if we get an error from OpenStack on submitting the request to create server instances.
+
+= Inputs =
+* Compute URL : OpenStack Compute URL. Example http://openstack.com:8774/v2.1
+* Token Id : Token Id for authentication. It is AES encoded. 
+* Tenant Id : Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
+* Parameter File : Specify full path and name of the JSON file which will be used to create a new server or servers.
+* Overwrite Agent: Overwrites the default agent
+* Overwrite Login: Overwrites the default login
+= Behavior =
+Sample 1:
+parameter file
+{
+    "server": {
+        "name": "new-server-test2",
+        "imageRef": "5cc06ee6-10ea-4696-87e4-e9ef0c0691ce",
+        "flavorRef": "1",
+        "metadata": {
+            "My Server Name": "Apache1"
+        },
+        "min_count": "1",
+        "max_count": "1"
+    }
+}
+output
+UC4RB_OPS_SERVER_IDS#[00001] : 75a75a44-de98-413a-bead-366240bc40fe
+Sample 2
+parameter file
+{
+    "server": {
+        "name": "new-server-test2",
+        "imageRef": "5cc06ee6-10ea-4696-87e4-e9ef0c0691ce",
+        "flavorRef": "1",
+ "return_reservation_id": "True",
+        "metadata": {
+            "My Server Name": "Apache1"
+        },
+        "min_count": "2",
+        "max_count": "2"
+    }
+}
+output
+UC4RB_OPS_SERVER_IDS#[00001] : 75a75a44-de98-413a-bead-366240bc40fe
+UC4RB_OPS_SERVER_IDS#[00002] : c97c4df-dd57-490e-81bc-ec0322c337cfge
+=Return Value=
+UC4RB_OPS_SERVER_IDS : Publishes create server ids in an AE array variable
+
+= Outputs =
+* Return code is 0 in case of success.
+* Return code is 1 in case of failure.
+* Return code is 2 in case of connection timed out !!
+= Rollback =
+(none)
+
+= Logging =
+AE logs will be displayed in the AE report.
+Java logs will be created at \temp\openstack.log under agent installation directory.
+
+= Example =
+(none)]]></DOC>
 </DOCU_Docu>
 </JOBP>
 </uc-export>
