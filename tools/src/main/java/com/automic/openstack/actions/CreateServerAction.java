@@ -12,7 +12,7 @@ import org.json.JSONObject;
 import com.automic.openstack.constants.Constants;
 import com.automic.openstack.constants.ExceptionConstants;
 import com.automic.openstack.exception.AutomicException;
-import com.automic.openstack.service.ResponseProcessService;
+import com.automic.openstack.service.ListServerService;
 import com.automic.openstack.util.AESEncryptDecrypt;
 import com.automic.openstack.util.CommonUtil;
 import com.automic.openstack.util.ConsoleWriter;
@@ -21,117 +21,131 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 /**
- * This class is used to Creates one or more servers with an optional reservation ID.
- * It publish one or more created server id.
+ * This class is used to Creates one or more servers with an optional
+ * reservation ID. It publish one or more created server id.
  * 
- *  @author Anurag Upadhyay
+ * @author Anurag Upadhyay
  */
 
-public class CreateServerAction extends AbstractHttpAction{
+public class CreateServerAction extends AbstractHttpAction {
 
-    private static final Logger LOGGER = LogManager.getLogger(CreateServerAction.class);
+	private static final Logger LOGGER = LogManager
+			.getLogger(CreateServerAction.class);
 
-    private String paramterFilePath;
-    private String tokenId;
-    private String tenantId;
-    private final String SERVER_ID="id";
-    private final String RESERVATION_ID ="reservation_id";
-    private final String SERVER_KEY="server";
-    private final String SERVERS_KEY="servers";
+	private String parameterFilePath;
+	private String tokenId;
+	private String tenantId;
+	private static final String SERVER_ID = "id";
+	private static final String RESERVATION_ID = "reservation_id";
+	private static final String SERVER_KEY = "server";
+	private static final String SERVERS_KEY = "servers";
 
-    public CreateServerAction() {
+	public CreateServerAction() {
 
-        addOption("computeurl", true, "Compute service endpoint");
-        addOption("tokenid", true, "Token Id for authentication");
-        addOption("tenantid", true, "Tenant/Project name");
-        addOption("filepath", true, "Xml file path ");
+		addOption("computeurl", true, "Compute service endpoint");
+		addOption("tokenid", true, "Token Id for authentication");
+		addOption("tenantid", true, "Tenant/Project name");
+		addOption("parameterfile", true, "Json file path ");
 
-    }
+	}
 
-    @Override
-    protected void initialize() {
-        baseUrl = getOptionValue("computeurl");
-        tokenId = getOptionValue("tokenid");
-        tenantId = getOptionValue("tenantid");
-        paramterFilePath = getOptionValue("filepath");
+	@Override
+	protected void initialize() {
+		baseUrl = getOptionValue("computeurl");
+		tokenId = getOptionValue("tokenid");
+		tenantId = getOptionValue("tenantid");
+		parameterFilePath = getOptionValue("parameterfile");
 
-    }
+	}
 
-    @Override
-    protected void validate() throws AutomicException {
+	@Override
+	protected void validate() throws AutomicException {
 
-        if (!Validator.checkNotEmpty(tokenId)) {
-            LOGGER.error(ExceptionConstants.EMPTY_TOKENID);
-            throw new AutomicException(ExceptionConstants.EMPTY_TOKENID);
-        }
-        if (!Validator.checkNotEmpty(tenantId)) {
-            LOGGER.error(ExceptionConstants.EMPTY_TENANTID);
-            throw new AutomicException(ExceptionConstants.EMPTY_TENANTID);
-        }
-        if (!Validator.checkFileExists(paramterFilePath)) {
-            String errMsg = String.format(ExceptionConstants.INVALID_FILE, paramterFilePath);
-            LOGGER.error(errMsg);
-            throw new AutomicException(errMsg);
-        }
+		if (!Validator.checkNotEmpty(tokenId)) {
+			LOGGER.error(ExceptionConstants.EMPTY_TOKENID);
+			throw new AutomicException(ExceptionConstants.EMPTY_TOKENID);
+		}
+		if (!Validator.checkNotEmpty(tenantId)) {
+			LOGGER.error(ExceptionConstants.EMPTY_TENANTID);
+			throw new AutomicException(ExceptionConstants.EMPTY_TENANTID);
+		}
+		if (!Validator.checkFileExists(parameterFilePath)) {
+			String errMsg = String.format(ExceptionConstants.INVALID_FILE,
+					parameterFilePath);
+			LOGGER.error(errMsg);
+			throw new AutomicException(errMsg);
+		}
 
-    }
+	}
 
-    @Override
-    /**
-     * Authenticates and Create Servers by  http://baseUrl/v2/​{tenant_id}​/servers
-     * */
-    protected void executeSpecific() throws AutomicException {
+	@Override
+	/**
+	 * Authenticates and Create Servers by  http://baseUrl/v2/​{tenant_id}​/servers
+	 * */
+	protected void executeSpecific() throws AutomicException {
 
-        ClientResponse response = null;
+		ClientResponse response = null;
 
-        tokenId = AESEncryptDecrypt.decrypt(tokenId);
+		tokenId = AESEncryptDecrypt.decrypt(tokenId);
 
-        WebResource webResource = client.resource(baseUrl).path(tenantId).path("servers");
+		WebResource webResource = client.resource(baseUrl).path(tenantId)
+				.path("servers");
 
-        LOGGER.info("Calling url " + webResource.getURI());
-      
+		LOGGER.info("Calling url " + webResource.getURI());
 
-        response = webResource.entity(new File(paramterFilePath), MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).header(Constants.X_AUTH_TOKEN, tokenId)
-                .post(ClientResponse.class);
+		response = webResource
+				.entity(new File(parameterFilePath), MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON)
+				.header(Constants.X_AUTH_TOKEN, tokenId)
+				.post(ClientResponse.class);
 
-        prepareOutput(response);
+		prepareOutput(response);
+	}
 
-    }
+	/**
+	 * This method publish one or more created server ids
+	 * 
+	 * @param response
+	 * @throws AutomicException
+	 */
+	private void prepareOutput(ClientResponse response) throws AutomicException {
+		JSONObject jsonObj = CommonUtil.jsonResponse(response
+				.getEntityInputStream());
 
-    /**
-     * This method publish one or more created server ids
-     * 
-     * @param response
-     * @throws AutomicException
-     */
-    private void prepareOutput(ClientResponse response) throws AutomicException {    	
-    	 JSONObject jsonObj = CommonUtil.jsonResponse(response.getEntityInputStream());
-    	 
-    	 if(jsonObj != null && jsonObj.has(SERVER_KEY)){
-    		 JSONObject  server = jsonObj.getJSONObject(SERVER_KEY);
-    		 ConsoleWriter.writeln("UC4RB_OPS_SERVER_IDS ::=" + server.getString(SERVER_ID));
-    		 
-    	 }else if(jsonObj != null && jsonObj.has(RESERVATION_ID)){    		 
-    		 ResponseProcessService rps =  ResponseProcessService.getResponseProcessService(client);
-    		 jsonObj = rps.executeListServerService(baseUrl, tenantId, tokenId, jsonObj.getString(RESERVATION_ID));		
-    		 
-    		 if(jsonObj != null && jsonObj.has(SERVERS_KEY)){    			 
-    		 JSONArray servers = jsonObj.getJSONArray(SERVERS_KEY);
-    		 
-    		 if(servers!=null && servers.length()>0){
-                 for (int i = 0; i < servers.length(); i++) {
-                	 JSONObject  server = servers.getJSONObject(i);
-                	 ConsoleWriter.writeln("UC4RB_OPS_SERVER_IDS["+i+"] ::=" + server.getString(SERVER_ID));
-                 }
-             }
-    	 }else{
-    		 LOGGER.info(" Unable to find Json key[servers] in json object :" + jsonObj); 
-    	 }
-    		 
-    	 }else{
-    		 LOGGER.info(" Unable to find Json keys[server, reservation_id] in json object :" + jsonObj);    	      
-    	 }
+		if (jsonObj != null && jsonObj.has(SERVER_KEY)) {
+			JSONObject server = jsonObj.getJSONObject(SERVER_KEY);
+			ConsoleWriter.writeln("UC4RB_OPS_SERVER_IDS ::="
+					+ server.getString(SERVER_ID));
 
-    }
+		} else if (jsonObj != null && jsonObj.has(RESERVATION_ID)) {
+			ListServerService rps = ListServerService
+					.getListServerService(client);
+			jsonObj = rps.executeListServerService(baseUrl, tenantId, tokenId,
+					jsonObj.getString(RESERVATION_ID));
+
+			if (jsonObj != null && jsonObj.has(SERVERS_KEY)) {
+				publishSrversId(jsonObj.getJSONArray(SERVERS_KEY));
+			} else {
+				LOGGER.info(" Unable to find Json key[servers] in json object :"
+						+ jsonObj);
+			}
+
+		} else {
+			LOGGER.info(" Unable to find Json keys[server, reservation_id] in json object :"
+					+ jsonObj);
+		}
+
+	}
+
+	private void publishSrversId(JSONArray servers) {
+		if (servers != null && servers.length() > 0) {
+			for (int i = 0; i < servers.length(); i++) {
+				JSONObject server = servers.getJSONObject(i);
+				ConsoleWriter.writeln("UC4RB_OPS_SERVER_IDS[" + i + "] ::="
+						+ server.getString(SERVER_ID));
+			}
+		}
+
+	}
 
 }
