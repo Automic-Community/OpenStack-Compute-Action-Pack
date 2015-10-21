@@ -73,8 +73,7 @@ public class ListServersAction extends AbstractHttpAction {
 	/**
 	 * Authenticates and generates a token by calling http://baseUrl/{tenantId}/servers/detail
 	 * */
-	protected void executeSpecific() throws AutomicException {
-		tokenId = AESEncryptDecrypt.decrypt(tokenId);
+	protected void executeSpecific() throws AutomicException {		
 		ListServerService rps = ListServerService.getListServerService(client);
 		prepareOutput(rps.executeListServerService(baseUrl, tenantId, tokenId));
 

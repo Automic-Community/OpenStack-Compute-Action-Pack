@@ -1,7 +1,5 @@
 package com.automic.openstack.actions;
 
-import java.io.File;
-
 import javax.ws.rs.core.MediaType;
 
 import org.apache.logging.log4j.LogManager;
@@ -32,13 +30,16 @@ public class CreateServerAction extends AbstractHttpAction {
 	private static final Logger LOGGER = LogManager
 			.getLogger(CreateServerAction.class);
 
-	private String parameterFilePath;
-	private String tokenId;
-	private String tenantId;
 	private static final String SERVER_ID = "id";
 	private static final String RESERVATION_ID = "reservation_id";
 	private static final String SERVER_KEY = "server";
 	private static final String SERVERS_KEY = "servers";
+	private static final String MIN_COUNT = "min_count";
+	
+	private String parameterFilePath;
+	private String tokenId;
+	private String tenantId;
+	
 
 	public CreateServerAction() {
 
@@ -86,7 +87,7 @@ public class CreateServerAction extends AbstractHttpAction {
 
 		ClientResponse response = null;
 
-		tokenId = AESEncryptDecrypt.decrypt(tokenId);
+		String decryptedTokenId = AESEncryptDecrypt.decrypt(tokenId);
 
 		WebResource webResource = client.resource(baseUrl).path(tenantId)
 				.path("servers");
@@ -94,9 +95,10 @@ public class CreateServerAction extends AbstractHttpAction {
 		LOGGER.info("Calling url " + webResource.getURI());
 
 		response = webResource
-				.entity(new File(parameterFilePath), MediaType.APPLICATION_JSON)
+				.entity(validateJsonObject(parameterFilePath),
+						MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
-				.header(Constants.X_AUTH_TOKEN, tokenId)
+				.header(Constants.X_AUTH_TOKEN, decryptedTokenId)
 				.post(ClientResponse.class);
 
 		prepareOutput(response);
@@ -136,7 +138,10 @@ public class CreateServerAction extends AbstractHttpAction {
 		}
 
 	}
-
+   /**
+    * This method iterate provided {@code JSONArray} and print server id
+    * @param servers
+    */
 	private void publishSrversId(JSONArray servers) {
 		if (servers != null && servers.length() > 0) {
 			for (int i = 0; i < servers.length(); i++) {
@@ -145,6 +150,25 @@ public class CreateServerAction extends AbstractHttpAction {
 						+ server.getString(SERVER_ID));
 			}
 		}
+
+	}
+  
+    /**
+     * This method validate and modify {@code JSONObject} instance integrity
+     * @param parameterFilePath
+     * @return
+     * @throws AutomicException
+     */
+	private String validateJsonObject(String parameterFilePath)
+			throws AutomicException {
+		JSONObject jsonObj = CommonUtil.getJSONObjectByFilePath(parameterFilePath);
+		if (jsonObj != null) {
+			JSONObject server = jsonObj.getJSONObject(SERVER_KEY);
+			if (server != null && server.has(MIN_COUNT) && server.getInt(MIN_COUNT) > 1) {
+				server.putOnce("return_reservation_id", "True");
+			}
+		}
+		return String.valueOf(jsonObj);
 
 	}
 
