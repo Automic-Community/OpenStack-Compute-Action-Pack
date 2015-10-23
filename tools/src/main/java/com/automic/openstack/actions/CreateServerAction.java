@@ -34,7 +34,7 @@ public class CreateServerAction extends AbstractHttpAction {
 	private static final String RESERVATION_ID = "reservation_id";
 	private static final String SERVER_KEY = "server";
 	private static final String SERVERS_KEY = "servers";
-	private static final String MIN_COUNT_KEY = "min_count";
+	private static final String MAX_COUNT_KEY = "max_count";
 	private static final String RESERVATION_ID_KEY = "return_reservation_id";
 	
 	private String parameterFilePath;
@@ -165,7 +165,7 @@ public class CreateServerAction extends AbstractHttpAction {
 		JSONObject jsonObj = CommonUtil.getJSONObjectByFilePath(parameterFilePath);
 		if (jsonObj != null) {
 			JSONObject server = jsonObj.getJSONObject(SERVER_KEY);
-			if (server != null && server.has(MIN_COUNT_KEY) && server.getInt(MIN_COUNT_KEY) > 1 && !server.has(RESERVATION_ID_KEY)) {
+			if (server != null && server.has(MAX_COUNT_KEY) && server.getInt(MAX_COUNT_KEY) > 1 && !server.has(RESERVATION_ID_KEY)) {
 				server.put("return_reservation_id", "True");
 			}
 		}
