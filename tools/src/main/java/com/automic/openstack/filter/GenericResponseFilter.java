@@ -26,6 +26,7 @@ public class GenericResponseFilter extends ClientFilter {
         if (!(response.getStatus() >= HTTP_SUCCESS_START && response.getStatus() <= HTTP_SUCCESS_END)) {
             LOGGER.error("Response code for " + request.getURI() + " is " + response.getStatus());
             String errorMsg = response.getEntity(String.class);
+
             LOGGER.error(errorMsg);
             throw new AutomicRuntimeException(errorMsg);
 
