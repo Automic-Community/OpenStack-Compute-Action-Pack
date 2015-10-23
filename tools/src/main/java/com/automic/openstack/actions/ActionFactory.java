@@ -43,6 +43,9 @@ public final class ActionFactory {
             case DELETE_FILE:
                 action = new DeleteFileAction();
                 break;
+            case CHANGE_SERVER_STATE:
+                action = new ChangeServerStateAction();
+                break;
             case CREATE_SERVER_SNAPSHOT:
                 action = new CreateServerSnapshotAction();
                 break;
