@@ -1,10 +1,15 @@
 package com.automic.openstack.util;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -209,5 +214,28 @@ public final class CommonUtil {
         }
         return input;
     }
+    
+    /**
+     * This method  is useful for reading small files. It create {@code JSONObject} from file content
+     * @param parameterFilePath
+     * @return
+     * @throws AutomicException
+     */
+ 	public static JSONObject  getJSONObjectByFilePath(String parameterFilePath)
+ 			throws AutomicException {
+ 		Path path = Paths.get(parameterFilePath);
+ 		JSONObject jsonObj = null;
+ 		try {
+ 			String jsonString = new String(Files.readAllBytes(path));
+ 			jsonObj = new JSONObject(jsonString);
+ 		} catch (IOException e) {
+ 			LOGGER.error(e);
+ 			throw new AutomicException(e.getMessage());
+ 		}
+
+ 		return jsonObj;
+ 	}
+ 	
+ 	
 
 }
