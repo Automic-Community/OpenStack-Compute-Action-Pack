@@ -35,12 +35,13 @@ public class CreateServerAction extends AbstractHttpAction {
 	private static final String SERVER_KEY = "server";
 	private static final String SERVERS_KEY = "servers";
 	private static final String MAX_COUNT_KEY = "max_count";
+	private static final String MIN_COUNT_KEY = "min_count";
 	private static final String RESERVATION_ID_KEY = "return_reservation_id";
-	
+	private static final String RESERVATION_ID_VAL = "True";
+
 	private String parameterFilePath;
 	private String tokenId;
 	private String tenantId;
-	
 
 	public CreateServerAction() {
 
@@ -129,44 +130,67 @@ public class CreateServerAction extends AbstractHttpAction {
 			if (jsonObj != null && jsonObj.has(SERVERS_KEY)) {
 				publishSrversId(jsonObj.getJSONArray(SERVERS_KEY));
 			} else {
-				LOGGER.info(" Unable to find Json key[servers] in json object :"
+				LOGGER.error(" Unable to find Json key[servers] in json object :"
 						+ jsonObj);
+				throw new AutomicException(ExceptionConstants.INVALID_RESPONSE);
 			}
 
 		} else {
-			LOGGER.info(" Unable to find Json keys[server, reservation_id] in json object :"
+			LOGGER.error(" Unable to find Json keys[server, reservation_id] in json object :"
 					+ jsonObj);
+			throw new AutomicException(	ExceptionConstants.INVALID_RESPONSE);
 		}
 
 	}
-   /**
-    * This method iterate provided {@code JSONArray} and print server id
-    * @param servers
-    */
+
+	/**
+	 * This method iterate provided {@code JSONArray} and print server id
+	 * 
+	 * @param servers
+	 */
 	private void publishSrversId(JSONArray servers) {
 		if (servers != null && servers.length() > 0) {
+			ConsoleWriter.writeln(servers.length()+" Server(s) has been created.");
 			for (int i = 0; i < servers.length(); i++) {
 				JSONObject server = servers.getJSONObject(i);
-				ConsoleWriter.writeln("UC4RB_OPS_SERVER_IDS[" + i + "] ::="
+				ConsoleWriter.writeln("UC4RB_OPS_SERVER_IDS ::="
 						+ server.getString(SERVER_ID));
 			}
 		}
-
 	}
-  
-    /**
-     * This method validate and modify {@code JSONObject} instance integrity
-     * @param parameterFilePath
-     * @return
-     * @throws AutomicException
-     */
+
+	/**
+	 * This method validate and modify {@code JSONObject} instance integrity
+	 * Should be Valid json If min_count or max_count > 1, then put
+	 * reservation_id max_count should be greater than or equal to min_count
+	 * 
+	 * @param parameterFilePath
+	 * @return {@code String} representation of {@code JSONObject} instance
+	 * @throws AutomicException
+	 */
 	private String validateJsonObject(String parameterFilePath)
 			throws AutomicException {
-		JSONObject jsonObj = CommonUtil.getJSONObjectByFilePath(parameterFilePath);
+		JSONObject jsonObj = CommonUtil
+				.getJSONObjectByFilePath(parameterFilePath);
 		if (jsonObj != null) {
 			JSONObject server = jsonObj.getJSONObject(SERVER_KEY);
-			if (server != null && server.has(MAX_COUNT_KEY) && server.getInt(MAX_COUNT_KEY) > 1 && !server.has(RESERVATION_ID_KEY)) {
-				server.put("return_reservation_id", "True");
+			if (server != null) {
+				// If min_count not specify, put min_count as 1
+				int minCount = server.has(MIN_COUNT_KEY) ? server
+						.getInt(MIN_COUNT_KEY) : 1;
+				// If max_count not specify, put max_count as min_count
+				int maxCount = server.has(MAX_COUNT_KEY) ? server
+						.getInt(MAX_COUNT_KEY) : minCount;
+
+				if (minCount > maxCount) {
+					LOGGER.error(ExceptionConstants.MAXCOUNT_LESS_MINCOUNT);
+					throw new AutomicException(
+							ExceptionConstants.MAXCOUNT_LESS_MINCOUNT);
+				}
+
+				if (minCount > 1 || maxCount > 1) {
+					server.put(RESERVATION_ID_KEY, RESERVATION_ID_VAL);
+				}
 			}
 		}
 		return String.valueOf(jsonObj);
