@@ -40,7 +40,7 @@ Assert Tenant ID as a mandatory field
 Assert Server ID as a mandatory field
                       OTHER     ${OS_Compute_URL}       blank                  blank                   ${EMPTY}                blank
 
-Assert Parameter File as a mandatory field
+Assert Image Name as a mandatory field
                       OTHER     ${OS_Compute_URL}       blank                  blank                   ${Valid_Server_ID}      ${EMPTY}
 
 *** Keywords ***
@@ -58,7 +58,6 @@ Create Server Snapshot Template
     ...    -${Tenant_ID}: This field specifies Tenant ID generated as the output of Get Auth Token action.
     ...    -${Server_ID}: This field specifies Server ID whose snapshot is to be created.
     ...    -${Image_Name}: This field specifies the name of snapshot created.
-    Run Keyword If    '${OK_NOK}' == 'OK'    Get Auth Token    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
     Run Keyword If    '${Generated_Token_ID}' == '${EMPTY}'    Get Auth Token    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
     Action Create    ${_CREATE_SERVER_SNAPSHOT_ACTION}
     Action Set    &UC4RB_OPS_COMPUTE_URL#    ${Compute_URL}
