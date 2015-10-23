@@ -9,7 +9,7 @@
 </HEADER>
 <STORE>
 <resourceList>
-<row checksum="84887FEA96FAD9AC57B267FE8AF4850B57EB741A33E361FABB5798CBFB36EB7E" fileType="BINARY" filename="openstacktool.jar" hw="*" id="OPENSTACK-ALL-ALL-ALL" name="OPENSTACK" platform="*" resname="PCK.AUTOMIC_OPENSTACK.PRV.STORE-OPENSTACK-ALL-ALL-ALL" size="3081314" sw="*" type="3" version="1.0.0.201510121742"/>
+<row checksum="E38423204B0A6FF3A34E832411719F9E4369C4AFEADFB596F4F99EA067C08763" fileType="BINARY" filename="openstacktool.jar" hw="*" id="OPENSTACK-ALL-ALL-ALL" name="OPENSTACK" platform="*" resname="PCK.AUTOMIC_OPENSTACK.PRV.STORE-OPENSTACK-ALL-ALL-ALL" size="3083841" sw="*" type="3" version="1.0.0.201510231213"/>
 </resourceList>
 </STORE>
 <DOCU_Docu state="1" type="text">
