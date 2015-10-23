@@ -26,7 +26,7 @@ public class ListServerService {
 	private final Client client;
 
 	/**
-	 * Initializes a newly created {@code ResponseProcessService} object.
+	 * Initializes a newly created {@code ListServerService} object.
 	 * 
 	 * @param client
 	 */
@@ -36,11 +36,11 @@ public class ListServerService {
 	}
 
 	/**
-	 * This method create the instance of {@code ResponseProcessService} with
+	 * This method create the instance of {@code ListServerService} with
 	 * provided client.
 	 * 
 	 * @param client
-	 * @return Initialize instance of {@code ResponseProcessService}
+	 * @return Initialize instance of {@code ListServerService}
 	 */
 	public static ListServerService getListServerService(Client client) {
 

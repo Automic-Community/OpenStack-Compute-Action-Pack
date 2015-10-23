@@ -11,6 +11,9 @@ import org.json.JSONObject;
 
 import com.automic.openstack.constants.ExceptionConstants;
 import com.automic.openstack.exception.AutomicException;
+import com.automic.openstack.model.AuthenticationToken;
+import com.automic.openstack.service.AuthenticationTokenSevice;
+import com.automic.openstack.service.ListServerService;
 import com.automic.openstack.util.CommonUtil;
 import com.automic.openstack.util.ConsoleWriter;
 import com.automic.openstack.util.Validator;
@@ -75,7 +78,7 @@ public class GetTokenAction extends AbstractHttpAction {
      * */
     protected void executeSpecific() throws AutomicException {
 
-        ClientResponse response = null;
+       /* ClientResponse response = null;
 
         WebResource webResource = client.resource(baseUrl).path("tokens");
 
@@ -83,10 +86,12 @@ public class GetTokenAction extends AbstractHttpAction {
 
         response = webResource.accept(MediaType.APPLICATION_JSON)
                 .entity(getAuthenticationJson(username, password, tenantName).toString(), MediaType.APPLICATION_JSON)
-                .post(ClientResponse.class);
+                .post(ClientResponse.class);*/
+    	
+    	AuthenticationTokenSevice ats = AuthenticationTokenSevice.getListServerService(client);
+		prepareOutput(ats.executeListServerService(baseUrl, username, password, tenantName));
 
-        prepareOutput(response);
-
+     
     }
 
     /**
@@ -94,9 +99,7 @@ public class GetTokenAction extends AbstractHttpAction {
      * the path provided
      */
 
-    private void prepareOutput(ClientResponse response) throws AutomicException {
-
-        JSONObject jsonObj = CommonUtil.jsonResponse(response.getEntityInputStream());
+    private void prepareOutput(JSONObject jsonObj) throws AutomicException {      
 
         JSONObject tokenJson = jsonObj.getJSONObject("access").getJSONObject("token");
 
@@ -105,12 +108,17 @@ public class GetTokenAction extends AbstractHttpAction {
             ConsoleWriter.writeln("UC4RB_OPS_TENANT_ID ::=" + tenantJson.get("id").toString());
         }
 
-        ConsoleWriter.writeln("UC4RB_OPS_TOKEN_ID ::=" + CommonUtil.encrypt(tokenJson.get("id").toString()));
-        ConsoleWriter.writeln("UC4RB_OPS_TOKEN_EXPIRY ::=" + tokenJson.get("expires").toString());
-
+        //ConsoleWriter.writeln("UC4RB_OPS_TOKEN_ID ::=" + CommonUtil.encrypt(tokenJson.get("id").toString()));
+       // ConsoleWriter.writeln("UC4RB_OPS_TOKEN_EXPIRY ::=" + tokenJson.get("expires").toString());
+        
+       
+        AuthenticationToken authToken=   new AuthenticationToken(baseUrl, username, password, tenantName, tokenJson.getString("id"),
+        		tokenJson.getString("expires"), tokenJson.getString("issued_at"));
+        
+        ConsoleWriter.writeln("UC4RB_OPS_TOKEN_ID ::=" + CommonUtil.encrypt(authToken.toString()));
     }
 
-    private JSONObject getAuthenticationJson(String username, String password, String tenantName) {
+   /* private JSONObject getAuthenticationJson(String username, String password, String tenantName) {
 
         JSONObject passwordCreds = new JSONObject();
         passwordCreds.put("username", username);
@@ -128,6 +136,6 @@ public class GetTokenAction extends AbstractHttpAction {
 
         return json;
 
-    }
+    }*/
 
 }
