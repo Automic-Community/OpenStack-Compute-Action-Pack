@@ -46,6 +46,9 @@ public final class ActionFactory {
             case CHANGE_SERVER_STATE:
                 action = new ChangeServerStateAction();
                 break;
+            case CREATE_SERVER_SNAPSHOT:
+                action = new CreateServerSnapshotAction();
+                break;
             case CREATE_SERVERS:
                 action = new CreateServerAction();
                 break;

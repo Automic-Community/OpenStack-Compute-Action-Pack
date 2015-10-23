@@ -1,6 +1,5 @@
 package com.automic.openstack.constants;
 
-
 /**
  * Constant class containing messages to describe Exception Scenarios.
  * 
@@ -19,7 +18,7 @@ public final class ExceptionConstants {
 
     public static final String INVALID_FILE = " File [%s] is invalid. Possibly file does not exist ";
     public static final String INVALID_DIRECTORY = " Directory [%s] is invalid ";
-    
+
     public static final String UNABLE_TO_WRITEFILE = "Error writing file ";
 
     public static final String UNABLE_TO_CLOSE_STREAM = "Error while closing stream";
@@ -42,10 +41,11 @@ public final class ExceptionConstants {
     public static final String INVALID_AUTH_TOKEN = "Invalid token id ";
     public static final String EMPTY_TOKENID = "Token Id must not be empty";
     public static final String EMPTY_TENANTID = "Tenant Id must not be empty";
- 
+
     public static final String EMPTY_SERVERID = "Server Id must not be empty";
 
     public static final String EMPTY_SERVER_ACTION = "Server action cannot be empty";
+    public static final String EMPTY_IMAGE_NAME = "Image name must not be empty";
 
     public static final String MAXCOUNT_LESS_MINCOUNT = "min_count must be <= max_count";
     public static final String INVALID_RESPONSE = "Invalid response";
