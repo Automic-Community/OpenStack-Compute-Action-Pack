@@ -45,7 +45,7 @@
 <MaxRetCode>0</MaxRetCode>
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
-<FcstStatus>0|U00000000 ??? ""</FcstStatus>
+<FcstStatus>0| |</FcstStatus>
 <Ert>2</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
@@ -169,7 +169,8 @@ java -jar &UC4RB_OPS_PATH_JAR# &UC4RB_OPS_JAVA_ARGUMENTS#
 <LoginFsc/>
 </OUTPUTSCAN>
 <POST_SCRIPT mode="1" replacementmode="1" state="1">
-<OSCRI><![CDATA[! Publishing server id list to object variable in case of success
+<OSCRI><![CDATA[: INC PCK.AUTOMIC_OPENSTACK.PUB.INCLUDE.PUBLISH_AUTH_TOKEN
+! Publishing server id list to object variable in case of success
 :SET &STATUS# = GET_UC_OBJECT_STATUS(,,"RETCODE")
 
 :DEFINE &UC4RB_OPS_SERVER_IDS#, string, 30
