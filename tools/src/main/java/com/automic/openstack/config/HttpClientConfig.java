@@ -27,6 +27,7 @@ public final class HttpClientConfig {
        
         config.getProperties().put(ClientConfig.PROPERTY_CONNECT_TIMEOUT, connectionTimeOut);
         config.getProperties().put(ClientConfig.PROPERTY_READ_TIMEOUT, readTimeOut);
+        config.getProperties().put(ClientConfig.PROPERTY_FOLLOW_REDIRECTS, true);
 
         if (Constants.HTTPS.equalsIgnoreCase(protocol)) {
             //https code goes here

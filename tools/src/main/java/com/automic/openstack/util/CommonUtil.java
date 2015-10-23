@@ -22,7 +22,6 @@ import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import com.automic.openstack.util.JSON2XMLAdapter;
 import com.automic.openstack.constants.Constants;
 import com.automic.openstack.constants.ExceptionConstants;
 import com.automic.openstack.exception.AutomicException;
