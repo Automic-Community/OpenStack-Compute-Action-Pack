@@ -22,6 +22,7 @@ public class GenericResponseFilter extends ClientFilter {
 
     @Override
     public ClientResponse handle(ClientRequest request) {
+    	System.out.println("GenericResponseFilter");
         ClientResponse response = getNext().handle(request);
         if (!(response.getStatus() >= HTTP_SUCCESS_START && response.getStatus() <= HTTP_SUCCESS_END)) {
             LOGGER.error("Response code for " + request.getURI() + " is " + response.getStatus());

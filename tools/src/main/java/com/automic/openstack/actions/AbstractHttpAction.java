@@ -13,6 +13,7 @@ import com.automic.openstack.config.HttpClientConfig;
 import com.automic.openstack.constants.Constants;
 import com.automic.openstack.constants.ExceptionConstants;
 import com.automic.openstack.exception.AutomicException;
+import com.automic.openstack.filter.AuthenticationFilter;
 import com.automic.openstack.filter.GenericResponseFilter;
 import com.automic.openstack.util.CommonUtil;
 import com.sun.jersey.api.client.Client;
@@ -60,6 +61,7 @@ public abstract class AbstractHttpAction extends AbstractAction {
             validate();
             client = getClient();
             client.addFilter(new GenericResponseFilter());
+            client.addFilter(new AuthenticationFilter());
             executeSpecific();
         } finally {
             if (client != null) {
