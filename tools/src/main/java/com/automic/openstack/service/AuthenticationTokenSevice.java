@@ -52,7 +52,7 @@ public class AuthenticationTokenSevice {
 	 * @return {@code JSONObject} object
 	 * @throws AutomicException
 	 */
-	public JSONObject executeListServerService(String baseUrl, String username,
+	public JSONObject executeAuthenticationTokenSevice(String baseUrl, String username,
 			String password, String tenantName) throws AutomicException {
 		ClientResponse response = null;
 		WebResource webResource = client.resource(baseUrl).path("tokens");

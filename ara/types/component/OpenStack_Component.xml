@@ -20,7 +20,7 @@
 			</Property>	
 		</Group>
 		<Group name="CreateServers" displayName="Create Servers">
-			<Property name="parameter_file" displayName="Parameter File" mode="EDITABLE" type="SingleLineText">
+			<Property name="create_server_param_file" displayName="Parameter File" mode="EDITABLE" type="SingleLineText">
 				<Description>Specify full path and name of the JSON file which will be used to create a new server or servers.</Description>
 			</Property>
 		</Group>
@@ -61,8 +61,8 @@
 			<Value>{/custom/action}</Value>
 			<Description>Provide information to change server state</Description>
 		</Property>
-		<Property name="/openstack/server_param/parameter_file" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
-			<Value>{/custom/parameter_file}</Value>
+		<Property name="/openstack/server/create_server_param_file" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+			<Value>{/custom/create_server_param_file}</Value>
 			<Description>Specify full path and name of the JSON file which will be used to create a new server or servers.</Description>
 		</Property>
 	</DynamicProperties>

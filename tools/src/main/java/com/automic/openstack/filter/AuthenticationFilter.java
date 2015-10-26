@@ -53,11 +53,13 @@ public class AuthenticationFilter extends ClientFilter {
 			
 			if(isExpired(authToken.getTokenExpiry(), currentAEDate, timeoutCriteria)){				
 				 AuthenticationTokenSevice ats = AuthenticationTokenSevice.getListServerService(client);
-			     jsonObj = ats.executeListServerService(authToken.getBaseurl(), authToken.getUserName(), authToken.getPassword(), authToken.getTenantName());
+			     jsonObj = ats.executeAuthenticationTokenSevice(authToken.getBaseurl(), authToken.getUserName(), authToken.getPassword(), authToken.getTenantName());
 			     JSONObject tokenJson = jsonObj.getJSONObject("access").getJSONObject("token");
 			     request.getHeaders().putSingle(Constants.X_AUTH_TOKEN, tokenJson.getString("id"));
-			     //System.out.println(request.getHeaders().get(Constants.X_AUTH_TOKEN));
-			}		
+			}else{// if token not expire
+				
+				request.getHeaders().putSingle(Constants.X_AUTH_TOKEN, authToken.getTokenId());
+			}
 			
 		} catch (AutomicException e) {			
 			   LOGGER.error(e);

@@ -79,7 +79,7 @@ public class GetTokenAction extends AbstractHttpAction {
     protected void executeSpecific() throws AutomicException {
     	
     	AuthenticationTokenSevice ats = AuthenticationTokenSevice.getListServerService(client);
-		prepareOutput(ats.executeListServerService(baseUrl, username, password, tenantName));
+		prepareOutput(ats.executeAuthenticationTokenSevice(baseUrl, username, password, tenantName));
 
      
     }
@@ -95,7 +95,7 @@ public class GetTokenAction extends AbstractHttpAction {
 
         if (tokenJson.has("tenant")) {
             JSONObject tenantJson = tokenJson.getJSONObject("tenant");
-            ConsoleWriter.writeln("UC4RB_OPS_TENANT_ID ::=" + tenantJson.get("id").toString());
+            ConsoleWriter.writeln("UC4RB_OPS_TENANT_ID ::=" + tenantJson.getString("id"));
         }
        
         AuthenticationToken authToken=   new AuthenticationToken(baseUrl, username, password, tenantName, tokenJson.getString("id"),
