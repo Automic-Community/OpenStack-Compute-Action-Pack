@@ -59,16 +59,16 @@ public class AuthenticationToken {
 		token.put("tokenId", tokenid);
 	}
 	
-	private String getTokenId() {
-		return token.getJSONObject("tokenId").toString();
+	public String getTokenId() {
+		return token.getString("tokenId");
 	}
 
 	private void setTenantName(String tenantname) {
 		token.put("tenantName", tenantname);
 	}
 	
-	private String getTenantName() {
-		return token.getJSONObject("tenantName").toString();
+	public String getTenantName() {
+		return token.getString("tenantName");
 	}
 
 	private void setPassword(String passw) {

@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import com.automic.openstack.constants.Constants;
 import com.automic.openstack.exception.AutomicException;
+import com.automic.openstack.exception.AutomicRuntimeException;
 import com.automic.openstack.model.AuthenticationToken;
 import com.automic.openstack.service.AuthenticationTokenSevice;
 import com.automic.openstack.util.AESEncryptDecrypt;
@@ -28,65 +29,61 @@ public class AuthenticationFilter extends ClientFilter {
 
     private String currentAEDate;
     private Client client; 
-    public AuthenticationFilter(String currentDate, Client client) {
+    private int timeoutCriteria;
+    
+    public AuthenticationFilter(String currentDate, Client client, int timeoutCriteria) {
 		this.currentAEDate = currentDate;
 		this.client = client;
+		this.timeoutCriteria = timeoutCriteria;
 	}
 
     private static final Logger LOGGER = LogManager.getLogger(AuthenticationFilter.class);
-    private static final 	SimpleDateFormat datetimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ");
+    private static final SimpleDateFormat DATETIMEFORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ");
 
     @Override
-    public ClientResponse handle(ClientRequest request) {
-    	
-    
-    	
-    	System.out.println("AuthenticationFilter");
-    	
-    	String  authDetails = String.valueOf(request.getHeaders().get(Constants.X_AUTH_TOKEN));
-    	
+    public ClientResponse handle(ClientRequest request) {    	
+    	JSONObject jsonObj = null;       	
+    	String  authDetails = (String) request.getHeaders().getFirst(Constants.X_AUTH_TOKEN);
+    	if(authDetails == null){
+        	return	getNext().handle(request);
+    	}
     	try {
     		
-			AuthenticationToken authToken = new AuthenticationToken(AESEncryptDecrypt.decrypt(authDetails));
+			AuthenticationToken authToken = new AuthenticationToken(AESEncryptDecrypt.decrypt(authDetails));	
 			
-			if(isExpired(authToken.getTokenExpiry(), currentAEDate)){
-				
-				AuthenticationTokenSevice ats = AuthenticationTokenSevice.getListServerService(client);
-			    JSONObject jsonObj = ats.executeListServerService(authToken.getBaseurl(), authToken.getUserName(), authToken.getPassword(), authToken.getTenantName());
-				
-			}
+			if(isExpired(authToken.getTokenExpiry(), currentAEDate, timeoutCriteria)){				
+				 AuthenticationTokenSevice ats = AuthenticationTokenSevice.getListServerService(client);
+			     jsonObj = ats.executeListServerService(authToken.getBaseurl(), authToken.getUserName(), authToken.getPassword(), authToken.getTenantName());
+			     JSONObject tokenJson = jsonObj.getJSONObject("access").getJSONObject("token");
+			     request.getHeaders().putSingle(Constants.X_AUTH_TOKEN, tokenJson.getString("id"));
+			     //System.out.println(request.getHeaders().get(Constants.X_AUTH_TOKEN));
+			}		
 			
-			
-		} catch (AutomicException e) {
-			
-			e.printStackTrace();
-		}
-    	
-    	
-    	return null;
-       
+		} catch (AutomicException e) {			
+			   LOGGER.error(e);
+	           throw new AutomicRuntimeException(e.getMessage());
+		}    	
+    	return getNext().handle(request);       
     }
     
-    private boolean isExpired(String expiresDate, String currentAEDate) {
-    	
-    	//SimpleDateFormat currentAEdateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    	//SimpleDateFormat expirationTimeFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-    	
+    private boolean isExpired(String expiresDate, String currentAEDate, int timeoutCriteria) {    	
     	
     	long currentAETime = 0;
     	long expirationTime = 0; 
+    	final long ONE_MINUTE_IN_MILLIS = 60000;//millisecond
 		try {
-			currentAETime = datetimeFormat.parse(currentAEDate).getTime();
-			expirationTime = datetimeFormat.parse(expiresDate).getTime();
+			currentAEDate = currentAEDate.replaceAll("T", " ").replaceAll("Z", "+0000");
+			expiresDate = expiresDate.replaceAll("T", " ").replaceAll("Z", "+0000");
+			currentAETime = DATETIMEFORMAT.parse(currentAEDate).getTime();
+			currentAETime = currentAETime + timeoutCriteria * ONE_MINUTE_IN_MILLIS;
+			expirationTime = DATETIMEFORMAT.parse(expiresDate).getTime();
+			
+			
 		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-    	
-    	
-    	return currentAETime <= expirationTime;
-    	
-    	
-    	
-    }
+			   LOGGER.error(e);
+	           throw new AutomicRuntimeException(e.getMessage());
+		}    	
+    	return expirationTime <= currentAETime;    	
+    	    }
 
 }

@@ -19,6 +19,7 @@ public final class Constants {
     public static final String X_AUTH_TOKEN = "X-Auth-Token";
     public static final String REQUEST_TOKENID_KEY = "X-Compute-Request-Id";
     public static final String CURRENT_AE_DATE = "currentdate";
+    public static final String TIMEOUT_CRITERIA = "timeoutcriteria";
 
     private Constants() {
     }

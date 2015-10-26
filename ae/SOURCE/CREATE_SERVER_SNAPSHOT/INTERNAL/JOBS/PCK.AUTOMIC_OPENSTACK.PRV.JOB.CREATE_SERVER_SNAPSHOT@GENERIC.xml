@@ -175,7 +175,8 @@ java -jar &UC4RB_OPS_PATH_JAR# &UC4RB_OPS_JAVA_ARGUMENTS#
 <LoginFsc/>
 </OUTPUTSCAN>
 <POST_SCRIPT mode="1" replacementmode="1" state="1">
-<OSCRI><![CDATA[! Publishing image url in case of success
+<OSCRI><![CDATA[: INC PCK.AUTOMIC_OPENSTACK.PUB.INCLUDE.PUBLISH_AUTH_TOKEN
+! Publishing image url in case of success
 :SET &STATUS# = GET_UC_OBJECT_STATUS(,,"RETCODE")
 
 :IF &STATUS# EQ 0

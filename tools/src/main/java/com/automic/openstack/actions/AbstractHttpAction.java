@@ -44,11 +44,13 @@ public abstract class AbstractHttpAction extends AbstractAction {
     private int readTimeOut;
     
     private String currentAEDate;
+    private int timeoutCriteria;
 
     public AbstractHttpAction() {
     	addOption(Constants.READ_TIMEOUT, true, "Read timeout");
         addOption(Constants.CONNECTION_TIMEOUT, true, "connection timeout");
         addOption(Constants.CURRENT_AE_DATE, true, "Current Automation engine date");
+        addOption(Constants.TIMEOUT_CRITERIA, true, "Specify timeout criteria");
     }
 
     /**
@@ -64,7 +66,7 @@ public abstract class AbstractHttpAction extends AbstractAction {
             validate();
             client = getClient();
             client.addFilter(new GenericResponseFilter());
-            client.addFilter(new AuthenticationFilter(currentAEDate));
+            client.addFilter(new AuthenticationFilter(currentAEDate, client, timeoutCriteria));
             executeSpecific();
         } finally {
             if (client != null) {
@@ -77,6 +79,7 @@ public abstract class AbstractHttpAction extends AbstractAction {
         this.connectionTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.CONNECTION_TIMEOUT));
         this.readTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.READ_TIMEOUT));
         this.currentAEDate = getOptionValue(Constants.CURRENT_AE_DATE);
+        this.timeoutCriteria =  Integer.valueOf(getOptionValue(Constants.TIMEOUT_CRITERIA));
     }
 
     private Client getClient() throws AutomicException {

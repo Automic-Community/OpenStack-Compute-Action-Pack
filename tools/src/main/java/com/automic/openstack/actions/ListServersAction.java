@@ -7,7 +7,6 @@ import org.json.JSONObject;
 import com.automic.openstack.constants.ExceptionConstants;
 import com.automic.openstack.exception.AutomicException;
 import com.automic.openstack.service.ListServerService;
-import com.automic.openstack.util.AESEncryptDecrypt;
 import com.automic.openstack.util.CommonUtil;
 import com.automic.openstack.util.ConsoleWriter;
 import com.automic.openstack.util.Validator;

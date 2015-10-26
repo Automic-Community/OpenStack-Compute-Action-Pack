@@ -8,6 +8,8 @@ import org.json.JSONObject;
 
 import com.automic.openstack.constants.Constants;
 import com.automic.openstack.exception.AutomicException;
+import com.automic.openstack.exception.AutomicRuntimeException;
+import com.automic.openstack.model.AuthenticationToken;
 import com.automic.openstack.util.AESEncryptDecrypt;
 import com.automic.openstack.util.CommonUtil;
 import com.sun.jersey.api.client.Client;
@@ -93,15 +95,18 @@ public class ListServerService {
 	 * @param webResource
 	 * @param tokenId
 	 * @return
+	 * @throws AutomicException 
+	 * @throws AutomicRuntimeException 
 	 */
-	private JSONObject executeRequest(WebResource webResource, String tokenId) {
+	private JSONObject executeRequest(WebResource webResource, String tokenId) throws AutomicRuntimeException, AutomicException {
 
 		ClientResponse response = null;
 		JSONObject jsonObj = null;
 		LOGGER.info("List servers Calling url " + webResource.getURI());
-		String decryptedTokenId = AESEncryptDecrypt.decrypt(tokenId);
+		//AuthenticationToken authToken = new AuthenticationToken(AESEncryptDecrypt.decrypt(tokenId));
+		//String decryptedTokenId = authToken.getTokenId();
 		response = webResource.accept(MediaType.APPLICATION_JSON)
-				.header(Constants.X_AUTH_TOKEN, decryptedTokenId)
+				.header(Constants.X_AUTH_TOKEN, tokenId)
 				.get(ClientResponse.class);
 		jsonObj = CommonUtil.jsonResponse(response.getEntityInputStream());
 

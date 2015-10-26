@@ -89,7 +89,7 @@ public class CreateServerAction extends AbstractHttpAction {
 
 		ClientResponse response = null;
 
-		String decryptedTokenId = AESEncryptDecrypt.decrypt(tokenId);
+		/*String decryptedTokenId = AESEncryptDecrypt.decrypt(tokenId);*/
 
 		WebResource webResource = client.resource(baseUrl).path(tenantId)
 				.path("servers");
@@ -100,7 +100,7 @@ public class CreateServerAction extends AbstractHttpAction {
 				.entity(validateJsonObject(parameterFilePath),
 						MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
-				.header(Constants.X_AUTH_TOKEN, decryptedTokenId)
+				.header(Constants.X_AUTH_TOKEN, tokenId)
 				.post(ClientResponse.class);
 
 		prepareOutput(response);
