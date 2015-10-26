@@ -21,6 +21,7 @@
 :      IF &KEY# = "UC4RB_OPS_TOKEN_ID"
 :         SET &UC4RB_OPS_TOKEN_ID# = "&VALUE#"
 :         PUBLISH &UC4RB_OPS_TOKEN_ID#,,"TOP"
+:         TERM_PROCESS
 :      ENDIF
 :   ENDIF
 : ENDIF
