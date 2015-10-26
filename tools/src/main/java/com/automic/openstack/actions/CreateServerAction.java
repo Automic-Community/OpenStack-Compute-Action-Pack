@@ -89,8 +89,6 @@ public class CreateServerAction extends AbstractHttpAction {
 
 		ClientResponse response = null;
 
-		/*String decryptedTokenId = AESEncryptDecrypt.decrypt(tokenId);*/
-
 		WebResource webResource = client.resource(baseUrl).path(tenantId)
 				.path("servers");
 
