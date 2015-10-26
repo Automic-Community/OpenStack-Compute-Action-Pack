@@ -289,7 +289,7 @@ If user provides valid Openstack connection details but does not give tenant nam
 The response will contain the following AE variables
 * UC4RB_OPS_TOKEN_ID : Token id
 * UC4RB_OPS_TENANT_ID : Tenant id
-* UC4RB_OPS_TOKEN_EXPIRY : Date time when token id would expire in "CCYY-MM-DDThh:mm:ss±hh:mm" format. For Example 2015-10-09T07:15:03Z
+* UC4RB_OPS_TOKEN_EXPIRY : Date time when token id would expire in "CCYY-MM-DDThh:mm:ss±hh:mm" format. For Example 2015-10-09T07:15:03Z. The ±hh:mm value, if included, is the time zone as an offset from UTC.
 
 = Outputs =
 * Return code is 0 in case of success.

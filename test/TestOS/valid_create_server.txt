@@ -1,0 +1,18 @@
+{
+    "server": {
+        "name": "AnkitTestInstance",
+        "imageRef": "99ba3c46-1919-4c9d-ad87-326c216de856",
+        "flavorRef": "1",
+        "adminPass":"Nagarro$004",
+        "networks": [
+            {
+                "uuid": "83860b48-0e04-462f-bb66-14dc467b2ee2"
+            }
+        ],
+        "metadata": {
+            "My Server Name": "Ubuntu1"
+        },
+        "min_count": "1",
+        "max_count": "1"
+    }
+}

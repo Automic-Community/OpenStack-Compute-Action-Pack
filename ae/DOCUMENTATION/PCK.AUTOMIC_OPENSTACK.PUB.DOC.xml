@@ -25,7 +25,14 @@ The result of this action will be the following information published as AE vari
 provides file path in the XML format.
 
 * Action Name:  PCK.AUTOMIC_OPENSTACK.PUB.ACTION.GET_SERVER_DETAILS
-* Action Description: This action is used to get the server details from OpenStack cloud as per the specified server id. Output of this action will an xml file path consisting the server information.]]></DOC>
+* Action Description: This action is used to get the server details from OpenStack cloud as per the specified server id. Output of this action will an xml file path consisting the server information.
+
+* Action Name:  PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CHANGE_SERVER_STATE
+* Action Description: This action is used to change the state of the server. The action will fail if either the server id is invalid or when the starting and the resultant state are same.Following states are allowed :
+Start (default), Stop, Reboot_Soft, Reboot_Hard, Pause, Unpause, Lock, Unlock, Suspend, Resume
+
+* Action Name:  PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CREATE_SERVER_SNAPSHOT
+* Action Description: This action is used to create a snapshot for an existing server as per the specified server id. Output of this action will be an AE variable having created server snapshot image url.]]></DOC>
 </DOCU_Docu>
 </DOCU>
 </uc-export>

@@ -1,41 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ComponentType attachedToTarget="true">
-  <Name>OpenStack</Name>
-  <DefaultDeploymentTargetType>OpenStack</DefaultDeploymentTargetType>
-  <Properties>
-    <Group name="ServerParameters" displayName="Server Parameters">
-      <Property name="server_id" displayName="Server ID" mode="EDITABLE" type="SingleLineText">
-        <Description>Specify server Id.</Description>
-      </Property>
-    </Group>
-  </Properties>
-  <DynamicProperties>
-    <Property name="/openstack/server_param/server_id" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
-      <Value>{/custom/server_id}</Value>
-      <Description>Specify server Id.</Description>
-    </Property>
-    <Property name="/openstack/endpoints/identity_url" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
-      <Value>{@target/custom/identity_url}</Value>
-      <Description>Specify your OpenStack Identity URL.
-</Description>
-    </Property>
-    <Property name="/openstack/endpoints/compute_url" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
-      <Value>{@target/custom/compute_url}</Value>
-      <Description>Specify your OpenStack Compute URL.
-</Description>
-    </Property>
-    <Property name="/openstack/auth/user_name" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
-      <Value>{@target/custom/user_name}</Value>
-      <Description>Specify your OpenStack username.
-</Description>
-    </Property>
-    <Property name="/openstack/auth/password" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
-      <Value>{@target/custom/password}</Value>
-      <Description>Specify your OpenStack password.</Description>
-    </Property>
-    <Property name="/openstack/auth/tenant_name" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
-      <Value>{@target/custom/tenant_name}</Value>
-      <Description>Specify tenant name.</Description>
-    </Property>
-  </DynamicProperties>
+	<Name>OpenStack</Name>
+	<DefaultDeploymentTargetType>OpenStack</DefaultDeploymentTargetType>
+	<Properties>
+		<Group name="ServerParameters" displayName="Server Parameters">
+			<Property name="server_id" displayName="Server ID" mode="EDITABLE" type="SingleLineText">
+				<Description>Specify server Id.</Description>
+			</Property>
+		</Group>
+		<Group name="CreateServerSnapshot" displayName="Create Server Snapshot">
+			<Property name="image_name" displayName="Image Name" mode="EDITABLE" type="SingleLineText">
+				<Description>Specify image name for the snapshot.</Description>
+			</Property>
+		</Group>
+		<Group name="ChangeServerState" displayName="Change Server State">
+			<Property name="action" displayName="Action" mode="EDITABLE" type="SingleChoice">
+				<List>START#;#STOP#;#PAUSE#;#UNPAUSE#;#RESUME#;#SUSPEND#;#REBOOT_SOFT#;#REBOOT_HARD#;#LOCK#;#UNLOCK</List>
+				<Description>Provide information to change server state</Description>
+			</Property>	
+		</Group>
+		<Group name="CreateServers" displayName="Create Servers">
+			<Property name="parameter_file" displayName="Parameter File" mode="EDITABLE" type="SingleLineText">
+				<Description>Specify full path and name of the JSON file which will be used to create a new server or servers.</Description>
+			</Property>
+		</Group>
+	</Properties>
+	<DynamicProperties>
+		<Property name="/openstack/server_param/server_id" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+			<Value>{/custom/server_id}</Value>
+			<Description>Specify server Id.</Description>
+		</Property>
+		<Property name="/openstack/image/image_name" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+			<Value>{/custom/image_name}</Value>
+			<Description>Specify image name for the snapshot.</Description>
+		</Property>
+		<Property name="/openstack/endpoints/identity_url" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+			<Value>{@target/custom/identity_url}</Value>
+			<Description>Specify your OpenStack Identity URL.
+			</Description>
+		</Property>
+		<Property name="/openstack/endpoints/compute_url" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+			<Value>{@target/custom/compute_url}</Value>
+			<Description>Specify your OpenStack Compute URL.
+			</Description>
+		</Property>
+		<Property name="/openstack/auth/user_name" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+			<Value>{@target/custom/user_name}</Value>
+			<Description>Specify your OpenStack username.
+			</Description>
+		</Property>
+		<Property name="/openstack/auth/password" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+			<Value>{@target/custom/password}</Value>
+			<Description>Specify your OpenStack password.</Description>
+		</Property>
+		<Property name="/openstack/auth/tenant_name" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+			<Value>{@target/custom/tenant_name}</Value>
+			<Description>Specify tenant name.</Description>
+		</Property>
+		<Property name="/openstack/server/server_action" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+			<Value>{/custom/action}</Value>
+			<Description>Provide information to change server state</Description>
+		</Property>
+		<Property name="/openstack/server_param/parameter_file" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+			<Value>{/custom/parameter_file}</Value>
+			<Description>Specify full path and name of the JSON file which will be used to create a new server or servers.</Description>
+		</Property>
+	</DynamicProperties>
 </ComponentType>

@@ -80,7 +80,8 @@ public class GetServerDetailsAction extends AbstractHttpAction {
 
     @Override
     /**
-     * Authenticates and generates a token by calling http://baseUrl/servers/detail
+     *  Retrieves server details for the specified server id by 
+     *  calling http://baseUrl/servers/{serverId}
      * */
     protected void executeSpecific() throws AutomicException {
 

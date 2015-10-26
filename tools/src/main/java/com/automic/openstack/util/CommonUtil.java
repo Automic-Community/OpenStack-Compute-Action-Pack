@@ -5,8 +5,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -17,7 +21,6 @@ import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import com.automic.openstack.util.JSON2XMLAdapter;
 import com.automic.openstack.constants.Constants;
 import com.automic.openstack.constants.ExceptionConstants;
 import com.automic.openstack.exception.AutomicException;
@@ -210,5 +213,40 @@ public final class CommonUtil {
         }
         return input;
     }
+    
+    /**
+     * This method  is useful for reading small files. It create {@code JSONObject} from file content
+     * @param parameterFilePath
+     * @return
+     * @throws AutomicException
+     */
+ 	public static JSONObject  getJSONObjectByFilePath(String parameterFilePath)
+ 			throws AutomicException {
+ 		Path path = Paths.get(parameterFilePath);
+ 		JSONObject jsonObj = null;
+ 		try {
+ 			String jsonString = new String(Files.readAllBytes(path));
+ 			jsonObj = new JSONObject(jsonString);
+ 		} catch (IOException e) {
+ 			LOGGER.error(e);
+ 			throw new AutomicException(e.getMessage());
+ 		}
+
+ 		return jsonObj;
+ 	}
+ 	
+ 	/**
+ 	*  This method add minute to provided date object
+ 	*  @param  minutes  The number of minutes to add
+ 	*  @param  beforeTime  The time that will have minutes added to it
+ 	*  @return  A date object with the specified number of minutes added to it 
+ 	*/
+ 	public static Date addMinutesToDate(int minutes, Date beforeTime){
+ 	    final long ONE_MINUTE_IN_MILLIS = 60000;//millisecs
+
+ 	    long curTimeInMs = beforeTime.getTime();
+ 	    Date afterAddingMins = new Date(curTimeInMs + (minutes * ONE_MINUTE_IN_MILLIS));
+ 	    return afterAddingMins;
+ 	}
 
 }

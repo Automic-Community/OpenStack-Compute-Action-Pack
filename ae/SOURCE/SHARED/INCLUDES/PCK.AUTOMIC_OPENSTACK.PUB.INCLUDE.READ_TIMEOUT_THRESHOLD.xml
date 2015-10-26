@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
+<JOBI name="PCK.AUTOMIC_OPENSTACK.PUB.INCLUDE.READ_TIMEOUT_THRESHOLD">
+<HEADER state="1">
+<Title>Read timeout value</Title>
+<ArchiveKey1/>
+<ArchiveKey2/>
+<OH_SubType/>
+</HEADER>
+<SCRIPT mode="1" state="1">
+<MSCRI><![CDATA[: SET &UC4RB_OPS_TIMEOUT_THRESHOLD# = "TIMEOUT_THRESHOLD"
+: SET &UC4RB_OPS_TIMEOUT_CRITERIA# = GET_VAR("PCK.AUTOMIC_OPENSTACK.PUB.VARA.TIMEOUT_THRESHOLD", "&UC4RB_OPS_TIMEOUT_THRESHOLD#")]]></MSCRI>
+</SCRIPT>
+<DOCU_Docu state="1" type="text">
+<DOC/>
+</DOCU_Docu>
+</JOBI>
+</uc-export>
