@@ -88,8 +88,6 @@ public class CreateServerSnapshotAction extends AbstractHttpAction {
 
         ClientResponse response = null;
 
-        tokenId = AESEncryptDecrypt.decrypt(tokenId);
-
         WebResource webResource = client.resource(baseUrl).path(tenantId).path("servers").path(serverId).path("action");
 
         LOGGER.info("Calling url " + webResource.getURI());

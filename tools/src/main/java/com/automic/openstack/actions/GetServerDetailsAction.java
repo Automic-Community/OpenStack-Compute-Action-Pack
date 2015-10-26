@@ -87,8 +87,6 @@ public class GetServerDetailsAction extends AbstractHttpAction {
 
         ClientResponse response = null;
 
-        tokenId = AESEncryptDecrypt.decrypt(tokenId);
-
         WebResource webResource = client.resource(baseUrl).path(tenantId).path("servers").path(serverId);
 
         LOGGER.info("Calling url " + webResource.getURI());

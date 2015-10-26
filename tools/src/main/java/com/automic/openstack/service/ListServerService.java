@@ -103,8 +103,6 @@ public class ListServerService {
 		ClientResponse response = null;
 		JSONObject jsonObj = null;
 		LOGGER.info("List servers Calling url " + webResource.getURI());
-		//AuthenticationToken authToken = new AuthenticationToken(AESEncryptDecrypt.decrypt(tokenId));
-		//String decryptedTokenId = authToken.getTokenId();
 		response = webResource.accept(MediaType.APPLICATION_JSON)
 				.header(Constants.X_AUTH_TOKEN, tokenId)
 				.get(ClientResponse.class);

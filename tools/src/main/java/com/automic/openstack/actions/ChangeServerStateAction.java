@@ -87,8 +87,6 @@ public class ChangeServerStateAction extends AbstractHttpAction {
     @Override
     protected void executeSpecific() throws AutomicException {
 
-        tokenId = AESEncryptDecrypt.decrypt(tokenId);
-
         WebResource webResource = client.resource(baseUrl).path(tenantId).path("servers").path(serverId).path("action");
 
         LOGGER.info("Calling url " + webResource.getURI());

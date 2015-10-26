@@ -15,6 +15,8 @@ import com.automic.openstack.exception.AutomicRuntimeException;
 import com.automic.openstack.model.AuthenticationToken;
 import com.automic.openstack.service.AuthenticationTokenSevice;
 import com.automic.openstack.util.AESEncryptDecrypt;
+import com.automic.openstack.util.CommonUtil;
+import com.automic.openstack.util.ConsoleWriter;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientRequest;
 import com.sun.jersey.api.client.ClientResponse;
@@ -50,12 +52,17 @@ public class AuthenticationFilter extends ClientFilter {
     	try {
     		
 			AuthenticationToken authToken = new AuthenticationToken(AESEncryptDecrypt.decrypt(authDetails));	
-			
+			// if token id is expired
 			if(isExpired(authToken.getTokenExpiry(), currentAEDate, timeoutCriteria)){				
 				 AuthenticationTokenSevice ats = AuthenticationTokenSevice.getListServerService(client);
 			     jsonObj = ats.executeAuthenticationTokenSevice(authToken.getBaseurl(), authToken.getUserName(), authToken.getPassword(), authToken.getTenantName());
 			     JSONObject tokenJson = jsonObj.getJSONObject("access").getJSONObject("token");
 			     request.getHeaders().putSingle(Constants.X_AUTH_TOKEN, tokenJson.getString("id"));
+			     
+			      authToken=   new AuthenticationToken(authToken.getBaseurl(), authToken.getUserName(), authToken.getPassword(), authToken.getTenantName(), tokenJson.getString("id"),
+			        		tokenJson.getString("expires"), tokenJson.getString("issued_at"));
+			        
+			        ConsoleWriter.writeln("UC4RB_OPS_TOKEN_ID ::=" + CommonUtil.encrypt(authToken.toString()));
 			}else{// if token not expire
 				
 				request.getHeaders().putSingle(Constants.X_AUTH_TOKEN, authToken.getTokenId());
