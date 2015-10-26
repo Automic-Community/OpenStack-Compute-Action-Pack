@@ -14,16 +14,16 @@ Resource          ../../Resources/actions.txt
 *** Test Cases ***    OK_NOK    ComputeURL              TokenID                TenantID                ServerID                ImageName
 Create Server Snapshot with Valid Inputs
                       [Tags]    main_scenarios
-                      OK        ${OS_Compute_URL}       blank                  blank                   ${Valid_Server_ID}      blank
+                      OK        ${OS_Compute_URL}       blank                  blank                   blank                   blank
 
 Assertion with Invalid Compute URL
-                      NOK       https://162.123.12.3    blank                  blank                   ${Valid_Server_ID}      blank
+                      NOK       https://162.123.12.3    blank                  blank                   blank                   blank
 
 Assertion with Invalid Token ID
-                      NOK       ${OS_Compute_URL}       ${Invalid_Token_ID}    blank                   ${Valid_Server_ID}      blank
+                      NOK       ${OS_Compute_URL}       ${Invalid_Token_ID}    blank                   blank                   blank
 
 Assertion with Invalid Tenant ID
-                      NOK       ${OS_Compute_URL}       blank                  ${Invalid_Tenant_ID}    ${Valid_Server_ID}      blank
+                      NOK       ${OS_Compute_URL}       blank                  ${Invalid_Tenant_ID}    blank                   blank
 
 Assertion with Invalid Server ID
                       NOK       ${OS_Compute_URL}       blank                  blank                   ${Invalid_Server_ID}    blank
@@ -41,7 +41,7 @@ Assert Server ID as a mandatory field
                       OTHER     ${OS_Compute_URL}       blank                  blank                   ${EMPTY}                blank
 
 Assert Image Name as a mandatory field
-                      OTHER     ${OS_Compute_URL}       blank                  blank                   ${Valid_Server_ID}      ${EMPTY}
+                      OTHER     ${OS_Compute_URL}       blank                  blank                   blank                   ${EMPTY}
 
 *** Keywords ***
 Startup
@@ -59,14 +59,16 @@ Create Server Snapshot Template
     ...    -${Server_ID}: This field specifies Server ID whose snapshot is to be created.
     ...    -${Image_Name}: This field specifies the name of snapshot created.
     Run Keyword If    '${Generated_Token_ID}' == '${EMPTY}'    Get Auth Token    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
+    Run Keyword If    '${Generated_Server_ID}' == '${EMPTY}'    Create Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Valid_Create_Server}
     Action Create    ${_CREATE_SERVER_SNAPSHOT_ACTION}
     Action Set    &UC4RB_OPS_COMPUTE_URL#    ${Compute_URL}
     Run Keyword If    '${Token_ID}' == 'blank'    Action Set    &UC4RB_OPS_TOKEN_ID#    ${Generated_Token_ID}
     Run Keyword If    '${Token_ID}' != 'blank'    Action Set    &UC4RB_OPS_TOKEN_ID#    ${Token_ID}
     Run Keyword If    '${Tenant_ID}' == 'blank'    Action Set    &UC4RB_OPS_TENANT_ID#    ${Generated_Tenant_ID}
     Run Keyword If    '${Tenant_ID}' != 'blank'    Action Set    &UC4RB_OPS_TENANT_ID#    ${Tenant_ID}
+    Run Keyword If    '${Server_ID}' == 'blank'    Action Set    &UC4RB_OPS_SERVER_ID#    ${Generated_Server_ID}
+    Run Keyword If    '${Server_ID}' != 'blank'    Action Set    &UC4RB_OPS_SERVER_ID#    ${Server_ID}
     Run Keyword If    '${Image_Name}' == 'blank'    Genarate String
-    Action Set    &UC4RB_OPS_SERVER_ID#    ${Server_ID}
     Run Keyword If    '${Image_Name}' == 'blank'    Action Set    &UC4RB_OPS_IMAGE_NAME#    ${Generated_Name}
     Run Keyword If    '${Image_Name}' != 'blank'    Action Set    &UC4RB_OPS_IMAGE_NAME#    ${EMPTY}
     Set Overwrite Agent
