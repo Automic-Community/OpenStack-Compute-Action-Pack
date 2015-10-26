@@ -76,7 +76,7 @@ Change Server State Template
     ...    -${Action}: This field specifies the target action which user wants to perform on an instance.
     #    blank input means Token ID and Tenant ID will get values from the output of Get Auth Token.
     #    Empty input means that field is left empty.
-    Run Keyword If    '${Action}' == 'STOP'    Get Auth Token    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
+    Run Keyword If    '${Generated_Token_ID}' == '${EMPTY}'    Get Auth Token    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
     Action Create    ${_CHANGE_SERVER_STATE_ACTION}
     Action Set    &UC4RB_OPS_COMPUTE_URL#    ${Compute_URL}
     Run Keyword If    '${Token_ID}' == 'blank'    Action Set    &UC4RB_OPS_TOKEN_ID#    ${Generated_Token_ID}
