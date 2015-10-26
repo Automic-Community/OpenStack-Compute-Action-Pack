@@ -211,7 +211,7 @@
 <MaxRetCode>0</MaxRetCode>
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
-<FcstStatus>0| |</FcstStatus>
+<FcstStatus>0|U00000000 ??? ""</FcstStatus>
 <Ert>3</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
@@ -293,7 +293,7 @@ This action is used to create a snapshot for an existing server as per the speci
 You can only create a new image from the server when its status is ACTIVE, SHUTOFF, PAUSED, or SUSPENDED
 = Inputs =
 * Compute URL : OpenStack Compute URL. Example http://openstack.com:8774/v2.1
-* Token Id : Token Id for authentication. It is AES encoded. 
+* Authentication Token : Token for authentication It is AES encoded 
 * Tenant Id : Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
 * Server Id : Server id of the server.
 * Image Name : Specify image name for snapshot

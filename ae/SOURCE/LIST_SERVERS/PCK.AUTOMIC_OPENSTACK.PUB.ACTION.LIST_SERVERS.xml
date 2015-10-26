@@ -187,7 +187,7 @@
 <MaxRetCode>0</MaxRetCode>
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
-<FcstStatus>0| |</FcstStatus>
+<FcstStatus>0|U00000000 ??? ""</FcstStatus>
 <Ert>2</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
@@ -382,7 +382,7 @@ The parameter file will have the following structure:
  
 = Inputs =
 * Compute URL : OpenStack Compute URL. Example http://openstack.com:8774/v2.1
-* Token Id    : Token Id for authentication. 
+* Authentication Token : Token for authentication It is AES encoded 
 * Tenant Id : Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
 * Overwrite Agent: Overwrites the default agent
 * Overwrite Login: Overwrites the default login
