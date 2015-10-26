@@ -37,9 +37,7 @@ public final class Client {
      *            array of Arguments
      */
     public static void main(String[] args) {
-    	
-    	System.out.println(Arrays.asList(args));
-    	
+    	    	
         int responseCode = RESPONSE_OK;
         try {
             ClientHelper.executeAction(args);

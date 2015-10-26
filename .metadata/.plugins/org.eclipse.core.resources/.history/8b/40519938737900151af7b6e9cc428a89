@@ -1,5 +1,0 @@
-package com.automic.openstack.model;
-
-public class AuthenticationToken {
-
-}
