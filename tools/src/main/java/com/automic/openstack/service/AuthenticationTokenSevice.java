@@ -35,7 +35,7 @@ public class AuthenticationTokenSevice {
 	 * @param client
 	 * @return Initialize instance of {@code AuthenticationTokenSevice}
 	 */
-	public static AuthenticationTokenSevice getListServerService(Client client) {
+	public static AuthenticationTokenSevice getAuthenticationTokenSevice(Client client) {
 
 		return new AuthenticationTokenSevice(client);
 
@@ -43,12 +43,12 @@ public class AuthenticationTokenSevice {
 	
 
 	/**
-	 * Get server details by calling http://baseUrl/{tenant_id}​/servers/detail.
+	 * Get server details by calling http://baseUrl/tokens.
 	 * 
 	 * @param baseUrl
-	 * @param tenantId
-	 * @param tokenId
-	 * @param reservationId
+	 * @param username
+	 * @param password
+	 * @param tenantName
 	 * @return {@code JSONObject} object
 	 * @throws AutomicException
 	 */

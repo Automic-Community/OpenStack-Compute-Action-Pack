@@ -3,8 +3,6 @@
  */
 package com.automic.openstack.actions;
 
-import javax.ws.rs.core.MediaType;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
@@ -13,12 +11,9 @@ import com.automic.openstack.constants.ExceptionConstants;
 import com.automic.openstack.exception.AutomicException;
 import com.automic.openstack.model.AuthenticationToken;
 import com.automic.openstack.service.AuthenticationTokenSevice;
-import com.automic.openstack.service.ListServerService;
 import com.automic.openstack.util.CommonUtil;
 import com.automic.openstack.util.ConsoleWriter;
 import com.automic.openstack.util.Validator;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
 
 /**
  * @author sumitsamson
@@ -78,7 +73,7 @@ public class GetTokenAction extends AbstractHttpAction {
      * */
     protected void executeSpecific() throws AutomicException {
     	
-    	AuthenticationTokenSevice ats = AuthenticationTokenSevice.getListServerService(client);
+    	AuthenticationTokenSevice ats = AuthenticationTokenSevice.getAuthenticationTokenSevice(client);
 		prepareOutput(ats.executeAuthenticationTokenSevice(baseUrl, username, password, tenantName));
 
      

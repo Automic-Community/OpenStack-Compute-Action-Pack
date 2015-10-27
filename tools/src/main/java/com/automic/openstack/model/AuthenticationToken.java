@@ -3,32 +3,36 @@ package com.automic.openstack.model;
 import org.json.JSONObject;
 
 import com.automic.openstack.exception.AutomicException;
-import com.automic.openstack.util.CommonUtil;
 
 public class AuthenticationToken {
-	
+
 	private final JSONObject token;
-	
+	private static final String TOKEN_ISSUE ="tokenIssue";
+	private static final String TOKEN_EXPIRY ="tokenExpiry";
+	private static final String TOKEN_ID ="tokenId";
+	private static final String TENANT_NAME ="tenantName";
+	private static final String PASSWORD ="password";
+	private static final String USERNAME ="userName";
+	private static final String BASEURL ="baseURL";
+
 	private AuthenticationToken() {
 		token = new JSONObject();
 	}
-	
-	public AuthenticationToken(String authToken) throws AutomicException{
-		token = new JSONObject(authToken);
-		
-	}
-	
 
-	
-	public String toString(){
-		
-		return token.toString();
-		
+	public AuthenticationToken(String authToken) throws AutomicException {
+		token = new JSONObject(authToken);
+
 	}
-	
-	public AuthenticationToken(String baseurl, String username,
-			String passw, String tenantname, String tokenid,
-			String tokenexpiry, String tokenissue) {
+
+	public String toString() {
+
+		return token.toString();
+
+	}
+
+	public AuthenticationToken(String baseurl, String username, String passw,
+			String tenantname, String tokenid, String tokenexpiry,
+			String tokenissue) {
 		this();
 		setBaseurl(baseurl);
 		setUserName(username);
@@ -40,58 +44,58 @@ public class AuthenticationToken {
 	}
 
 	private void setTokenIssue(String tokenissue) {
-		token.put("tokenIssue", tokenissue);
+		token.put(TOKEN_ISSUE, tokenissue);
 	}
-	
-	private String getTokenIssue() {
-		return token.getJSONObject("tokenIssue").toString();
+
+	public String getTokenIssue() {
+		return token.getString(TOKEN_ISSUE);
 	}
 
 	private void setTokenExpiry(String tokenexpiry) {
-		token.put("tokenExpiry", tokenexpiry);
+		token.put(TOKEN_EXPIRY, tokenexpiry);
 	}
 
 	public String getTokenExpiry() {
-		return token.getString("tokenExpiry");
+		return token.getString(TOKEN_EXPIRY);
 	}
-	
+
 	private void setTokenId(String tokenid) {
-		token.put("tokenId", tokenid);
+		token.put(TOKEN_ID, tokenid);
 	}
-	
+
 	public String getTokenId() {
-		return token.getString("tokenId");
+		return token.getString(TOKEN_ID);
 	}
 
 	private void setTenantName(String tenantname) {
-		token.put("tenantName", tenantname);
+		token.put(TENANT_NAME, tenantname);
 	}
-	
+
 	public String getTenantName() {
-		return token.getString("tenantName");
+		return token.getString(TENANT_NAME);
 	}
 
 	private void setPassword(String passw) {
-		token.put("password", passw);
+		token.put(PASSWORD, passw);
 	}
-	
+
 	public String getPassword() {
-		return token.getString("password");
+		return token.getString(PASSWORD);
 	}
 
 	private void setUserName(String username) {
-		token.put("userName", username);
+		token.put(USERNAME, username);
 	}
 
 	public String getUserName() {
-		return token.getString("userName");
+		return token.getString(USERNAME);
 	}
-	
+
 	private void setBaseurl(String baseurl) {
-		token.put("baseURL", baseurl);
+		token.put(BASEURL, baseurl);
 	}
 
 	public String getBaseurl() {
-		return token.getString("baseURL");
+		return token.getString(BASEURL);
 	}
 }

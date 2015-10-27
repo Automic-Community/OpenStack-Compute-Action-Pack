@@ -9,8 +9,6 @@ import org.json.JSONObject;
 import com.automic.openstack.constants.Constants;
 import com.automic.openstack.exception.AutomicException;
 import com.automic.openstack.exception.AutomicRuntimeException;
-import com.automic.openstack.model.AuthenticationToken;
-import com.automic.openstack.util.AESEncryptDecrypt;
 import com.automic.openstack.util.CommonUtil;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;

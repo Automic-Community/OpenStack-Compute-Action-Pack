@@ -10,7 +10,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Date;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -233,20 +232,6 @@ public final class CommonUtil {
  		}
 
  		return jsonObj;
- 	}
- 	
- 	/**
- 	*  This method add minute to provided date object
- 	*  @param  minutes  The number of minutes to add
- 	*  @param  beforeTime  The time that will have minutes added to it
- 	*  @return  A date object with the specified number of minutes added to it 
- 	*/
- 	public static Date addMinutesToDate(int minutes, Date beforeTime){
- 	    final long ONE_MINUTE_IN_MILLIS = 60000;//millisecs
-
- 	    long curTimeInMs = beforeTime.getTime();
- 	    Date afterAddingMins = new Date(curTimeInMs + (minutes * ONE_MINUTE_IN_MILLIS));
- 	    return afterAddingMins;
  	}
 
 }

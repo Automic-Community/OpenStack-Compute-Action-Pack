@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 import com.automic.openstack.constants.Constants;
 import com.automic.openstack.constants.ExceptionConstants;
 import com.automic.openstack.exception.AutomicException;
-import com.automic.openstack.util.AESEncryptDecrypt;
 import com.automic.openstack.util.CommonUtil;
 import com.automic.openstack.util.Validator;
 import com.sun.jersey.api.client.ClientResponse;

@@ -15,23 +15,26 @@ import com.sun.jersey.api.client.filter.ClientFilter;
 
 public class GenericResponseFilter extends ClientFilter {
 
-    private static final int HTTP_SUCCESS_START = 200;
-    private static final int HTTP_SUCCESS_END = 299;
+	private static final int HTTP_SUCCESS_START = 200;
+	private static final int HTTP_SUCCESS_END = 299;
 
-    private static final Logger LOGGER = LogManager.getLogger(GenericResponseFilter.class);
+	private static final Logger LOGGER = LogManager
+			.getLogger(GenericResponseFilter.class);
 
-    @Override
-    public ClientResponse handle(ClientRequest request) {
-        ClientResponse response = getNext().handle(request);
-        if (!(response.getStatus() >= HTTP_SUCCESS_START && response.getStatus() <= HTTP_SUCCESS_END)) {
-            LOGGER.error("Response code for " + request.getURI() + " is " + response.getStatus());
-            String errorMsg = response.getEntity(String.class);
+	@Override
+	public ClientResponse handle(ClientRequest request) {
+		ClientResponse response = getNext().handle(request);
+		if (!(response.getStatus() >= HTTP_SUCCESS_START && response
+				.getStatus() <= HTTP_SUCCESS_END)) {
+			LOGGER.error("Response code for " + request.getURI() + " is "
+					+ response.getStatus());
+			String errorMsg = response.getEntity(String.class);
 
-            LOGGER.error(errorMsg);
-            throw new AutomicRuntimeException(errorMsg);
+			LOGGER.error(errorMsg);
+			throw new AutomicRuntimeException(errorMsg);
 
-        }
-        return response;
-    }
+		}
+		return response;
+	}
 
 }

@@ -12,7 +12,6 @@ import org.json.JSONObject;
 import com.automic.openstack.constants.Constants;
 import com.automic.openstack.constants.ExceptionConstants;
 import com.automic.openstack.exception.AutomicException;
-import com.automic.openstack.util.AESEncryptDecrypt;
 import com.automic.openstack.util.Validator;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
