@@ -3,6 +3,7 @@ package com.automic.openstack.model;
 import org.json.JSONObject;
 
 import com.automic.openstack.exception.AutomicException;
+import com.automic.openstack.util.CommonUtil;
 
 public class AuthenticationToken {
 
@@ -48,7 +49,7 @@ public class AuthenticationToken {
 	}
 
 	public String getTokenIssue() {
-		return token.getString(TOKEN_ISSUE);
+		return token.getString(TOKEN_ISSUE).toString();
 	}
 
 	private void setTokenExpiry(String tokenexpiry) {
@@ -72,7 +73,7 @@ public class AuthenticationToken {
 	}
 
 	public String getTenantName() {
-		return token.getString(TENANT_NAME);
+		return token.has(TENANT_NAME)?token.getString(TENANT_NAME):null;
 	}
 
 	private void setPassword(String passw) {

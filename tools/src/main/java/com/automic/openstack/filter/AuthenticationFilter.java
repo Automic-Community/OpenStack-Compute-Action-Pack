@@ -2,6 +2,7 @@ package com.automic.openstack.filter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,7 +33,8 @@ public class AuthenticationFilter extends ClientFilter {
 	private String currentAEDate;
 	private Client client;
 	private int timeoutCriteria;
-
+    private static boolean flag = true;
+    
 	public AuthenticationFilter(String currentDate, Client client,
 			int timeoutCriteria) {
 		this.currentAEDate = currentDate;
@@ -78,12 +80,16 @@ public class AuthenticationFilter extends ClientFilter {
 							authToken.getTenantName(),
 							tokenJson.getString("id"),
 							tokenJson.getString("expires"),
-							tokenJson.getString("issued_at"));
+							tokenJson.getString("issued_at"));					
 					ConsoleWriter.writeln("UC4RB_OPS_TOKEN_ID ::="
-							+ CommonUtil.encrypt(authToken.toString()));					
+							+ CommonUtil.encrypt(authToken.toString()));
+					
 				}
 				request.getHeaders().putSingle(Constants.X_AUTH_TOKEN,
 						authToken.getTokenId());
+				if(authToken.getTenantName() == null){
+					ConsoleWriter.writeln("Tenant name is missing");
+				}
 
 			} catch (AutomicException e) {
 				LOGGER.error(e);
@@ -103,18 +109,32 @@ public class AuthenticationFilter extends ClientFilter {
 		long expirationTime = 0;
 		final long ONE_MINUTE_IN_MILLIS = 60000;// millisecond
 		try {
+			
+			Date automationEngineDate = AE_DATETIME_FORMAT.parse(currentAEDate);
+			Date  openStackdate =  OPENSTACK_DATETIME_FORMAT.parse(expiresDate);
 
-			currentAETime = AE_DATETIME_FORMAT.parse(currentAEDate).getTime();
+			currentAETime = automationEngineDate.getTime();
 			currentAETime = currentAETime + timeoutCriteria
 					* ONE_MINUTE_IN_MILLIS;
-			expirationTime = OPENSTACK_DATETIME_FORMAT.parse(expiresDate)
-					.getTime();
-
+			expirationTime = openStackdate.getTime();
+			
+			publishDate(automationEngineDate, openStackdate);
+			
 		} catch (ParseException e) {
 			LOGGER.error(e);
 			throw new AutomicRuntimeException(e.getMessage());
 		}
 		return expirationTime <= currentAETime;
+	}
+	
+	private void publishDate(Date currentAEDate, Date expiresDate){
+		
+		if(flag){
+			ConsoleWriter.writeln("AE TimeStamp : "+currentAEDate);
+			ConsoleWriter.writeln("OpenStack TimeStamp : "+expiresDate);
+			flag = false;
+		}
+		
 	}
 
 }
