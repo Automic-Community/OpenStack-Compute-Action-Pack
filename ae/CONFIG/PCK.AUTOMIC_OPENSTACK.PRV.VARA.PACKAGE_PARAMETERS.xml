@@ -8,7 +8,7 @@
 <OH_SubType>STATIC</OH_SubType>
 </HEADER>
 <ATTR_VARA state="1">
-<Type>C|Text</Type>
+<Type>N|Number</Type>
 <lblSource>Static</lblSource>
 <source>STATIC</source>
 <VRName>FREI|Freely selected</VRName>
@@ -17,9 +17,11 @@
 <ShareN>0</ShareN>
 <ShareL>0</ShareL>
 <ShareR>0</ShareR>
-<MaxValue_C>1024</MaxValue_C>
-<CheckMax_C>0</CheckMax_C>
-<uppercase>0</uppercase>
+<OutputFormat_N>0</OutputFormat_N>
+<MinValue_N>0</MinValue_N>
+<CheckMin_N>1</CheckMin_N>
+<MaxValue_N/>
+<CheckMax_N>0</CheckMax_N>
 <sortColumn>0</sortColumn>
 <sortDirection>0</sortDirection>
 </ATTR_VARA>
