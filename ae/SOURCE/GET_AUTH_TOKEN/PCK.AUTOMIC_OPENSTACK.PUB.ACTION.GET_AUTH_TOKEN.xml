@@ -265,16 +265,15 @@
 </SCRIPT>
 <DOCU_Docu state="1" type="text">
 <DOC><![CDATA[= Action name =
-PCK.AUTOMIC_OpenStack.PUB.ACTION.GET_AUTH_TOKEN
+PCK.AUTOMIC_OPENSTACK.PUB.ACTION.GET_AUTH_TOKEN
 
 = General description =
-This action is used to authenticate against OpenStack identity service with valid OpenStack credentials and generates a token id. This token could further be used as an input in subsequent actions to other OpenStack services for instance Compute, Storage etc.
+This action is used to authenticate against OpenStack identity service with valid OpenStack credentials and generates an Authentication token. This token could further be used as an input in subsequent actions to other OpenStack services for instance Compute, Storage etc.
 If user provides the tenant name as an input in OpenStack credentials then the action also generates the tenant id.
 The result of this action will be the following information published as AE variables:
-* token id (always in encrypted form)
+* authentication token (Encrypted form)
 * tenant id 
-* expiration time of the token
- 
+
 = Inputs =
 * Identity URL : OpenStack Identity URL. Example http://openstack.com:5000/v2.0
 * Username : Name of the user
@@ -287,9 +286,11 @@ If user provides valid Openstack connection details but does not give tenant nam
 
 =Return Value=
 The response will contain the following AE variables
-* UC4RB_OPS_TOKEN_ID : Token id
+* UC4RB_OPS_TOKEN_ID : Authentication token in encrypted form. This is encrypted representation of OpenStack connection details, token Id, tenant id, issue date and expiry date.
 * UC4RB_OPS_TENANT_ID : Tenant id
-* UC4RB_OPS_TOKEN_EXPIRY : Date time when token id would expire in "CCYY-MM-DDThh:mm:ss±hh:mm" format. For Example 2015-10-09T07:15:03Z. The ±hh:mm value, if included, is the time zone as an offset from UTC.
+Authentication token in decrypt form:
+{"tokenIssue":"2015-10-26T08:16:30.194546","tokenId":"266b15569a624b749517ba02242d1625","tokenExpiry":"2015-10-26T09:16:30Z","baseURL":"http://172.16.0.3:5000/v2.0","userName":"admin","password":"admin","tenantName":"admin"} 
+Note: Every action in OpenStack package would accept this authentication token as an input. Action implementation would check whether the token id has reached threshold limit for expiry, renew the token id and republish the new authentication token. If token id could be reused the action would continue using the current authentication token and no new authentication token would be published.
 
 = Outputs =
 * Return code is 0 in case of success.
