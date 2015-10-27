@@ -64,6 +64,10 @@ public class CreateServerSnapshotAction extends AbstractHttpAction {
             LOGGER.error(ExceptionConstants.EMPTY_TOKENID);
             throw new AutomicException(ExceptionConstants.EMPTY_TOKENID);
         }
+        if (!Validator.isAuthDetailsJSONValid(tokenId)) {
+			LOGGER.error(ExceptionConstants.INVALID_AUTHENTICATION_TOKEN);
+			throw new AutomicException(ExceptionConstants.INVALID_AUTHENTICATION_TOKEN);
+		}
         if (!Validator.checkNotEmpty(tenantId)) {
             LOGGER.error(ExceptionConstants.EMPTY_TENANTID);
             throw new AutomicException(ExceptionConstants.EMPTY_TENANTID);
