@@ -296,11 +296,11 @@ Start (default), Stop, Reboot_Soft, Reboot_Hard, Pause, Unpause, Lock, Unlock, S
 This is an asynchronous operation. The action returns status code 202 only means request is accepted successfully .To further verify user can user GET SERVER DETAILS action
 = Inputs =
 * Compute URL : OpenStack Compute URL. Example http://openstack.com:8774/v2.1
-* Authentication Token : Token for authentication It is AES encoded 
+* Authentication Token : Token for authentication. It is AES encoded 
 * Tenant Id : Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
 * Server Id : Server id of the server. 
 * Action : Action to be performed on server (Start (default), Stop, Reboot_Soft, Reboot_Hard, Pause, Unpause, Lock, Unlock, Suspend, Resume)
- * Overwrite Agent: Overwrites the default agent
+* Overwrite Agent: Overwrites the default agent
 * Overwrite Login: Overwrites the default login
 = Behavior =
 If specified server id does not exist the action will fail.
