@@ -3,6 +3,11 @@ package com.automic.openstack.util;
 import java.io.File;
 import java.util.regex.Pattern;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.automic.openstack.exception.AutomicRuntimeException;
+
 /**
  *
  * Utility Class that has many utility methods to put validations on {@link Object}, {@link String}, {@link File}.
@@ -90,5 +95,19 @@ public final class Validator {
      */
     public static boolean isValidText(String pattern, String text) {
         return Pattern.matches(pattern, text);
+    }
+    
+    /**
+     * This method check is provided json string is valid 
+     * @param authDetailsJson
+     * @return true or false
+     */
+    public static boolean isAuthDetailsJSONValid(String authDetailsJson) {
+        try {
+            new JSONObject(AESEncryptDecrypt.decrypt(authDetailsJson));
+        } catch (JSONException  | AutomicRuntimeException ex) {
+        	return false;
+        }
+        return true;
     }
 }

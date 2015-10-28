@@ -50,6 +50,7 @@ public final class ExceptionConstants {
     public static final String MAXCOUNT_LESS_MINCOUNT = "min_count must be <= max_count";
     public static final String INVALID_RESPONSE = "Invalid response";
     public static final String INVALID_JSON_OBJECT = "Invalid json onject";
+    public static final String INVALID_AUTHENTICATION_TOKEN = "Invalid authentication token";
     
     private ExceptionConstants() {
     }

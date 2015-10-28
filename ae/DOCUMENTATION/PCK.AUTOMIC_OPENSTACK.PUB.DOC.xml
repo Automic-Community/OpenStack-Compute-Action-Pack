@@ -8,31 +8,82 @@
 <OH_SubType/>
 </HEADER>
 <DOCU_Docu state="1" type="text">
-<DOC><![CDATA[=Actions=
+<DOC><![CDATA[About Automic's OpenStack Package
+================================
+
+OpenStack is a set of software tools for building and managing cloud computing platforms for public and private clouds. With this package we automate the OpenStack Identity and Compute services through various actions. These actions could further be used in a complex workflow to achieve the given business goal.
+* Manage Authentication
+* Create/Manage cloud instances
+* Check details/status of cloud instances
+* Create server snapshots
+
+=Supported OpenStack versions=
+Following versions of OpenStack Rest API(s) are supported:
+
+* For Identity Services v2.0
+* For Compute Services v2.1
+
+=Limitations=
+
+* Currently Actions cannot connect to OpenStack accepting requests over HTTPS.
+
+=Setup=
+
+* Oracle JDK 1.7 or higher must be installed on Agent OS and "java" must be set as executable on the same.
+
+* The Agent should be able to access the OpenStack URL(s) in order to make HTTP requests.
+
+* Modify the HTTP timeout parameters as per your environment. By default "CONNECTION_TIMEOUT" is defined as 30000 and "REAS_TIMEOUT" is defined as 60000. Both are defined in milliseconds. 0 means no timeout.
+
+* Modify TOKEN_EXPIRY_THRESHOLD parameter if required as per requirement. by default it is defined as 5 minutes. 
+
+* You should have connection detailsto connect to OpenStack Services.
+
+* REST API(s) should be enabled for OpenStack environment.
+
+
+=Variables=
+
+PCK.AUTOMIC_OPENSTACK.PRV.VARA.PACKAGE_PARAMETERS
+* HTTP timeout parameters can be configured in this variable. Values are defined in milliseconds. 0 means no timeout.
+* TOKEN_EXPIRY_THRESHOLD is defined in minutes to control when should our actions renew authentication token based on difference between token expiry and current AE time.
+
+=Actions=
 
 Following actions are supported for Openstack.
 
 * Action Name: PCK.AUTOMIC_OPENSTACK.PUB.ACTION.GET_AUTH_TOKEN
-* Action Description: This action is used to authenticate against OpenStack identity service with valid OpenStack credentials and generates a token id. This token could further be used as an input in subsequent actions to other OpenStack services for instance Compute, Storage etc.
-If user provides the tenant name as an input in OpenStack credentials then the action also generates the tenant id.
-The result of this action will be the following information published as AE variables:
-* token id (always in encrypted form)
-* tenant id 
-* expiration time of the token
+* Action Description: This action is used to authenticate against OpenStack identity service with valid OpenStack credentials and generates an Authentication token. This token could be further used as an input in subsequent actions for other OpenStack services for instance Compute, Storage etc.
+If user provides the tenant name as an input in OpenStack credentials then the action also generates the tenant id. Without providing tenant name the user cannot use the generated Authentication token in subsequent actions. The result of this action will be the following information published as AE variables:
+* authentication token (Encrypted form)
+* tenant id
+Every subsequent action in OpenStack package would accept this authentication token as an input. Action would check whether the difference in token expiry and current AE time is less than the threshold limit for expiry and renew the token id and finally republish the new authentication token. If token id could be reused the action would continue using the current authentication token and no new authentication token would be published.
 
 * Action Name: PCK.AUTOMIC_OPENSTACK.PUB.ACTION.LIST_SERVERS
 * Action Description: This action is used to get all the servers with corresponding server details from OpenStack cloud and Save the details to 
 provides file path in the XML format.
+The result of this action will be the following information published as AE variables:
+* Xml file path 
+* Server count
 
 * Action Name:  PCK.AUTOMIC_OPENSTACK.PUB.ACTION.GET_SERVER_DETAILS
-* Action Description: This action is used to get the server details from OpenStack cloud as per the specified server id. Output of this action will an xml file path consisting the server information.
+* Action Description: This action is used to get the server details from OpenStack cloud as per the specified server id. Output of this action will be an xml file path consisting the server information.
+This action will be failed, if unable to connect with the OpenStack
+Failure Conditions for this action:
+* Invalid input parameters like server URL, token/tenant id.
+* Specified server id does not exist.
+
+
+* Action Name:  PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CREATE_SERVERS
+* Action Description: This action is used to create one or more servers in OpenStack. Since creating servers is an asynchronous operation the action returns a list of server ids in an AE array variable. These server ids could be iterated over with Get Server Details action to check whether server provisioning was successful. When creating multiple servers in Compute service v2.1 please provide "return_reservation_id": "True" in parameter file to get server ids of all the servers created otherwise the action publishes the server id of the first instance. The action can only publish maximum of 30 server ids in a single execution. 
+The action will fail if we get an error from OpenStack on submitting the request to create server instances.
 
 * Action Name:  PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CHANGE_SERVER_STATE
 * Action Description: This action is used to change the state of the server. The action will fail if either the server id is invalid or when the starting and the resultant state are same.Following states are allowed :
 Start (default), Stop, Reboot_Soft, Reboot_Hard, Pause, Unpause, Lock, Unlock, Suspend, Resume
 
 * Action Name:  PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CREATE_SERVER_SNAPSHOT
-* Action Description: This action is used to create a snapshot for an existing server as per the specified server id. Output of this action will be an AE variable having created server snapshot image url.]]></DOC>
+* Action Description: This action is used to create a snapshot for an existing server as per the specified server id. Output of this action will be an AE variable having created server snapshot image url. You can only create a new image from the server when its status is ACTIVE, SHUTOFF, PAUSED, or SUSPENDED ]]></DOC>
 </DOCU_Docu>
 </DOCU>
 </uc-export>

@@ -3,6 +3,8 @@
  */
 package com.automic.openstack.client;
 
+import java.util.Arrays;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -35,6 +37,7 @@ public final class Client {
      *            array of Arguments
      */
     public static void main(String[] args) {
+    	    	
         int responseCode = RESPONSE_OK;
         try {
             ClientHelper.executeAction(args);

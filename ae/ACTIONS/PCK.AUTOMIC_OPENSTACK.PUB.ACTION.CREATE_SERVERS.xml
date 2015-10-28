@@ -294,7 +294,7 @@ The action will fail if we get an error from OpenStack on submitting the request
 
 = Inputs =
 * Compute URL : OpenStack Compute URL. Example http://openstack.com:8774/v2.1
-* Token Id : Token Id for authentication. It is AES encoded. 
+* Authentication Token : Token for authentication. It is AES encoded 
 * Tenant Id : Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
 * Parameter File : Specify full path and name of the JSON file which will be used to create a new server or servers.
 * Overwrite Agent: Overwrites the default agent

@@ -10,7 +10,10 @@ ${Password_OS}    z7I51t3ifWmzHwKM
 ${Name_Tenant}    facebook1162754143740305
 ${Invalid_Token_ID}    124355
 ${Generated_Token_ID}    ${EMPTY}
+${Generated_Server_ID}    ${EMPTY}
 ${Invalid_Tenant_ID}    1234566
-${Valid_Server_ID}    5da90811-883e-43a9-8997-ad55a0899edb
 ${Invalid_Server_ID}    1234566
-
+${Valid_Create_Server}    ${EXECDIR}\\Create_Server.txt
+${Valid_Create_Multiple_Servers}    ${EXECDIR}\\Create_Multiple_Servers.txt
+${Valid_CreateServer_with_ReservationID}    ${EXECDIR}\\CreateServers_with_ReservationID.txt
+${Invalid_Create_Server}    ${EXECDIR}\\Invalid_Create_Server.txt

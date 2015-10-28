@@ -11,7 +11,6 @@ import org.json.JSONObject;
 import com.automic.openstack.constants.Constants;
 import com.automic.openstack.constants.ExceptionConstants;
 import com.automic.openstack.exception.AutomicException;
-import com.automic.openstack.util.AESEncryptDecrypt;
 import com.automic.openstack.util.ConsoleWriter;
 import com.automic.openstack.util.Validator;
 import com.sun.jersey.api.client.ClientResponse;
@@ -65,6 +64,10 @@ public class CreateServerSnapshotAction extends AbstractHttpAction {
             LOGGER.error(ExceptionConstants.EMPTY_TOKENID);
             throw new AutomicException(ExceptionConstants.EMPTY_TOKENID);
         }
+        if (!Validator.isAuthDetailsJSONValid(tokenId)) {
+			LOGGER.error(ExceptionConstants.INVALID_AUTHENTICATION_TOKEN);
+			throw new AutomicException(ExceptionConstants.INVALID_AUTHENTICATION_TOKEN);
+		}
         if (!Validator.checkNotEmpty(tenantId)) {
             LOGGER.error(ExceptionConstants.EMPTY_TENANTID);
             throw new AutomicException(ExceptionConstants.EMPTY_TENANTID);
@@ -87,8 +90,6 @@ public class CreateServerSnapshotAction extends AbstractHttpAction {
     protected void executeSpecific() throws AutomicException {
 
         ClientResponse response = null;
-
-        tokenId = AESEncryptDecrypt.decrypt(tokenId);
 
         WebResource webResource = client.resource(baseUrl).path(tenantId).path("servers").path(serverId).path("action");
 

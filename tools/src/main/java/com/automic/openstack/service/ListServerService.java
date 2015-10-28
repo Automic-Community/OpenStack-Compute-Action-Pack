@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 import com.automic.openstack.constants.Constants;
 import com.automic.openstack.exception.AutomicException;
-import com.automic.openstack.util.AESEncryptDecrypt;
+import com.automic.openstack.exception.AutomicRuntimeException;
 import com.automic.openstack.util.CommonUtil;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -26,7 +26,7 @@ public class ListServerService {
 	private final Client client;
 
 	/**
-	 * Initializes a newly created {@code ResponseProcessService} object.
+	 * Initializes a newly created {@code ListServerService} object.
 	 * 
 	 * @param client
 	 */
@@ -36,11 +36,11 @@ public class ListServerService {
 	}
 
 	/**
-	 * This method create the instance of {@code ResponseProcessService} with
+	 * This method create the instance of {@code ListServerService} with
 	 * provided client.
 	 * 
 	 * @param client
-	 * @return Initialize instance of {@code ResponseProcessService}
+	 * @return Initialize instance of {@code ListServerService}
 	 */
 	public static ListServerService getListServerService(Client client) {
 
@@ -93,15 +93,16 @@ public class ListServerService {
 	 * @param webResource
 	 * @param tokenId
 	 * @return
+	 * @throws AutomicException 
+	 * @throws AutomicRuntimeException 
 	 */
-	private JSONObject executeRequest(WebResource webResource, String tokenId) {
+	private JSONObject executeRequest(WebResource webResource, String tokenId) throws AutomicRuntimeException, AutomicException {
 
 		ClientResponse response = null;
 		JSONObject jsonObj = null;
 		LOGGER.info("List servers Calling url " + webResource.getURI());
-		String decryptedTokenId = AESEncryptDecrypt.decrypt(tokenId);
 		response = webResource.accept(MediaType.APPLICATION_JSON)
-				.header(Constants.X_AUTH_TOKEN, decryptedTokenId)
+				.header(Constants.X_AUTH_TOKEN, tokenId)
 				.get(ClientResponse.class);
 		jsonObj = CommonUtil.jsonResponse(response.getEntityInputStream());
 

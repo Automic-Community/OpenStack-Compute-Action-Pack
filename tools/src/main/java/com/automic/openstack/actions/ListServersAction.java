@@ -7,7 +7,6 @@ import org.json.JSONObject;
 import com.automic.openstack.constants.ExceptionConstants;
 import com.automic.openstack.exception.AutomicException;
 import com.automic.openstack.service.ListServerService;
-import com.automic.openstack.util.AESEncryptDecrypt;
 import com.automic.openstack.util.CommonUtil;
 import com.automic.openstack.util.ConsoleWriter;
 import com.automic.openstack.util.Validator;
@@ -55,6 +54,10 @@ public class ListServersAction extends AbstractHttpAction {
 		if (!Validator.checkNotEmpty(tokenId)) {
 			LOGGER.error(ExceptionConstants.EMPTY_TOKENID);
 			throw new AutomicException(ExceptionConstants.EMPTY_TOKENID);
+		}
+		if (!Validator.isAuthDetailsJSONValid(tokenId)) {
+			LOGGER.error(ExceptionConstants.INVALID_AUTHENTICATION_TOKEN);
+			throw new AutomicException(ExceptionConstants.INVALID_AUTHENTICATION_TOKEN);
 		}
 		if (!Validator.checkNotEmpty(tenantId)) {
 			LOGGER.error(ExceptionConstants.EMPTY_TENANTID);

@@ -15,6 +15,12 @@ Create Server with Valid Parameter File
                       [Tags]    main_scenarios
                       OK        ${OS_Compute_URL}       blank                  blank                   ${Valid_Create_Server}
 
+Create Multiple Servers with Valid Parameter File without Providing Reservation ID = True in Parameter File
+                      OK        ${OS_Compute_URL}       blank                  blank                   ${Valid_Create_Multiple_Servers}
+
+Create Multiple Servers with Valid Parameter File also Providing Reservation ID = True in Parameter File
+                      OK        ${OS_Compute_URL}       blank                  blank                   ${Valid_CreateServer_with_ReservationID}
+
 Assertion with Invalid Compute URL
                       NOK       https://162.123.12.3    blank                  blank                   ${Valid_Create_Server}
 
@@ -56,6 +62,8 @@ Create Servers Template
     ...    -${Token_ID}: This field specifies Token ID generated as the output of Get Auth Token action.
     ...    -${Tenant_ID}: This field specifies Tenant ID generated as the output of Get Auth Token action.
     ...    -${Parameter_File}: This field specifies path of the parameter file which is used to create server.
+    #    blank input means Token ID and Tenant ID will get values from the output of Get Auth Token.
+    #    Empty input means that field is left empty.
     Run Keyword If    '${Generated_Token_ID}' == '${EMPTY}'    Get Auth Token    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
     Action Create    ${_CREATE_SERVERS_ACTION}
     Action Set    &UC4RB_OPS_COMPUTE_URL#    ${Compute_URL}
@@ -69,6 +77,7 @@ Create Servers Template
     Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
     ...    Assert Mandatory
     Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable Should Be Found    &UC4RB_OPS_SERVER_IDS#[00001]    ELSE    Action Object Variable Should Not Be Found    &UC4RB_OPS_SERVER_IDS#[00001]
+    Run Keyword If    '${Parameter_File}' == 'Valid_Create_Servers' and '${Parameter_File}' == 'Valid_Create_Servers_Reservation'    Action Object Variable Should Be Found    &UC4RB_OPS_SERVER_IDS#[00002]
 
 Teardown
     Log    *******End Test "CREATE SERVERS"*******

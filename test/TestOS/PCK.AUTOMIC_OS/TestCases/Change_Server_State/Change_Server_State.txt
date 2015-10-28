@@ -12,37 +12,37 @@ Resource          ../../Resources/actions.txt
 
 *** Test Cases ***    OK_NOK    ComputeURL              TokenID                TenantID                ServerID                Action
 Stopping a Server     [Tags]    main_scenarios
-                      OK        ${OS_Compute_URL}       blank                  blank                   ${Valid_Server_ID}      STOP
+                      OK        ${OS_Compute_URL}       blank                  blank                   blank                   STOP
 
-Starting a Server     OK        ${OS_Compute_URL}       blank                  blank                   ${Valid_Server_ID}      START
+Starting a Server     OK        ${OS_Compute_URL}       blank                  blank                   blank                   START
 
-Pausing a Server      OK        ${OS_Compute_URL}       blank                  blank                   ${Valid_Server_ID}      PAUSE
+Pausing a Server      OK        ${OS_Compute_URL}       blank                  blank                   blank                   PAUSE
 
-Unpausing a Server    OK        ${OS_Compute_URL}       blank                  blank                   ${Valid_Server_ID}      UNPAUSE
+Unpausing a Server    OK        ${OS_Compute_URL}       blank                  blank                   blank                   UNPAUSE
 
-Locking a Server      OK        ${OS_Compute_URL}       blank                  blank                   ${Valid_Server_ID}      LOCK
+Locking a Server      OK        ${OS_Compute_URL}       blank                  blank                   blank                   LOCK
 
-Unlocking a Server    OK        ${OS_Compute_URL}       blank                  blank                   ${Valid_Server_ID}      UNLOCK
+Unlocking a Server    OK        ${OS_Compute_URL}       blank                  blank                   blank                   UNLOCK
 
 Suspending a Server
-                      OK        ${OS_Compute_URL}       blank                  blank                   ${Valid_Server_ID}      SUSPEND
+                      OK        ${OS_Compute_URL}       blank                  blank                   blank                   SUSPEND
 
-Resuming a Server     OK        ${OS_Compute_URL}       blank                  blank                   ${Valid_Server_ID}      RESUME
+Resuming a Server     OK        ${OS_Compute_URL}       blank                  blank                   blank                   RESUME
 
 Soft Rebooting a Server
-                      OK        ${OS_Compute_URL}       blank                  blank                   ${Valid_Server_ID}      REBOOT_SOFT
+                      OK        ${OS_Compute_URL}       blank                  blank                   blank                   REBOOT_SOFT
 
 Hard Rebooting a Server
-                      OK        ${OS_Compute_URL}       blank                  blank                   ${Valid_Server_ID}      REBOOT_HARD
+                      OK        ${OS_Compute_URL}       blank                  blank                   blank                   REBOOT_HARD
 
 Assertion with Invalid Compute URL
-                      NOK       https://162.123.12.3    blank                  blank                   ${Valid_Server_ID}      START
+                      NOK       https://162.123.12.3    blank                  blank                   blank                   START
 
 Assertion with Invalid Token ID
-                      NOK       ${OS_Compute_URL}       ${Invalid_Token_ID}    blank                   ${Valid_Server_ID}      START
+                      NOK       ${OS_Compute_URL}       ${Invalid_Token_ID}    blank                   blank                   START
 
 Assertion with Invalid Tenant ID
-                      NOK       ${OS_Compute_URL}       blank                  ${Invalid_Tenant_ID}    ${Valid_Server_ID}      START
+                      NOK       ${OS_Compute_URL}       blank                  ${Invalid_Tenant_ID}    blank                   START
 
 Assertion with Invalid Server ID
                       NOK       ${OS_Compute_URL}       blank                  blank                   ${Invalid_Server_ID}    START
@@ -76,14 +76,16 @@ Change Server State Template
     ...    -${Action}: This field specifies the target action which user wants to perform on an instance.
     #    blank input means Token ID and Tenant ID will get values from the output of Get Auth Token.
     #    Empty input means that field is left empty.
-    Run Keyword If    '${Action}' == 'STOP'    Get Auth Token    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
+    Run Keyword If    '${Generated_Token_ID}' == '${EMPTY}'    Get Auth Token    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
+    Run Keyword If    '${Generated_Server_ID}' == '${EMPTY}'    Create Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Valid_Create_Server}
     Action Create    ${_CHANGE_SERVER_STATE_ACTION}
     Action Set    &UC4RB_OPS_COMPUTE_URL#    ${Compute_URL}
     Run Keyword If    '${Token_ID}' == 'blank'    Action Set    &UC4RB_OPS_TOKEN_ID#    ${Generated_Token_ID}
     Run Keyword If    '${Token_ID}' != 'blank'    Action Set    &UC4RB_OPS_TOKEN_ID#    ${Token_ID}
     Run Keyword If    '${Tenant_ID}' == 'blank'    Action Set    &UC4RB_OPS_TENANT_ID#    ${Generated_Tenant_ID}
     Run Keyword If    '${Tenant_ID}' != 'blank'    Action Set    &UC4RB_OPS_TENANT_ID#    ${Tenant_ID}
-    Action Set    &UC4RB_OPS_SERVER_ID#    ${Server_ID}
+    Run Keyword If    '${Server_ID}' == 'blank'    Action Set    &UC4RB_OPS_SERVER_ID#    ${Generated_Server_ID}
+    Run Keyword If    '${Server_ID}' != 'blank'    Action Set    &UC4RB_OPS_SERVER_ID#    ${Server_ID}
     Action Set    &UC4RB_OPS_SERVER_ACTION#    ${Action}
     Set Overwrite Agent
     Action Execute
