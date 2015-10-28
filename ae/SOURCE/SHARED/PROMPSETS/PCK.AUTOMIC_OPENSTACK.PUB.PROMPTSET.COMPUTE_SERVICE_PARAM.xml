@@ -39,7 +39,7 @@
         <entry name="resetable">1</entry>
       <entry name="initvalue"/>
          </properties>
-    </text><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_OPS_TOKEN_IDs.00" inputassistance="0" len="" multiline="0" multilineIcon="0" nl="1" regex="" required="0" separator=";" showaspassword="0" text="Authentication Token" tooltip="Token for authentication. It is AES encoded" upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
+    </text><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_OPS_AUTH_TOKENs.00" inputassistance="0" len="" multiline="0" multilineIcon="0" nl="1" regex="" required="0" separator=";" showaspassword="0" text="Authentication Token" tooltip="Token for authentication. It is AES encoded" upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
          
       <properties>
         <entry listparam="C,N" name="reference" reftype="STATIC">UC_DATATYPE_STRING</entry>
@@ -52,7 +52,7 @@
         <entry name="separator">;</entry>
         <entry name="len"/>
         <entry name="quotes"/>
-        <entry name="id">UC4RB_OPS_TOKEN_IDs.00</entry>
+        <entry name="id">UC4RB_OPS_AUTH_TOKENs.00</entry>
         <entry name="regex"/>
         <entry name="inputassistance">0</entry>
         <entry name="enabled">0</entry>
@@ -98,7 +98,7 @@
     </text></readpanel></dialog>]]></XUIEDITOR>
 </PROMPTSETXUI>
 <PROMPTSETDATA state="1">
-<DATAEDITOR><![CDATA[<PRPTS ontop="1"><PRPTBOX><UC4RB_OPS_COMPUTE_URLs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_OPS_COMPUTE_URL#" ReadFromTable="OPSE"></UC4RB_OPS_COMPUTE_URLs.00><UC4RB_OPS_TOKEN_IDs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_OPS_TOKEN_ID#" ReadFromTable="OPSE"></UC4RB_OPS_TOKEN_IDs.00><UC4RB_OPS_TENANT_IDs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_OPS_TENANT_ID#" ReadFromTable="OPSE"></UC4RB_OPS_TENANT_IDs.00></PRPTBOX></PRPTS>]]></DATAEDITOR>
+<DATAEDITOR><![CDATA[<PRPTS ontop="1"><PRPTBOX><UC4RB_OPS_COMPUTE_URLs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_OPS_COMPUTE_URL#" ReadFromTable="OPSE"></UC4RB_OPS_COMPUTE_URLs.00><UC4RB_OPS_AUTH_TOKENs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_OPS_AUTH_TOKEN#" ReadFromTable="OPSE"></UC4RB_OPS_AUTH_TOKENs.00><UC4RB_OPS_TENANT_IDs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_OPS_TENANT_ID#" ReadFromTable="OPSE"></UC4RB_OPS_TENANT_IDs.00></PRPTBOX></PRPTS>]]></DATAEDITOR>
 </PROMPTSETDATA>
 <DOCU_Docu state="1" type="text">
 <DOC/>

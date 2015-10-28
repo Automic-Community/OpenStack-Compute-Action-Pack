@@ -56,9 +56,9 @@
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
+<UC4RB_OPS_AUTH_TOKENs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_AUTH_TOKEN#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_COMPUTE_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_COMPUTE_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_TENANT_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TENANT_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
-<UC4RB_OPS_TOKEN_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TOKEN_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -120,9 +120,9 @@
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
+<UC4RB_OPS_AUTH_TOKENs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_AUTH_TOKEN#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_COMPUTE_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_COMPUTE_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_TENANT_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TENANT_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
-<UC4RB_OPS_TOKEN_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TOKEN_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -170,9 +170,9 @@
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
+<UC4RB_OPS_AUTH_TOKENs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_AUTH_TOKEN#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_COMPUTE_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_COMPUTE_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_TENANT_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TENANT_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
-<UC4RB_OPS_TOKEN_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TOKEN_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -296,7 +296,7 @@ The action will fail if we get an error from OpenStack on submitting the request
 * Compute URL : OpenStack Compute URL. Example http://openstack.com:8774/v2.1
 * Authentication Token : Token for authentication. It is AES encoded 
 * Tenant Id : Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
-* Parameter File : Specify full path and name of the JSON file which will be used to create a new server or servers.
+* Parameter File : Specify full path and name of the JSON file which will be used to create a new server or max of 30 instances.
 * Overwrite Agent: Overwrites the default agent
 * Overwrite Login: Overwrites the default login
 = Behavior =
@@ -335,7 +335,7 @@ output
 UC4RB_OPS_SERVER_IDS#[00001] : 75a75a44-de98-413a-bead-366240bc40fe
 UC4RB_OPS_SERVER_IDS#[00002] : c97c4df-dd57-490e-81bc-ec0322c337cfge
 =Return Value=
-UC4RB_OPS_SERVER_IDS : Publishes create server ids in an AE array variable
+UC4RB_OPS_SERVERLIST : Publishes create server ids in an AE array variable
 
 = Outputs =
 * Return code is 0 in case of success.
