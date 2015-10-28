@@ -51,6 +51,7 @@ public final class ExceptionConstants {
     public static final String INVALID_RESPONSE = "Invalid response";
     public static final String INVALID_JSON_OBJECT = "Invalid json onject";
     public static final String INVALID_AUTHENTICATION_TOKEN = "Invalid authentication token";
+    public static final String MAX_INSTANCE_COUNT = "  Create Server Max Count limit has been exceeded. Maximum: 30 Actual: [%S]";
     
     private ExceptionConstants() {
     }
