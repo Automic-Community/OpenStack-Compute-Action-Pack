@@ -27,8 +27,6 @@
 : ENDIF
 :ENDPROCESS
 :CLOSE_PROCESS &HND#
-:ELSE
-:  PSET &UC4RB_OPS_AUTH_TOKEN# = ""
 :ENDIF]]></MSCRI>
 </SCRIPT>
 <DOCU_Docu state="1" type="text">
