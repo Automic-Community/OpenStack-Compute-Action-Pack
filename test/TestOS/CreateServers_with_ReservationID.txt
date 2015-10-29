@@ -1,7 +1,7 @@
 {
     "server": {
         "name": "AnkitTestInstance",
-        "imageRef": "99ba3c46-1919-4c9d-ad87-326c216de856",
+        "imageRef": "5cc06ee6-10ea-4696-87e4-e9ef0c0691ce",
         "flavorRef": "1",
         "adminPass":"Nagarro$004",
         "networks": [
@@ -10,10 +10,10 @@
             }
         ],
         "metadata": {
-            "My Server Name": "Ubuntu1"
+            "My Server Name": "Cirros1"
         },
         "return_reservation_id": "True",
         "min_count": "2",
-        "max_count": "6"
+        "max_count": "2"
     }
 }

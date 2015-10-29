@@ -38,7 +38,7 @@ Hard Rebooting a Server
 Assertion with Invalid Compute URL
                       NOK       https://162.123.12.3    blank                  blank                   blank                   START
 
-Assertion with Invalid Token ID
+Assertion with Invalid Authentication Token
                       NOK       ${OS_Compute_URL}       ${Invalid_Token_ID}    blank                   blank                   START
 
 Assertion with Invalid Tenant ID
@@ -50,7 +50,7 @@ Assertion with Invalid Server ID
 Assert Compute URL as a mandatory field
                       OTHER     ${EMPTY}                blank                  blank                   ${Invalid_Server_ID}    START
 
-Assert Token ID as a mandatory field
+Assert Authentication Token as a mandatory field
                       OTHER     ${OS_Compute_URL}       ${EMPTY}               blank                   ${Invalid_Server_ID}    START
 
 Assert Tenant ID as a mandatory field
@@ -80,8 +80,8 @@ Change Server State Template
     Run Keyword If    '${Generated_Server_ID}' == '${EMPTY}'    Create Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Valid_Create_Server}
     Action Create    ${_CHANGE_SERVER_STATE_ACTION}
     Action Set    &UC4RB_OPS_COMPUTE_URL#    ${Compute_URL}
-    Run Keyword If    '${Token_ID}' == 'blank'    Action Set    &UC4RB_OPS_TOKEN_ID#    ${Generated_Token_ID}
-    Run Keyword If    '${Token_ID}' != 'blank'    Action Set    &UC4RB_OPS_TOKEN_ID#    ${Token_ID}
+    Run Keyword If    '${Token_ID}' == 'blank'    Action Set    &UC4RB_OPS_AUTH_TOKEN#    ${Generated_Token_ID}
+    Run Keyword If    '${Token_ID}' != 'blank'    Action Set    &UC4RB_OPS_AUTH_TOKEN#    ${Token_ID}
     Run Keyword If    '${Tenant_ID}' == 'blank'    Action Set    &UC4RB_OPS_TENANT_ID#    ${Generated_Tenant_ID}
     Run Keyword If    '${Tenant_ID}' != 'blank'    Action Set    &UC4RB_OPS_TENANT_ID#    ${Tenant_ID}
     Run Keyword If    '${Server_ID}' == 'blank'    Action Set    &UC4RB_OPS_SERVER_ID#    ${Generated_Server_ID}

@@ -67,8 +67,8 @@ Create Servers Template
     Run Keyword If    '${Generated_Token_ID}' == '${EMPTY}'    Get Auth Token    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
     Action Create    ${_CREATE_SERVERS_ACTION}
     Action Set    &UC4RB_OPS_COMPUTE_URL#    ${Compute_URL}
-    Run Keyword If    '${Token_ID}' == 'blank'    Action Set    &UC4RB_OPS_TOKEN_ID#    ${Generated_Token_ID}
-    Run Keyword If    '${Token_ID}' != 'blank'    Action Set    &UC4RB_OPS_TOKEN_ID#    ${Token_ID}
+    Run Keyword If    '${Token_ID}' == 'blank'    Action Set    &UC4RB_OPS_AUTH_TOKEN#    ${Generated_Token_ID}
+    Run Keyword If    '${Token_ID}' != 'blank'    Action Set    &UC4RB_OPS_AUTH_TOKEN#    ${Token_ID}
     Run Keyword If    '${Tenant_ID}' == 'blank'    Action Set    &UC4RB_OPS_TENANT_ID#    ${Generated_Tenant_ID}
     Run Keyword If    '${Tenant_ID}' != 'blank'    Action Set    &UC4RB_OPS_TENANT_ID#    ${Tenant_ID}
     Action Set    &UC4RB_OPS_PARAMETER_FILE#    ${Parameter_File}
@@ -76,8 +76,8 @@ Create Servers Template
     Action Execute
     Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
     ...    Assert Mandatory
-    Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable Should Be Found    &UC4RB_OPS_SERVER_IDS#[00001]    ELSE    Action Object Variable Should Not Be Found    &UC4RB_OPS_SERVER_IDS#[00001]
-    Run Keyword If    '${Parameter_File}' == 'Valid_Create_Servers' and '${Parameter_File}' == 'Valid_Create_Servers_Reservation'    Action Object Variable Should Be Found    &UC4RB_OPS_SERVER_IDS#[00002]
+    Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable Should Be Found    &UC4RB_OPS_SERVERLIST#[00001]    ELSE    Action Object Variable Should Not Be Found    &UC4RB_OPS_SERVERLIST#[00001]
+    Run Keyword If    '${Parameter_File}' == 'Valid_Create_Servers' and '${Parameter_File}' == 'Valid_Create_Servers_Reservation'    Action Object Variable Should Be Found    &UC4RB_OPS_SERVERLIST#[00002]
 
 Teardown
     Log    *******End Test "CREATE SERVERS"*******

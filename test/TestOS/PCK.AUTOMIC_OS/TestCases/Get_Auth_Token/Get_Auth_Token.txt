@@ -56,7 +56,7 @@ Get Auth Token Template
     Get Auth Token    ${Identity_URL}    ${Username}    ${Password}    ${Tenant_Name}
     Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
     ...    Assert Mandatory
-    Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable Should Be Found    &UC4RB_OPS_TOKEN_ID#    ELSE    Action Object Variable Should Not Be Found    &UC4RB_OPS_TOKEN_ID#
+    Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable Should Be Found    &UC4RB_OPS_AUTH_TOKEN#    ELSE    Action Object Variable Should Not Be Found    &UC4RB_OPS_AUTH_TOKEN#
     Run Keyword If    '${Tenant_Name}' == '${Name_Tenant}' and '${OK_NOK}' == 'OK'    Action Object Variable Should Be Found    &UC4RB_OPS_TENANT_ID#    ELSE    Action Object Variable Should Not Be Found    &UC4RB_OPS_TENANT_ID#
 
 Teardown
