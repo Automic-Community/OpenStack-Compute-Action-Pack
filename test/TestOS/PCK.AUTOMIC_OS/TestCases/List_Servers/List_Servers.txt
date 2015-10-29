@@ -15,10 +15,10 @@ List Servers with Valid Inputs
                       [Tags]    main_scenarios
                       OK        ${OS_Compute_URL}       blank                  blank
 
-Assertion with Invalid Coompute URL
+Assertion with Invalid Compute URL
                       NOK       https://162.123.12.3    blank                  blank
 
-Assertion with Invalid Token ID
+Assertion with Invalid Authentication Token
                       NOK       ${OS_Compute_URL}       ${Invalid_Token_ID}    blank
 
 Assertion with Invalid Tenant ID
@@ -27,7 +27,7 @@ Assertion with Invalid Tenant ID
 Assert Compute URL as a mandatory field
                       OTHER     ${EMPTY}                blank                  blank
 
-Assert Token ID as a mandatory field
+Assert Authentication Token as a mandatory field
                       OTHER     ${OS_Compute_URL}       ${EMPTY}               blank
 
 Assert Tenant ID as a mandatory field
@@ -49,8 +49,8 @@ List Servers Template
     Run Keyword If    '${Generated_Token_ID}' == '${EMPTY}'    Get Auth Token    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
     Action Create    ${_LIST_SERVERS_ACTION}
     Action Set    &UC4RB_OPS_COMPUTE_URL#    ${Compute_URL}
-    Run Keyword If    '${Token_ID}' == 'blank'    Action Set    &UC4RB_OPS_TOKEN_ID#    ${Generated_Token_ID}
-    Run Keyword If    '${Token_ID}' != 'blank'    Action Set    &UC4RB_OPS_TOKEN_ID#    ${Token_ID}
+    Run Keyword If    '${Token_ID}' == 'blank'    Action Set    &UC4RB_OPS_AUTH_TOKEN#    ${Generated_Token_ID}
+    Run Keyword If    '${Token_ID}' != 'blank'    Action Set    &UC4RB_OPS_AUTH_TOKEN#    ${Token_ID}
     Run Keyword If    '${Tenant_ID}' == 'blank'    Action Set    &UC4RB_OPS_TENANT_ID#    ${Generated_Tenant_ID}
     Run Keyword If    '${Tenant_ID}' != 'blank'    Action Set    &UC4RB_OPS_TENANT_ID#    ${Tenant_ID}
     Set Overwrite Agent

@@ -16,7 +16,7 @@ public final class ExceptionConstants {
     public static final String INVALID_KEYSTORE = "Invalid KeyStore.";
     public static final String SSLCONTEXT_ERROR = "Unable to build secured context.";
 
-    public static final String INVALID_FILE = " File [%s] is invalid. Possibly file does not exist ";
+    public static final String INVALID_FILE = "File [%s] is invalid. Possibly file does not exist ";
     public static final String INVALID_DIRECTORY = " Directory [%s] is invalid ";
 
     public static final String UNABLE_TO_WRITEFILE = "Error writing file ";
@@ -51,6 +51,7 @@ public final class ExceptionConstants {
     public static final String INVALID_RESPONSE = "Invalid response";
     public static final String INVALID_JSON_OBJECT = "Invalid json onject";
     public static final String INVALID_AUTHENTICATION_TOKEN = "Invalid authentication token";
+    public static final String MAX_INSTANCE_COUNT = "Create Server Max Count limit has been exceeded. Maximum: 30 Actual: [%S]";
     
     private ExceptionConstants() {
     }

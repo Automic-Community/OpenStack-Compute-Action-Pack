@@ -105,7 +105,7 @@ Get Auth Token
     Action Set    &UC4RB_OPS_TENANT_NAME#    ${Tenant_Name}
     Set Overwrite Agent
     Action Execute
-    ${Generated_Token_ID}=    Action Get Variable    &UC4RB_OPS_TOKEN_ID#
+    ${Generated_Token_ID}=    Action Get Variable    &UC4RB_OPS_AUTH_TOKEN#
     Set Global Variable    ${Generated_Token_ID}
     ${Generated_Tenant_ID}=    Action Get Variable    &UC4RB_OPS_TENANT_ID#
     Set Global Variable    ${Generated_Tenant_ID}
@@ -114,11 +114,11 @@ Create Server
     [Arguments]    ${Compute_URL}    ${Token_ID}    ${Tenant_ID}    ${Parameter_File}
     Action Create    ${_CREATE_SERVERS_ACTION}
     Action Set    &UC4RB_OPS_COMPUTE_URL#    ${Compute_URL}
-    Action Set    &UC4RB_OPS_TOKEN_ID#    ${Token_ID}
+    Action Set    &UC4RB_OPS_AUTH_TOKEN#    ${Token_ID}
     Action Set    &UC4RB_OPS_TENANT_ID#    ${Tenant_ID}
     Action Set    &UC4RB_OPS_PARAMETER_FILE#    ${Parameter_File}
     Set Overwrite Agent
     Action Execute
-    ${Generated_Server_ID}=    Action Get Variable    &UC4RB_OPS_SERVER_IDS#[00001]
+    ${Generated_Server_ID}=    Action Get Variable    &UC4RB_OPS_SERVERLIST#[00001]
     Set Global Variable    ${Generated_Server_ID}
     Sleep    15s

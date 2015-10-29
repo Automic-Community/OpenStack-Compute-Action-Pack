@@ -56,16 +56,16 @@
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
+<UC4RB_OPS_AUTH_TOKENs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_AUTH_TOKEN#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_COMPUTE_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_COMPUTE_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_TENANT_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TENANT_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
-<UC4RB_OPS_TOKEN_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TOKEN_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CHANGE_SERVER_STATE" name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CHANGE_SERVER_STATE" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CHANGE_SERVER_STATE">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CHANGE_SERVER_STATE">
-<UC4RB_OPS_SERVER_ACTIONs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_SERVER_ACTION#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CHANGE_SERVER_STATE">Start</UC4RB_OPS_SERVER_ACTIONs.00>
+<UC4RB_OPS_SERVER_ACTIONs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_SERVER_ACTION#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CHANGE_SERVER_STATE">START</UC4RB_OPS_SERVER_ACTIONs.00>
 <UC4RB_OPS_SERVER_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_SERVER_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CHANGE_SERVER_STATE"/>
 </PRPTBOX>
 </PROMPTSET>
@@ -121,16 +121,16 @@
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
+<UC4RB_OPS_AUTH_TOKENs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_AUTH_TOKEN#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_COMPUTE_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_COMPUTE_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_TENANT_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TENANT_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
-<UC4RB_OPS_TOKEN_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TOKEN_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CHANGE_SERVER_STATE" name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CHANGE_SERVER_STATE" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CHANGE_SERVER_STATE">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CHANGE_SERVER_STATE">
-<UC4RB_OPS_SERVER_ACTIONs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_SERVER_ACTION#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CHANGE_SERVER_STATE">Start</UC4RB_OPS_SERVER_ACTIONs.00>
+<UC4RB_OPS_SERVER_ACTIONs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_SERVER_ACTION#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CHANGE_SERVER_STATE">START</UC4RB_OPS_SERVER_ACTIONs.00>
 <UC4RB_OPS_SERVER_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_SERVER_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CHANGE_SERVER_STATE"/>
 </PRPTBOX>
 </PROMPTSET>
@@ -172,16 +172,16 @@
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
+<UC4RB_OPS_AUTH_TOKENs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_AUTH_TOKEN#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_COMPUTE_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_COMPUTE_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_TENANT_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TENANT_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
-<UC4RB_OPS_TOKEN_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TOKEN_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CHANGE_SERVER_STATE" name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CHANGE_SERVER_STATE" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CHANGE_SERVER_STATE">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CHANGE_SERVER_STATE">
-<UC4RB_OPS_SERVER_ACTIONs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_SERVER_ACTION#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CHANGE_SERVER_STATE">Start</UC4RB_OPS_SERVER_ACTIONs.00>
+<UC4RB_OPS_SERVER_ACTIONs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_SERVER_ACTION#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CHANGE_SERVER_STATE">START</UC4RB_OPS_SERVER_ACTIONs.00>
 <UC4RB_OPS_SERVER_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_SERVER_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.CHANGE_SERVER_STATE"/>
 </PRPTBOX>
 </PROMPTSET>
@@ -295,10 +295,10 @@ Following states are allowed :
 Start (default), Stop, Reboot_Soft, Reboot_Hard, Pause, Unpause, Lock, Unlock, Suspend, Resume.
 This is an asynchronous operation. The action returns status code 202 only means request is accepted successfully .To further verify user can user GET SERVER DETAILS action
 = Inputs =
-* Compute URL : OpenStack Compute URL. Example http://openstack.com:8774/v2.1
+* Compute URL : OpenStack Compute URL. Example http://openstack.com:8774/v2
 * Authentication Token : Token for authentication. It is AES encoded 
 * Tenant Id : Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
-* Server Id : Server id of the server. 
+* Server Id : Specify Server id. 
 * Action : Action to be performed on server (Start (default), Stop, Reboot_Soft, Reboot_Hard, Pause, Unpause, Lock, Unlock, Suspend, Resume)
 * Overwrite Agent: Overwrites the default agent
 * Overwrite Login: Overwrites the default login

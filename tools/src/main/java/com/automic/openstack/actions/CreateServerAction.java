@@ -188,6 +188,12 @@ public class CreateServerAction extends AbstractHttpAction {
 					throw new AutomicException(
 							ExceptionConstants.MAXCOUNT_LESS_MINCOUNT);
 				}
+				if(maxCount > 30){
+					  String errMsg = String.format(ExceptionConstants.MAX_INSTANCE_COUNT, maxCount);
+					LOGGER.error(errMsg);
+					throw new AutomicException(errMsg);
+					
+				}
 
 				if (minCount > 1 || maxCount > 1) {
 					server.put(RESERVATION_ID_KEY, RESERVATION_ID_VAL);
