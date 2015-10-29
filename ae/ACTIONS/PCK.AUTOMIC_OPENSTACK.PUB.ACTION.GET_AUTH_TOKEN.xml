@@ -274,7 +274,7 @@ If user provides the tenant name as an input in OpenStack credentials then the a
 * tenant id
 Note: 
 * Open Stack identity service URL should be accessible from agent OS.
-* Every subsequent action in OpenStack package would accept this authentication token as an input. Action would check whether the difference in token expiry and current AE time is less than the threshold limit for expiry and renew the token id and finally republish the new authentication token. If token id could be reused the action would continue using the current authentication token and no new authentication token would be published. The threshold limit is specified in minutes in VARA object PCK.AUTOMIC_OPENSTACK.PRV.VARA.PACKAGE_PARAMETERS with  key TOKEN_EXPIRY_THRESHOLD.
+* Every subsequent action in OpenStack package would accept this authentication token as an input. Action would check whether the difference in token expiry and current AE time is less than the threshold limit for expiry and renew the authentication token and finally republish the new authentication token. If authentication token could be reused the action would continue using the current authentication token and no new authentication token would be published. The threshold limit is specified in minutes in VARA object PCK.AUTOMIC_OPENSTACK.PRV.VARA.PACKAGE_PARAMETERS with  key TOKEN_EXPIRY_THRESHOLD.
  
 = Inputs =
 * Identity URL : OpenStack Identity URL. Example http://openstack.com:5000/v2.0
