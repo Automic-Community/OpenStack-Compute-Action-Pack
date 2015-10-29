@@ -81,7 +81,7 @@ public class AuthenticationFilter extends ClientFilter {
 							tokenJson.getString("id"),
 							tokenJson.getString("expires"),
 							tokenJson.getString("issued_at"));
-					ConsoleWriter.writeln("UC4RB_OPS_TOKEN_ID ::="
+					ConsoleWriter.writeln("UC4RB_OPS_AUTH_TOKEN ::="
 							+ CommonUtil.encrypt(authToken.toString()));
 
 				}
