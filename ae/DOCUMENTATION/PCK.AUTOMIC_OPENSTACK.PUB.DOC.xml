@@ -17,6 +17,9 @@ OpenStack is a set of software tools for building and managing cloud computing p
 * Check details/status of cloud instances
 * Create server snapshots
 
+=ARA Compatibility=
+This OpenStack Package also offers cusotm types for all the OpenStack actions which further can be used in ARA.
+
 =Supported OpenStack versions=
 Following versions of OpenStack Rest API(s) are supported:
 
