@@ -191,7 +191,7 @@
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
 <FcstStatus>0|U00000000 ??? ""</FcstStatus>
-<Ert>3</Ert>
+<Ert>5</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
 <ErtFix>0</ErtFix>
@@ -289,7 +289,7 @@ If user provides valid Openstack connection details but does not give tenant nam
 
 =Return Value=
 The response will contain the following AE variables
-* UC4RB_OPS_TOKEN_ID : Authentication token in encrypted form. This is encrypted representation of OpenStack connection details, token Id, tenant id, issue date and expiry date.
+* UC4RB_OPS_AUTH_TOKEN : Authentication token in encrypted form. This is encrypted representation of OpenStack connection details, token Id, tenant id, issue date and expiry date.
 * UC4RB_OPS_TENANT_ID : Tenant id
 Authentication token in decrypt form:
 {"tokenIssue":"2015-10-26T08:16:30.194546","tokenId":"266b15569a624b749517ba02242d1625","tokenExpiry":"2015-10-26T09:16:30Z","baseURL":"http://172.16.0.3:5000/v2.0","userName":"admin","password":"admin","tenantName":"admin"} 

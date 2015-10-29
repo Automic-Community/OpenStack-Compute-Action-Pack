@@ -56,9 +56,9 @@
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
+<UC4RB_OPS_AUTH_TOKENs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_AUTH_TOKEN#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_COMPUTE_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_COMPUTE_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_TENANT_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TENANT_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
-<UC4RB_OPS_TOKEN_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TOKEN_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -120,9 +120,9 @@
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
+<UC4RB_OPS_AUTH_TOKENs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_AUTH_TOKEN#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_COMPUTE_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_COMPUTE_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_TENANT_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TENANT_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
-<UC4RB_OPS_TOKEN_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TOKEN_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -170,9 +170,9 @@
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM">
+<UC4RB_OPS_AUTH_TOKENs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_AUTH_TOKEN#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_COMPUTE_URLs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_COMPUTE_URL#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 <UC4RB_OPS_TENANT_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TENANT_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
-<UC4RB_OPS_TOKEN_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_TOKEN_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.COMPUTE_SERVICE_PARAM"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -399,7 +399,7 @@ This action is used to get the server details from OpenStack cloud as per the sp
 </server>
 
 = Inputs =
-* Compute URL : OpenStack Compute URL. Example http://openstack.com:8774/v2.1
+* Compute URL : OpenStack Compute URL. Example http://openstack.com:8774/v2
 * Authentication Token : Token for authentication It is AES encoded 
 * Tenant Id : Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
 * Server Id : Server id of the server 
