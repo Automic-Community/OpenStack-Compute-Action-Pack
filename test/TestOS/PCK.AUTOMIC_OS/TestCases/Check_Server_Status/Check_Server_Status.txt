@@ -18,6 +18,9 @@ Asserting behavior of action when orginal status of server at openstack is selec
 Asserting behavior of action when orginal status of server at openstack is not known and "Fail action if target status is not reached" is selected as NO.
                       OK        ${OS_Compute_URL}       blank                  blank                   blank                   SUSPENDED       NO        5             10
 
+Asserting behavior of action when "Any" is selected as Target Status.
+                      OK        ${OS_Compute_URL}       blank                  blank                   blank                   ANY             YES       5             10
+
 Assertion with Invalid Compute URL
                       NOK       https://162.123.12.3    blank                  blank                   blank                   ACTIVE          YES       5             10
 
