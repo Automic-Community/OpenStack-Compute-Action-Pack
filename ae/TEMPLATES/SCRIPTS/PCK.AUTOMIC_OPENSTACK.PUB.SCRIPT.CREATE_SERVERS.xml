@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ISO-8859-15" standalone="no"?><uc-export clientvers="11.0.0">
+<SCRI name="PCK.AUTOMIC_OPENSTACK.PUB.SCRIPT.CREATE_SERVERS">
+<XHEADER state="1">
+<Title>Prepare json to create servers in openstack</Title>
+<ArchiveKey1/>
+<ArchiveKey2/>
+<Active>1</Active>
+<OH_SubType/>
+<CustomAttributes KeyListID="0" dataRequestID="0"/>
+</XHEADER>
+<SYNCREF state="1">
+<Syncs/>
+</SYNCREF>
+<ATTR_SCRI state="1">
+<Queue>CLIENT_QUEUE</Queue>
+<StartType/>
+<ExtRepDef>1</ExtRepDef>
+<ExtRepAll>0</ExtRepAll>
+<ExtRepNone>0</ExtRepNone>
+<IntAccount/>
+<ActAtRun>0</ActAtRun>
+<UC4Priority>0</UC4Priority>
+<MaxParallel2>0</MaxParallel2>
+<MpElse1>1</MpElse1>
+<MpElse2>0</MpElse2>
+<TZ/>
+<AutoDeactNo>0</AutoDeactNo>
+<AutoDeact1ErrorFree>0</AutoDeact1ErrorFree>
+<AutoDeactErrorFree>0</AutoDeactErrorFree>
+<DeactWhen/>
+<AutoDeactAlways>1</AutoDeactAlways>
+<DeactDelay>0</DeactDelay>
+</ATTR_SCRI>
+<RUNTIME state="1">
+<MaxRetCode>0</MaxRetCode>
+<MrcExecute/>
+<MrcElseE>0</MrcElseE>
+<FcstStatus>0| |</FcstStatus>
+
+<ErtMethodDef>1</ErtMethodDef>
+<ErtMethodFix>0</ErtMethodFix>
+<ErtFix>0</ErtFix>
+<ErtDynMethod>2|Average</ErtDynMethod>
+<ErtMethodDyn>0</ErtMethodDyn>
+<ErtCnt>0</ErtCnt>
+<ErtCorr>0</ErtCorr>
+<ErtIgn>0</ErtIgn>
+<ErtIgnFlg>0</ErtIgnFlg>
+<ErtMinCnt>0</ErtMinCnt>
+<MrtMethodNone>1</MrtMethodNone>
+<MrtMethodFix>0</MrtMethodFix>
+<MrtFix>0</MrtFix>
+<MrtMethodErt>0</MrtMethodErt>
+<MrtErt>0</MrtErt>
+<MrtMethodDate>0</MrtMethodDate>
+<MrtDays>0</MrtDays>
+<MrtTime>00:00</MrtTime>
+<MrtTZ/>
+<SrtMethodNone>1</SrtMethodNone>
+<SrtMethodFix>0</SrtMethodFix>
+<SrtFix>0</SrtFix>
+<SrtMethodErt>0</SrtMethodErt>
+<SrtErt>0</SrtErt>
+<MrtCancel>0</MrtCancel>
+<MrtExecute>0</MrtExecute>
+<MrtExecuteObj/>
+</RUNTIME>
+<DYNVALUES state="1">
+<dyntree>
+<node content="1" id="VALUE" name="Variables" parent="" type="VALUE">
+<VALUE state="1">
+<Values/>
+<Mode>0</Mode>
+</VALUE>
+</node>
+</dyntree>
+</DYNVALUES>
+<ROLLBACK state="1">
+<RollbackFlag>0</RollbackFlag>
+<CBackupObj/>
+<CRollbackObj/>
+<FBackupPath/>
+<FDeleteBefore>0</FDeleteBefore>
+<FInclSubDirs>0</FInclSubDirs>
+</ROLLBACK>
+<SCRIPT mode="1" state="1">
+<MSCRI><![CDATA[!------------------Reading json template from VARA and replacing the values with the given input -------------
+:    SET &VARA_OBJ_JSON# = "PCK.AUTOMIC_OPENSTACK.PUB.VARA.JSON_TEMPLATE"
+:    DEFINE &UC4RB_OPS_CONFIG_JSON#, string
+
+:    SET &UC4RB_OPS_CONFIG_JSON# = GET_VAR(&VARA_OBJ_JSON#, "JSON_TEMPLATE",1)
+:    SET &UC4RB_OPS_CONFIG_JSON# = STR_SUB (&UC4RB_OPS_CONFIG_JSON#, "$$servername", &UC4RB_OPS_SERVER_NAME#)
+:    SET &UC4RB_OPS_CONFIG_JSON# = STR_SUB (&UC4RB_OPS_CONFIG_JSON#, "$$imageRef", &UC4RB_OPS_IMAGE_REF#)
+:    SET &UC4RB_OPS_CONFIG_JSON# = STR_SUB (&UC4RB_OPS_CONFIG_JSON#, "$$flavorRef", &UC4RB_OPS_FLAVOR_REF#)
+
+:    SET &UC4RB_OPS_FILE_CONTENT# = &UC4RB_OPS_CONFIG_JSON#
+:    SET &UC4RB_OPS_FILENAME# = "create-server"
+
+
+:INCLUDE PCK.AUTOMIC_OPENSTACK.PUB.INCLUDE.CREATE_FILE
+
+]]></MSCRI>
+</SCRIPT>
+<DOCU_Docu state="1" type="text">
+<DOC/>
+</DOCU_Docu>
+</SCRI>
+</uc-export>
