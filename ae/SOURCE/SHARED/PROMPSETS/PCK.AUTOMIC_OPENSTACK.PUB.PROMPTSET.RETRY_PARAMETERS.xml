@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
+<PRPT name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.RETRY_PARAMETERS">
+<HEADER state="1">
+<Title>Provide retry information</Title>
+<ArchiveKey1/>
+<ArchiveKey2/>
+<OH_SubType/>
+</HEADER>
+<PROMPTDESIGNER state="1">
+<DESIGNER/>
+</PROMPTDESIGNER>
+<PROMPTSETXUI state="1">
+<XUIEDITOR><![CDATA[<dialog height="424" icon="PRPT" id="PRPTS" left="0" top="0" width="441"><readpanel fill="b" id="PRPTBOX" nl="1" scroll="v" text="Provide retry information"><properties><entry name="text">Provide retry information</entry><entry name="modifiable">0</entry></properties><integer alt="1" enabled="1" fill="b" focus="0" id="UC4RB_OPS_RETRY_COUNTs.00" max="100" min="1" nl="1" text="Retry Count" tooltip="Number of retry attempts to check the status of server. Min 1 and Max 100">
+      <properties>
+        <entry listparam="N" name="reference" reftype="STATIC">UC_DATATYPE_NUMERIC</entry>
+        <entry name="text">Retry Count</entry>
+        <entry name="min">1</entry>
+        <entry name="max">100</entry>
+        <entry name="quotes"/>
+        <entry name="id">UC4RB_OPS_RETRY_COUNTs.00</entry>
+        <entry name="enabled">0</entry>
+        <entry name="focus">0</entry>
+        <entry name="tooltip">Number of retry attempts to check the status of server. Min 1 and Max 100</entry>
+        <entry name="modifiable">1</entry>
+        <entry name="customfield"/>
+      <entry name="initvalue">0</entry></properties>
+    </integer><integer alt="1" enabled="1" fill="b" focus="0" id="UC4RB_OPS_RETRY_INTERVALs.00" max="2000" min="1" nl="1" text="Retry Interval (seconds)" tooltip="Specify how frequently you want to check the status of server.Min 1 and Max 2000">
+      <properties>
+        <entry listparam="N" name="reference" reftype="STATIC">UC_DATATYPE_NUMERIC</entry>
+        <entry name="text">Retry Interval (seconds)</entry>
+        <entry name="min">1</entry>
+        <entry name="max">2000</entry>
+        <entry name="quotes"/>
+        <entry name="id">UC4RB_OPS_RETRY_INTERVALs.00</entry>
+        <entry name="enabled">0</entry>
+        <entry name="focus">0</entry>
+        <entry name="tooltip">Specify how frequently you want to check the status of server.Min 1 and Max 2000</entry>
+        <entry name="modifiable">1</entry>
+        <entry name="customfield"/>
+      <entry name="initvalue">0</entry></properties>
+    </integer></readpanel></dialog>]]></XUIEDITOR>
+</PROMPTSETXUI>
+<PROMPTSETDATA state="1">
+<DATAEDITOR><![CDATA[<PRPTS ontop="1"><PRPTBOX><UC4RB_OPS_RETRY_COUNTs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_OPS_RETRY_COUNT#" ReadFromTable="OPSE">1</UC4RB_OPS_RETRY_COUNTs.00><UC4RB_OPS_RETRY_INTERVALs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_OPS_RETRY_INTERVAL#" ReadFromTable="OPSE">1</UC4RB_OPS_RETRY_INTERVALs.00></PRPTBOX></PRPTS>]]></DATAEDITOR>
+</PROMPTSETDATA>
+<DOCU_Docu state="1" type="text">
+<DOC/>
+</DOCU_Docu>
+</PRPT>
+</uc-export>
