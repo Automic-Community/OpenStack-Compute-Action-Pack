@@ -11,11 +11,11 @@ Resource          ../../Resources/variables.txt
 Resource          ../../Resources/actions.txt
 
 *** Test Cases ***    OK_NOK    ComputeURL              TokenID                TenantID                ServerID                TargetStatus    FailIf    RetryCount    RetryInterval
-Asserting behavior of action when orginal status of server at openstack is selected as Target Status
+Asserting behavior of action when original status of server at openstack is selected as Target Status
                       [Tags]    main_scenarios
                       OK        ${OS_Compute_URL}       blank                  blank                   blank                   ACTIVE          YES       5             10
 
-Asserting behavior of action when orginal status of server at openstack is not known and "Fail action if target status is not reached" is selected as NO.
+Asserting behavior of action when original status of server at openstack is not known and "Fail action if target status is not reached" is selected as NO.
                       OK        ${OS_Compute_URL}       blank                  blank                   blank                   SUSPENDED       NO        5             10
 
 Asserting behavior of action when "Any" is selected as Target Status.
