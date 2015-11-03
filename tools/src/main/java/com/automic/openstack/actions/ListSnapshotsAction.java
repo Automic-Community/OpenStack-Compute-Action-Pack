@@ -19,9 +19,13 @@ import com.sun.jersey.api.client.WebResource;
 
 /**
  * 
- * @author shrutinambiar This class is used to list all the images and its
- *         details that are present. The result for the same is stored in an XML
- *         file at the specified location.
+ * @author shrutinambiar 
+ */
+
+/**
+ * This class is used to list all the images and its details that are present.
+ * The result for the same is stored in an XML file at the specified location.
+ *
  */
 
 public class ListSnapshotsAction extends AbstractHttpAction {
@@ -156,13 +160,16 @@ public class ListSnapshotsAction extends AbstractHttpAction {
 		}
 		return paramMap;
 	}
-	
+
 	/**
 	 * Method to prepare output based on Response of an HTTP request to client.
-	 * @param response instance of {@link ClientResponse}
+	 * 
+	 * @param response
+	 *            instance of {@link ClientResponse}
 	 * @throws AutomicException
 	 */
-	private void prepareOutput(final ClientResponse response) throws AutomicException {
+	private void prepareOutput(final ClientResponse response)
+			throws AutomicException {
 
 		CommonUtil.jsonResponse2xml(response.getEntityInputStream(), filePath,
 				"ListSnapshots");

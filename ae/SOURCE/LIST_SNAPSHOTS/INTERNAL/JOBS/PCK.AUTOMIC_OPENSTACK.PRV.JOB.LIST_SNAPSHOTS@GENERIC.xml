@@ -121,9 +121,9 @@
 
 !------------------------------------------ Buidling java arguments --------------------------------------------------------------------------------------------
 ! Building output file path
-:SET &AGENT_CURR_DIR# = GET_VAR('UC_EX_PATH_TEMP', &AGENT#)
-:SET &UC4RB_OPS_FILENAME# = "openstack-snapshotlist-&$RUNID#.xml"
-:PSET &UC4RB_OPS_SNAPSHOTS_XML_PATH# = STR_CAT(&AGENT_CURR_DIR#,&UC4RB_OPS_FILENAME#)
+: SET &AGENT_CURR_DIR# = GET_VAR('UC_EX_PATH_TEMP', &AGENT#)
+: SET &UC4RB_OPS_FILENAME# = "openstack-snapshotlist-&$RUNID#.xml"
+: PSET &UC4RB_OPS_SNAPSHOTS_XML_PATH# = STR_CAT(&AGENT_CURR_DIR#,&UC4RB_OPS_FILENAME#)
 
 ! Action name
 : SET &UC4RB_OPS_ACTION_NAME# = "LIST_SNAPSHOTS"
@@ -132,7 +132,7 @@
 : DEFINE &UC4RB_OPS_OPTIONS#, string, 12
 
 : SET &UC4RB_OPS_OPTIONS#[1] = "-action"
-:INC PCK.AUTOMIC_OPENSTACK.PUB.INCLUDE.ESCAPE_ARG_VALUE "TEMP_OPTION_VALUE"="&UC4RB_OPS_ACTION_NAME#"
+: INC PCK.AUTOMIC_OPENSTACK.PUB.INCLUDE.ESCAPE_ARG_VALUE "TEMP_OPTION_VALUE"="&UC4RB_OPS_ACTION_NAME#"
 : SET &UC4RB_OPS_OPTIONS#[2] = "&UC4RB_OPS_OPTION_VALUE#"
 
 : SET &UC4RB_OPS_OPTIONS#[3] = "-computeurl"
@@ -166,12 +166,12 @@ java -jar &UC4RB_OPS_PATH_JAR# &UC4RB_OPS_JAVA_ARGUMENTS#
 
 
 ! Status messages
-:SET &UC4RB_LOGGING_INFO# = "******** LIST SNAPSHOTS ACTION EXECUTED SUCCESSFULLY ********"
-:SET &UC4RB_LOGGING_ERROR# = "******** LIST SNAPSHOTS ACTION FAILED ********" 
+: SET &UC4RB_LOGGING_INFO# = "******** LIST SNAPSHOTS ACTION EXECUTED SUCCESSFULLY ********"
+: SET &UC4RB_LOGGING_ERROR# = "******** LIST SNAPSHOTS ACTION FAILED ********" 
 
 !------------------------------------------ Error Handling -----------------------------------------------------------------------------------------------------
 
-:INC PCK.AUTOMIC_OPENSTACK.PUB.INCLUDE.CHECK_JOBSTATUS
+: INC PCK.AUTOMIC_OPENSTACK.PUB.INCLUDE.CHECK_JOBSTATUS
 ]]></MSCRI>
 </SCRIPT>
 <OUTPUTSCAN state="1">
