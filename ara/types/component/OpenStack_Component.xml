@@ -24,6 +24,26 @@
 				<Description>Specify full path and name of the JSON file which will be used to create a new server or servers.</Description>
 			</Property>
 		</Group>
+		<Group name="RetryParameters" displayName="Retry Parameters">
+			<Property name="retry_count" displayName="Retry Count" mode="EDITABLE" type="SingleLineText">
+				<Description>Number of retry attempts to check the status of server. Min 1 and Max 100.</Description>
+			</Property>
+			<Property name="retry_interval" displayName="Retry Interval" mode="EDITABLE" type="SingleLineText">
+				<Description>Specify how frequently you want to check the status of server.Min 1 and Max 2000.</Description>
+			</Property>
+		</Group>
+		<Group name="CheckServerStatus" displayName="Check Server Status">
+			<Property name="target_status" displayName="Target Status" mode="EDITABLE" type="SingleChoice">
+				<Defaultvalue>ANY</Defaultvalue>
+				<List>ANY#;#ACTIVE#;#PAUSED#;#SHUTOFF#;#STOP#;#SUSPENDED#;#ERROR</List>
+				<Description>Specify wished target status.</Description>
+			</Property>
+			<Property name="match" displayName="Fail if target status is not reached" mode="EDITABLE" type="SingleChoice">
+				<Defaultvalue>YES</Defaultvalue>
+				<List>YES#;#NO</List>
+				<Description>Yes: action fails if target status is not reached. No: action is always successful.</Description>
+			</Property>
+		</Group>
 	</Properties>
 	<DynamicProperties>
 		<Property name="/openstack/server_param/server_id" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
@@ -64,6 +84,22 @@
 		<Property name="/openstack/server/create_server_param_file" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
 			<Value>{/custom/create_server_param_file}</Value>
 			<Description>Specify full path and name of the JSON file which will be used to create a new server or servers.</Description>
+		</Property>
+		<Property name="/openstack/retry_param/retry_count" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+			<Value>{/custom/retry_count}</Value>
+			<Description>Number of retry attempts to check the status of server. Min 1 and Max 100.</Description>
+		</Property>
+		<Property name="/openstack/retry_param/retry_interval" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+			<Value>{/custom/retry_interval}</Value>
+			<Description>Specify how frequently you want to check the status of server.Min 1 and Max 2000.</Description>
+		</Property>
+		<Property name="/openstack/server/target_status" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+			<Value>{/custom/target_status}</Value>
+			<Description>Specify wished target status.</Description>
+		</Property>
+		<Property name="/openstack/server/match" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+			<Value>{/custom/match}</Value>
+			<Description>Yes: action fails if target status is not reached. No: action is always successful.</Description>
 		</Property>
 	</DynamicProperties>
 </ComponentType>
