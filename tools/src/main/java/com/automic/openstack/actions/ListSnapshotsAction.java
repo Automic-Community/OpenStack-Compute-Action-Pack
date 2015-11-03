@@ -137,7 +137,7 @@ public class ListSnapshotsAction extends AbstractHttpAction{
 	private void prepareOutput(ClientResponse response) throws AutomicException {
 
 		CommonUtil.jsonResponse2xml(response.getEntityInputStream(), filePath, "ListSnapshots");
-		ConsoleWriter.writeln("UC4RB_OPS_LIST_SNAPSHOTS_XML ::=" + filePath);
+		ConsoleWriter.writeln("UC4RB_OPS_SNAPSHOTS_XML_PATH ::=" + filePath);
 
     }
 
