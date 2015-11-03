@@ -1,12 +1,12 @@
 {
     "server": {
-        "name": "AnkitTestInstance",
+        "name": "TestServer",
         "imageRef": "5cc06ee6-10ea-4696-87e4-e9ef0c0691ce",
         "flavorRef": "1",
         "adminPass":"Nagarro$004",
         "networks": [
             {
-                "uuid": "83860b48-0e04-462f-bb66-14dc467b2ee2"
+                "uuid": "8ccb924d-bbd4-4559-a652-de7cc7f1b471"
             }
         ],
         "metadata": {
