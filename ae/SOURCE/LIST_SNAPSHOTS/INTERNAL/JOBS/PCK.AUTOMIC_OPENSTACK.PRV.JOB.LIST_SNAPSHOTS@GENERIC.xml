@@ -122,7 +122,7 @@
 !------------------------------------------ Buidling java arguments --------------------------------------------------------------------------------------------
 ! Building output file path
 :SET &AGENT_CURR_DIR# = GET_VAR('UC_EX_PATH_TEMP', &AGENT#)
-:SET &UC4RB_OPS_FILENAME# = "openstack-imagelist-&$RUNID#.xml"
+:SET &UC4RB_OPS_FILENAME# = "openstack-snapshotlist-&$RUNID#.xml"
 :PSET &UC4RB_OPS_SNAPSHOTS_XML_PATH# = STR_CAT(&AGENT_CURR_DIR#,&UC4RB_OPS_FILENAME#)
 
 ! Action name
@@ -183,7 +183,7 @@ java -jar &UC4RB_OPS_PATH_JAR# &UC4RB_OPS_JAVA_ARGUMENTS#
 <POST_SCRIPT mode="1" replacementmode="1" state="1">
 <OSCRI><![CDATA[: INC PCK.AUTOMIC_OPENSTACK.PUB.INCLUDE.PUBLISH_AUTH_TOKEN
 :SET &STATUS# = GET_UC_OBJECT_STATUS(,,"RETCODE")
-! In case of success we publish list server xml
+! In case of success we publish list snapshot xml
 :IF &STATUS# EQ 0
 :  PUBLISH &UC4RB_OPS_SNAPSHOTS_XML_PATH#,,"TOP"
 ! Publishing total server records found into one AE variable
@@ -197,7 +197,7 @@ java -jar &UC4RB_OPS_PATH_JAR# &UC4RB_OPS_JAVA_ARGUMENTS#
 :  XML_CLOSE  
 :ELSE
 :  PSET &UC4RB_OPS_SNAPSHOTS_XML_PATH# = ""
-:  SET &UC4RB_OPS_SNAPSHOTS_COUNT# = ""
+:  PSET &UC4RB_OPS_SNAPSHOTS_COUNT# = ""
 :ENDIF]]></OSCRI>
 </POST_SCRIPT>
 <DOCU_Docu state="1" type="text">
