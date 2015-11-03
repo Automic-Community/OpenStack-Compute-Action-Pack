@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
+<SCRI name="PCK.AUTOMIC_OPENSTACK.PRV.SCRIPT.CHECK_SERVER_STATUS">
+<XHEADER state="1">
+<Title>Check server status</Title>
+<ArchiveKey1/>
+<ArchiveKey2/>
+<Active>1</Active>
+<OH_SubType/>
+<CustomAttributes KeyListID="0" dataRequestID="0"/>
+</XHEADER>
+<SYNCREF state="1">
+<Syncs/>
+</SYNCREF>
+<ATTR_SCRI state="1">
+<Queue>CLIENT_QUEUE</Queue>
+<StartType/>
+<ExtRepDef>1</ExtRepDef>
+<ExtRepAll>0</ExtRepAll>
+<ExtRepNone>0</ExtRepNone>
+<IntAccount/>
+<ActAtRun>1</ActAtRun>
+<UC4Priority>0</UC4Priority>
+<MaxParallel2>0</MaxParallel2>
+<MpElse1>1</MpElse1>
+<MpElse2>0</MpElse2>
+<TZ/>
+<AutoDeactNo>0</AutoDeactNo>
+<AutoDeact1ErrorFree>0</AutoDeact1ErrorFree>
+<AutoDeactErrorFree>0</AutoDeactErrorFree>
+<DeactWhen/>
+<AutoDeactAlways>1</AutoDeactAlways>
+<DeactDelay>0</DeactDelay>
+</ATTR_SCRI>
+<RUNTIME state="1">
+<MaxRetCode>0</MaxRetCode>
+<MrcExecute/>
+<MrcElseE>0</MrcElseE>
+<FcstStatus>0| |</FcstStatus>
+<Ert>10</Ert>
+<ErtMethodDef>1</ErtMethodDef>
+<ErtMethodFix>0</ErtMethodFix>
+<ErtFix>0</ErtFix>
+<ErtDynMethod>2|Average</ErtDynMethod>
+<ErtMethodDyn>0</ErtMethodDyn>
+<ErtCnt>0</ErtCnt>
+<ErtCorr>0</ErtCorr>
+<ErtIgn>0</ErtIgn>
+<ErtIgnFlg>0</ErtIgnFlg>
+<ErtMinCnt>0</ErtMinCnt>
+<MrtMethodNone>1</MrtMethodNone>
+<MrtMethodFix>0</MrtMethodFix>
+<MrtFix>0</MrtFix>
+<MrtMethodErt>0</MrtMethodErt>
+<MrtErt>0</MrtErt>
+<MrtMethodDate>0</MrtMethodDate>
+<MrtDays>0</MrtDays>
+<MrtTime>00:00</MrtTime>
+<MrtTZ/>
+<SrtMethodNone>1</SrtMethodNone>
+<SrtMethodFix>0</SrtMethodFix>
+<SrtFix>0</SrtFix>
+<SrtMethodErt>0</SrtMethodErt>
+<SrtErt>0</SrtErt>
+<MrtCancel>0</MrtCancel>
+<MrtExecute>0</MrtExecute>
+<MrtExecuteObj/>
+</RUNTIME>
+<DYNVALUES state="1">
+<dyntree>
+<node content="1" id="VALUE" name="Variables" parent="" type="VALUE">
+<VALUE state="1">
+<Values/>
+<Mode>0</Mode>
+</VALUE>
+</node>
+</dyntree>
+</DYNVALUES>
+<ROLLBACK state="1">
+<RollbackFlag>0</RollbackFlag>
+<CBackupObj/>
+<CRollbackObj/>
+<FBackupPath/>
+<FDeleteBefore>0</FDeleteBefore>
+<FInclSubDirs>0</FInclSubDirs>
+</ROLLBACK>
+<SCRIPT mode="1" state="1">
+<MSCRI><![CDATA[!-------------------------------------Logging input parameters-------------------------------------------------------------------------------------------------
+:PRINT "-------------Logging input parameters start---------------------"
+:PRINT "Compute URL : &UC4RB_OPS_COMPUTE_URL#"
+:PRINT "Authentication Token : &UC4RB_OPS_AUTH_TOKEN#"
+:PRINT "Tenant Id : &UC4RB_OPS_TENANT_ID#"
+:PRINT "Server Id : &UC4RB_OPS_SERVER_ID#"
+:PRINT "Taregt Status : &UC4RB_OPS_TARGET_STATUS#"
+:PRINT "Fail if target status is not reached : &UC4RB_OPS_MATCH#"
+:PRINT "Retry Count : &UC4RB_OPS_RETRY_COUNT#"
+:PRINT "Retry Interval (seconds) : &UC4RB_OPS_RETRY_INTERVAL#"
+:PRINT "-------------Logging input parameters end---------------------"
+
+!------------------------------------------ Invoking Get Server Details Action and fetching open stack server status ---------------------------------------------------------------------------
+
+:  SET &COUNT# = 0
+:  SET &FLAG# = "FALSE"
+:  DEFINE &SERVER_INFO_FILEPATH#, string
+:  WHILE &COUNT# LT &UC4RB_OPS_RETRY_COUNT#
+:     WAIT &UC4RB_OPS_RETRY_INTERVAL#
+:     SET  &COUNT# = &COUNT# +1
+:     PRINT "Retry Count &COUNT#"
+:     SET &GET_SERVER_OBJECT_NAME# = "PCK.AUTOMIC_OPENSTACK.PRV.JOB.GET_SERVER_DETAILS@GENERIC" 
+!     Invoking 'Get Server Details' Action    
+:     INC PCK.AUTOMIC_OPENSTACK.PUB.INCLUDE.ACTIVATE_OBJECT UC4RB_OPS_OBJECT_TYPE = GET_SERVER_OBJECT_NAME
+:     IF &ACTOBJ# <> 0 
+:         SET &SERVER_INFO_FILEPATH# = GET_PUBLISHED_VALUE(&ACTOBJ#,UC4RB_OPS_SERVER_INFO_FILEPATH#)
+:         PSET &UC4RB_OPS_FILE_PATH# = &SERVER_INFO_FILEPATH#
+!         Reading 'Get Server Details' xml and fetching open stack server status         
+:         INC PCK.AUTOMIC_OPENSTACK.PUB.INCLUDE.GET_SERVER_STATUS
+:         PRINT "Request Status = &UC4RB_OPS_SERVER_STATUS#"
+:         IF &UC4RB_OPS_TARGET_STATUS# EQ "ANY"
+:             SET &FLAG# = "TRUE"
+:             SET  &COUNT# = &UC4RB_OPS_RETRY_COUNT#    
+:         ENDIF  
+:         IF &UC4RB_OPS_MATCH# EQ "YES"
+:             IF &UC4RB_OPS_TARGET_STATUS# EQ "ERROR"
+:                 SET  &COUNT# = &UC4RB_OPS_RETRY_COUNT#
+:                 PRINT "Target status is Error. Hence existing from the loop!!"
+:             ENDIF
+:             IF &UC4RB_OPS_SERVER_STATUS# EQ &UC4RB_OPS_TARGET_STATUS#  
+!                 Satisfy the condition to quit from while loop as status is no more inprogress state.       
+:                 SET  &COUNT# = &UC4RB_OPS_RETRY_COUNT#
+:                 SET &FLAG# = "TRUE"
+:             ENDIF
+:         ELSE
+:             SET &FLAG# = "TRUE"
+:             IF &UC4RB_OPS_TARGET_STATUS# EQ "ERROR"
+:                 SET  &COUNT# = &UC4RB_OPS_RETRY_COUNT#
+:                 PRINT "Target status is Error. Hence existing from the loop!!"
+:             ENDIF        
+:         ENDIF
+:     ENDIF
+:  ENDWHILE
+:  IF &FLAG# EQ "FALSE"
+:     STOP MSG, 50, "Error ! Retrieved server status does not match with target status."
+:  ENDIF 
+:  PUBLISH &UC4RB_OPS_SERVER_STATUS#,,"TOP"
+
+!----------------------------------------------------------------- Deleting Get Server Details XML file------------------------------------------ -------------------------------------------
+: SET &DELETE_FILE_OBJECT_NAME# = "PCK.AUTOMIC_OPENSTACK.PRV.JOB.DELETE_FILE@GENERIC"
+: PSET &UC4RB_OPS_STATUS# = "YES"
+!Invoking 'Delete File' Action
+: INC PCK.AUTOMIC_OPENSTACK.PUB.INCLUDE.ACTIVATE_OBJECT UC4RB_OPS_OBJECT_TYPE = DELETE_FILE_OBJECT_NAME
+: IF &ACTOBJ# <> 0 
+:   PRINT "File &UC4RB_OPS_FILE_PATH# deleted succssfully."
+: ENDIF
+: PSET &UC4RB_OPS_FILE_PATH# = ""
+: PSET &UC4RB_OPS_STATUS# = ""
+]]></MSCRI>
+</SCRIPT>
+<DOCU_Docu state="1" type="text">
+<DOC/>
+</DOCU_Docu>
+</SCRI>
+</uc-export>
