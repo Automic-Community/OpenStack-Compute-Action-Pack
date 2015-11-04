@@ -321,7 +321,7 @@
 <DOC><![CDATA[= Action name =
 PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CHECK_SERVER_STATUS
 = General description =
-This action is used to retrieve the status of a server using server id. Output of this action will be an AE variable having current server status on Open Stack.
+This action is used to check/get the status of a server using server id. Output of this action will be an AE variable having current server status on Open Stack.
 In case the operation is taking time, we may have to call this action repeatedly. For this, there is a prompt-set for Retry Parameters which can be used until the operation got completed.
 Internally this action calls Get Server Details  action to get the server status on Open Stack.
 
