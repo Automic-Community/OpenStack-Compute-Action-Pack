@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="ISO-8859-15" standalone="no"?><uc-export clientvers="11.0.0">
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
 <SCRI name="PCK.AUTOMIC_OPENSTACK.PUB.SCRIPT.CREATE_SERVERS">
 <XHEADER state="1">
 <Title>Prepare json to create servers in openstack</Title>
@@ -36,7 +37,7 @@
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
 <FcstStatus>0| |</FcstStatus>
-
+<Ert>1</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
 <ErtFix>0</ErtFix>
@@ -89,13 +90,15 @@
 :    DEFINE &UC4RB_OPS_CONFIG_JSON#, string
 
 :    SET &UC4RB_OPS_CONFIG_JSON# = GET_VAR(&VARA_OBJ_JSON#, "JSON_TEMPLATE",1)
-:    SET &UC4RB_OPS_CONFIG_JSON# = STR_SUB (&UC4RB_OPS_CONFIG_JSON#, "$$servername", &UC4RB_OPS_SERVER_NAME#)
-:    SET &UC4RB_OPS_CONFIG_JSON# = STR_SUB (&UC4RB_OPS_CONFIG_JSON#, "$$imageRef", &UC4RB_OPS_IMAGE_REF#)
-:    SET &UC4RB_OPS_CONFIG_JSON# = STR_SUB (&UC4RB_OPS_CONFIG_JSON#, "$$flavorRef", &UC4RB_OPS_FLAVOR_REF#)
+:    SET &UC4RB_OPS_CONFIG_JSON# = STR_SUB (&UC4RB_OPS_CONFIG_JSON#, "$servername", &UC4RB_OPS_SERVER_NAME#)
+:    SET &UC4RB_OPS_CONFIG_JSON# = STR_SUB (&UC4RB_OPS_CONFIG_JSON#, "$imagereference", &UC4RB_OPS_IMAGE_REF#)
+:    SET &UC4RB_OPS_CONFIG_JSON# = STR_SUB (&UC4RB_OPS_CONFIG_JSON#, "$flavorreference", &UC4RB_OPS_FLAVOR_REF#)
 
 :    SET &UC4RB_OPS_FILE_CONTENT# = &UC4RB_OPS_CONFIG_JSON#
 :    SET &UC4RB_OPS_FILENAME# = "create-server"
+:    SET &UC4RB_OPS_FILETYPE# = "json"
 
+!-----------creating json file with  --------------------
 
 :INCLUDE PCK.AUTOMIC_OPENSTACK.PUB.INCLUDE.CREATE_FILE
 
