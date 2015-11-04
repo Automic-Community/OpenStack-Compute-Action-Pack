@@ -370,16 +370,16 @@
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.DELETE_FILE" name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.DELETE_FILE" parent="PRPTS" type="PROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.DELETE_FILE">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.DELETE_FILE">
-<UC4RB_OPS_FILE_PATHs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_FILE_PATH#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.DELETE_FILE">&amp;UC4RB_OPS_FILE_PATH#</UC4RB_OPS_FILE_PATHs.00>
-<UC4RB_OPS_STATUSs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_STATUS#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.DELETE_FILE">NO</UC4RB_OPS_STATUSs.00>
+<UC4RB_OPS_FILE_PATHs.00 ReadFromTable="JPPV" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_FILE_PATH#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.DELETE_FILE">&amp;UC4RB_OPS_FILE_PATH#</UC4RB_OPS_FILE_PATHs.00>
+<UC4RB_OPS_STATUSs.00 ReadFromTable="JPPV" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_STATUS#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.DELETE_FILE">NO</UC4RB_OPS_STATUSs.00>
 </PRPTBOX>
 </PROMPTSET>
 </node>
 <node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PRPTS" type="PROMPTSET">
 <PROMPTSET name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
 <PRPTBOX promptset="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
-<AGENTs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="AGENT#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">&amp;AGENT#</AGENTs.00>
-<LOGINs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="LOGIN#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">&amp;LOGIN#</LOGINs.00>
+<AGENTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="AGENT#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT"/>
+<LOGINs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="LOGIN#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -483,7 +483,7 @@
 <MaxRetCode>0</MaxRetCode>
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
-<FcstStatus>0| |</FcstStatus>
+<FcstStatus>0|U00000000 ??? ""</FcstStatus>
 <Ert>9</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
