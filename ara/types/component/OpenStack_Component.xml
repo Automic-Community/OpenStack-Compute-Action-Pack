@@ -26,9 +26,11 @@
 		</Group>
 		<Group name="RetryParameters" displayName="Retry Parameters">
 			<Property name="retry_count" displayName="Retry Count" mode="EDITABLE" type="SingleLineText">
+				<Defaultvalue>5</Defaultvalue>
 				<Description>Number of retry attempts to check the status of server. Min 1 and Max 100.</Description>
 			</Property>
 			<Property name="retry_interval" displayName="Retry Interval" mode="EDITABLE" type="SingleLineText">
+				<Defaultvalue>10</Defaultvalue>
 				<Description>Specify how frequently you want to check the status of server.Min 1 and Max 2000.</Description>
 			</Property>
 		</Group>
