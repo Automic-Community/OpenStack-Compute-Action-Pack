@@ -1,9 +1,9 @@
 package com.automic.openstack.actions;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,22 +16,22 @@ import com.automic.openstack.util.ConsoleWriter;
 import com.automic.openstack.util.Validator;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
+
 
 /**
+ * @author Shruti Nambiar 
  * 
- * @author shrutinambiar 
- */
-
-/**
  * This class is used to list all the images and its details that are present.
  * The result for the same is stored in an XML file at the specified location.
  *
  */
 
+
 public class ListSnapshotsAction extends AbstractHttpAction {
 
 	private static final Logger LOGGER = LogManager
-			.getLogger(ListServersAction.class);
+			.getLogger(ListSnapshotsAction.class);
 
 	private static final String QUERY_DELIMETER = ",";
 	private static final String VAL_DELIMETER = "=";
@@ -85,6 +85,9 @@ public class ListSnapshotsAction extends AbstractHttpAction {
 	}
 
 	@Override
+	/**
+	 * Retrieves snapshot details by calling http://baseUrl/{tenantId}/images
+	 */
 	protected void executeSpecific() throws AutomicException {
 		ClientResponse response = null;
 
@@ -92,13 +95,9 @@ public class ListSnapshotsAction extends AbstractHttpAction {
 				.path("images");
 
 		LOGGER.info("Calling url " + webResource.getURI());
-
+		
 		if (Validator.checkNotEmpty(queryParam)) {
-			Map<String, String> paramMap = prepareQueryParamsMap(queryParam);
-			for (Map.Entry<String, String> entry : paramMap.entrySet()) {
-				webResource = webResource.queryParam(entry.getKey(),
-						entry.getValue());
-			}
+			webResource = webResource.queryParams(prepareQueryParamsMaps(queryParam));
 		}
 
 		response = webResource.accept(MediaType.APPLICATION_JSON)
@@ -110,7 +109,7 @@ public class ListSnapshotsAction extends AbstractHttpAction {
 	}
 
 	/**
-	 * Method to prepare a map of query parameters. It splits the string using
+	 * Method to prepare a multi-valued map of query parameters. It splits the string using
 	 * two delimiters {@link ListSnapshotsAction#QUERY_DELIMETER} and
 	 * {@link ListSnapshotsAction#VAL_DELIMETER} and creates the key-value pair.
 	 *
@@ -118,47 +117,38 @@ public class ListSnapshotsAction extends AbstractHttpAction {
 	 *            Query arguments as one string
 	 * @return map
 	 */
-	private Map<String, String> prepareQueryParamsMap(final String queryArgs) {
-		Map<String, String> paramMap = new HashMap<String, String>();
+	
+	private MultivaluedMap<String, String> prepareQueryParamsMaps(final String queryArgs) {
+		MultivaluedMap<String, String> params = new MultivaluedMapImpl();
 		String[] splitArgs = queryArgs.split(QUERY_DELIMETER);
 		if (splitArgs != null && splitArgs.length > 0) {
 			for (String str : splitArgs) {
 				String[] queryParam = str.split(VAL_DELIMETER);
 				if (queryParam != null && queryParam.length == 2) {
 					String key = queryParam[0].trim();
-					key = key.toLowerCase();
 					String value = queryParam[1].trim();
 					if (Validator.checkNotEmpty(key)
 							&& Validator.checkNotEmpty(value)) {
-						switch (key) {
-						case "changes-since":
-							paramMap.put(key, value);
-							break;
+						switch (key.toLowerCase()) {
+						case "changes-since":							
 						case "server":
-							paramMap.put(key, value);
-							break;
 						case "name":
-							paramMap.put(key, value);
-							break;
 						case "status":
-							paramMap.put(key, value);
-							break;
 						case "type":
-							paramMap.put(key, value);
-							break;
 						case "limit":
-							paramMap.put(key, value);
-							break;
 						case "marker":
-							paramMap.put(key, value);
+							params.put(key, Arrays.asList(value));
 							break;
 						default:
+							LOGGER.info("Invalid query parameter : "+key+ "=" +value);
 						}
 					}
+				} else {
+					LOGGER.info("Invalid query parameter : "+str);
 				}
 			}
 		}
-		return paramMap;
+		return params;
 	}
 
 	/**
