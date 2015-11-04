@@ -239,7 +239,7 @@
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
 <FcstStatus>0| |</FcstStatus>
-<Ert>14</Ert>
+<Ert>6</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
 <ErtFix>0</ErtFix>
@@ -324,11 +324,12 @@ PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CHECK_SERVER_STATUS
 This action is used to retrieve the status of a server using server id. Output of this action will be an AE variable having current server status on Open Stack.
 In case the operation is taking time, we may have to call this action repeatedly. For this, there is a prompt-set for Retry Parameters which can be used until the operation got completed.
 Internally this action calls Get Server Details  action to get the server status on Open Stack.
+
 Possible values of Target Status are:
 ANY (default), ACTIVE, STOP, SHUTOFF, SUSPENDED, PAUSED, ERROR 
-Note: If specified Target Status is :
-ERROR : In this case this action won't compare status with Open Stack server status and the action will pass/fail as per the specified 'Fail if target status is not reached' field.
-ANY :  In this case this action will get the current server status on Open Stack and publish the same in an AE variable.
+
+Note: If specified Target Status is ANY then this action will get the current server status on Open Stack and publish the same in an AE variable.
+
 = Inputs =
 * Compute URL : OpenStack Compute URL. Example http://openstack.com:8774/v2
 * Authentication Token : Token for authentication. It is AES encoded. 
