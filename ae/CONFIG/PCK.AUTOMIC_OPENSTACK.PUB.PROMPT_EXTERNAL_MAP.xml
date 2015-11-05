@@ -72,6 +72,12 @@
 <row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.LIST_SERVERS/UC4RB_OPS_AUTH_TOKEN#" Value="&amp;UC4RB_OPS_AUTH_TOKEN#" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.LIST_SERVERS/UC4RB_OPS_COMPUTE_URL#" Value="EXT:/openstack/endpoints/compute_url" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.LIST_SERVERS/UC4RB_OPS_TENANT_ID#" Value="&amp;UC4RB_OPS_TENANT_ID#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.LIST_SNAPSHOTS/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.LIST_SNAPSHOTS/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.LIST_SNAPSHOTS/UC4RB_OPS_AUTH_TOKEN#" Value="&amp;UC4RB_OPS_AUTH_TOKEN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.LIST_SNAPSHOTS/UC4RB_OPS_COMPUTE_URL#" Value="EXT:/openstack/endpoints/compute_url" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.LIST_SNAPSHOTS/UC4RB_OPS_QUERY_PARAM#" Value="EXT:/openstack/image/list_snapshot_query_param" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.LIST_SNAPSHOTS/UC4RB_OPS_TENANT_ID#" Value="&amp;UC4RB_OPS_TENANT_ID#" Value1="" Value2="" Value3="" Value4=""/>
 </Variables>
 </VARA>
 <DOCU_Docu state="1" type="text">

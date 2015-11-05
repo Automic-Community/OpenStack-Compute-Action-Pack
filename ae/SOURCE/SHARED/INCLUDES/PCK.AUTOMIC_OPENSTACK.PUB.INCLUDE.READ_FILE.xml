@@ -8,7 +8,7 @@
 <OH_SubType/>
 </HEADER>
 <SCRIPT mode="1" state="1">
-<MSCRI><![CDATA[! Reading xml file and pleace it in one AE variable
+<MSCRI><![CDATA[! Reading xml file and place it in one AE variable
 :SET &HND# = PREP_PROCESS_FILE (&AGENT#, "&UC4RB_OPS_FILE_PATH#",,"COL=NONE", 'UC_LOGIN=&LOGIN#')
 :SET &UC4RB_OPS_FILE_CONTENT# = ""
 :PROCESS &HND#
