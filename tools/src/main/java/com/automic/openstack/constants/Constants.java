@@ -20,6 +20,9 @@ public final class Constants {
     public static final String REQUEST_TOKENID_KEY = "X-Compute-Request-Id";
     public static final String CURRENT_AE_DATE = "currentdate";
     public static final String TIMEOUT_CRITERIA = "timeoutcriteria";
+    
+    public static final String QUERY_DELIMETER = ",";
+    public static final String VAL_DELIMETER = "=";
 
     private Constants() {
     }

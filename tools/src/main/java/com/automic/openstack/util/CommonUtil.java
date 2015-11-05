@@ -10,6 +10,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -20,6 +22,7 @@ import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import com.automic.openstack.actions.ListSnapshotsAction;
 import com.automic.openstack.constants.Constants;
 import com.automic.openstack.constants.ExceptionConstants;
 import com.automic.openstack.exception.AutomicException;
@@ -183,7 +186,7 @@ public final class CommonUtil {
     public static void jsonResponse2xml(InputStream is, String filePath, String rootTag) throws AutomicException {
         json2xml(jsonResponse(is), filePath, rootTag);
     }
-    
+
     public static void jsonResponse2xml(InputStream is, String filePath) throws AutomicException {
         json2xml(jsonResponse(is), filePath, null);
     }
@@ -212,26 +215,53 @@ public final class CommonUtil {
         }
         return input;
     }
-    
+
     /**
-     * This method  is useful for reading small files. It create {@code JSONObject} from file content
+     * This method is useful for reading small files. It create {@code JSONObject} from file content
+     * 
      * @param parameterFilePath
      * @return
      * @throws AutomicException
      */
- 	public static JSONObject  getJSONObjectByFilePath(String parameterFilePath)
- 			throws AutomicException {
- 		Path path = Paths.get(parameterFilePath);
- 		JSONObject jsonObj = null;
- 		try {
- 			String jsonString = new String(Files.readAllBytes(path));
- 			jsonObj = new JSONObject(jsonString);
- 		} catch (IOException e) {
- 			LOGGER.error(e);
- 			throw new AutomicException(e.getMessage());
- 		}
+    public static JSONObject getJSONObjectByFilePath(String parameterFilePath) throws AutomicException {
+        Path path = Paths.get(parameterFilePath);
+        JSONObject jsonObj = null;
+        try {
+            String jsonString = new String(Files.readAllBytes(path));
+            jsonObj = new JSONObject(jsonString);
+        } catch (IOException e) {
+            LOGGER.error(e);
+            throw new AutomicException(e.getMessage());
+        }
 
- 		return jsonObj;
- 	}
+        return jsonObj;
+    }
+
+    /**
+     * Method to prepare a  map of query parameters. It splits the string using
+     * two delimiters {@link ListSnapshotsAction#QUERY_DELIMETER} and
+     * {@link ListSnapshotsAction#VAL_DELIMETER} and creates the key-value pair.
+     *
+     * @param queryArgs
+     *            Query arguments as one string
+     * @return map
+     */
+    public static Map<String, String> prepareQueryParamsMap(final String queryArgs) {
+        Map<String, String> params = new LinkedHashMap<String, String>();
+        String[] splitArgs = queryArgs.split(Constants.QUERY_DELIMETER);
+        if (splitArgs != null && splitArgs.length > 0) {
+            for (String str : splitArgs) {
+                String[] queryParam = str.split(Constants.VAL_DELIMETER);
+                if (queryParam != null && queryParam.length == 2) {
+                    String key = queryParam[0].trim();
+                    String value = queryParam[1].trim();
+                    if (Validator.checkNotEmpty(key) && Validator.checkNotEmpty(value)) {
+                        params.put(key, value);
+                    }
+                }
+            }
+        }
+        return params;
+    }
 
 }
