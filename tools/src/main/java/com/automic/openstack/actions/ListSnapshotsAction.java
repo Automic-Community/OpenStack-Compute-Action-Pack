@@ -85,11 +85,11 @@ public class ListSnapshotsAction extends AbstractHttpAction {
 
         WebResource webResource = client.resource(baseUrl).path(tenantId).path("images");
 
-        LOGGER.info("Calling url " + webResource.getURI());
-
         if (Validator.checkNotEmpty(queryParam)) {
             webResource = webResource.queryParams(prepareValidQueryParamsMap(queryParam));
         }
+
+        LOGGER.info("Calling url " + webResource.getURI());
 
         response = webResource.accept(MediaType.APPLICATION_JSON).header(Constants.X_AUTH_TOKEN, tokenId)
                 .get(ClientResponse.class);

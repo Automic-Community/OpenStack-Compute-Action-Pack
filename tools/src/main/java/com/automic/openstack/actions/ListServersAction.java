@@ -84,12 +84,7 @@ public class ListServersAction extends AbstractHttpAction {
         ListServerService rps = ListServerService.getListServerService(client);
         if (Validator.checkNotEmpty(queryParam)) {
             MultivaluedMap<String, String> queryParamMap = prepareValidQueryParamsMap(queryParam);
-            if (queryParamMap.size() > 0) {
-                LOGGER.info("Passing query param to List Servers rest API");
-                prepareOutput(rps.executeListServerService(baseUrl, tenantId, tokenId, queryParamMap));
-            } else {
-                LOGGER.info("Query Param Map size is less than zero..." + queryParamMap.size());
-            }
+            prepareOutput(rps.executeListServerService(baseUrl, tenantId, tokenId, queryParamMap));
         } else {
             prepareOutput(rps.executeListServerService(baseUrl, tenantId, tokenId));
         }

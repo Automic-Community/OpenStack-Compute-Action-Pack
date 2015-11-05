@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<PRPT name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.LIST_SNAPSHOTS">
+<PRPT name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.QUERY_PARAMETERS">
 <HEADER state="1">
-<Title>List OpenStack Snapshots</Title>
+<Title>Provide query parameters</Title>
 <ArchiveKey1/>
 <ArchiveKey2/>
 <OH_SubType/>
