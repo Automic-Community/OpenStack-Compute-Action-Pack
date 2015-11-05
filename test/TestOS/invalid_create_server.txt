@@ -1,6 +1,6 @@
 {
     "server": {
-        "name": "AnkitTestInstance",
+        "name": "TestServer",
         "imageRef": "99ba3c46-1919-4c9d-ad87-326c216de856",
         "flavorRef": "1",
         "adminPass":"Nagarro$004",
