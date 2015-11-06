@@ -10,6 +10,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -28,15 +32,16 @@ import com.automic.openstack.exception.AutomicException;
  * OpenStack utility class
  * 
  */
-public final class CommonUtil {
-
-    private static final String YES = "YES";
-    private static final String TRUE = "TRUE";
-    private static final String ONE = "1";
+public final class CommonUtil {    
 
     private static final Logger LOGGER = LogManager.getLogger(CommonUtil.class);
 
     private static final String RESPONSE_ERROR = "ERROR";
+    private static final String YES = "YES";
+    private static final String TRUE = "TRUE";
+    private static final String ONE = "1";
+    private static final String UTC = "UTC";
+
 
     private CommonUtil() {
     }
@@ -233,5 +238,33 @@ public final class CommonUtil {
 
  		return jsonObj;
  	}
+ 	
+ 	public static Date convert2date(String givenDate, String format) throws AutomicException{
+        Date date = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
+        dateFormat.setTimeZone(TimeZone.getTimeZone(UTC));
+        try {
+               date = (Date) dateFormat.parse(givenDate);
+        } catch (ParseException e) {
+               LOGGER.error("Error while parsing String to produce a Date", e);
+               throw new AutomicException(ExceptionConstants.INVALID_DATE);
+        }
+        return date;
+ } 
+ 	public static Long calcTokenExpiryTime(String expiry, String issuedAt, String currentAEDate)throws AutomicException{
+ 		
+ 		Long tokenexpireTime = null;
+ 		if(!"null".equals(expiry)){
+ 			long opsTokenExpiryTime = convert2date(expiry,Constants.OPS_TOKEN_EXPIRE_DATE_FORMAT).getTime();
+ 			long opsTokenIssueTime  = convert2date(issuedAt,Constants.OPS_TOKEN_ISSUE_DATE_FORMAT).getTime();
+ 			
+ 			long timeStamp = opsTokenExpiryTime - opsTokenIssueTime;
+ 			long aeTime = CommonUtil.convert2date(currentAEDate,Constants.AE_DATE_FORMAT).getTime();
+ 			tokenexpireTime = aeTime + timeStamp;
+ 			}
+ 		return tokenexpireTime;
+ 	}
+
+
 
 }

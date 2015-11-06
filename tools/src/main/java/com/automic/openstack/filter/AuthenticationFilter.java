@@ -1,7 +1,7 @@
 package com.automic.openstack.filter;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import static com.automic.openstack.util.CommonUtil.calcTokenExpiryTime;
+
 import java.util.Date;
 
 import org.apache.logging.log4j.LogManager;
@@ -30,10 +30,11 @@ import com.sun.jersey.api.client.filter.ClientFilter;
 
 public class AuthenticationFilter extends ClientFilter {
 
+	private static boolean flag = true;
+
 	private String currentAEDate;
 	private Client client;
 	private int timeoutCriteria;
-	private static boolean flag = true;
 
 	public AuthenticationFilter(String currentDate, Client client,
 			int timeoutCriteria) {
@@ -44,10 +45,6 @@ public class AuthenticationFilter extends ClientFilter {
 
 	private static final Logger LOGGER = LogManager
 			.getLogger(AuthenticationFilter.class);
-	private static final SimpleDateFormat AE_DATETIME_FORMAT = new SimpleDateFormat(
-			"yyyy-MM-dd HH:mm:ssX");
-	private static final SimpleDateFormat OPENSTACK_DATETIME_FORMAT = new SimpleDateFormat(
-			"yyyy-MM-dd'T'HH:mm:ssX");
 
 	/**
 	 * {@inheritDoc} This method validate token id from request and validate
@@ -65,22 +62,29 @@ public class AuthenticationFilter extends ClientFilter {
 
 				AuthenticationToken authToken = new AuthenticationToken(
 						AESEncryptDecrypt.decrypt(authDetails));
+				Long currentAETime = CommonUtil.convert2date(currentAEDate,
+						Constants.AE_DATE_FORMAT).getTime();
+				publishDate(currentAETime, authToken.getTokenExpiry());
 				// if token id is expired
-				if (isExpired(authToken.getTokenExpiry(), currentAEDate,
+				if (isExpired(authToken.getTokenExpiry(), currentAETime,
 						timeoutCriteria)) {
+					LOGGER.info("Renewing Token...");
 					AuthenticationTokenSevice ats = AuthenticationTokenSevice
 							.getAuthenticationTokenSevice(client);
 					jsonObj = ats.executeAuthenticationTokenSevice(
 							authToken.getBaseurl(), authToken.getUserName(),
 							authToken.getPassword(), authToken.getTenantName());
-					JSONObject tokenJson = jsonObj.getJSONObject("access")
-							.getJSONObject("token");
+					JSONObject tokenJson = jsonObj.getJSONObject(Constants.ACCESS)
+							.getJSONObject(Constants.TOKEN);
+					Long expiryTokenTime = calcTokenExpiryTime(
+							tokenJson.getString(Constants.EXPIRES),
+							tokenJson.getString(Constants.ISSUED_AT),
+							currentAEDate);
 					authToken = new AuthenticationToken(authToken.getBaseurl(),
 							authToken.getUserName(), authToken.getPassword(),
-							authToken.getTenantName(),
-							tokenJson.getString("id"),
-							tokenJson.getString("expires"),
-							tokenJson.getString("issued_at"));
+							authToken.getTenantName(), tokenJson.getString(Constants.ID),
+							expiryTokenTime);
+
 					ConsoleWriter.writeln("UC4RB_OPS_AUTH_TOKEN ::="
 							+ CommonUtil.encrypt(authToken.toString()));
 
@@ -108,32 +112,16 @@ public class AuthenticationFilter extends ClientFilter {
 	 * @param timeoutCriteria
 	 * @return true or false
 	 */
-	private boolean isExpired(String expiresDate, String currentAEDate,
-			int timeoutCriteria) {
+	private boolean isExpired(Long expiresTime, Long currentAETime,
+			int timeoutCriteria) throws AutomicException {
 
-		if (expiresDate == null || "null".equals(expiresDate))
+		if (expiresTime == null)
 			return false;
 
-		long currentAETime = 0;
-		long expirationTime = 0;
-		final long ONE_MINUTE_IN_MILLIS = 60000;// millisecond
-		try {
+		currentAETime = currentAETime + timeoutCriteria
+				* Constants.ONE_MINUTE_IN_MILLIS;
 
-			Date automationEngineDate = AE_DATETIME_FORMAT.parse(currentAEDate);
-			Date openStackdate = OPENSTACK_DATETIME_FORMAT.parse(expiresDate);
-
-			currentAETime = automationEngineDate.getTime();
-			currentAETime = currentAETime + timeoutCriteria
-					* ONE_MINUTE_IN_MILLIS;
-			expirationTime = openStackdate.getTime();
-
-			publishDate(automationEngineDate, openStackdate);
-
-		} catch (ParseException e) {
-			LOGGER.error(e);
-			throw new AutomicRuntimeException(e.getMessage());
-		}
-		return expirationTime <= currentAETime;
+		return expiresTime.compareTo(currentAETime) < 0 ? true : false;
 	}
 
 	/**
@@ -142,11 +130,13 @@ public class AuthenticationFilter extends ClientFilter {
 	 * @param currentAEDate
 	 * @param expiresDate
 	 */
-	private void publishDate(Date currentAEDate, Date expiresDate) {
+	private void publishDate(Long currentAETime, Long expiresTime) {
 
 		if (flag) {
-			ConsoleWriter.writeln("AE Current TimeStamp : " + currentAEDate);
-			ConsoleWriter.writeln("OpenStack Token Expire TimeStamp : " + expiresDate);
+			ConsoleWriter.writeln("AE Current TimeStamp : "
+					+ new Date(currentAETime));
+			ConsoleWriter.writeln("OpenStack Token Expire TimeStamp : "
+					+ (expiresTime == null ? null : new Date(expiresTime)));
 			flag = false;
 		}
 

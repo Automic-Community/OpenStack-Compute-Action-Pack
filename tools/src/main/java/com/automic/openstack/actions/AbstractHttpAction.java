@@ -43,7 +43,7 @@ public abstract class AbstractHttpAction extends AbstractAction {
      */
     private int readTimeOut;
     
-    private String currentAEDate;
+    protected String currentAEDate;
     private int timeoutCriteria;
 
     public AbstractHttpAction() {

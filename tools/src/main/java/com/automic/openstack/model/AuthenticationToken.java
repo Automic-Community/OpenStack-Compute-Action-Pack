@@ -3,12 +3,10 @@ package com.automic.openstack.model;
 import org.json.JSONObject;
 
 import com.automic.openstack.exception.AutomicException;
-import com.automic.openstack.util.CommonUtil;
 
 public class AuthenticationToken {
 
 	private final JSONObject token;
-	private static final String TOKEN_ISSUE = "tokenIssue";
 	private static final String TOKEN_EXPIRY = "tokenExpiry";
 	private static final String TOKEN_ID = "tokenId";
 	private static final String TENANT_NAME = "tenantName";
@@ -32,8 +30,7 @@ public class AuthenticationToken {
 	}
 
 	public AuthenticationToken(String baseurl, String username, String passw,
-			String tenantname, String tokenid, String tokenexpiry,
-			String tokenissue) {
+			String tenantname, String tokenid, Long tokenexpiry) {
 		this();
 		setBaseurl(baseurl);
 		setUserName(username);
@@ -41,23 +38,15 @@ public class AuthenticationToken {
 		setTenantName(tenantname);
 		setTokenId(tokenid);
 		setTokenExpiry(tokenexpiry);
-		setTokenIssue(tokenissue);
+
 	}
 
-	private void setTokenIssue(String tokenissue) {
-		token.put(TOKEN_ISSUE, tokenissue);
-	}
-
-	public String getTokenIssue() {
-		return token.getString(TOKEN_ISSUE).toString();
-	}
-
-	private void setTokenExpiry(String tokenexpiry) {
+	private void setTokenExpiry(Long tokenexpiry) {
 		token.put(TOKEN_EXPIRY, tokenexpiry);
 	}
 
-	public String getTokenExpiry() {
-		return token.getString(TOKEN_EXPIRY);
+	public Long getTokenExpiry() {
+		return token.has(TOKEN_EXPIRY)?token.getLong(TOKEN_EXPIRY):null;
 	}
 
 	private void setTokenId(String tokenid) {
@@ -73,7 +62,9 @@ public class AuthenticationToken {
 	}
 
 	public String getTenantName() {
-		return token.has(TENANT_NAME)? !"".equals(token.getString(TENANT_NAME))? token.getString(TENANT_NAME): null : null;
+		return token.has(TENANT_NAME) ? !""
+				.equals(token.getString(TENANT_NAME)) ? token
+				.getString(TENANT_NAME) : null : null;
 	}
 
 	private void setPassword(String passw) {
