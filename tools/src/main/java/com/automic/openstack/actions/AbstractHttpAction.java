@@ -43,7 +43,10 @@ public abstract class AbstractHttpAction extends AbstractAction {
      */
     private int readTimeOut;
     
-    private String currentAEDate;
+    protected String currentAETime;
+    
+    /**
+     * Timeout criteria in minutes*/
     private int timeoutCriteria;
 
     public AbstractHttpAction() {
@@ -66,7 +69,7 @@ public abstract class AbstractHttpAction extends AbstractAction {
             validate();
             client = getClient();
             client.addFilter(new GenericResponseFilter());
-            client.addFilter(new AuthenticationFilter(currentAEDate, client, timeoutCriteria));
+            client.addFilter(new AuthenticationFilter(currentAETime, client, timeoutCriteria));
             executeSpecific();
         } finally {
             if (client != null) {
@@ -78,7 +81,7 @@ public abstract class AbstractHttpAction extends AbstractAction {
     private void initializeCommonInputs() {
         this.connectionTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.CONNECTION_TIMEOUT));
         this.readTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.READ_TIMEOUT));
-        this.currentAEDate = getOptionValue(Constants.CURRENT_AE_DATE);
+        this.currentAETime = getOptionValue(Constants.CURRENT_AE_DATE);
         this.timeoutCriteria =  Integer.valueOf(getOptionValue(Constants.TIMEOUT_CRITERIA));
     }
 
