@@ -1,0 +1,81 @@
+*** Settings ***
+Suite Setup       Startup
+Suite Teardown    Teardown
+Force Tags        list_snapshots
+Default Tags
+Test Template     List Snapshots Template
+Library           com.automic.robot.itpa.ItpaLibrary
+Library           String
+Resource          ../../Resources/messages.txt
+Resource          ../../Resources/keywords.txt
+Resource          ../../Resources/variables.txt
+Resource          ../../Resources/actions.txt
+
+*** Test Cases ***    OK_NOK    ComputeURL              AuthToken              TenantID                QueryParameter
+List Snapshots with Valid Inputs and without Query Parameter
+                      [Tags]    main_scenarios
+                      OK        ${OS_Compute_URL}       blank                  blank                   ${EMPTY}
+
+List all ACTIVE Snapshots
+                      [Tags]    main_scenarios
+                      OK        ${OS_Compute_URL}       blank                  blank                   status=ACTIVE
+
+List Snapshots with type=Snapshot
+                      [Tags]    main_scenarios
+                      OK        ${OS_Compute_URL}       blank                  blank                   type=Snapshot
+
+Assert with Invalid Query Parameter
+                      [Tags]    main_scenarios
+                      OK        ${OS_Compute_URL}       blank                  blank                   abcdefg
+
+Assertion with Invalid Compute URL
+                      NOK       https://162.123.12.3    blank                  blank                   ${EMPTY}
+
+Assertion with Invalid Authentication Token
+                      NOK       ${OS_Compute_URL}       ${Invalid_Token_ID}    blank                   ${EMPTY}
+
+Assertion with Invalid Tenant ID
+                      NOK       ${OS_Compute_URL}       blank                  ${Invalid_Tenant_ID}    ${EMPTY}
+
+Assert Compute URL as a mandatory field
+                      OTHER     ${EMPTY}                blank                  blank                   ${EMPTY}
+
+Assert Authentication Token as a mandatory field
+                      OTHER     ${OS_Compute_URL}       ${EMPTY}               blank                   ${EMPTY}
+
+Assert Tenant ID as a mandatory field
+                      OTHER     ${OS_Compute_URL}       blank                  ${EMPTY}                ${EMPTY}
+
+*** Keywords ***
+Startup
+    Log    *******Start Test "LIST SNAPSHOTS"*******
+    Log    *******Connect to AE*******
+    Connect AE
+
+List_snapshots Template
+    [Arguments]    ${OK_NOK}    ${Compute_URL}    ${Token_ID}    ${Tenant_ID}    ${Query_Param}
+    [Documentation]    This test lists all the snapshots of the servers or as per query parameter specified.
+    ...    -${OK_NOK}: Boolean value indicate if the action is ENDED_OK or ENDED_NOT_OK. Value of this variable should be OK, NOK or OTHER.
+    ...    -${Compute_URL}: This field specifies OpenStack Compute URL.
+    ...    -${Token_ID}: This field specifies Token ID generated as the output of Get Auth Token action.
+    ...    -${Tenant_ID}: This field specifies Tenant ID generated as the output of Get Auth Token action.
+    ...    -${Query_Param}: This is the optional field. User can provide various parameters with which he/she can filter the list of images. Example: change since, server, name, status, type, limit, marker
+    Run Keyword If    '${Generated_Token_ID}' == '${EMPTY}'    Get Auth Token    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
+    Action Create    ${_LIST_SNAPSHOTS_ACTION}
+    Action Set    &UC4RB_OPS_COMPUTE_URL#    ${Compute_URL}
+    Run Keyword If    '${Token_ID}' == 'blank'    Action Set    &UC4RB_OPS_AUTH_TOKEN#    ${Generated_Token_ID}
+    Run Keyword If    '${Token_ID}' != 'blank'    Action Set    &UC4RB_OPS_AUTH_TOKEN#    ${Token_ID}
+    Run Keyword If    '${Tenant_ID}' == 'blank'    Action Set    &UC4RB_OPS_TENANT_ID#    ${Generated_Tenant_ID}
+    Run Keyword If    '${Tenant_ID}' != 'blank'    Action Set    &UC4RB_OPS_TENANT_ID#    ${Tenant_ID}
+    Action Set    &UC4RB_OPS_QUERY_PARAM#    ${Query_Param}
+    Set Overwrite Agent
+    Action Execute
+    Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
+    ...    Assert Mandatory
+    Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable Should Be Found    &UC4RB_OPS_SNAPSHOTS_COUNT#    ELSE    Action Object Variable Should Not Be Found    &UC4RB_OPS_SNAPSHOT_COUNT#
+    Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable File Path Should Be    &UC4RB_OPS_SNAPSHOTS_XML_PATH#    .xml    ELSE    Action Object Variable Should Not Be Found
+    ...    &UC4RB_OPS_LIST_SNAPSHOTS_XML#
+    Run Keyword If    '${OK_NOK}' == 'OK'    Delete File
+
+Teardown
+    Log    *******End Test "LIST SNAPSHOTS"*******
