@@ -117,7 +117,7 @@
 			<Value>{/custom/list_snapshot_query_param}</Value>
 			<Description>Provide request parameter in comma separated format. Example: status=ACTIVE,name=cirros.</Description>
 		</Property>
-		<Property name="/openstack/image/list_servers_query_param" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+		<Property name="/openstack/server/list_servers_query_param" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
 			<Value>{/custom/list_servers_query_param}</Value>
 			<Description>Provide request parameter in comma separated format. Example: status=ACTIVE,name=cirros.</Description>
 		</Property>
