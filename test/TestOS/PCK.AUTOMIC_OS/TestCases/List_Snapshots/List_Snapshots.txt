@@ -24,6 +24,10 @@ List Snapshots with type=Snapshot
                       [Tags]    main_scenarios
                       OK        ${OS_Compute_URL}       blank                  blank                   type=Snapshot
 
+List Snapshots changes since 2015-01-01T01:01:01
+                      [Tags]    main_scenarios
+                      OK        ${OS_Compute_URL}       blank                  blank                   changes-since=2015-01-01T01:01:01
+
 Assert with Invalid Query Parameter
                       [Tags]    main_scenarios
                       OK        ${OS_Compute_URL}       blank                  blank                   abcdefg

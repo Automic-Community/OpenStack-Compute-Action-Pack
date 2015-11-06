@@ -1,6 +1,7 @@
 package com.automic.openstack.service;
 
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,94 +21,90 @@ import com.sun.jersey.api.client.WebResource;
  * @author Anurag Upadhyay
  */
 public class ListServerService {
-	private static final Logger LOGGER = LogManager
-			.getLogger(ListServerService.class);
+    private static final Logger LOGGER = LogManager.getLogger(ListServerService.class);
 
-	private final Client client;
+    private final Client client;
 
-	/**
-	 * Initializes a newly created {@code ListServerService} object.
-	 * 
-	 * @param client
-	 */
-	private ListServerService(Client client) {
+    /**
+     * Initializes a newly created {@code ListServerService} object.
+     * 
+     * @param client
+     */
+    private ListServerService(Client client) {
 
-		this.client = client;
-	}
+        this.client = client;
+    }
 
-	/**
-	 * This method create the instance of {@code ListServerService} with
-	 * provided client.
-	 * 
-	 * @param client
-	 * @return Initialize instance of {@code ListServerService}
-	 */
-	public static ListServerService getListServerService(Client client) {
+    /**
+     * This method create the instance of {@code ListServerService} with provided client.
+     * 
+     * @param client
+     * @return Initialize instance of {@code ListServerService}
+     */
+    public static ListServerService getListServerService(Client client) {
 
-		return new ListServerService(client);
+        return new ListServerService(client);
 
-	}
-	/**
-	 * Get server details using reservation id by calling
-	 * http://baseUrl/{tenant_id}​/servers/detail.
-	 * 
-	 * @param baseUrl
-	 * @param tenantId
-	 * @param tokenId
-	 * @param reservationId
-	 * @return {@code JSONObject} object
-	 * @throws AutomicException
-	 */
-	public JSONObject executeListServerService(String baseUrl, String tenantId,
-			String tokenId, String reservationId) throws AutomicException {
+    }
 
-		WebResource webResource = client.resource(baseUrl).path(tenantId)
-				.path("servers").path("detail")
-				.queryParam("reservation_id", reservationId);
+    /**
+     * Get server details using reservation id by calling http://baseUrl/{tenant_id}​/servers/detail.
+     * 
+     * @param baseUrl
+     * @param tenantId
+     * @param tokenId
+     * @param queryParamMap
+     * @return {@code JSONObject} object
+     * @throws AutomicException
+     */
+    public JSONObject executeListServerService(String baseUrl, String tenantId, String tokenId,
+            MultivaluedMap<String, String> queryParamMap) throws AutomicException {
 
-		return executeRequest(webResource, tokenId);
+        WebResource webResource = client.resource(baseUrl).path(tenantId).path("servers").path("detail")
+                .queryParams(queryParamMap);
 
-	}
+        return executeRequest(webResource, tokenId);
 
-	/**
-	 * Get server details by calling http://baseUrl/{tenant_id}​/servers/detail.
-	 * 
-	 * @param baseUrl
-	 * @param tenantId
-	 * @param tokenId
-	 * @param reservationId
-	 * @return {@code JSONObject} object
-	 * @throws AutomicException
-	 */
-	public JSONObject executeListServerService(String baseUrl, String tenantId,
-			String tokenId) throws AutomicException {
+    }
 
-		WebResource webResource = client.resource(baseUrl).path(tenantId)
-				.path("servers").path("detail");
+    /**
+     * Get server details by calling http://baseUrl/{tenant_id}​/servers/detail.
+     * 
+     * @param baseUrl
+     * @param tenantId
+     * @param tokenId
+     * @return {@code JSONObject} object
+     * @throws AutomicException
+     */
+    public JSONObject executeListServerService(String baseUrl, String tenantId, String tokenId) throws AutomicException {
 
-		return executeRequest(webResource, tokenId);
+        WebResource webResource = client.resource(baseUrl).path(tenantId).path("servers").path("detail");
 
-	}
-	/**
-	 * This method execute request by provided {@code WebResource} object
-	 * @param webResource
-	 * @param tokenId
-	 * @return
-	 * @throws AutomicException 
-	 * @throws AutomicRuntimeException 
-	 */
-	private JSONObject executeRequest(WebResource webResource, String tokenId) throws AutomicRuntimeException, AutomicException {
+        return executeRequest(webResource, tokenId);
 
-		ClientResponse response = null;
-		JSONObject jsonObj = null;
-		LOGGER.info("List servers Calling url " + webResource.getURI());
-		response = webResource.accept(MediaType.APPLICATION_JSON)
-				.header(Constants.X_AUTH_TOKEN, tokenId)
-				.get(ClientResponse.class);
-		jsonObj = CommonUtil.jsonResponse(response.getEntityInputStream());
+    }
 
-		return jsonObj;
+    /**
+     * This method execute request by provided {@code WebResource} object
+     * 
+     * @param webResource
+     * @param tokenId
+     * @return
+     * @throws AutomicException
+     * @throws AutomicRuntimeException
+     */
+    private JSONObject executeRequest(WebResource webResource, String tokenId) throws AutomicRuntimeException,
+            AutomicException {
 
-	}
+        ClientResponse response = null;
+        JSONObject jsonObj = null;
+        LOGGER.info("List servers Calling url " + webResource.getURI());
+        response = webResource.accept(MediaType.APPLICATION_JSON).header(Constants.X_AUTH_TOKEN, tokenId)
+                .get(ClientResponse.class);
+        jsonObj = CommonUtil.jsonResponse(response.getEntityInputStream());
+
+        return jsonObj;
+
+    }
 
 }
