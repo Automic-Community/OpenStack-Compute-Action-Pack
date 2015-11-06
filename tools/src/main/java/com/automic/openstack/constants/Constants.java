@@ -23,7 +23,7 @@ public final class Constants {
     
     public static final String QUERY_DELIMETER = ",";
     public static final String VAL_DELIMETER = "=";
-    public static final long ONE_MINUTE_IN_MILLIS = 60000;
+        public static final long ONE_MINUTE_IN_MILLIS = 60000;
     public static final String AE_DATE_FORMAT = "yyyy-MM-dd HH:mm:ssX";
     public static final String OPS_TOKEN_ISSUE_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS";
     public static final String OPS_TOKEN_EXPIRE_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssX";
@@ -33,7 +33,7 @@ public final class Constants {
 	public static final String ACCESS = "access";
 	public static final String TOKEN = "token";
 	public static final String ID = "id";
-    
+
     private Constants() {
     }
 

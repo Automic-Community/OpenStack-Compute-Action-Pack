@@ -3,44 +3,44 @@ package com.automic.openstack.actions;
 import java.util.Arrays;
 import java.util.Map;
 
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.JSONObject;
 
+import com.automic.openstack.constants.Constants;
 import com.automic.openstack.constants.ExceptionConstants;
 import com.automic.openstack.exception.AutomicException;
-import com.automic.openstack.service.ListServerService;
 import com.automic.openstack.util.CommonUtil;
 import com.automic.openstack.util.ConsoleWriter;
 import com.automic.openstack.util.Validator;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 
 /**
- * @author Anurag Upadhyay
+ * @author Shruti Nambiar
+ * 
+ *         This class is used to list all the images and its details that are present. The result for the same is stored
+ *         in an XML file at the specified location.
  * 
  */
-/**
- * This class is used to get all the servers with corresponding server details. It also includes server usage
- * information. It generates all the information in the XML format and store the xml file at the specified path.
- * 
- */
-public class ListServersAction extends AbstractHttpAction {
 
-    private static final Logger LOGGER = LogManager.getLogger(ListServersAction.class);
+public class ListSnapshotsAction extends AbstractHttpAction {
+
+    private static final Logger LOGGER = LogManager.getLogger(ListSnapshotsAction.class);
 
     private String filePath;
     private String tokenId;
     private String tenantId;
     private String queryParam;
 
-    public ListServersAction() {
-
+    public ListSnapshotsAction() {
         addOption("computeurl", true, "Compute service endpoint");
         addOption("tokenid", true, "Token Id for authentication");
         addOption("tenantid", true, "Tenant/Project name");
-        addOption("filepath", true, "Xml file path ");
+        addOption("filepath", true, "Xml file path");
         addOption("queryparam", false, "Query parameter in comma separated format");
     }
 
@@ -51,11 +51,11 @@ public class ListServersAction extends AbstractHttpAction {
         tenantId = getOptionValue("tenantid");
         filePath = getOptionValue("filepath");
         queryParam = getOptionValue("queryparam");
+
     }
 
     @Override
     protected void validate() throws AutomicException {
-
         if (!Validator.checkNotEmpty(tokenId)) {
             LOGGER.error(ExceptionConstants.EMPTY_TOKENID);
             throw new AutomicException(ExceptionConstants.EMPTY_TOKENID);
@@ -78,27 +78,23 @@ public class ListServersAction extends AbstractHttpAction {
 
     @Override
     /**
-     * Authenticates and generates a token by calling http://baseUrl/{tenantId}/servers/detail
-     * */
-    protected void executeSpecific() throws AutomicException {
-        ListServerService rps = ListServerService.getListServerService(client);
-        if (Validator.checkNotEmpty(queryParam)) {
-            MultivaluedMap<String, String> queryParamMap = prepareValidQueryParamsMap(queryParam);
-            prepareOutput(rps.executeListServerService(baseUrl, tenantId, tokenId, queryParamMap));
-        } else {
-            prepareOutput(rps.executeListServerService(baseUrl, tenantId, tokenId));
-        }
-    }
-
-    /**
-     * This method prepare the output xml by converting the json response into xml which is then written to the file at
-     * the path provided
+     * Retrieves snapshot details by calling http://baseUrl/{tenantId}/images
      */
+    protected void executeSpecific() throws AutomicException {
+        ClientResponse response = null;
 
-    private void prepareOutput(JSONObject jsonObj) throws AutomicException {
+        WebResource webResource = client.resource(baseUrl).path(tenantId).path("images");
 
-        CommonUtil.json2xml(jsonObj, filePath, "ListServers");
-        ConsoleWriter.writeln("UC4RB_OPS_LIST_SERVERS_XML ::=" + filePath);
+        if (Validator.checkNotEmpty(queryParam)) {
+            webResource = webResource.queryParams(prepareValidQueryParamsMap(queryParam));
+        }
+
+        LOGGER.info("Calling url " + webResource.getURI());
+
+        response = webResource.accept(MediaType.APPLICATION_JSON).header(Constants.X_AUTH_TOKEN, tokenId)
+                .get(ClientResponse.class);
+
+        prepareOutput(response);
 
     }
 
@@ -120,11 +116,10 @@ public class ListServersAction extends AbstractHttpAction {
             String value = entry.getValue();
             switch (key.toLowerCase()) {
                 case "changes-since":
-                case "image":
-                case "flavor":
+                case "server":
                 case "name":
                 case "status":
-                case "host":
+                case "type":
                 case "limit":
                 case "marker":
                     params.put(key, Arrays.asList(value));
@@ -134,6 +129,20 @@ public class ListServersAction extends AbstractHttpAction {
             }
         }
         return params;
+    }
+
+    /**
+     * Method to prepare output based on Response of an HTTP request to client.
+     * 
+     * @param response
+     *            instance of {@link ClientResponse}
+     * @throws AutomicException
+     */
+    private void prepareOutput(final ClientResponse response) throws AutomicException {
+
+        CommonUtil.jsonResponse2xml(response.getEntityInputStream(), filePath, "ListSnapshots");
+        ConsoleWriter.writeln("UC4RB_OPS_SNAPSHOTS_XML_PATH ::=" + filePath);
+
     }
 
 }

@@ -86,7 +86,16 @@ The action will fail if we get an error from OpenStack on submitting the request
 Start (default), Stop, Reboot_Soft, Reboot_Hard, Pause, Unpause, Lock, Unlock, Suspend, Resume
 
 * Action Name:  PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CREATE_SERVER_SNAPSHOT
-* Action Description: This action is used to create a snapshot for an existing server as per the specified server id. Output of this action will be an AE variable having created server snapshot image url. You can only create a new image from the server when its status is ACTIVE, SHUTOFF, PAUSED, or SUSPENDED ]]></DOC>
+* Action Description: This action is used to create a snapshot for an existing server as per the specified server id. Output of this action will be an AE variable having created server snapshot image url. You can only create a new image from the server when its status is ACTIVE, SHUTOFF, PAUSED, or SUSPENDED 
+
+* Action Name: PCK.AUTOMIC_OPENSTACK.PUB.ACTION.LIST_SNAPSHOTS
+* Action Description: This action is used to get all the snapshots with corresponding details from OpenStack cloud in accordance with the query parameters provided by the user (if any) and save the details in the XML format.
+The result of this action will be the following information published as AE variables:
+* Xml file path 
+* Snapshot count
+
+* Action Name: PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CHECK_SERVER_STATUS
+* Action Description: This action is used to check/get the status of a server using server id. Output of this action will be an AE variable having current server status on Open Stack.]]></DOC>
 </DOCU_Docu>
 </DOCU>
 </uc-export>

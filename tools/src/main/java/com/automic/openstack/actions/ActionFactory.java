@@ -52,6 +52,9 @@ public final class ActionFactory {
             case CREATE_SERVERS:
                 action = new CreateServerAction();
                 break;
+            case LIST_SNAPSHOTS:
+                action = new ListSnapshotsAction();
+                break;
             default:
                 String msg = "Invalid Action.. Please enter valid action " + Action.getActionNames();
                 LOGGER.error(msg);
