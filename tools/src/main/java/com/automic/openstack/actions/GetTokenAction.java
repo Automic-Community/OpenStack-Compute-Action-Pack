@@ -105,7 +105,7 @@ public class GetTokenAction extends AbstractHttpAction {
 		}
 		Long expiryTokenTime = calcTokenExpiryTime(
 				tokenJson.getString(Constants.EXPIRES),
-				tokenJson.getString(Constants.ISSUED_AT), currentAEDate);
+				tokenJson.getString(Constants.ISSUED_AT), currentAETime);
 		AuthenticationToken authToken = new AuthenticationToken(baseUrl,
 				username, password, tenantName, tokenJson.getString(Constants.ID),
 				expiryTokenTime);

@@ -108,7 +108,7 @@ public class AuthenticationFilter extends ClientFilter {
 	 * TimeStamp
 	 * 
 	 * @param expiresDate
-	 * @param currentAEDate
+	 * @param currentAETime
 	 * @param timeoutCriteria
 	 * @return true or false
 	 */
@@ -127,7 +127,7 @@ public class AuthenticationFilter extends ClientFilter {
 	/**
 	 * This method print AE and OpenStack TimeStamp id flag is true
 	 * 
-	 * @param currentAEDate
+	 * @param currentAETime
 	 * @param expiresDate
 	 */
 	private void publishDate(Long currentAETime, Long expiresTime) {
