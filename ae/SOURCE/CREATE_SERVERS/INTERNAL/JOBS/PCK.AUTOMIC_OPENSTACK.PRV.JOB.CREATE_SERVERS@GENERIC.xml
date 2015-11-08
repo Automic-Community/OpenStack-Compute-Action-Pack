@@ -46,7 +46,7 @@
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
 <FcstStatus>0| |</FcstStatus>
-<Ert>1</Ert>
+<Ert>4</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
 <ErtFix>0</ErtFix>
@@ -173,8 +173,14 @@ java -jar &UC4RB_OPS_PATH_JAR# &UC4RB_OPS_JAVA_ARGUMENTS#
 ! Publishing server id list to object variable in case of success
 :SET &STATUS# = GET_UC_OBJECT_STATUS(,,"RETCODE")
 
-:DEFINE &UC4RB_OPS_SERVER_IDS#, string, 30
+
 :IF &STATUS# EQ 0
+!--creating dynamic VARA --
+:SET &UC4RB_OPS_VARA_NAME# = "PCK.AUTOMIC_OPENSTACK.PRV.VARA.SERVERLIST_&$RUNID#"
+:SET &RET# = CREATE_OBJECT("VARA",&UC4RB_OPS_VARA_NAME#,"/APPDATA/TEMP","Openstack Server list",,,)
+
+!--Checking if VARA created successfully
+:IF &RET# EQ 0
 :  SET &IDX# = 1
 :  SET &HND# = PREP_PROCESS_REPORT("JOBS",, "REP",,"COL=DELIMITER", 'DELIMITER=*::=*')
 :  PROCESS &HND#
@@ -183,21 +189,17 @@ java -jar &UC4RB_OPS_PATH_JAR# &UC4RB_OPS_JAVA_ARGUMENTS#
 :    IF &KEY# <> ""
 :      IF &VALUE# <> ""
 :        IF STR_FIND(&KEY#, "UC4RB_OPS_SERVER_IDS") NE 0
-:           SET &UC4RB_OPS_SERVER_IDS#[&IDX#] = "&VALUE#"
-:           SET &IDX# = &IDX# + 1
-:           IF &IDX# EQ 31
-:             TERM_PROCESS
-:           ENDIF
+:          PUT_VAR "&UC4RB_OPS_VARA_NAME#","&VALUE#",""
 :        ENDIF
 :      ENDIF
 :    ENDIF
 :  ENDPROCESS
 :  CLOSE_PROCESS &HND#
-:  PUBLISH &UC4RB_OPS_SERVER_IDS#[],,"TOP"
-! --- else clear the server id list
-:ELSE
-:  CLEAR &UC4RB_OPS_SERVER_IDS#[]
-:  PUBLISH &UC4RB_OPS_SERVER_IDS#[],,"TOP"
+!--Publishing the VARA name
+:  PUBLISH &UC4RB_OPS_VARA_NAME#,,"TOP"
+:  ELSE
+:    PRINT "ERROR Creating VARA &UC4RB_OPS_VARA_NAME#"
+:ENDIF
 :ENDIF]]></OSCRI>
 </POST_SCRIPT>
 <DOCU_Docu state="1" type="text">
