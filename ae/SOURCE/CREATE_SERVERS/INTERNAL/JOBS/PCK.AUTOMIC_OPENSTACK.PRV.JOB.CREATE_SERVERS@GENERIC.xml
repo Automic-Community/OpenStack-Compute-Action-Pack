@@ -200,6 +200,10 @@ java -jar &UC4RB_OPS_PATH_JAR# &UC4RB_OPS_JAVA_ARGUMENTS#
 :  ELSE
 :    PRINT "ERROR Creating VARA &UC4RB_OPS_VARA_NAME#"
 :ENDIF
+:ELSE
+!--clearing values from the VARA name
+:SET &UC4RB_OPS_VARA_NAME# = ""
+:  PUBLISH &UC4RB_OPS_VARA_NAME#,,"TOP"
 :ENDIF]]></OSCRI>
 </POST_SCRIPT>
 <DOCU_Docu state="1" type="text">

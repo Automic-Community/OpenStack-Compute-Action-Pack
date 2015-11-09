@@ -294,7 +294,7 @@ VARA will be created at location \APPDATA\TEMP. If the following folder location
 * Compute URL : OpenStack Compute URL. Example http://openstack.com:8774/v2
 * Authentication Token : Token for authentication. It is AES encoded. 
 * Tenant Id : Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
-* Parameter File : Specify full path and name of the JSON file to create a new server or max of 30 instances.
+* Parameter File : Specify full path and name of the JSON file to create a new server.
 * Overwrite Agent: Overwrites the default agent
 * Overwrite Login: Overwrites the default login
 = Behavior =
