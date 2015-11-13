@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import com.automic.openstack.constants.Constants;
 import com.automic.openstack.constants.ExceptionConstants;
 import com.automic.openstack.exception.AutomicException;
+import com.automic.openstack.util.ConsoleWriter;
 import com.automic.openstack.util.Validator;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -36,7 +37,7 @@ public class AllocateDeallocateFloatingIPAction extends AbstractHttpAction{
         addOption("tokenid", true, "Token Id for authentication");
         addOption("tenantid", true, "Tenant/Project id");
         addOption("serverid", true, "Server id");
-        addOption("action", true, "Action to execute on the server");
+        addOption("floatingipaction", true, "Action to execute on the server");
         addOption("floatingip", true, "Specify Floating IP for the server");
         addOption("fixedip", true, "Specify Fixed IP for the server");
 
@@ -49,7 +50,7 @@ public class AllocateDeallocateFloatingIPAction extends AbstractHttpAction{
         tokenId = getOptionValue("tokenid");
         tenantId = getOptionValue("tenantid");
         serverId = getOptionValue("serverid");
-        action = getOptionValue("action");
+        action = getOptionValue("floatingipaction");
         floatingIP = getOptionValue("floatingip");
         fixedIP = getOptionValue("fixedip");
     }
@@ -98,17 +99,18 @@ public class AllocateDeallocateFloatingIPAction extends AbstractHttpAction{
 
     @Override
     protected void executeSpecific() throws AutomicException {
-
+    	ClientResponse response = null;
         WebResource webResource = client.resource(baseUrl).path(tenantId).path("servers").path(serverId).path("action");
 
         LOGGER.info("Calling url " + webResource.getURI());
 
-        webResource.entity(getServerActionJson(), MediaType.APPLICATION_JSON)
+        response = webResource.entity(getFloatingIPActionJson(), MediaType.APPLICATION_JSON)
                 .header(Constants.X_AUTH_TOKEN, tokenId).post(ClientResponse.class);
+        prepareOutput(response);
 
     }
 
-    private String getServerActionJson() throws AutomicException {
+    private String getFloatingIPActionJson() throws AutomicException {
 
         JSONObject actionJson = new JSONObject();
 
@@ -132,6 +134,18 @@ public class AllocateDeallocateFloatingIPAction extends AbstractHttpAction{
     	 childJson.put("address", floatingIP);
     	 childJson.put("fixed_address", fixedIP);
     	 return childJson;
+    }
+    
+    /**
+     * Method to prepare output based on Response of an HTTP request to client.
+     * 
+     * @param response
+     *            instance of {@link ClientResponse}
+     * @throws AutomicException
+     */
+    private void prepareOutput(final ClientResponse response) throws AutomicException {       
+        ConsoleWriter.writeln("Response code :" + response.getStatus());
+
     }
 
 }
