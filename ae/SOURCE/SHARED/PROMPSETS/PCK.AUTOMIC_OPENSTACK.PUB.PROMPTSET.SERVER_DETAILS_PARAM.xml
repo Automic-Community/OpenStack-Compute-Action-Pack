@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<PRPT name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.GET_SERVER_DETAILS">
+<PRPT name="PCK.AUTOMIC_OPENSTACK.PUB.PROMPTSET.SERVER_DETAILS_PARAM">
 <HEADER state="1">
-<Title>Get server details</Title>
+<Title>Server details parameter</Title>
 <ArchiveKey1/>
 <ArchiveKey2/>
 <OH_SubType/>

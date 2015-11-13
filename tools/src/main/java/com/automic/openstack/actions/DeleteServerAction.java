@@ -82,7 +82,7 @@ public class DeleteServerAction extends AbstractHttpAction {
 	@Override
 	protected void executeSpecific() throws AutomicException {
 		// 
-		WebResource webResource = client.resource(baseUrl).path(tenantId).path("servers").path(serverId).path("action");
+		WebResource webResource = client.resource(baseUrl).path(tenantId).path("servers").path(serverId);
 
         LOGGER.info("Calling url " + webResource.getURI());
         webResource.header(Constants.X_AUTH_TOKEN, tokenId).delete(ClientResponse.class);

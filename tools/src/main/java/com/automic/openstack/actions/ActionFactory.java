@@ -55,6 +55,9 @@ public final class ActionFactory {
             case LIST_SNAPSHOTS:
                 action = new ListSnapshotsAction();
                 break;
+            case DELETE_SERVER:
+                action = new DeleteServerAction();
+                break;
             default:
                 String msg = "Invalid Action.. Please enter valid action " + Action.getActionNames();
                 LOGGER.error(msg);
