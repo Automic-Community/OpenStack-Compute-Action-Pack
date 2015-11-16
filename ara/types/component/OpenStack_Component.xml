@@ -24,6 +24,11 @@
 				<Description>Specify full path and name of the JSON file which will be used to create a new server or servers.</Description>
 			</Property>
 		</Group>
+		<Group name="ListSnapshots" displayName="List Snapshots">
+			<Property name="list_snapshot_query_param" displayName="Query Parameter" mode="EDITABLE" type="SingleLineText">
+				<Description>Provide request parameter in comma separated format. Example: status=ACTIVE,name=cirros.</Description>
+			</Property>
+		</Group>
 		<Group name="RetryParameters" displayName="Retry Parameters">
 			<Property name="retry_count" displayName="Retry Count" mode="EDITABLE" type="SingleLineText">
 				<Defaultvalue>5</Defaultvalue>
@@ -44,11 +49,6 @@
 				<Defaultvalue>YES</Defaultvalue>
 				<List>YES#;#NO</List>
 				<Description>Yes: action fails if target status is not reached. No: action is always successful.</Description>
-			</Property>
-		</Group>
-		<Group name="ListSnapshots" displayName="List Snapshots">
-			<Property name="list_snapshot_query_param" displayName="Query Parameter" mode="EDITABLE" type="SingleLineText">
-				<Description>Provide request parameter in comma separated format. Example: status=ACTIVE,name=cirros.</Description>
 			</Property>
 		</Group>
 		<Group name="ListServers" displayName="List Servers">
