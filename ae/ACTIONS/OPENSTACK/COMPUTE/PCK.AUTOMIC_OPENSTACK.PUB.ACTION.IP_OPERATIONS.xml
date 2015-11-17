@@ -65,7 +65,6 @@
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS" name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS">
-<UC4RB_OPS_FIXED_IPs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_FIXED_IP#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS"/>
 <UC4RB_OPS_IP_OPERATIONs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_IP_OPERATION#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS">ALLOCATE_IP</UC4RB_OPS_IP_OPERATIONs.00>
 <UC4RB_OPS_SERVER_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_SERVER_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS"/>
 <UC4RB_OPS_SERVER_IPs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_SERVER_IP#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS"/>
@@ -132,7 +131,6 @@
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS" name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS">
-<UC4RB_OPS_FIXED_IPs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_FIXED_IP#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS"/>
 <UC4RB_OPS_IP_OPERATIONs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_IP_OPERATION#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS">ALLOCATE_IP</UC4RB_OPS_IP_OPERATIONs.00>
 <UC4RB_OPS_SERVER_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_SERVER_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS"/>
 <UC4RB_OPS_SERVER_IPs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_SERVER_IP#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS"/>
@@ -185,7 +183,6 @@
 <node content="1" id="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS" name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS">
 <PRPTBOX promptset="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS">
-<UC4RB_OPS_FIXED_IPs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_FIXED_IP#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS"/>
 <UC4RB_OPS_IP_OPERATIONs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_IP_OPERATION#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS">ALLOCATE_IP</UC4RB_OPS_IP_OPERATIONs.00>
 <UC4RB_OPS_SERVER_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_SERVER_ID#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS"/>
 <UC4RB_OPS_SERVER_IPs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_OPS_SERVER_IP#" promptsetname="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS"/>
@@ -292,7 +289,43 @@
 <MSCRI/>
 </SCRIPT>
 <DOCU_Docu state="1" type="text">
-<DOC/>
+<DOC><![CDATA[= Action name =
+PCK.AUTOMIC_OPENSTACK.PUB.ACTION.IP_OPERATIONS
+
+= General description =
+This action is used to allocate/de-allocate floating IP's to a server.The floating ip is used to provide the access to the server from the outside world.
+The action will fail
+ * If the provided server id or the floating IP is invalid
+ * If the provided server id and floating IP does not belong to same tenant.
+= Inputs =
+* Compute URL : OpenStack Compute URL. Example http://openstack.com:8774/v2
+* Authentication Token : Token for authentication. It is AES encoded. 
+* Tenant Id : Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
+* Server Id : Server id of the server.
+* Action: Select action you want to execute on the server.
+* IP : Specify IP for the server.
+ * Overwrite Agent: Overwrites the default agent.
+* Overwrite Login: Overwrites the default login
+ 
+= Behavior =
+(mentioned in description)
+ 
+=Return Value=
+Successful completion of action will return 202 as response code. 
+
+= Outputs =
+* Return code is 0 in case of success.
+* Return code is 1 in case of failure.
+* Return code is 2 in case of connection timed out !!
+ 
+= Rollback =
+(none)
+ 
+= Logging =
+AE logs will be displayed in the AE report.
+Java logs will be created at \temp\openstack.log under agent installation directory.
+= Example =
+(none)]]></DOC>
 </DOCU_Docu>
 </JOBP>
 </uc-export>

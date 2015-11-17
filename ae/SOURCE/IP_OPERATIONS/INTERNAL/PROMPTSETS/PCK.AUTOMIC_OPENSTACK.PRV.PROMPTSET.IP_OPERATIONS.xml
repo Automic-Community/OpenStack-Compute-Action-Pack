@@ -2,7 +2,7 @@
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
 <PRPT name="PCK.AUTOMIC_OPENSTACK.PRV.PROMPTSET.IP_OPERATIONS">
 <HEADER state="1">
-<Title/>
+<Title>Assign or remove floating IP</Title>
 <ArchiveKey1/>
 <ArchiveKey2/>
 <OH_SubType/>

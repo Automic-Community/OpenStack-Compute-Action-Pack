@@ -95,7 +95,10 @@ The result of this action will be the following information published as AE vari
 * Snapshot count
 
 * Action Name: PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CHECK_SERVER_STATUS
-* Action Description: This action is used to check/get the status of a server using server id. Output of this action will be an AE variable having current server status on Open Stack.]]></DOC>
+* Action Description: This action is used to check/get the status of a server using server id. Output of this action will be an AE variable having current server status on Open Stack.
+
+* Action Name: PCK.AUTOMIC_OPENSTACK.PUB.ACTION.IP_OPERATIONS
+* Action Description: This action is used to allocate/de-allocate floating IP's to a server.The floating ip is used to provide the access to the server from the outside world.]]></DOC>
 </DOCU_Docu>
 </DOCU>
 </uc-export>

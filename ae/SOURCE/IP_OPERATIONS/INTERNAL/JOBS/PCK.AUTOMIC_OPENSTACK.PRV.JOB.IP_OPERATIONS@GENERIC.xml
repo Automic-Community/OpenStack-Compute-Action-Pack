@@ -120,10 +120,6 @@
 :  SET &UC4RB_LOGGING_PARAMETER# = "Server IP"
 : SET &UC4RB_LOGGING_PARAMETER_VAL# = "&UC4RB_OPS_SERVER_IP#"
 : INC PCK.ITPA_SHARED.PRV.INCLUDE.LOGGING.PARAM
-: SET &UC4RB_LOGGING_PARAMETER# = "Fixed IP"
-!: SET &UC4RB_LOGGING_PARAMETER_VAL# = "&UC4RB_OPS_FIXED_IP#"
-!: INC PCK.ITPA_SHARED.PRV.INCLUDE.LOGGING.PARAM
-
 
 !------------------------------------------ Buidling java arguments --------------------------------------------------------------------------------------------
 
@@ -161,10 +157,6 @@
 : INC PCK.AUTOMIC_OPENSTACK.PUB.INCLUDE.ESCAPE_ARG_VALUE "TEMP_OPTION_VALUE"="&UC4RB_OPS_SERVER_IP#"
 : SET &UC4RB_OPS_OPTIONS#[14] = "&UC4RB_OPS_OPTION_VALUE#"
 
-!: SET &UC4RB_OPS_OPTIONS#[15] = "-fixedip"
-!: INC PCK.AUTOMIC_OPENSTACK.PUB.INCLUDE.ESCAPE_ARG_VALUE "TEMP_OPTION_VALUE"="&UC4RB_OPS_FIXED_IP#"
-!: SET &UC4RB_OPS_OPTIONS#[16] = "&UC4RB_OPS_OPTION_VALUE#"
-
 ! Build java arguments
 : INC PCK.AUTOMIC_OPENSTACK.PUB.INCLUDE.BUILD_JAVA_ARGUMENTS
 
@@ -176,8 +168,8 @@ java -jar &UC4RB_OPS_PATH_JAR# &UC4RB_OPS_JAVA_ARGUMENTS#
 
 
 ! Status messages
-:SET &UC4RB_LOGGING_INFO# = "******** ASSIGN REMOVE ACTION EXECUTED SUCCESSFULLY ********"
-:SET &UC4RB_LOGGING_ERROR# = "******** ASSIGN REMOVE ACTION FAILED ********"
+:SET &UC4RB_LOGGING_INFO# = "******** IP OPERATIONS ACTION EXECUTED SUCCESSFULLY ********"
+:SET &UC4RB_LOGGING_ERROR# = "******** IP OPERATIONS ACTION FAILED ********"
 
 !------------------------------------------ Error Handling -----------------------------------------------------------------------------------------------------
 
