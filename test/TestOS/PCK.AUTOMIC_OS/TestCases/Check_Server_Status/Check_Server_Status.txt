@@ -67,7 +67,7 @@ Check Server Status Template
     ...    -${Fail_If}: This is a radio button wiht yes and no as value which means "Yes: action fails if target status is not reached and No: action always executes successful"
     ...    -${Retry_Count}: This field specifies the number of count user wants to retry to get that server status(default 5 times).
     ...    -${Retry_Interval}: This field specifies the time interval user wants to retry to get that server status(default 10 sec).
-    #    blank input means Token ID and Tenant ID will get values from the output of Get Auth Token.
+    #    blank input means Token ID and Tenant ID will get values from the output of Get Auth Token also Server ID generated from Create Server.
     #    Empty input means that field is left empty.
     #    By invalid target status test case, it means original state of server on openstack is known and target status selected is other than that original state.
     Run Keyword If    '${Generated_Token_ID}' == '${EMPTY}'    Get Auth Token    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}

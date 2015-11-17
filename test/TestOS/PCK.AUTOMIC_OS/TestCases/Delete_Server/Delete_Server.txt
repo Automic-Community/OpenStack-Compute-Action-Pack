@@ -11,10 +11,6 @@ Resource          ../../Resources/variables.txt
 Resource          ../../Resources/actions.txt
 
 *** Test Cases ***    OK_NOK    ComputeURL              TokenID                TenantID                ServerID
-Delete Server with Valid Inputs
-                      [Tags]    main_scenarios
-                      OK        ${OS_Compute_URL}       blank                  blank                   blank
-
 Assertion with Invalid Compute URL
                       NOK       https://162.123.12.3    blank                  blank                   blank
 
@@ -26,6 +22,10 @@ Assertion with Invalid Tenant ID
 
 Assertion with Invalid Server ID
                       NOK       ${OS_Compute_URL}       blank                  blank                   ${Invalid_Server_ID}
+
+Delete Server with Valid Inputs
+                      [Tags]    main_scenarios
+                      OK        ${OS_Compute_URL}       blank                  blank                   blank
 
 Assert Compute URL as a mandatory field
                       OTHER     ${EMPTY}                blank                  blank                   blank
@@ -53,12 +53,11 @@ Delete Server Template
     ...    -${Token_ID}: This field specifies Token ID generated as the output of Get Auth Token action.
     ...    -${Tenant_ID}: This field specifies Tenant ID generated as the output of Get Auth Token action.
     ...    -${Server_ID}: This field specifies Server ID which is to be deleted.
+    #    blank input means Token ID and Tenant ID will get values from the output of Get Auth Token also Server ID generated from Create Server.
+    #    Empty input means that field is left empty.
     Run Keyword If    '${Generated_Token_ID}' == '${EMPTY}'    Get Auth Token    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
     Run Keyword If    '${Generated_Server_ID}' == '${EMPTY}'    Create Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Valid_Create_Server}
     Run Keyword If    '${Generated_Server_ID}' == '${EMPTY}'    Get Server ID    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
-    ...    ${OS_Compute_URL}    ${Query}
-    Run Keyword If    '${Compute_URL}' == 'https://162.123.12.3'    Create Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Valid_Create_Server}
-    Run Keyword If    '${Compute_URL}' == 'https://162.123.12.3'    Get Server ID    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
     ...    ${OS_Compute_URL}    ${Query}
     Action Create    ${_DELETE_SERVER_ACTION}
     Action Set    &UC4RB_OPS_COMPUTE_URL#    ${Compute_URL}
