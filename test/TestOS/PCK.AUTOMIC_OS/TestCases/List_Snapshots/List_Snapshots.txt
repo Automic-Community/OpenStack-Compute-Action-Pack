@@ -64,6 +64,8 @@ List_snapshots Template
     ...    -${Token_ID}: This field specifies Token ID generated as the output of Get Auth Token action.
     ...    -${Tenant_ID}: This field specifies Tenant ID generated as the output of Get Auth Token action.
     ...    -${Query_Param}: This is the optional field. User can provide various parameters with which he/she can filter the list of images. Example: change since, server, name, status, type, limit, marker
+    #    blank input means Token ID and Tenant ID will get values from the output of Get Auth Token.
+    #    Empty input means that field is left empty.
     Run Keyword If    '${Generated_Token_ID}' == '${EMPTY}'    Get Auth Token    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
     Action Create    ${_LIST_SNAPSHOTS_ACTION}
     Action Set    &UC4RB_OPS_COMPUTE_URL#    ${Compute_URL}
