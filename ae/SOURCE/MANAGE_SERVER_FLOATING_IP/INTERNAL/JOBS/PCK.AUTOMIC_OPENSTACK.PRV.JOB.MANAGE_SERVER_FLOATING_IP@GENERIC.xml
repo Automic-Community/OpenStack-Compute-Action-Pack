@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<JOBS_GENERIC AttrType="GENERIC" name="PCK.AUTOMIC_OPENSTACK.PRV.JOB.IP_OPERATIONS@GENERIC">
+<JOBS_GENERIC AttrType="GENERIC" name="PCK.AUTOMIC_OPENSTACK.PRV.JOB.MANAGE_SERVER_FLOATING_IP@GENERIC">
 <XHEADER state="1">
 <Title>Assign or remove floating IP's</Title>
 <ArchiveKey1/>
@@ -122,6 +122,10 @@
 : INC PCK.ITPA_SHARED.PRV.INCLUDE.LOGGING.PARAM
 
 !------------------------------------------ Buidling java arguments --------------------------------------------------------------------------------------------
+
+!----Reading action values from VARA
+! :SET &VARA_OBJ_CONFIG# = "PCK.AUTOMIC_OPENSTACK.PRV.VARA.IP_OPERATION_STATE"
+! :SET &UC4RB_OPS_IP_OPERATION# = GET_VAR(&VARA_OBJ_CONFIG#, "&UC4RB_OPS_IP_OPERATION#",1)
 
 ! Action name
 : SET &UC4RB_OPS_ACTION_NAME# = "FLOATING_IP"
