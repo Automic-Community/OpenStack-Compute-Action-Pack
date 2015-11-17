@@ -1,9 +1,9 @@
 *** Settings ***
 Suite Setup       Startup
 Suite Teardown    Teardown
-Force Tags        get_server_details
+Force Tags        delete_server
 Default Tags
-Test Template     Get Server Details Template
+Test Template     Delete Server Template
 Library           com.automic.robot.itpa.ItpaLibrary
 Resource          ../../Resources/messages.txt
 Resource          ../../Resources/keywords.txt
@@ -11,7 +11,7 @@ Resource          ../../Resources/variables.txt
 Resource          ../../Resources/actions.txt
 
 *** Test Cases ***    OK_NOK    ComputeURL              TokenID                TenantID                ServerID
-Get Server Details with Valid Inputs
+Delete Server with Valid Inputs
                       [Tags]    main_scenarios
                       OK        ${OS_Compute_URL}       blank                  blank                   blank
 
@@ -28,36 +28,39 @@ Assertion with Invalid Server ID
                       NOK       ${OS_Compute_URL}       blank                  blank                   ${Invalid_Server_ID}
 
 Assert Compute URL as a mandatory field
-                      OTHER     ${EMPTY}                blank                  blank                   ${Invalid_Server_ID}
+                      OTHER     ${EMPTY}                blank                  blank                   blank
 
 Assert Authentication Token as a mandatory field
-                      OTHER     ${OS_Compute_URL}       ${EMPTY}               blank                   ${Invalid_Server_ID}
+                      OTHER     ${OS_Compute_URL}       ${EMPTY}               blank                   blank
 
 Assert Tenant ID as a mandatory field
-                      OTHER     ${OS_Compute_URL}       blank                  ${EMPTY}                ${Invalid_Server_ID}
+                      OTHER     ${OS_Compute_URL}       blank                  ${EMPTY}                blank
 
 Assert Server ID as a mandatory field
                       OTHER     ${OS_Compute_URL}       blank                  blank                   ${EMPTY}
 
 *** Keywords ***
 Startup
-    Log    *******Start Test "GET SERVER DETAILS"*******
+    Log    *******Start Test "DELETE SERVER"*******
     Log    *******Connect to AE*******
     Connect AE
 
-Get Server Details Template
+Delete Server Template
     [Arguments]    ${OK_NOK}    ${Compute_URL}    ${Token_ID}    ${Tenant_ID}    ${Server_ID}
-    [Documentation]    This test generates a XML containing details of a server.
+    [Documentation]    This test deletes a already created server from openstack.
     ...    -${OK_NOK}: Boolean value indicate if the action is ENDED_OK or ENDED_NOT_OK. Value of this variable should be OK, NOK or OTHER.
     ...    -${Compute_URL}: This field specifies OpenStack Compute URL.
     ...    -${Token_ID}: This field specifies Token ID generated as the output of Get Auth Token action.
     ...    -${Tenant_ID}: This field specifies Tenant ID generated as the output of Get Auth Token action.
-    ...    -${Server_ID}: This field specifies Server ID whose details are to be fetched.
+    ...    -${Server_ID}: This field specifies Server ID which is to be deleted.
     Run Keyword If    '${Generated_Token_ID}' == '${EMPTY}'    Get Auth Token    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
     Run Keyword If    '${Generated_Server_ID}' == '${EMPTY}'    Create Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Valid_Create_Server}
     Run Keyword If    '${Generated_Server_ID}' == '${EMPTY}'    Get Server ID    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
     ...    ${OS_Compute_URL}    ${Query}
-    Action Create    ${_GET_SERVER_DETAILS_ACTION}
+    Run Keyword If    '${Compute_URL}' == 'https://162.123.12.3'    Create Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Valid_Create_Server}
+    Run Keyword If    '${Compute_URL}' == 'https://162.123.12.3'    Get Server ID    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
+    ...    ${OS_Compute_URL}    ${Query}
+    Action Create    ${_DELETE_SERVER_ACTION}
     Action Set    &UC4RB_OPS_COMPUTE_URL#    ${Compute_URL}
     Run Keyword If    '${Token_ID}' == 'blank'    Action Set    &UC4RB_OPS_AUTH_TOKEN#    ${Generated_Token_ID}
     Run Keyword If    '${Token_ID}' != 'blank'    Action Set    &UC4RB_OPS_AUTH_TOKEN#    ${Token_ID}
@@ -69,10 +72,7 @@ Get Server Details Template
     Action Execute
     Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
     ...    Assert Mandatory
-    Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable File Path Should Be    &UC4RB_OPS_SERVER_INFO_FILEPATH#    .xml    ELSE    Action Object Variable Should Not Be Found
-    ...    &UC4RB_OPS_SERVER_INFO_FILEPATH#
-    Run Keyword If    '${OK_NOK}' == 'OK'    Delete File
     Run Keyword If    '${Server_ID}' == '${EMPTY}'    Delete Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Generated_Server_ID}
 
 Teardown
-    Log    *******End Test "GET SERVER DETAILS"*******
+    Log    *******End Test "DELETE SERVER"*******

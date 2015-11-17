@@ -55,6 +55,12 @@
 <row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CREATE_SERVERS/UC4RB_OPS_COMPUTE_URL#" Value="EXT:/openstack/endpoints/compute_url" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CREATE_SERVERS/UC4RB_OPS_PARAMETER_FILE#" Value="EXT:/openstack/server/create_server_param_file" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CREATE_SERVERS/UC4RB_OPS_TENANT_ID#" Value="&amp;UC4RB_OPS_TENANT_ID#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.DELETE_SERVER/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.DELETE_SERVER/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.DELETE_SERVER/UC4RB_OPS_AUTH_TOKEN#" Value="&amp;UC4RB_OPS_AUTH_TOKEN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.DELETE_SERVER/UC4RB_OPS_COMPUTE_URL#" Value="EXT:/openstack/endpoints/compute_url" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.DELETE_SERVER/UC4RB_OPS_SERVER_ID#" Value="EXT:/openstack/server_param/server_id" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.DELETE_SERVER/UC4RB_OPS_TENANT_ID#" Value="&amp;UC4RB_OPS_TENANT_ID#" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.GET_AUTH_TOKEN/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.GET_AUTH_TOKEN/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.GET_AUTH_TOKEN/UC4RB_OPS_IDENTITY_URL#" Value="EXT:/openstack/endpoints/identity_url" Value1="" Value2="" Value3="" Value4=""/>

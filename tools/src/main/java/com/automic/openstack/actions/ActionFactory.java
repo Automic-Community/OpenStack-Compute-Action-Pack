@@ -58,6 +58,9 @@ public final class ActionFactory {
             case FLOATING_IP:
                 action = new AllocateDeallocateFloatingIPAction();
                 break;
+            case DELETE_SERVER :
+                action = new DeleteServerAction();
+                break;
             default:
                 String msg = "Invalid Action.. Please enter valid action " + Action.getActionNames();
                 LOGGER.error(msg);
