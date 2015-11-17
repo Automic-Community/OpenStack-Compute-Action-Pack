@@ -299,9 +299,7 @@ NOTE : This is an asynchronous operation.
 * Overwrite Login: Overwrites the default login
  
 = Behavior =
-The action will fail:
-* If specified server id does not exist.
-* If the server instance is locked. 
+(mentioned in description) 
  
 =Return Value=
 Successful completion of action does not return a response code

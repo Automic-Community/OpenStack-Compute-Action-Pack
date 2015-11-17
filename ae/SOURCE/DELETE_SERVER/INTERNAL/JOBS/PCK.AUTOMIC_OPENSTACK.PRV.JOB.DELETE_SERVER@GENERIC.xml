@@ -2,7 +2,7 @@
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
 <JOBS_GENERIC AttrType="GENERIC" name="PCK.AUTOMIC_OPENSTACK.PRV.JOB.DELETE_SERVER@GENERIC">
 <XHEADER state="1">
-<Title>action to delete server instance</Title>
+<Title>Delete server instance</Title>
 <ArchiveKey1/>
 <ArchiveKey2/>
 <Active>1</Active>
