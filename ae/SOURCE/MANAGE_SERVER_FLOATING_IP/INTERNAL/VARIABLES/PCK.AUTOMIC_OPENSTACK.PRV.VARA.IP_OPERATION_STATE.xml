@@ -25,8 +25,8 @@
 </ATTR_VARA>
 <VARA state="1">
 <Variables>
-<row Name="ALLOCATE_IP" Value="ALLOCATE_IP" Value1="" Value2="" Value3="" Value4=""/>
-<row Name="DEALLOCATE_IP" Value="DEALLOCATE_IP" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="ALLOCATE_IP" Value="Associate Floating IP" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="DEALLOCATE_IP" Value="Disassociate Floating IP" Value1="" Value2="" Value3="" Value4=""/>
 </Variables>
 </VARA>
 <DOCU_Docu state="1" type="text">
