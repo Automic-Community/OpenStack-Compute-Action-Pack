@@ -37,11 +37,11 @@ Assert Authentication Token as a mandatory field
 Assert Tenant ID as a mandatory field
                       OTHER     ${OS_Compute_URL}       blank                  ${EMPTY}                ${Invalid_Server_ID}    blank
 
-Assert Server ID as a mandatory field
-                      OTHER     ${OS_Compute_URL}       blank                  blank                   ${EMPTY}                blank
-
 Assert Image Name as a mandatory field
                       OTHER     ${OS_Compute_URL}       blank                  blank                   blank                   ${EMPTY}
+
+Assert Server ID as a mandatory field
+                      OTHER     ${OS_Compute_URL}       blank                  blank                   ${EMPTY}                blank
 
 *** Keywords ***
 Startup
@@ -60,6 +60,8 @@ Create Server Snapshot Template
     ...    -${Image_Name}: This field specifies the name of snapshot created.
     Run Keyword If    '${Generated_Token_ID}' == '${EMPTY}'    Get Auth Token    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
     Run Keyword If    '${Generated_Server_ID}' == '${EMPTY}'    Create Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Valid_Create_Server}
+    Run Keyword If    '${Generated_Server_ID}' == '${EMPTY}'    Get Server ID    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
+    ...    ${OS_Compute_URL}    ${Query}
     Action Create    ${_CREATE_SERVER_SNAPSHOT_ACTION}
     Action Set    &UC4RB_OPS_COMPUTE_URL#    ${Compute_URL}
     Run Keyword If    '${Token_ID}' == 'blank'    Action Set    &UC4RB_OPS_AUTH_TOKEN#    ${Generated_Token_ID}
@@ -76,6 +78,7 @@ Create Server Snapshot Template
     Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
     ...    Assert Mandatory
     Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable Should Be Found    &UC4RB_OPS_IMAGE_URL#    ELSE    Action Object Variable Should Not Be Found    &UC4RB_OPS_IMAGE_URL#
+    Run Keyword If    '${Server_ID}' == '${EMPTY}'    Delete Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Generated_Server_ID}
 
 Teardown
     Log    *******End Test "CREATE SERVER SNAPSHOT"*******
