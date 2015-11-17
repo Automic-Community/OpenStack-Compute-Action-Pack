@@ -29,7 +29,7 @@ public class AllocateDeallocateFloatingIPAction extends AbstractHttpAction{
     private String serverId;
     private String action;
     private String floatingIP;
-    private String fixedIP;
+//    private String fixedIP;
 
     public AllocateDeallocateFloatingIPAction() {
 
@@ -39,7 +39,7 @@ public class AllocateDeallocateFloatingIPAction extends AbstractHttpAction{
         addOption("serverid", true, "Server id");
         addOption("floatingipaction", true, "Action to execute on the server");
         addOption("floatingip", true, "Specify Floating IP for the server");
-        addOption("fixedip", true, "Specify Fixed IP for the server");
+     //   addOption("fixedip", true, "Specify Fixed IP for the server");
 
     }
 
@@ -52,7 +52,7 @@ public class AllocateDeallocateFloatingIPAction extends AbstractHttpAction{
         serverId = getOptionValue("serverid");
         action = getOptionValue("floatingipaction");
         floatingIP = getOptionValue("floatingip");
-        fixedIP = getOptionValue("fixedip");
+      //  fixedIP = getOptionValue("fixedip");
     }
 
     @Override
@@ -85,11 +85,11 @@ public class AllocateDeallocateFloatingIPAction extends AbstractHttpAction{
             LOGGER.error(ExceptionConstants.EMPTY_FLOATING_IP);
             throw new AutomicException(ExceptionConstants.EMPTY_FLOATING_IP);
         }
-        if (!Validator.checkNotEmpty(fixedIP)) {        	
+      /*  if (!Validator.checkNotEmpty(fixedIP)) {        	
             LOGGER.error(ExceptionConstants.EMPTY_FIXED_IP);
             throw new AutomicException(ExceptionConstants.EMPTY_FIXED_IP);
         }
-
+*/
     }
 
     /**
@@ -115,11 +115,11 @@ public class AllocateDeallocateFloatingIPAction extends AbstractHttpAction{
         JSONObject actionJson = new JSONObject();
 
         switch (action) {           
-            case "ALLOCATE_IP":            	
-                 actionJson.put("addFloatingIp", getIPDetailsJsonObj());
+            case "ALLOCATE_IP":  
+            	 actionJson.put("addFloatingIp", new JSONObject().put("address", floatingIP));
                 break;
             case "DEALLOCATE_IP":
-                actionJson.put("removeFloatingIp",  getIPDetailsJsonObj());
+            	actionJson.put("removeFloatingIp", new JSONObject().put("address", floatingIP));               
                 break;
             default:
                 LOGGER.error("invalid action");
@@ -129,13 +129,13 @@ public class AllocateDeallocateFloatingIPAction extends AbstractHttpAction{
         return actionJson.toString();
     }
     
-    private JSONObject getIPDetailsJsonObj(){    	
+   /* private JSONObject getIPDetailsJsonObj(){    	
     	 JSONObject childJson = new JSONObject();
     	 childJson.put("address", floatingIP);
     	 childJson.put("fixed_address", fixedIP);
     	 return childJson;
     }
-    
+    */
     /**
      * Method to prepare output based on Response of an HTTP request to client.
      * 
