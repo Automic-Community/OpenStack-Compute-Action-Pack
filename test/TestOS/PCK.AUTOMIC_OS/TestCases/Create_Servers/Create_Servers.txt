@@ -15,12 +15,6 @@ Create Server with Valid Parameter File
                       [Tags]    main_scenarios
                       OK        ${OS_Compute_URL}       blank                  blank                   ${Valid_Create_Server}
 
-Create Multiple Servers with Valid Parameter File without Providing Reservation ID = True in Parameter File
-                      OK        ${OS_Compute_URL}       blank                  blank                   ${Valid_Create_Multiple_Servers}
-
-Create Multiple Servers with Valid Parameter File also Providing Reservation ID = True in Parameter File
-                      OK        ${OS_Compute_URL}       blank                  blank                   ${Valid_CreateServer_with_ReservationID}
-
 Assertion with Invalid Compute URL
                       NOK       https://162.123.12.3    blank                  blank                   ${Valid_Create_Server}
 
@@ -76,8 +70,7 @@ Create Servers Template
     Action Execute
     Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
     ...    Assert Mandatory
-    Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable Should Be Found    &UC4RB_OPS_SERVERLIST#[00001]    ELSE    Action Object Variable Should Not Be Found    &UC4RB_OPS_SERVERLIST#[00001]
-    Run Keyword If    '${Parameter_File}' == 'Valid_Create_Servers' and '${Parameter_File}' == 'Valid_Create_Servers_Reservation'    Action Object Variable Should Be Found    &UC4RB_OPS_SERVERLIST#[00002]
+    Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable Should Be Found    &UC4RB_OPS_VARA_NAME#    ELSE    Action Object Variable Should Not Be Found    &UC4RB_OPS_VARA_NAME#
 
 Teardown
     Log    *******End Test "CREATE SERVERS"*******
