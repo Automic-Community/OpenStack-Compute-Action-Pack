@@ -117,7 +117,7 @@ public class AllocateDeallocateFloatingIPAction extends AbstractHttpAction {
 
 		JSONObject actionJson = new JSONObject();
 
-		switch (action) {
+		switch (action.toUpperCase()) {
 		case "ALLOCATE_IP":
 			actionJson.put("addFloatingIp",
 					new JSONObject().put("address", floatingIP));
@@ -128,7 +128,7 @@ public class AllocateDeallocateFloatingIPAction extends AbstractHttpAction {
 			break;
 		default:
 			LOGGER.error("invalid action");
-			throw new AutomicException("Invalid  action [" + action + "]");
+			throw new AutomicException("Invalid  floating IP action [" + action + "]");
 		}
 
 		return actionJson.toString();
