@@ -11,47 +11,47 @@ Resource          ../../Resources/keywords.txt
 Resource          ../../Resources/variables.txt
 Resource          ../../Resources/actions.txt
 
-*** Test Cases ***    OK_NOK    ComputeURL              TokenID                TenantID                ServerID                Operation        IP
-Assign Floating IP to Server
+*** Test Cases ***    OK_NOK    ComputeURL              TokenID                TenantID                ServerID                Operation                   IP
+Asssociate Floating IP to Server
                       [Tags]    main_scenarios
-                      OK        ${OS_Compute_URL}       blank                  blank                   blank                   ALLOCATE_IP      ${Floating_IP}
+                      OK        ${OS_Compute_URL}       blank                  blank                   blank                   Associate Floating IP       ${Floating_IP}
 
-Remove Floating IP from Server
+Disassociate Floating IP from Server
                       [Tags]    main_scenarios
-                      OK        ${OS_Compute_URL}       blank                  blank                   blank                   DEALLOCATE_IP    ${Floating_IP}
+                      OK        ${OS_Compute_URL}       blank                  blank                   blank                   Disassociate Floating IP    ${Floating_IP}
 
 Assertion with Invalid Compute URL
-                      NOK       https://162.123.12.3    blank                  blank                   blank                   ALLOCATE_IP      ${Floating_IP}
+                      NOK       https://162.123.12.3    blank                  blank                   blank                   Associate Floating IP       ${Floating_IP}
 
 Assertion with Invalid Authentication Token
-                      NOK       ${OS_Compute_URL}       ${Invalid_Token_ID}    blank                   blank                   ALLOCATE_IP      ${Floating_IP}
+                      NOK       ${OS_Compute_URL}       ${Invalid_Token_ID}    blank                   blank                   Associate Floating IP       ${Floating_IP}
 
 Assertion with Invalid Tenant ID
-                      NOK       ${OS_Compute_URL}       blank                  ${Invalid_Tenant_ID}    blank                   ALLOCATE_IP      ${Floating_IP}
+                      NOK       ${OS_Compute_URL}       blank                  ${Invalid_Tenant_ID}    blank                   Associate Floating IP       ${Floating_IP}
 
 Assertion with Invalid Server ID
-                      NOK       ${OS_Compute_URL}       blank                  blank                   ${Invalid_Server_ID}    ALLOCATE_IP      ${Floating_IP}
+                      NOK       ${OS_Compute_URL}       blank                  blank                   ${Invalid_Server_ID}    Associate Floating IP       ${Floating_IP}
 
 Assertion with Invalid Floating IP
-                      NOK       ${OS_Compute_URL}       blank                  blank                   blank                   ALLOCATE_IP      11.22.33.44.55
+                      NOK       ${OS_Compute_URL}       blank                  blank                   blank                   Associate Floating IP       11.22.33.44.55
 
 Assert Compute URL as a mandatory field
-                      OTHER     ${EMPTY}                blank                  blank                   ${Invalid_Server_ID}    ALLOCATE_IP      ${Floating_IP}
+                      OTHER     ${EMPTY}                blank                  blank                   ${Invalid_Server_ID}    Associate Floating IP       ${Floating_IP}
 
 Assert Authentication Token as a mandatory field
-                      OTHER     ${OS_Compute_URL}       ${EMPTY}               blank                   ${Invalid_Server_ID}    ALLOCATE_IP      ${Floating_IP}
+                      OTHER     ${OS_Compute_URL}       ${EMPTY}               blank                   ${Invalid_Server_ID}    Associate Floating IP       ${Floating_IP}
 
 Assert Tenant ID as a mandatory field
-                      OTHER     ${OS_Compute_URL}       blank                  ${EMPTY}                ${Invalid_Server_ID}    ALLOCATE_IP      ${Floating_IP}
+                      OTHER     ${OS_Compute_URL}       blank                  ${EMPTY}                ${Invalid_Server_ID}    Associate Floating IP       ${Floating_IP}
 
 Assert Server ID as a mandatory field
-                      OTHER     ${OS_Compute_URL}       blank                  blank                   ${EMPTY}                ALLOCATE_IP      ${Floating_IP}
+                      OTHER     ${OS_Compute_URL}       blank                  blank                   ${EMPTY}                Associate Floating IP       ${Floating_IP}
 
 Assert Operation as a mandatory field
-                      OTHER     ${OS_Compute_URL}       blank                  blank                   blank                   ${EMPTY}         ${Floating_IP}
+                      OTHER     ${OS_Compute_URL}       blank                  blank                   blank                   ${EMPTY}                    ${Floating_IP}
 
 Assert Floating IP as a mandatory field
-                      OTHER     ${OS_Compute_URL}       blank                  blank                   blank                   DEALLOCATE_IP    ${EMPTY}
+                      OTHER     ${OS_Compute_URL}       blank                  blank                   blank                   Disassociate Floating IP    ${EMPTY}
 
 *** Keywords ***
 Startup
@@ -74,10 +74,7 @@ Assign-Remove Floating IP Template
     Run Keyword If    '${Generated_Server_ID}' == '${EMPTY}'    Create Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Valid_Create_Server}
     Run Keyword If    '${Generated_Server_ID}' == '${EMPTY}'    Get Server ID    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
     ...    ${OS_Compute_URL}    ${Query}
-    #Run Keyword If    '${Compute_URL}' == 'https://162.123.12.3'    Create Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Valid_Create_Server}
-    #Run Keyword If    '${Compute_URL}' == 'https://162.123.12.3'    Get Server ID    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
-    #...    ${OS_Compute_URL}    ${Query}
-    Action Create    ${_ASSIGN_REMOVE_IP_ACTION}
+    Action Create    ${MANAGE_SERVER_FLOATING_IP_ACTION}
     Action Set    &UC4RB_OPS_COMPUTE_URL#    ${Compute_URL}
     Run Keyword If    '${Token_ID}' == 'blank'    Action Set    &UC4RB_OPS_AUTH_TOKEN#    ${Generated_Token_ID}
     Run Keyword If    '${Token_ID}' != 'blank'    Action Set    &UC4RB_OPS_AUTH_TOKEN#    ${Token_ID}
