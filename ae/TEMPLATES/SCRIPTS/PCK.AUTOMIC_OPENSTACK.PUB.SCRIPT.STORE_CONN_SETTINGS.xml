@@ -36,7 +36,7 @@
 <MaxRetCode>0</MaxRetCode>
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
-<FcstStatus>0|U00000000 ??? ""</FcstStatus>
+<FcstStatus>0| |</FcstStatus>
 <Ert>1</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
@@ -90,8 +90,8 @@
 ! Check if existing connection to be overwritten
 :IF &UC4RB_OPS_OVERWRITE_CONN# EQ "YES"
 :  PRINT "connection created or updated with name &UC4RB_OPS_CONN_NAME#"
-:  PUT_VAR "PCK.AUTOMIC_OPENSTACK.PUB.VARA.CONN_SETTINGS" , "&UC4RB_OPS_CONN_NAME#" , "&UC4RB_OPS_IDENTITY_URL#" , "&UC4RB_OPS_USERNAME#" , "&UC4RB_OPS_PASSWORD#" , "&UC4RB_OPS_TENANT_NAME#" 
-:ELSE 
+:  PUT_VAR "PCK.AUTOMIC_OPENSTACK.PUB.VARA.CONN_SETTINGS" , "&UC4RB_OPS_CONN_NAME#" , "&UC4RB_OPS_IDENTITY_URL#" , "&UC4RB_OPS_USERNAME#" , "&UC4RB_OPS_PASSWORD#" , "&UC4RB_OPS_TENANT_NAME#"
+:ELSE
 :  SET &TEMP# = GET_VAR("PCK.AUTOMIC_OPENSTACK.PUB.VARA.CONN_SETTINGS", "&UC4RB_OPS_CONN_NAME#")
 :  IF &TEMP# EQ ""
 :    PRINT "new connection created with name &UC4RB_OPS_CONN_NAME#"

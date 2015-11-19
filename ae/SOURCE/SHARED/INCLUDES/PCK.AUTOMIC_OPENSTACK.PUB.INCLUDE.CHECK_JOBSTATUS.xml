@@ -33,7 +33,7 @@ elif [ $execcode -eq 2 ]
 else
 :  INC PCK.ITPA_SHARED.PRV.INCLUDE.LOGGING.ERROR
 fi
-if [ "$execcode" -ne "0" ] 
+if [ "$execcode" -ne "0" ]
 then
     exit $execcode
 fi

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="ISO-8859-15" standalone="no"?><uc-export clientvers="11.0.0">
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
 <JOBI name="PCK.AUTOMIC_OPENSTACK.PUB.INCLUDE.CREATE_FILE">
 <HEADER state="1">
 <Title>Create file</Title>
