@@ -56,7 +56,7 @@
         <entry name="tooltip">Select action you want to execute on the server.</entry>
         <entry name="modifiable">1</entry>
         <entry name="onchangereset"/>
-        <entry name="customfield">abc</entry>
+        <entry name="customfield"/>
         <entry name="resetable">1</entry>
       <entry name="initvalue"/>
          </properties>

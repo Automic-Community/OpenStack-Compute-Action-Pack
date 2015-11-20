@@ -11,7 +11,7 @@ Resource          ../../Resources/keywords.txt
 Resource          ../../Resources/variables.txt
 Resource          ../../Resources/actions.txt
 
-*** Test Cases ***    OK_NOK    ComputeURL              TokenID                TenantID                ServerID                Operation                   IP
+*** Test Cases ***    OK_NOK    ComputeURL              TokenID                TenantID                ServerID                Action                   IPAddress
 Asssociate Floating IP to Server
                       [Tags]    main_scenarios
                       OK        ${OS_Compute_URL}       blank                  blank                   blank                   Associate Floating IP       ${Floating_IP}
@@ -61,7 +61,7 @@ Startup
 
 Assign-Remove Floating IP Template
     [Arguments]    ${OK_NOK}    ${Compute_URL}    ${Token_ID}    ${Tenant_ID}    ${Server_ID}    ${Operation}
-    ...    ${IP}
+    ...    ${IP_Address}
     [Documentation]    This test creates the server snapshot when server state is active, shutoff, suspended or resume.
     ...    -${OK_NOK}: Boolean value indicate if the action is ENDED_OK or ENDED_NOT_OK. Value of this variable should be OK, NOK or OTHER.
     ...    -${Compute_URL}: This field specifies OpenStack Compute URL.
@@ -69,7 +69,7 @@ Assign-Remove Floating IP Template
     ...    -${Tenant_ID}: This field specifies Tenant ID generated as the output of Get Auth Token action.
     ...    -${Server_ID}: This field specifies Server ID whose snapshot is to be created.
     ...    -${Operation}: This field specifies Allocate or Deallocate Floating IP operation with Server.
-    ...    -${IP}: This field specifies the IP for the servers.
+    ...    -${IP_Address}: This field specifies the Floating IP for the servers.
     Run Keyword If    '${Generated_Token_ID}' == '${EMPTY}'    Get Auth Token    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
     Run Keyword If    '${Generated_Server_ID}' == '${EMPTY}'    Create Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Valid_Create_Server}
     Run Keyword If    '${Generated_Server_ID}' == '${EMPTY}'    Get Server ID    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
@@ -83,7 +83,7 @@ Assign-Remove Floating IP Template
     Run Keyword If    '${Server_ID}' == 'blank'    Action Set    &UC4RB_OPS_SERVER_ID#    ${Generated_Server_ID}
     Run Keyword If    '${Server_ID}' != 'blank'    Action Set    &UC4RB_OPS_SERVER_ID#    ${Server_ID}
     Action Set    &UC4RB_OPS_IP_OPERATION#    ${Operation}
-    Action Set    &UC4RB_OPS_SERVER_IP#    ${IP}
+    Action Set    &UC4RB_OPS_SERVER_IP#    ${IP_Address}
     Set Overwrite Agent
     Action Execute
     Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
