@@ -56,13 +56,13 @@
 				<Description>Provide request parameter in comma separated format. Example: status=ACTIVE,name=cirros.</Description>
 			</Property>
 		</Group>
-		<Group name="IPOperations" displayName="IP Operations">
+		<Group name="IPOperations" displayName="Manage IP Operations">
 			<Property name="ip_operations_server_ip" displayName="IP Address" mode="EDITABLE" type="SingleLineText">
 				<Description>Specify Floating IP for the server</Description>
 			</Property>
 			<Property name="ip_operations_action" displayName="Action" mode="EDITABLE" type="SingleChoice">
-				<Defaultvalue>ALLOCATE_IP</Defaultvalue>
-				<List>ALLOCATE_IP#;#DEALLOCATE_IP</List>
+				<Defaultvalue>Associate Floating IP</Defaultvalue>
+				<List>Associate Floating IP#;#Disassociate Floating IP</List>
 				<Description>Select action you want to execute on the server.</Description>
 			</Property>
 		</Group>
