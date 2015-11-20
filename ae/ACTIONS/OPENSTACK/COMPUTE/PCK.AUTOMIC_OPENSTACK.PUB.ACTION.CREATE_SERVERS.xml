@@ -209,7 +209,7 @@
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
 <FcstStatus>0| |</FcstStatus>
-<Ert>4</Ert>
+<Ert>2</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
 <ErtFix>0</ErtFix>
@@ -287,18 +287,18 @@
 PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CREATE_SERVERS
 
 = General description =
-This action is used to create one or more servers in OpenStack. Since creating servers is an asynchronous operation the action returns a list of server ids in a VARA which will be created dynamically. These server ids could be iterated over with Get Server Details action to check whether server provisioning was successful. When creating multiple servers in Compute service v2 please provide "return_reservation_id": "True" in parameter file to get server ids of all the servers created otherwise the action publishes the server id of the first instance. The action can only publish maximum of 30 server ids in a single execution.
-The action will fail if we get an error from OpenStack on submitting the request to create server instances.
-VARA will be created at location \APPDATA\TEMP. If the following folder location does not exists please create the same.
+This action is used to create one or more servers in OpenStack. Since creating servers is an asynchronous operation, the action returns a list of server ids in a VARA which will be created dynamically. These server ids could be iterated over with Get Server Details action to check whether server provisioning was successful. When creating multiple servers in Compute service v2 please provide "return_reservation_id": "True" in parameter file to get server ids of all the servers created otherwise the action publishes the server id of the first instance.
+VARA will be created at the location PACKAGES\APPDATA\TEMP. If the given folder doesn?t exist, VARA will be created at the root.
+
 = Inputs =
-* Compute URL : OpenStack Compute URL. Example http://openstack.com:8774/v2
-* Authentication Token : Token for authentication. It is AES encoded. 
-* Tenant Id : Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
-* Parameter File : Specify full path and name of the JSON file to create a new server.
-* Overwrite Agent: Overwrites the default agent
-* Overwrite Login: Overwrites the default login
-= Behavior =
-Sample 1:
+* Compute URL 		: OpenStack Compute URL. Example http://openstack.com:8774/v2
+* Authentication Token 	: Token for authentication. It is AES encoded. 
+* Tenant Id 		: Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
+* Parameter File 	: Specify full path and name of the JSON file to create a new server.
+* Overwrite Agent	: Overwrites the default agent
+* Overwrite Login	: Overwrites the default login
+
+Sample:
 parameter file
 {
     "server": {
@@ -312,18 +312,20 @@ parameter file
         "max_count": "1"
     }
 }
-output
-&UC4RB_OPS_VARA_NAME#	PCK.AUTOMIC_OPENSTACK.PRV.VARA.SERVERLIST_0001091015
+
+= Behavior =
  
 =Return Value=
-UC4RB_OPS_VARA_NAME : Publishes create server ids in a VARA
+UC4RB_OPS_VARA_NAME : Publishes created server ids in a VARA.
 
 = Outputs =
 * Return code is 0 in case of success.
 * Return code is 1 in case of failure.
 * Return code is 2 in case of connection timed out !!
+
 = Rollback =
 (none)
+
 = Logging =
 AE logs will be displayed in the AE report.
 Java logs will be created at \temp\openstack.log under agent installation directory.

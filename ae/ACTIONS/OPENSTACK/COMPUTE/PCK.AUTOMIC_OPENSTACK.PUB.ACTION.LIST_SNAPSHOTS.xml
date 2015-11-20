@@ -331,14 +331,13 @@ The result of this action will be the following information published as AE vari
     </images>
 </ListSnapshots>
  
- 
 = Inputs =
-* Compute URL : OpenStack Compute URL. Example http://openstack.com:8774/v2
-* Authentication Token : Token for authentication. It is AES encoded
-* Tenant Id : Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
-* Query Parameters : Specify query parameters separated by comma. Eg. status=ACTIVE,name=cirros.
-* Overwrite Agent: Overwrites the default agent
-* Overwrite Login: Overwrites the default login
+* Compute URL 		: OpenStack Compute URL. Example http://openstack.com:8774/v2
+* Authentication Token 	: Token for authentication. It is AES encoded
+* Tenant Id 		: Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
+* Query Parameters 	: Specify query parameters separated by comma. Eg. status=ACTIVE,name=cirros.
+* Overwrite Agent	: Overwrites the default agent
+* Overwrite Login	: Overwrites the default login
 
 = Behavior =
 (None)
@@ -361,7 +360,8 @@ AE logs will be displayed in the AE report.
 Java logs will be created at \temp\openstack.log under agent installation directory.
 
 = Example =
-(none)]]></DOC>
+(none)
+]]></DOC>
 </DOCU_Docu>
 </JOBP>
 </uc-export>

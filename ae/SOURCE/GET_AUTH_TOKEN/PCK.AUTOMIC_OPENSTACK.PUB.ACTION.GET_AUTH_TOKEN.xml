@@ -191,7 +191,7 @@
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
 <FcstStatus>0| |</FcstStatus>
-<Ert>5</Ert>
+<Ert>1</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
 <ErtFix>0</ErtFix>
@@ -272,15 +272,16 @@ This action is used to authenticate against OpenStack identity service with vali
 If user provides the tenant name as an input in OpenStack credentials then the action also generates the tenant id. Without providing tenant name the user cannot use the generated Authentication token in subsequent actions. The result of this action will be the following information published as AE variables:
 * authentication token (Encrypted form)
 * tenant id
+
 Note: 
 * Open Stack identity service URL should be accessible from agent OS.
 * Every subsequent action in OpenStack package would accept this authentication token as an input. Action would check whether the difference in token expiry and current AE time is less than the threshold limit for expiry and renew the authentication token and finally republish the new authentication token. If authentication token could be reused the action would continue using the current authentication token and no new authentication token would be published. The threshold limit is specified in minutes in VARA object PCK.AUTOMIC_OPENSTACK.PRV.VARA.PACKAGE_PARAMETERS with  key TOKEN_EXPIRY_THRESHOLD.
  
 = Inputs =
-* Identity URL : OpenStack Identity URL. Example http://openstack.com:5000/v2.0
-* Username : Name of the user
-* Password : Password for the above user 
-* Tenant Name : Tenant name (a group of users is referred to as a project or tenant. These terms are interchangeable.)
+* Identity URL 	: OpenStack Identity URL. Example http://openstack.com:5000/v2.0
+* Username 	: Name of the user
+* Password 	: Password for the above user 
+* Tenant Name 	: Tenant name (a group of users is referred to as a project or tenant. These terms are interchangeable.)
 * Overwrite Agent: Overwrites the default agent
 * Overwrite Login: Overwrites the default login
 
@@ -289,10 +290,10 @@ If user provides valid Openstack connection details but does not give tenant nam
 
 =Return Value=
 The response will contain the following AE variables
-* UC4RB_OPS_AUTH_TOKEN : Authentication token in encrypted form. This is encrypted representation of OpenStack connection details, token Id, tenant id, issue date and expiry date.
+* UC4RB_OPS_AUTH_TOKEN : Authentication token in encrypted form. This is encrypted representation of OpenStack connection details, token Id, tenant id and expiry date.
 * UC4RB_OPS_TENANT_ID : Tenant id
 Authentication token in decrypt form:
-{"tokenIssue":"2015-10-26T08:16:30.194546","tokenId":"266b15569a624b749517ba02242d1625","tokenExpiry":"2015-10-26T09:16:30Z","baseURL":"http://172.16.0.3:5000/v2.0","userName":"admin","password":"admin","tenantName":"admin"} 
+{"tokenId":"266b15569a624b749517ba02242d1625","tokenExpiry":"74528972345169876453","baseURL":"http://172.16.0.3:5000/v2.0","userName":"admin","password":"admin","tenantName":"admin"} 
  
 = Outputs =
 * Return code is 0 in case of success.
@@ -305,8 +306,10 @@ Authentication token in decrypt form:
 = Logging =
 AE logs will be displayed in the AE report.
 Java logs will be created at \temp\openstack.log under agent installation directory.
+
 = Example =
-(none)]]></DOC>
+(none)
+]]></DOC>
 </DOCU_Docu>
 </JOBP>
 </uc-export>
