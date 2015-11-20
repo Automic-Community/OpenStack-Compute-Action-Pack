@@ -55,7 +55,10 @@ public final class ActionFactory {
             case LIST_SNAPSHOTS:
                 action = new ListSnapshotsAction();
                 break;
-            case DELETE_SERVER:
+            case FLOATING_IP:
+                action = new AllocateDeallocateFloatingIPAction();
+                break;
+            case DELETE_SERVER :
                 action = new DeleteServerAction();
                 break;
             default:
