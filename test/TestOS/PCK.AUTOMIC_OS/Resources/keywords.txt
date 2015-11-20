@@ -143,3 +143,5 @@ Get Server ID
     Action Execute
     ${Generated_Server_ID}=    Action Get Variable    &UC4RB_OPS_SERVER_ID#
     Set Suite Variable    ${Generated_Server_ID}
+    Action Object Variable File Path Should Be    &UC4RB_OPS_LIST_SERVERS_XML#    .xml
+    Delete File

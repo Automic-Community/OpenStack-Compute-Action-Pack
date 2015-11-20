@@ -11,7 +11,7 @@ Resource          ../../Resources/keywords.txt
 Resource          ../../Resources/variables.txt
 Resource          ../../Resources/actions.txt
 
-*** Test Cases ***    OK_NOK    ComputeURL              TokenID                TenantID                ServerID                Action                   IPAddress
+*** Test Cases ***    OK_NOK    ComputeURL              TokenID                TenantID                ServerID                Action                      IPAddress
 Asssociate Floating IP to Server
                       [Tags]    main_scenarios
                       OK        ${OS_Compute_URL}       blank                  blank                   blank                   Associate Floating IP       ${Floating_IP}
@@ -74,7 +74,7 @@ Assign-Remove Floating IP Template
     Run Keyword If    '${Generated_Server_ID}' == '${EMPTY}'    Create Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Valid_Create_Server}
     Run Keyword If    '${Generated_Server_ID}' == '${EMPTY}'    Get Server ID    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
     ...    ${OS_Compute_URL}    ${Query}
-    Action Create    ${MANAGE_SERVER_FLOATING_IP_ACTION}
+    Action Create    ${_MANAGE_SERVER_FLOATING_IP_ACTION}
     Action Set    &UC4RB_OPS_COMPUTE_URL#    ${Compute_URL}
     Run Keyword If    '${Token_ID}' == 'blank'    Action Set    &UC4RB_OPS_AUTH_TOKEN#    ${Generated_Token_ID}
     Run Keyword If    '${Token_ID}' != 'blank'    Action Set    &UC4RB_OPS_AUTH_TOKEN#    ${Token_ID}
