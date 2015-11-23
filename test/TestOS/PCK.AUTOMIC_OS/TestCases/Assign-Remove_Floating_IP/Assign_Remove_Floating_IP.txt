@@ -90,4 +90,5 @@ Assign-Remove Floating IP Template
     ...    Assert Mandatory
 
 Teardown
+    Delete Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Generated_Server_ID}
     Log    *******End Test "ASSIGN/REMOVE FLOATING IP"*******

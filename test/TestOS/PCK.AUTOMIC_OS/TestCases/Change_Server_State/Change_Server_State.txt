@@ -94,7 +94,8 @@ Change Server State Template
     Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
     ...    Assert Mandatory
     Run Keyword If    '${OK_NOK}' == 'OK'    Sleep    60s
-    Run Keyword If    '${Server_ID}' == '${EMPTY}'    Delete Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Generated_Server_ID}
+    Delete Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Generated_Server_ID}
 
 Teardown
+    Delete Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Generated_Server_ID}
     Log    *******End Test "CHANGE SERVER STATE"*******
