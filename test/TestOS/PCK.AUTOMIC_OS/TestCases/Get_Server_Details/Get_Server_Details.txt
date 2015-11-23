@@ -53,6 +53,9 @@ Get Server Details Template
     ...    -${Token_ID}: This field specifies Token ID generated as the output of Get Auth Token action.
     ...    -${Tenant_ID}: This field specifies Tenant ID generated as the output of Get Auth Token action.
     ...    -${Server_ID}: This field specifies Server ID whose details are to be fetched.
+    #    blank input means Token ID and Tenant ID will get values from the output of Get Auth Token.
+    #    Empty input means that field is left empty.
+    #    blank input for server id will get server id from get server id template.
     Run Keyword If    '${Generated_Token_ID}' == '${EMPTY}'    Get Auth Token    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
     Run Keyword If    '${Generated_Server_ID}' == '${EMPTY}'    Create Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Valid_Create_Server}
     Run Keyword If    '${Generated_Server_ID}' == '${EMPTY}'    Get Server ID    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
@@ -72,7 +75,7 @@ Get Server Details Template
     Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable File Path Should Be    &UC4RB_OPS_SERVER_INFO_FILEPATH#    .xml    ELSE    Action Object Variable Should Not Be Found
     ...    &UC4RB_OPS_SERVER_INFO_FILEPATH#
     Run Keyword If    '${OK_NOK}' == 'OK'    Delete File
-    Run Keyword If    '${Server_ID}' == '${EMPTY}'    Delete Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Generated_Server_ID}
 
 Teardown
+    Delete Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Generated_Server_ID}
     Log    *******End Test "GET SERVER DETAILS"*******

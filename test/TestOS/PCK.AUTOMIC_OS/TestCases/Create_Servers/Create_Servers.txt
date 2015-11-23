@@ -71,6 +71,9 @@ Create Servers Template
     Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
     ...    Assert Mandatory
     Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable Should Be Found    &UC4RB_OPS_VARA_NAME#    ELSE    Action Object Variable Should Not Be Found    &UC4RB_OPS_VARA_NAME#
+    Run Keyword If    '${OK_NOK}' == 'OK'    Get Server ID    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
+    ...    ${OS_Compute_URL}    ${Query}
 
 Teardown
+    Delete Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Generated_Server_ID}
     Log    *******End Test "CREATE SERVERS"*******
