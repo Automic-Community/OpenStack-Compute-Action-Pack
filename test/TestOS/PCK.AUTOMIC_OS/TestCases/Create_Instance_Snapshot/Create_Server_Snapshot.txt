@@ -58,6 +58,9 @@ Create Server Snapshot Template
     ...    -${Tenant_ID}: This field specifies Tenant ID generated as the output of Get Auth Token action.
     ...    -${Server_ID}: This field specifies Server ID whose snapshot is to be created.
     ...    -${Image_Name}: This field specifies the name of snapshot created.
+    #    blank input means Token ID and Tenant ID will get values from the output of Get Auth Token.
+    #    Empty input means that field is left empty.
+    #    blank input for server id will get server id from get server id template.
     Run Keyword If    '${Generated_Token_ID}' == '${EMPTY}'    Get Auth Token    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
     Run Keyword If    '${Generated_Server_ID}' == '${EMPTY}'    Create Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Valid_Create_Server}
     Run Keyword If    '${Generated_Server_ID}' == '${EMPTY}'    Get Server ID    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
