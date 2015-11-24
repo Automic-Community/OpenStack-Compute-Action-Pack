@@ -340,7 +340,7 @@ The result of this action will be the following information published as AE vari
 * Overwrite Login	: Overwrites the default login
 
 = Behavior =
-(None)
+(none)
 
 =Return Value=
 The response will contain the following AE variables

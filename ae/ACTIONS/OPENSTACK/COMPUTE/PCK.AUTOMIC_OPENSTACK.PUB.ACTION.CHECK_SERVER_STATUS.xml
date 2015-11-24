@@ -345,6 +345,7 @@ Note: If specified Target Status is ANY then this action will get the current se
 * Overwrite Login	: Overwrites the default login
 
 = Behavior =
+(none)
 
 =Return Value=
 The response will contain the following AE variable
