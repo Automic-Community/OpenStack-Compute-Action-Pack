@@ -56,6 +56,16 @@
 				<Description>Provide request parameter in comma separated format. Example: status=ACTIVE,name=cirros.</Description>
 			</Property>
 		</Group>
+		<Group name="IPOperations" displayName="Manage IP Operations">
+			<Property name="ip_operations_server_ip" displayName="IP Address" mode="EDITABLE" type="SingleLineText">
+				<Description>Specify Floating IP for the server</Description>
+			</Property>
+			<Property name="ip_operations_action" displayName="Action" mode="EDITABLE" type="SingleChoice">
+				<Defaultvalue>Associate Floating IP</Defaultvalue>
+				<List>Associate Floating IP#;#Disassociate Floating IP</List>
+				<Description>Select action you want to execute on the server.</Description>
+			</Property>
+		</Group>
 	</Properties>
 	<DynamicProperties>
 		<Property name="/openstack/server_param/server_id" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
@@ -120,6 +130,14 @@
 		<Property name="/openstack/server/list_servers_query_param" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
 			<Value>{/custom/list_servers_query_param}</Value>
 			<Description>Provide request parameter in comma separated format. Example: status=ACTIVE,name=cirros.</Description>
+		</Property>
+		<Property name="/openstack/server/ip_operations_action" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+			<Value>{/custom/ip_operations_action}</Value>
+			<Description>Specify Floating IP for the server</Description>
+		</Property>
+		<Property name="/openstack/server/ip_operations_server_ip" protected="false" highlighted="false" type="SingleLineText" allowCustomValues="false">
+			<Value>{/custom/ip_operations_server_ip}</Value>
+			<Description>Select action you want to execute on the server.</Description>
 		</Property>
 	</DynamicProperties>
 </ComponentType>

@@ -17,3 +17,5 @@ ${Valid_Create_Server}    ${EXECDIR}\\Create_Server.txt
 ${Valid_Create_Multiple_Servers}    ${EXECDIR}\\Create_Multiple_Servers.txt
 ${Valid_CreateServer_with_ReservationID}    ${EXECDIR}\\CreateServers_with_ReservationID.txt
 ${Invalid_Create_Server}    ${EXECDIR}\\Invalid_Create_Server.txt
+${Query}          server=TestServer
+${Floating_IP}    128.136.179.187

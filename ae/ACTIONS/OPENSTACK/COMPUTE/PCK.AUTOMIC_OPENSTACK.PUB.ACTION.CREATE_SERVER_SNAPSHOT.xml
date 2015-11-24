@@ -290,7 +290,7 @@
 PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CREATE_SERVER_SNAPSHOT
 
 = General description =
-This action is used to create a snapshot for an existing server as per the specified server id. Output of this action will be an AE variable having created server snapshot?s image url.
+This action is used to create a snapshot for an existing server as per the specified server id. Output of this action will be an AE variable having created server snapshot's image url.
 You can only create a new image from the server when its status is ACTIVE, SHUTOFF, PAUSED, or SUSPENDED.
 
 = Inputs =

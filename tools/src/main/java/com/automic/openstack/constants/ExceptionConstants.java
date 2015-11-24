@@ -54,6 +54,8 @@ public final class ExceptionConstants {
     public static final String MAX_INSTANCE_COUNT = "Create Server Max Count limit has been exceeded. Maximum: 30 Actual: [%S]";
     
     public static final String INVALID_DATE = "Invalid date";
+    public static final String EMPTY_FLOATING_IP = "Floating ip cannot be empty";
+    public static final String EMPTY_FIXED_IP = "Fixed ip cannot be empty";
     
     private ExceptionConstants() {
     }

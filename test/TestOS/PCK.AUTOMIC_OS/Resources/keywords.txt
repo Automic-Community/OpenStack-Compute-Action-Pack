@@ -88,7 +88,7 @@ Assert Mandatory
 Delete File
     Action Create    ${_DELETE_FILE_ACTION}
     Action Set    &UC4RB_OPS_FILE_PATH#    ${File_path}
-    Action Set    &UC4RB_OPS_STATUS#    YES
+    Action Set    &UC4RB_OPS_FILE_EXIST#    YES
     Set Overwrite Agent
     Action Execute
 
@@ -119,6 +119,29 @@ Create Server
     Action Set    &UC4RB_OPS_PARAMETER_FILE#    ${Parameter_File}
     Set Overwrite Agent
     Action Execute
-    ${Generated_Server_ID}=    Action Get Variable    &UC4RB_OPS_SERVERLIST#[00001]
-    Set Global Variable    ${Generated_Server_ID}
-    Sleep    15s
+
+Delete Server
+    [Arguments]    ${Compute_URL}    ${Token_ID}    ${Tenant_ID}    ${Server_ID}
+    Action Create    ${_DELETE_SERVER_ACTION}
+    Action Set    &UC4RB_OPS_COMPUTE_URL#    ${Compute_URL}
+    Action Set    &UC4RB_OPS_AUTH_TOKEN#    ${Token_ID}
+    Action Set    &UC4RB_OPS_TENANT_ID#    ${Tenant_ID}
+    Action Set    &UC4RB_OPS_SERVER_ID#    ${Server_ID}
+    Set Overwrite Agent
+    Action Execute
+
+Get Server ID
+    [Arguments]    ${Identity_URL}    ${Username}    ${Password}    ${Tenant_Name}    ${Compute_URL}    ${Query}
+    Action Create    ${_GET_SERVER_ID_TEMPLATE}
+    Action Set    &UC4RB_OPS_IDENTITY_URL#    ${Identity_URL}
+    Action Set    &UC4RB_OPS_USERNAME#    ${UserName}
+    Action Set    &UC4RB_OPS_PASSWORD#    ${Password}
+    Action Set    &UC4RB_OPS_TENANT_NAME#    ${Tenant_Name}
+    Action Set    &UC4RB_OPS_COMPUTE_URL#    ${Compute_URL}
+    Action Set    &UC4RB_OPS_QUERY_PARAM#    ${Query}
+    Set Overwrite Agent
+    Action Execute
+    ${Generated_Server_ID}=    Action Get Variable    &UC4RB_OPS_SERVER_ID#
+    Set Suite Variable    ${Generated_Server_ID}
+    Action Object Variable File Path Should Be    &UC4RB_OPS_LIST_SERVERS_XML#    .xml
+    Delete File

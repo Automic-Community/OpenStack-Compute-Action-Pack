@@ -72,6 +72,8 @@ Check Server Status Template
     #    By invalid target status test case, it means original state of server on openstack is known and target status selected is other than that original state.
     Run Keyword If    '${Generated_Token_ID}' == '${EMPTY}'    Get Auth Token    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
     Run Keyword If    '${Generated_Server_ID}' == '${EMPTY}'    Create Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Valid_Create_Server}
+    Run Keyword If    '${Generated_Server_ID}' == '${EMPTY}'    Get Server ID    ${OS_Identity_URL}    ${UserName_OS}    ${Password_OS}    ${Name_Tenant}
+    ...    ${OS_Compute_URL}    ${Query}
     Action Create    ${_CHECK_SERVER_STATUS_ACTION}
     Action Set    &UC4RB_OPS_COMPUTE_URL#    ${Compute_URL}
     Run Keyword If    '${Token_ID}' == 'blank'    Action Set    &UC4RB_OPS_AUTH_TOKEN#    ${Generated_Token_ID}
@@ -89,6 +91,8 @@ Check Server Status Template
     Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
     ...    Assert Mandatory
     Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable Should Be Found    &UC4RB_OPS_SERVER_STATUS#    ELSE    Action Object Variable Should Not Be Found    &UC4RB_OPS_SERVER_STATUS#
+    Delete Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Generated_Server_ID}
 
 Teardown
+    Delete Server    ${OS_Compute_URL}    ${Generated_Token_ID}    ${Generated_Tenant_ID}    ${Generated_Server_ID}
     Log    *******End Test "CHECK SERVER STATUS"*******

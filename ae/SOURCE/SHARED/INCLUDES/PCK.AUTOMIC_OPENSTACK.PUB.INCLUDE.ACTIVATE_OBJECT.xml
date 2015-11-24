@@ -12,11 +12,11 @@
 :     SET &STATUS# = GET_UC_OBJECT_STATUS(,&ACTOBJ#,"RETCODE")
 :     IF &STATUS# <> "0"
 :         STOP MSG, 50, "Error while executing &UC4RB_OPS_OBJECT_TYPE# object "
-:     ENDIF 
+:     ENDIF
 :     IF &ACTOBJ# = "0"
-:         SET &ERRNR# = SYS_LAST_ERR_NR() 
-:         SET &ERRINS#  = SYS_LAST_ERR_INS() 
-:         SET &MESSAGE# = GET_MSG_TXT(&ERRNR#,&ERRINS#) 
+:         SET &ERRNR# = SYS_LAST_ERR_NR()
+:         SET &ERRINS#  = SYS_LAST_ERR_INS()
+:         SET &MESSAGE# = GET_MSG_TXT(&ERRNR#,&ERRINS#)
 :         PRINT "Error while activating check server status object :&MESSAGE#"
 :         STOP MSG, 50, "Error while activating &UC4RB_OPS_OBJECT_TYPE# object :&MESSAGE#"
 :      ENDIF

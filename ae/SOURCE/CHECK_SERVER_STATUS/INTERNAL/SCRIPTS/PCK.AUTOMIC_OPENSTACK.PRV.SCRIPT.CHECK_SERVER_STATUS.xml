@@ -102,25 +102,25 @@
 :SET &COUNT# = 0
 :SET &FLAG# = "FALSE"
 :DEFINE &SERVER_INFO_FILEPATH#, string
-:SET &GET_SERVER_OBJECT_NAME# = "PCK.AUTOMIC_OPENSTACK.PRV.JOB.GET_SERVER_DETAILS@GENERIC" 
+:SET &GET_SERVER_OBJECT_NAME# = "PCK.AUTOMIC_OPENSTACK.PRV.JOB.GET_SERVER_DETAILS@GENERIC"
 :SET &DELETE_FILE_OBJECT_NAME# = "PCK.AUTOMIC_OPENSTACK.PRV.JOB.DELETE_FILE@GENERIC"
 :WHILE &COUNT# LT &UC4RB_OPS_RETRY_COUNT#
 :     WAIT &UC4RB_OPS_RETRY_INTERVAL#
 :     SET  &COUNT# = &COUNT# +1
 :     PRINT "Retry Count &COUNT#"
-!     Invoking 'Get Server Details' Action    
-:     INC PCK.AUTOMIC_OPENSTACK.PUB.INCLUDE.ACTIVATE_OBJECT UC4RB_OPS_OBJECT_TYPE = GET_SERVER_OBJECT_NAME 
+!     Invoking 'Get Server Details' Action
+:     INC PCK.AUTOMIC_OPENSTACK.PUB.INCLUDE.ACTIVATE_OBJECT UC4RB_OPS_OBJECT_TYPE = GET_SERVER_OBJECT_NAME
 :     SET &SERVER_INFO_FILEPATH# = GET_PUBLISHED_VALUE(&ACTOBJ#,UC4RB_OPS_SERVER_INFO_FILEPATH#)
 :     PSET &UC4RB_OPS_FILE_PATH# = &SERVER_INFO_FILEPATH#
-!     Reading 'Get Server Details' xml and fetching open stack server status         
+!     Reading 'Get Server Details' xml and fetching open stack server status
 :     INC PCK.AUTOMIC_OPENSTACK.PUB.INCLUDE.GET_SERVER_STATUS
 :     PRINT "Request Status = &UC4RB_OPS_SERVER_STATUS#"
 :     IF &UC4RB_OPS_TARGET_STATUS# EQ "ANY"
 :         SET &FLAG# = "TRUE"
-:         SET  &COUNT# = &UC4RB_OPS_RETRY_COUNT#    
-:     ENDIF  
-:     IF &UC4RB_OPS_SERVER_STATUS# EQ &UC4RB_OPS_TARGET_STATUS#  
-!         Satisfy the condition to quit from while loop as status is no more inprogress state.       
+:         SET  &COUNT# = &UC4RB_OPS_RETRY_COUNT#
+:     ENDIF
+:     IF &UC4RB_OPS_SERVER_STATUS# EQ &UC4RB_OPS_TARGET_STATUS#
+!         Satisfy the condition to quit from while loop as status is no more inprogress state.
 :         SET  &COUNT# = &UC4RB_OPS_RETRY_COUNT#
 :         SET &FLAG# = "TRUE"
 :     ENDIF
@@ -128,13 +128,13 @@
 :     PSET &UC4RB_OPS_FILE_EXIST# = "YES"
 !     Invoking 'Delete File' Action
 :     INC PCK.AUTOMIC_OPENSTACK.PUB.INCLUDE.ACTIVATE_OBJECT UC4RB_OPS_OBJECT_TYPE = DELETE_FILE_OBJECT_NAME
-:     IF &ACTOBJ# <> 0 
+:     IF &ACTOBJ# <> 0
 :         PRINT "----------File &UC4RB_OPS_FILE_PATH# deleted succssfully---------------."
 :     ENDIF
-!----------------------- Deleting Get Server Details XML file end --------------------------------- 
+!----------------------- Deleting Get Server Details XML file end ---------------------------------
 :ENDWHILE
 
-:IF &UC4RB_OPS_MATCH# EQ "NO"     
+:IF &UC4RB_OPS_MATCH# EQ "NO"
 :   IF &FLAG# EQ "FALSE"
 :      PRINT "Error ! Retrieved server status does not match with target status."
 :      SET &FLAG# = "TRUE"
@@ -147,7 +147,7 @@
 :IF &FLAG# EQ "FALSE"
 :   PRINT "Error ! Retrieved server status does not match with target status."
 :   STOP MSG, 50, "Error ! Retrieved server status does not match with target status."
-:ENDIF 
+:ENDIF
 :PUBLISH &UC4RB_OPS_SERVER_STATUS#,,"TOP"
 ]]></MSCRI>
 </SCRIPT>
