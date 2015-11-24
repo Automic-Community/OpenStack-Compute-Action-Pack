@@ -297,15 +297,16 @@ This action is used to allocate/de-allocate floating IP's to a server.The floati
 The action will fail
  * If the provided server id or the floating IP is invalid
  * If the provided server id and floating IP does not belong to same tenant.
+
 = Inputs =
-* Compute URL : OpenStack Compute URL. Example http://openstack.com:8774/v2
-* Authentication Token : Token for authentication. It is AES encoded. 
-* Tenant Id : Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
-* Server Id : Server id of the server.
-* Action: Select action you want to execute on the server.
-* IP Address : Specify Floating IP for the server.
-* Overwrite Agent: Overwrites the default agent.
-* Overwrite Login: Overwrites the default login
+* Compute URL 		: OpenStack Compute URL. Example http://openstack.com:8774/v2
+* Authentication Token 	: Token for authentication. It is AES encoded. 
+* Tenant Id 		: Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
+* Server Id 		: Server id of the server.
+* Action		: Select action you want to execute on the server.
+* IP Address 		: Specify Floating IP for the server.
+* Overwrite Agent	: Overwrites the default agent.
+* Overwrite Login	: Overwrites the default login.
  
 = Behavior =
 (mentioned in description)
@@ -324,6 +325,7 @@ Successful completion of action will return 202 as response code.
 = Logging =
 AE logs will be displayed in the AE report.
 Java logs will be created at \temp\openstack.log under agent installation directory.
+
 = Example =
 (none)]]></DOC>
 </DOCU_Docu>

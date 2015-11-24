@@ -287,8 +287,7 @@
 PCK.AUTOMIC_OPENSTACK.PUB.ACTION.LIST_SERVERS
 
 = General description =
-This action is used to get all the servers with corresponding server details from OpenStack cloud and Save the details to 
-provides file path in the XML format.
+This action is used to get all the servers with corresponding server details from OpenStack cloud and save the details in the XML format.
 The result of this action will be the following information published as AE variables:
 * Xml file path 
 * Server count
@@ -407,12 +406,12 @@ The parameter file will have the following structure:
 </ListServers>
  
 = Inputs =
-* Compute URL : OpenStack Compute URL. Example http://openstack.com:8774/v2
-* Authentication Token : Token for authentication It is AES encoded 
-* Tenant Id : Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
-* Query Parameters : Specify query parameters separated by comma. Eg. status=ACTIVE,name=cirros.
-* Overwrite Agent: Overwrites the default agent
-* Overwrite Login: Overwrites the default login
+* Compute URL 		: OpenStack Compute URL. Example http://openstack.com:8774/v2
+* Authentication Token 	: Token for authentication. It is AES encoded 
+* Tenant Id 		: Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
+* Query Parameters 	: Specify query parameters separated by comma. Eg. status=ACTIVE,name=cirros.
+* Overwrite Agent	: Overwrites the default agent
+* Overwrite Login	: Overwrites the default login
 
 = Behavior =
 (None)
@@ -422,18 +421,21 @@ The response will contain the following AE variables
 * UC4RB_OPS_LIST_SERVERS_XML : Xml File Path
 * UC4RB_OPS_SERVER_COUNT : Number of available servers 
 
-
 = Outputs =
 * Return code is 0 in case of success.
 * Return code is 1 in case of failure.
 * Return code is 2 in case of connection timed out !!
+
 = Rollback =
 (none)
+
 = Logging =
 AE logs will be displayed in the AE report.
 Java logs will be created at \temp\openstack.log under agent installation directory.
+
 = Example =
-(none)]]></DOC>
+(none)
+]]></DOC>
 </DOCU_Docu>
 </JOBP>
 </uc-export>

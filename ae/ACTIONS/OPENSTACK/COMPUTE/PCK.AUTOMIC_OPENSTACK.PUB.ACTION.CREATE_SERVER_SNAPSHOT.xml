@@ -288,31 +288,38 @@
 <DOCU_Docu state="1" type="text">
 <DOC><![CDATA[= Action name =
 PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CREATE_SERVER_SNAPSHOT
+
 = General description =
-This action is used to create a snapshot for an existing server as per the specified server id. Output of this action will be an AE variable having created server snapshot image url.
-You can only create a new image from the server when its status is ACTIVE, SHUTOFF, PAUSED, or SUSPENDED
+This action is used to create a snapshot for an existing server as per the specified server id. Output of this action will be an AE variable having created server snapshot's image url.
+You can only create a new image from the server when its status is ACTIVE, SHUTOFF, PAUSED, or SUSPENDED.
+
 = Inputs =
-* Compute URL : OpenStack Compute URL. Example http://openstack.com:8774/v2
-* Authentication Token : Token for authentication. It is AES encoded 
-* Tenant Id : Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
-* Server Id : Server id of the server.
-* Image Name : Specify image name for snapshot
-* Overwrite Agent: Overwrites the default agent
-* Overwrite Login: Overwrites the default login
+* Compute URL 		: OpenStack Compute URL. Example http://openstack.com:8774/v2
+* Authentication Token 	: Token for authentication. It is AES encoded 
+* Tenant Id 		: Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
+* Server Id 		: Server id of the server.
+* Image Name 		: Specify image name for snapshot
+* Overwrite Agent	: Overwrites the default agent
+* Overwrite Login	: Overwrites the default login
+
 = Behavior =
-If specified server id does not exist the action will fail.
+
 =Return Value=
 The response will contain the following AE variable
 * UC4RB_OPS_IMAGE_URL : Created server snapshot image URL
+
 = Outputs =
 * Return code is 0 in case of success.
 * Return code is 1 in case of failure.
 * Return code is 2 in case of connection timed out !!
+
 = Rollback =
 (none)
+
 = Logging =
 AE logs will be displayed in the AE report.
 Java logs will be created at \temp\openstack.log under agent installation directory.
+
 = Example =
 (none)]]></DOC>
 </DOCU_Docu>

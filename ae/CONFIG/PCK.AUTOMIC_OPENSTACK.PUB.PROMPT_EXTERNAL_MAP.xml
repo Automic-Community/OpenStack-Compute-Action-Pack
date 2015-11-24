@@ -47,7 +47,7 @@
 <row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CREATE_SERVER_SNAPSHOT/UC4RB_OPS_AUTH_TOKEN#" Value="&amp;UC4RB_OPS_AUTH_TOKEN#" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CREATE_SERVER_SNAPSHOT/UC4RB_OPS_COMPUTE_URL#" Value="EXT:/openstack/endpoints/compute_url" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CREATE_SERVER_SNAPSHOT/UC4RB_OPS_IMAGE_NAME#" Value="EXT:/openstack/image/image_name" Value1="" Value2="" Value3="" Value4=""/>
-<row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CREATE_SERVER_SNAPSHOT/UC4RB_OPS_SERVER_ID#" Value="EXT:/openstack/server/server_id" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CREATE_SERVER_SNAPSHOT/UC4RB_OPS_SERVER_ID#" Value="EXT:/openstack/server_param/server_id" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CREATE_SERVER_SNAPSHOT/UC4RB_OPS_TENANT_ID#" Value="&amp;UC4RB_OPS_TENANT_ID#" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CREATE_SERVERS/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CREATE_SERVERS/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>

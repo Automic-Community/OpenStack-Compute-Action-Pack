@@ -291,15 +291,15 @@ This action is used to delete an existing server instance based on the server id
 NOTE : This is an asynchronous operation. 
  
 = Inputs =
-* Compute URL : OpenStack Compute URL. Example http://openstack.com:8774/v2
-* Authentication Token : Token for authentication. It is AES encoded. 
-* Tenant Id : Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
-* Server Id : Server id of the server. 
-* Overwrite Agent: Overwrites the default agent.
-* Overwrite Login: Overwrites the default login
+* Compute URL 		: OpenStack Compute URL. Example http://openstack.com:8774/v2
+* Authentication Token 	: Token for authentication. It is AES encoded. 
+* Tenant Id 		: Tenant Id (a group of users is referred to as a project or tenant. These terms are interchangeable.)
+* Server Id 		: Server id of the server. 
+* Overwrite Agent	: Overwrites the default agent.
+* Overwrite Login	: Overwrites the default login.
  
 = Behavior =
-(mentioned in description) 
+Action will fail if the server id provided is in locked state.
  
 =Return Value=
 Successful completion of action does not return a response code
@@ -315,6 +315,7 @@ Successful completion of action does not return a response code
 = Logging =
 AE logs will be displayed in the AE report.
 Java logs will be created at \temp\openstack.log under agent installation directory.
+
 = Example =
 (none)]]></DOC>
 </DOCU_Docu>

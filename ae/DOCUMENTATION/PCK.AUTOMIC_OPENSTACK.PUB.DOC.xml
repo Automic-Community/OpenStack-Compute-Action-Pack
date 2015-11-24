@@ -13,9 +13,11 @@
 
 OpenStack is a set of software tools for building and managing cloud computing platforms for public and private clouds. With this package we automate the OpenStack Identity and Compute services through various actions. These actions could further be used in a complex workflow to achieve the given business goal.
 * Manage Authentication
-* Create/Manage cloud instances
+* Create/Delete/List cloud instances
 * Check details/status of cloud instances
-* Create server snapshots
+* Create/List server snapshots
+* Change server state
+* Assign/Remove floating IP
 
 =ARA Compatibility=
 This OpenStack Package also offers cusotm types for all the OpenStack actions which further can be used in ARA.
@@ -63,8 +65,7 @@ If user provides the tenant name as an input in OpenStack credentials then the a
 Every subsequent action in OpenStack package would accept this authentication token as an input. Action would check whether the difference in token expiry and current AE time is less than the threshold limit for expiry and renew the authentication token and finally republish the new authentication token. If authentication token could be reused the action would continue using the current authentication token and no new authentication token would be published.
 
 * Action Name: PCK.AUTOMIC_OPENSTACK.PUB.ACTION.LIST_SERVERS
-* Action Description: This action is used to get all the servers with corresponding server details from OpenStack cloud and Save the details to 
-provides file path in the XML format.
+* Action Description: This action is used to get all the servers with corresponding server details from OpenStack cloud in accordance with the query parameters provided by the user (if any) and save the details in the XML format.
 The result of this action will be the following information published as AE variables:
 * Xml file path 
 * Server count
@@ -78,11 +79,11 @@ Failure Conditions for this action:
 
 
 * Action Name:  PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CREATE_SERVERS
-* Action Description: This action is used to create one or more servers in OpenStack. Since creating servers is an asynchronous operation the action returns a list of server ids in an AE array variable. These server ids could be iterated over with Get Server Details action to check whether server provisioning was successful. When creating multiple servers in Compute service v2 please provide "return_reservation_id": "True" in parameter file to get server ids of all the servers created otherwise the action publishes the server id of the first instance. The action can only publish maximum of 30 server ids in a single execution. 
+* Action Description: This action is used to create one or more servers in OpenStack. Since creating servers is an asynchronous operation the action returns a list of server ids in an AE array variable. These server ids could be iterated over with Get Server Details action to check whether server provisioning was successful. When creating multiple servers in Compute service v2 please provide "return_reservation_id": "True" in parameter file to get server ids of all the servers created otherwise the action publishes the server id of the first instance. 
 The action will fail if we get an error from OpenStack on submitting the request to create server instances.
 
 * Action Name:  PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CHANGE_SERVER_STATE
-* Action Description: This action is used to change the state of the server. The action will fail if either the server id is invalid or when the starting and the resultant state are same.Following states are allowed :
+* Action Description: This action is used to change the state of the server. The action will fail if either the server id is invalid or when the starting and the resultant state are same. Following states are allowed :
 Start (default), Stop, Reboot_Soft, Reboot_Hard, Pause, Unpause, Lock, Unlock, Suspend, Resume
 
 * Action Name:  PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CREATE_SERVER_SNAPSHOT
@@ -97,8 +98,17 @@ The result of this action will be the following information published as AE vari
 * Action Name: PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CHECK_SERVER_STATUS
 * Action Description: This action is used to check/get the status of a server using server id. Output of this action will be an AE variable having current server status on Open Stack.
 
-* Action Name: PCK.AUTOMIC_OPENSTACK.PUB.ACTION.MANAGE_IP_OPERATIONS
-* Action Description: This action is used to allocate/de-allocate floating IP's to a server.The floating ip is used to provide the access to the server from the outside world.]]></DOC>
+*Action Name: PCK.AUTOMIC_OPENSTACK.PUB.ACTION.DELETE_SERVER
+*Action Description: This action is used to delete an existing server instance based on the server id provided. The action will fail if either the server id is invalid or the instance we are deleting is locked.
+
+*Action Name: PCK.AUTOMIC_OPENSTACK.PUB.ACTION.MANAGE_SERVER_FLOATING_IP
+*Action Description: This action is used to allocate/de-allocate floating IP's to a server.The floating ip is used to provide the access to the server from the outside world.
+The action will fail
+ * If the provided server id or the floating IP is invalid
+ * If the provided server id and floating IP does not belong to same tenant.
+
+*Action Name: PCK.AUTOMIC_OPENSTACK.PUB.ACTION.DELETE_FILE
+*Action Description: This action will delete the specified file if it exists.]]></DOC>
 </DOCU_Docu>
 </DOCU>
 </uc-export>
