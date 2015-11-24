@@ -409,7 +409,7 @@ This action is used to get the server details from OpenStack cloud as per the sp
 * Overwrite Login	: Overwrites the default login
 
 = Behavior =
-(None)
+(none)
 
 =Return Value=
 The response will contain the following AE variables

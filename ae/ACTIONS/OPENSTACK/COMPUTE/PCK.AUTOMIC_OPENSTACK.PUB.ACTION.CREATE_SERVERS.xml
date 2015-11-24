@@ -287,8 +287,8 @@
 PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CREATE_SERVERS
 
 = General description =
-This action is used to create one or more servers in OpenStack. Since creating servers is an asynchronous operation, the action returns a list of server ids in a VARA which will be created dynamically. These server ids could be iterated over with Get Server Details action to check whether server provisioning was successful. When creating multiple servers in Compute service v2 please provide "return_reservation_id": "True" in parameter file to get server ids of all the servers created otherwise the action publishes the server id of the first instance.
-VARA will be created at the location PACKAGES\APPDATA\TEMP. If the given folder doesn?t exist, VARA will be created at the root.
+This action is used to create one or more servers in OpenStack. Since creating servers is an asynchronous operation, the action returns a list of server ids in a VARA which will be created dynamically. These server ids could be iterated over with Get Server Details action to check whether server provisioning was successful.
+VARA will be created at the location PACKAGES\APPDATA\TEMP. If the given folder doesn't exist, VARA will be created at the root.
 
 = Inputs =
 * Compute URL 		: OpenStack Compute URL. Example http://openstack.com:8774/v2
@@ -314,6 +314,7 @@ parameter file
 }
 
 = Behavior =
+(none)
  
 =Return Value=
 UC4RB_OPS_VARA_NAME : Publishes created server ids in a VARA.

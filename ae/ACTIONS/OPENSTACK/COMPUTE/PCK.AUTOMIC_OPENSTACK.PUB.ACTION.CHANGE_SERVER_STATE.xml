@@ -293,7 +293,7 @@ PCK.AUTOMIC_OPENSTACK.PUB.ACTION.CHANGE_SERVER_STATE
 This action is used to change the state of the server. The action will fail if either the server id is invalid or when the starting and the resultant state are same.
 Following states are allowed :
 Start (default), Stop, Reboot_Soft, Reboot_Hard, Pause, Unpause, Lock, Unlock, Suspend, Resume.
-This is an asynchronous operation. The action returns status code 202 only means request is accepted successfully .To further verify user can use GET SERVER DETAILS action.
+This is an asynchronous operation. The action returns status code 202 only means request is accepted successfully. To further verify user can use GET SERVER DETAILS action.
 
 = Inputs =
 * Compute URL 		: OpenStack Compute URL. Example http://openstack.com:8774/v2
@@ -305,6 +305,7 @@ This is an asynchronous operation. The action returns status code 202 only means
 * Overwrite Login	: Overwrites the default login
 
 = Behavior =
+(none)
 
 =Return Value=
 Successful completion of action will return 202 as response code
