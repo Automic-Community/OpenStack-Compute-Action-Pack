@@ -267,7 +267,7 @@ This action is used to delete the specified file.
 * Overwrite Login   	: Overwrites the default login
 
 = Behavior =
-The specified file will be deleted if the file exist.
+(none)
 
 =Return Value=
 (none)

@@ -414,7 +414,7 @@ The parameter file will have the following structure:
 * Overwrite Login	: Overwrites the default login
 
 = Behavior =
-(None)
+(none)
 
 =Return Value=
 The response will contain the following AE variables
