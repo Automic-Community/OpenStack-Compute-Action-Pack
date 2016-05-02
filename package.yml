@@ -12,14 +12,3 @@ binaries:
         type: BINARY
         path: tools/target/openstacktool.jar
         version: 1.0.0
-  - object: RESOURCES/PCK.AUTOMIC_OPENSTACK.PRV.CUSTOM_TYPES
-    timestamp: disabled
-    resources:
-      - name: DEPLOYMENTTARGET#OPENSTACK#1 
-        type: TEXT
-        path: ara/types/deploymenttarget/OpenStack_DepTarget.xml
-        version: 1.0.0
-      - name: COMPONENT#OPENSTACK#2 
-        type: TEXT
-        path: ara/types/component/OpenStack_Component.xml
-        version: 1.0.0			

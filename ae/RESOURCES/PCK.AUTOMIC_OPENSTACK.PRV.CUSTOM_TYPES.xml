@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-15"?>
-<uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
+<?xml version="1.0" encoding="ISO-8859-15" standalone="no"?><uc-export clientvers="11.0.0">
 <STORE name="PCK.AUTOMIC_OPENSTACK.PRV.CUSTOM_TYPES">
 <HEADER state="1">
 <Title/>
@@ -9,8 +8,8 @@
 </HEADER>
 <STORE>
 <resourceList>
-<row checksum="67EE51ACCCE3C1C879833F6E0FB88909725AE795CAE3C478319916087B87C481" fileType="TEXT" filename="OpenStack_Component.xml" hw="*" id="COMPONENT#OPENSTACK#2-ALL-ALL-ALL" name="COMPONENT#OPENSTACK#2" platform="*" resname="PCK.AUTOMIC_OPENSTACK.PRV.CUSTOM_TYPES-COMPONENT#OPENSTACK#2-ALL-ALL-ALL" size="8877" sw="*" type="3" version="1.0.0"/>
-<row checksum="0CDE1DC75C13F35BBD59576A115ABAA6343B4AD5B22BE97F38390E184E9632D3" fileType="TEXT" filename="OpenStack_DepTarget.xml" hw="*" id="DEPLOYMENTTARGET#OPENSTACK#1-ALL-ALL-ALL" name="DEPLOYMENTTARGET#OPENSTACK#1" platform="*" resname="PCK.AUTOMIC_OPENSTACK.PRV.CUSTOM_TYPES-DEPLOYMENTTARGET#OPENSTACK#1-ALL-ALL-ALL" size="1263" sw="*" type="3" version="1.0.0"/>
+<row checksum="1A8449A0AEAB48CAE9FE9DB32BDEAB6523D5B180BBBB084B4B408A5B8F9B77EB" fileType="TEXT" filename="OpenStack_Component.xml" hw="*" id="COMPONENT#OPENSTACK#2-ALL-ALL-ALL" name="COMPONENT#OPENSTACK#2" platform="*" resname="PCK.AUTOMIC_OPENSTACK.PRV.CUSTOM_TYPES-COMPONENT#OPENSTACK#2-ALL-ALL-ALL" size="8735" sw="*" type="3" version="1.0.0"/>
+<row checksum="D80BAC75AA479AA92C704E96FA77D3E005D56DDC628EF1539BBA8EBBECB67C3F" fileType="TEXT" filename="OpenStack_DepTarget.xml" hw="*" id="DEPLOYMENTTARGET#OPENSTACK#1-ALL-ALL-ALL" name="DEPLOYMENTTARGET#OPENSTACK#1" platform="*" resname="PCK.AUTOMIC_OPENSTACK.PRV.CUSTOM_TYPES-DEPLOYMENTTARGET#OPENSTACK#1-ALL-ALL-ALL" size="1237" sw="*" type="3" version="1.0.0"/>
 </resourceList>
 </STORE>
 <DOCU_Docu state="1" type="text">
