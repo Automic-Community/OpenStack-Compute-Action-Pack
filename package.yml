@@ -10,5 +10,5 @@ binaries:
     resources:
       - name: OPENSTACK 
         type: BINARY
-        path: tools/target/openstacktool.jar
+        path: tools/target/openstack-tool.jar
         version: 1.0.0

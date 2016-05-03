@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-15"?>
-<uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
+<?xml version="1.0" encoding="ISO-8859-15" standalone="no"?><uc-export clientvers="11.0.0">
 <VARA OVD_VRName="FREI" data_type="STATIC" name="PCK.AUTOMIC_OPENSTACK.PUB.VAR.METADATA" replacementmode="2">
 <HEADER state="1">
 <Title/>
@@ -34,7 +33,7 @@
 <row Name="Name" Value="PCK.AUTOMIC_OPENSTACK" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="Package Format Version" Value="0.1.0" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="Title" Value="Automic OpenStack Package" Value1="" Value2="" Value3="" Value4=""/>
-<row Name="Version" Value="1.0.0" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="Version" Value="2.0.0" Value1="" Value2="" Value3="" Value4=""/>
 </Variables>
 </VARA>
 <DOCU_Docu state="1" type="text">
