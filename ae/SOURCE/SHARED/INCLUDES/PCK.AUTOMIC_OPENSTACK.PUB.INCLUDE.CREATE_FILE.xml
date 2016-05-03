@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-15"?>
-<uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
+<?xml version="1.0" encoding="ISO-8859-15" standalone="no"?><uc-export clientvers="11.0.0">
 <JOBI name="PCK.AUTOMIC_OPENSTACK.PUB.INCLUDE.CREATE_FILE">
 <HEADER state="1">
 <Title>Create file</Title>
@@ -10,7 +9,7 @@
 <SCRIPT mode="1" state="1">
 <MSCRI><![CDATA[! --------------- file path -----------------------------------------
 :  SET &AGENT_CURR_DIR# = GET_VAR('UC_EX_PATH_TEMP', &AGENT#)
-:  SET &UC4RB_OPS_FILENAME# = "&UC4RB_OPS_FILENAME#-&$TOP_PROCESSFLOW_RUNID#.xml"
+:  SET &UC4RB_OPS_FILENAME# = "&UC4RB_OPS_FILENAME#-&$RUNID#.xml"
 :  set &UC4RB_OPS_FILE_PATH# = STR_CAT(&AGENT_CURR_DIR#,&UC4RB_OPS_FILENAME#)
 
 ! ----------------- Writing File-------------------------------------
