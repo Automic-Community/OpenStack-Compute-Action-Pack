@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-15"?>
-<uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
+<?xml version="1.0" encoding="ISO-8859-15" standalone="no"?><uc-export clientvers="11.0.0">
 <JOBI name="PCK.AUTOMIC_OPENSTACK.PUB.INCLUDE.ATTACH_RESOURCE">
 <HEADER state="1">
 <Title>attach the openstack jar to current agent</Title>
@@ -11,7 +10,7 @@
 <MSCRI><![CDATA[:ATTACH_RES "PCK.AUTOMIC_OPENSTACK.PRV.STORE" ,"OPENSTACK", C, N
 
 ! Setting jar class path into variable
-:SET &UC4RB_OPS_PATH_JAR#= STR_CAT(&$AGENT_RESOURCES_CLIENT#,"openstacktool.jar")]]></MSCRI>
+:SET &UC4RB_OPS_PATH_JAR#= STR_CAT(&$AGENT_RESOURCES_CLIENT#,"openstack-tool.jar")]]></MSCRI>
 </SCRIPT>
 <DOCU_Docu state="1" type="text">
 <DOC/>
