@@ -23,93 +23,83 @@ import com.automic.openstack.util.Validator;
  * 
  */
 /**
- * This class is used to do authentication and generate the authorization token
- * which will send as request header in all the other Openstack service
- * requests.Along with the token it provides the service end points which along
- * with the above information is written in the xml file at the path mentioned
- * in the filePath
+ * This class is used to do authentication and generate the authorization token which will send as request header in all
+ * the other Openstack service requests.Along with the token it provides the service end points which along with the
+ * above information is written in the xml file at the path mentioned in the filePath
  */
 public class GetTokenAction extends AbstractHttpAction {
 
-	private static final Logger LOGGER = LogManager
-			.getLogger(GetTokenAction.class);
-	private static final String TENANT = "tenant";
+    private static final Logger LOGGER = LogManager.getLogger(GetTokenAction.class);
+    private static final String TENANT = "tenant";
 
-	private String username;
-	private String password;
-	private String tenantName;
+    private String username;
+    private String password;
+    private String tenantName;
 
-	public GetTokenAction() {
+    public GetTokenAction() {
 
-		addOption("baseurl", true, "Identity Service Endpoint");
-		addOption("username", true, "Username for Openstack");
-		addOption("password", true, "Password for Openstack");
-		addOption("tenantname", false, "Tenant/Project Name");
+        addOption("baseurl", true, "Identity Service Endpoint");
+        addOption("username", true, "Username for Openstack");
+        addOption("password", true, "Password for Openstack");
+        addOption("tenantname", false, "Tenant/Project Name");
 
-	}
+    }
 
-	@Override
-	protected void initialize() {
-		baseUrl = getOptionValue("baseurl");
-		username = getOptionValue("username");
-		password = getOptionValue("password");
-		tenantName = getOptionValue("tenantname");
-	}
+    @Override
+    protected void initialize() {
+        baseUrl = getOptionValue("baseurl");
+        username = getOptionValue("username");
+        password = getOptionValue("password");
+        tenantName = getOptionValue("tenantname");
+    }
 
-	@Override
-	protected void validate() throws AutomicException {
-		if (!Validator.checkNotEmpty(this.baseUrl)) {
-			LOGGER.error(ExceptionConstants.EMPTY_SERVICE_ENDPOINT);
-			throw new AutomicException(
-					ExceptionConstants.EMPTY_SERVICE_ENDPOINT);
-		}
-		if (!Validator.checkNotEmpty(this.username)) {
-			LOGGER.error(ExceptionConstants.EMPTY_USERNAME);
-			throw new AutomicException(ExceptionConstants.EMPTY_USERNAME);
-		}
-		if (!Validator.checkNotEmpty(this.password)) {
-			LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
-			throw new AutomicException(ExceptionConstants.EMPTY_PASSWORD);
-		}
-	}
+    @Override
+    protected void validate() throws AutomicException {
+        if (!Validator.checkNotEmpty(this.baseUrl)) {
+            LOGGER.error(ExceptionConstants.EMPTY_SERVICE_ENDPOINT);
+            throw new AutomicException(ExceptionConstants.EMPTY_SERVICE_ENDPOINT);
+        }
+        if (!Validator.checkNotEmpty(this.username)) {
+            LOGGER.error(ExceptionConstants.EMPTY_USERNAME);
+            throw new AutomicException(ExceptionConstants.EMPTY_USERNAME);
+        }
+        if (!Validator.checkNotEmpty(this.password)) {
+            LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
+            throw new AutomicException(ExceptionConstants.EMPTY_PASSWORD);
+        }
+    }
 
-	@Override
-	/**
-	 * Authenticates and generates a token by calling http://baseUrl/tokens
-	 * */
-	protected void executeSpecific() throws AutomicException {
+    @Override
+    /**
+     * Authenticates and generates a token by calling http://baseUrl/tokens
+     */
+    protected void executeSpecific() throws AutomicException {
 
-		AuthenticationTokenSevice ats = AuthenticationTokenSevice
-				.getAuthenticationTokenSevice(client);
-		prepareOutput(ats.executeAuthenticationTokenSevice(baseUrl, username,
-				password, tenantName));
+        AuthenticationTokenSevice ats = AuthenticationTokenSevice.getAuthenticationTokenSevice(client);
 
-	}
+        prepareOutput(ats.executeAuthenticationTokenSevice(baseUrl, username, password, tenantName));
 
-	/**
-	 * This method prepare the output xml by converting the json response into
-	 * xml which is then written to the file at the path provided
-	 */
+    }
 
-	private void prepareOutput(JSONObject jsonObj) throws AutomicException {
+    /**
+     * This method prepare the output xml by converting the json response into xml which is then written to the file at
+     * the path provided
+     */
 
-		JSONObject tokenJson = jsonObj.getJSONObject(Constants.ACCESS).getJSONObject(
-				Constants.TOKEN);
+    private void prepareOutput(JSONObject jsonObj) throws AutomicException {
 
-		if (tokenJson.has(TENANT)) {
-			JSONObject tenantJson = tokenJson.getJSONObject(TENANT);
-			ConsoleWriter.writeln("UC4RB_OPS_TENANT_ID ::="
-					+ tenantJson.getString(Constants.ID));
-		}
-		Long expiryTokenTime = calcTokenExpiryTime(
-				tokenJson.getString(Constants.EXPIRES),
-				tokenJson.getString(Constants.ISSUED_AT),dateFormat, currentAETime);
-		AuthenticationToken authToken = new AuthenticationToken(baseUrl,
-				username, password, tenantName, tokenJson.getString(Constants.ID),
-				expiryTokenTime);
+        JSONObject tokenJson = jsonObj.getJSONObject(Constants.ACCESS).getJSONObject(Constants.TOKEN);
 
-		ConsoleWriter.writeln("UC4RB_OPS_AUTH_TOKEN ::="
-				+ CommonUtil.encrypt(authToken.toString()));
-	}
+        if (tokenJson.has(TENANT)) {
+            JSONObject tenantJson = tokenJson.getJSONObject(TENANT);
+            ConsoleWriter.writeln("UC4RB_OPS_TENANT_ID ::=" + tenantJson.getString(Constants.ID));
+        }
+        Long expiryTokenTime = calcTokenExpiryTime(tokenJson.getString(Constants.EXPIRES),
+                tokenJson.getString(Constants.ISSUED_AT), currentAETime);
+        AuthenticationToken authToken = new AuthenticationToken(baseUrl, username, password, tenantName,
+                tokenJson.getString(Constants.ID), expiryTokenTime);
+
+        ConsoleWriter.writeln("UC4RB_OPS_AUTH_TOKEN ::=" + CommonUtil.encrypt(authToken.toString()));
+    }
 
 }

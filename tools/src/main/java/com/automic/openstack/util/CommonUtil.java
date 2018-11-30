@@ -90,15 +90,13 @@ public final class CommonUtil {
 		boolean ret = false;
 		if (Validator.checkNotEmpty(value)) {
 			final String upperCaseValue = value.toUpperCase();
-			ret = YES.equals(upperCaseValue) || TRUE.equals(upperCaseValue)
-					|| ONE.equals(upperCaseValue);
+			ret = YES.equals(upperCaseValue) || TRUE.equals(upperCaseValue) || ONE.equals(upperCaseValue);
 		}
 		return ret;
 	}
 
 	/**
-	 * Method to copy contents of an {@link InputStream} to a
-	 * {@link OutputStream}
+	 * Method to copy contents of an {@link InputStream} to a {@link OutputStream}
 	 * 
 	 * @param source
 	 *            {@link InputStream} to read from
@@ -106,8 +104,7 @@ public final class CommonUtil {
 	 *            {@link OutputStream} to write to
 	 * @throws AutomicException
 	 */
-	public static void copyData(final InputStream source,
-			final OutputStream dest) throws AutomicException {
+	public static void copyData(final InputStream source, final OutputStream dest) throws AutomicException {
 		final byte[] buffer = new byte[Constants.IO_BUFFER_SIZE];
 		int length;
 		try {
@@ -117,8 +114,7 @@ public final class CommonUtil {
 			}
 
 		} catch (final IOException e) {
-			final String msg = String.format(
-					ExceptionConstants.UNABLE_TO_COPY_DATA, source);
+			final String msg = String.format(ExceptionConstants.UNABLE_TO_COPY_DATA, source);
 			LOGGER.error(msg, e);
 			throw new AutomicException(msg);
 		} finally {
@@ -127,8 +123,7 @@ public final class CommonUtil {
 				source.close();
 				dest.close();
 			} catch (final IOException e) {
-				final String msg = String.format(
-						ExceptionConstants.UNABLE_TO_COPY_DATA, source);
+				final String msg = String.format(ExceptionConstants.UNABLE_TO_COPY_DATA, source);
 				LOGGER.error(msg, e);
 				throw new AutomicException(msg);
 			}
@@ -144,8 +139,7 @@ public final class CommonUtil {
 	 * @param content
 	 * @throws IOException
 	 */
-	public static void createFile(String filePath, String content)
-			throws AutomicException {
+	public static void createFile(String filePath, String content) throws AutomicException {
 
 		File file = new File(filePath);
 		boolean success = true;
@@ -154,8 +148,7 @@ public final class CommonUtil {
 		} catch (IOException e) {
 			success = false;
 			LOGGER.error("Error while writing file ", e);
-			throw new AutomicException(String.format(
-					ExceptionConstants.UNABLE_TO_WRITE_FILE, filePath));
+			throw new AutomicException(String.format(ExceptionConstants.UNABLE_TO_WRITE_FILE, filePath));
 		} finally {
 			if (!success && !file.delete()) {
 				LOGGER.error("Error deleting file " + file.getName());
@@ -184,28 +177,24 @@ public final class CommonUtil {
 	 * @param rootTag
 	 * @throws DockerException
 	 */
-	public static void json2xml(JSONObject json, String filePath, String rootTag)
-			throws AutomicException {
-		createFile(filePath, org.json.XML.toString(
-				JSON2XMLAdapter.adoptJsonToXml(json), rootTag));
+	public static void json2xml(JSONObject json, String filePath, String rootTag) throws AutomicException {
+		createFile(filePath, org.json.XML.toString(JSON2XMLAdapter.adoptJsonToXml(json), rootTag));
 	}
 
 	/**
-	 * Method to convert a stream to xml and then write it to a File specified.
-	 * It also appends a Root tag to xml.
+	 * Method to convert a stream to xml and then write it to a File specified. It
+	 * also appends a Root tag to xml.
 	 * 
 	 * @param is
 	 * @param filePath
 	 * @param rootTag
 	 * @throws DockerException
 	 */
-	public static void jsonResponse2xml(InputStream is, String filePath,
-			String rootTag) throws AutomicException {
+	public static void jsonResponse2xml(InputStream is, String filePath, String rootTag) throws AutomicException {
 		json2xml(jsonResponse(is), filePath, rootTag);
 	}
 
-	public static void jsonResponse2xml(InputStream is, String filePath)
-			throws AutomicException {
+	public static void jsonResponse2xml(InputStream is, String filePath) throws AutomicException {
 		json2xml(jsonResponse(is), filePath, null);
 	}
 
@@ -213,8 +202,7 @@ public final class CommonUtil {
 
 		try {
 			input = AESEncryptDecrypt.encrypt(input);
-		} catch (InvalidKeyException | NoSuchAlgorithmException
-				| NoSuchPaddingException | IllegalBlockSizeException
+		} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
 				| BadPaddingException e) {
 
 			LOGGER.error("Error while encryption ", e);
@@ -236,15 +224,14 @@ public final class CommonUtil {
 	}
 
 	/**
-	 * This method is useful for reading small files. It create
-	 * {@code JSONObject} from file content
+	 * This method is useful for reading small files. It create {@code JSONObject}
+	 * from file content
 	 * 
 	 * @param parameterFilePath
 	 * @return
 	 * @throws AutomicException
 	 */
-	public static JSONObject getJSONObjectByFilePath(String parameterFilePath)
-			throws AutomicException {
+	public static JSONObject getJSONObjectByFilePath(String parameterFilePath) throws AutomicException {
 		Path path = Paths.get(parameterFilePath);
 		JSONObject jsonObj = null;
 		try {
@@ -259,16 +246,15 @@ public final class CommonUtil {
 	}
 
 	/**
-	 * Method to prepare a map of query parameters. It splits the string using
-	 * two delimiters {@link ListSnapshotsAction#QUERY_DELIMETER} and
+	 * Method to prepare a map of query parameters. It splits the string using two
+	 * delimiters {@link ListSnapshotsAction#QUERY_DELIMETER} and
 	 * {@link ListSnapshotsAction#VAL_DELIMETER} and creates the key-value pair.
 	 *
 	 * @param queryArgs
 	 *            Query arguments as one string
 	 * @return map
 	 */
-	public static Map<String, String> prepareQueryParamsMap(
-			final String queryArgs) {
+	public static Map<String, String> prepareQueryParamsMap(final String queryArgs) {
 		Map<String, String> params = new LinkedHashMap<String, String>();
 		String[] splitArgs = queryArgs.split(Constants.QUERY_DELIMETER);
 		if (splitArgs != null && splitArgs.length > 0) {
@@ -277,8 +263,7 @@ public final class CommonUtil {
 				if (queryParam != null && queryParam.length == 2) {
 					String key = queryParam[0].trim();
 					String value = queryParam[1].trim();
-					if (Validator.checkNotEmpty(key)
-							&& Validator.checkNotEmpty(value)) {
+					if (Validator.checkNotEmpty(key) && Validator.checkNotEmpty(value)) {
 						params.put(key, value);
 					}
 				}
@@ -288,16 +273,15 @@ public final class CommonUtil {
 	}
 
 	/**
-	 * This method convert provided string to date object according to given
-	 * format .
+	 * This method convert provided string to date object according to given format
+	 * .
 	 * 
 	 * @param givenDate
 	 * @param format
 	 * @return date object
 	 * @throws AutomicException
 	 */
-	public static Date convert2date(String givenDate, String format)
-			throws AutomicException {
+	public static Date convert2date(String givenDate, String format) throws AutomicException {
 		Date date = null;
 		SimpleDateFormat dateFormat = new SimpleDateFormat(format);
 		dateFormat.setTimeZone(TimeZone.getTimeZone(UTC));
@@ -316,27 +300,34 @@ public final class CommonUtil {
 	 * 
 	 * @param expiry
 	 * @param issuedAt
-	 * @param dateFormat
 	 * @param currentAEDate
 	 * @return expiry token time in {@link Long}
 	 * @throws AutomicException
 	 */
-	public static Long calcTokenExpiryTime(String expiry, String issuedAt, String dateFormat,
-			String currentAEDate) throws AutomicException {
+	public static Long calcTokenExpiryTime(String expiry, String issuedAt, String currentAEDate)
+			throws AutomicException {
 
 		Long tokenexpireTime = null;
 		if (!"null".equals(expiry)) {
-			long opsTokenExpiryTime = convert2date(expiry,
-					dateFormat).getTime();
-			long opsTokenIssueTime = convert2date(issuedAt,
-					dateFormat).getTime();
+			long opsTokenExpiryTime = convert2date(expiry, getSystemProperty(Constants.ENV_OPS_TOKEN_EXPIRE_DATE_FORMAT,
+					Constants.OPS_TOKEN_EXPIRE_DATE_FORMAT_DEFAULT)).getTime();
+			long opsTokenIssueTime = convert2date(issuedAt, getSystemProperty(Constants.ENV_OPS_TOKEN_ISSUE_DATE_FORMAT,
+					Constants.OPS_TOKEN_ISSUE_DATE_FORMAT_DEFAULT)).getTime();
 
 			long timeStamp = opsTokenExpiryTime - opsTokenIssueTime;
-			long aeTime = CommonUtil.convert2date(currentAEDate,
-					Constants.AE_DATE_FORMAT).getTime();
+			long aeTime = CommonUtil.convert2date(currentAEDate, Constants.AE_DATE_FORMAT).getTime();
 			tokenexpireTime = aeTime + timeStamp;
 		}
 		return tokenexpireTime;
+	}
+
+	private static String getSystemProperty(String property, String defaultValue) {
+
+		String propertyValue = System.getenv(property);
+		if (propertyValue == null || propertyValue.isEmpty()) {
+			propertyValue = defaultValue;
+		}
+		return propertyValue;
 	}
 
 }

@@ -1,7 +1,8 @@
 # Package Build Configuration
 name: PCK.AUTOMIC_OPENSTACK
 
-source: ae
+appdata: ae/APPDATA
+source: ae/content
 
 # binary object resource mapping will be defined here
 # please add resources here
