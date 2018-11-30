@@ -316,19 +316,20 @@ public final class CommonUtil {
 	 * 
 	 * @param expiry
 	 * @param issuedAt
+	 * @param dateFormat
 	 * @param currentAEDate
 	 * @return expiry token time in {@link Long}
 	 * @throws AutomicException
 	 */
-	public static Long calcTokenExpiryTime(String expiry, String issuedAt,
+	public static Long calcTokenExpiryTime(String expiry, String issuedAt, String dateFormat,
 			String currentAEDate) throws AutomicException {
 
 		Long tokenexpireTime = null;
 		if (!"null".equals(expiry)) {
 			long opsTokenExpiryTime = convert2date(expiry,
-					Constants.OPS_TOKEN_EXPIRE_DATE_FORMAT).getTime();
+					dateFormat).getTime();
 			long opsTokenIssueTime = convert2date(issuedAt,
-					Constants.OPS_TOKEN_ISSUE_DATE_FORMAT).getTime();
+					dateFormat).getTime();
 
 			long timeStamp = opsTokenExpiryTime - opsTokenIssueTime;
 			long aeTime = CommonUtil.convert2date(currentAEDate,

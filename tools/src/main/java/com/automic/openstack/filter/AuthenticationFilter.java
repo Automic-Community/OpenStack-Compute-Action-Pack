@@ -35,12 +35,14 @@ public class AuthenticationFilter extends ClientFilter {
 	private String currentAEDate;
 	private Client client;
 	private int timeoutCriteria;
+	private String dateFormat;
 
 	public AuthenticationFilter(String currentDate, Client client,
-			int timeoutCriteria) {
+			int timeoutCriteria, String dateFormat) {
 		this.currentAEDate = currentDate;
 		this.client = client;
 		this.timeoutCriteria = timeoutCriteria;
+		this.dateFormat = dateFormat;
 	}
 
 	private static final Logger LOGGER = LogManager
@@ -78,7 +80,7 @@ public class AuthenticationFilter extends ClientFilter {
 							.getJSONObject(Constants.TOKEN);
 					Long expiryTokenTime = calcTokenExpiryTime(
 							tokenJson.getString(Constants.EXPIRES),
-							tokenJson.getString(Constants.ISSUED_AT),
+							tokenJson.getString(Constants.ISSUED_AT),dateFormat,
 							currentAEDate);
 					authToken = new AuthenticationToken(authToken.getBaseurl(),
 							authToken.getUserName(), authToken.getPassword(),

@@ -41,10 +41,10 @@ public class GetTokenAction extends AbstractHttpAction {
 
 	public GetTokenAction() {
 
-		addOption("baseurl", true, "Identity service endpoint");
-		addOption("username", true, "Username for openstack");
-		addOption("password", true, "password for openstack");
-		addOption("tenantname", false, "Tenant/Project name");
+		addOption("baseurl", true, "Identity Service Endpoint");
+		addOption("username", true, "Username for Openstack");
+		addOption("password", true, "Password for Openstack");
+		addOption("tenantname", false, "Tenant/Project Name");
 
 	}
 
@@ -54,7 +54,6 @@ public class GetTokenAction extends AbstractHttpAction {
 		username = getOptionValue("username");
 		password = getOptionValue("password");
 		tenantName = getOptionValue("tenantname");
-
 	}
 
 	@Override
@@ -72,7 +71,6 @@ public class GetTokenAction extends AbstractHttpAction {
 			LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
 			throw new AutomicException(ExceptionConstants.EMPTY_PASSWORD);
 		}
-
 	}
 
 	@Override
@@ -105,7 +103,7 @@ public class GetTokenAction extends AbstractHttpAction {
 		}
 		Long expiryTokenTime = calcTokenExpiryTime(
 				tokenJson.getString(Constants.EXPIRES),
-				tokenJson.getString(Constants.ISSUED_AT), currentAETime);
+				tokenJson.getString(Constants.ISSUED_AT),dateFormat, currentAETime);
 		AuthenticationToken authToken = new AuthenticationToken(baseUrl,
 				username, password, tenantName, tokenJson.getString(Constants.ID),
 				expiryTokenTime);
