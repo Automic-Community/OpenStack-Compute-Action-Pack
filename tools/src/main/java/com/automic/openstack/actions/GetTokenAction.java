@@ -31,87 +31,87 @@ import com.automic.openstack.util.Validator;
  */
 public class GetTokenAction extends AbstractHttpAction {
 
-	private static final Logger LOGGER = LogManager
-			.getLogger(GetTokenAction.class);
-	private static final String TENANT = "tenant";
+    private static final Logger LOGGER = LogManager
+            .getLogger(GetTokenAction.class);
+    private static final String TENANT = "tenant";
 
-	private String username;
-	private String password;
-	private String tenantName;
+    private String username;
+    private String password;
+    private String tenantName;
 
-	public GetTokenAction() {
+    public GetTokenAction() {
 
-		addOption("baseurl", true, "Identity service endpoint");
-		addOption("username", true, "Username for openstack");
-		addOption("password", true, "password for openstack");
-		addOption("tenantname", false, "Tenant/Project name");
+        addOption("baseurl", true, "Identity service endpoint");
+        addOption("username", true, "Username for openstack");
+        addOption("password", true, "password for openstack");
+        addOption("tenantname", false, "Tenant/Project name");
 
-	}
+    }
 
-	@Override
-	protected void initialize() {
-		baseUrl = getOptionValue("baseurl");
-		username = getOptionValue("username");
-		password = getOptionValue("password");
-		tenantName = getOptionValue("tenantname");
+    @Override
+    protected void initialize() {
+        baseUrl = getOptionValue("baseurl");
+        username = getOptionValue("username");
+        password = getOptionValue("password");
+        tenantName = getOptionValue("tenantname");
 
-	}
+    }
 
-	@Override
-	protected void validate() throws AutomicException {
-		if (!Validator.checkNotEmpty(this.baseUrl)) {
-			LOGGER.error(ExceptionConstants.EMPTY_SERVICE_ENDPOINT);
-			throw new AutomicException(
-					ExceptionConstants.EMPTY_SERVICE_ENDPOINT);
-		}
-		if (!Validator.checkNotEmpty(this.username)) {
-			LOGGER.error(ExceptionConstants.EMPTY_USERNAME);
-			throw new AutomicException(ExceptionConstants.EMPTY_USERNAME);
-		}
-		if (!Validator.checkNotEmpty(this.password)) {
-			LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
-			throw new AutomicException(ExceptionConstants.EMPTY_PASSWORD);
-		}
+    @Override
+    protected void validate() throws AutomicException {
+        if (!Validator.checkNotEmpty(this.baseUrl)) {
+            LOGGER.error(ExceptionConstants.EMPTY_SERVICE_ENDPOINT);
+            throw new AutomicException(
+                    ExceptionConstants.EMPTY_SERVICE_ENDPOINT);
+        }
+        if (!Validator.checkNotEmpty(this.username)) {
+            LOGGER.error(ExceptionConstants.EMPTY_USERNAME);
+            throw new AutomicException(ExceptionConstants.EMPTY_USERNAME);
+        }
+        if (!Validator.checkNotEmpty(this.password)) {
+            LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
+            throw new AutomicException(ExceptionConstants.EMPTY_PASSWORD);
+        }
 
-	}
+    }
 
-	@Override
-	/**
-	 * Authenticates and generates a token by calling http://baseUrl/tokens
-	 * */
-	protected void executeSpecific() throws AutomicException {
+    @Override
+    /**
+     * Authenticates and generates a token by calling http://baseUrl/tokens
+     * */
+    protected void executeSpecific() throws AutomicException {
 
-		AuthenticationTokenSevice ats = AuthenticationTokenSevice
-				.getAuthenticationTokenSevice(client);
-		prepareOutput(ats.executeAuthenticationTokenSevice(baseUrl, username,
-				password, tenantName));
+        AuthenticationTokenSevice ats = AuthenticationTokenSevice
+                .getAuthenticationTokenSevice(client);
+        prepareOutput(ats.executeAuthenticationTokenSevice(baseUrl, username,
+                password, tenantName));
 
-	}
+    }
 
-	/**
-	 * This method prepare the output xml by converting the json response into
-	 * xml which is then written to the file at the path provided
-	 */
+    /**
+     * This method prepare the output xml by converting the json response into
+     * xml which is then written to the file at the path provided
+     */
 
-	private void prepareOutput(JSONObject jsonObj) throws AutomicException {
+    private void prepareOutput(JSONObject jsonObj) throws AutomicException {
 
-		JSONObject tokenJson = jsonObj.getJSONObject(Constants.ACCESS).getJSONObject(
-				Constants.TOKEN);
+        JSONObject tokenJson = jsonObj.getJSONObject(Constants.ACCESS).getJSONObject(
+                Constants.TOKEN);
 
-		if (tokenJson.has(TENANT)) {
-			JSONObject tenantJson = tokenJson.getJSONObject(TENANT);
-			ConsoleWriter.writeln("UC4RB_OPS_TENANT_ID ::="
-					+ tenantJson.getString(Constants.ID));
-		}
-		Long expiryTokenTime = calcTokenExpiryTime(
-				tokenJson.getString(Constants.EXPIRES),
-				tokenJson.getString(Constants.ISSUED_AT), currentAETime);
-		AuthenticationToken authToken = new AuthenticationToken(baseUrl,
-				username, password, tenantName, tokenJson.getString(Constants.ID),
-				expiryTokenTime);
+        if (tokenJson.has(TENANT)) {
+            JSONObject tenantJson = tokenJson.getJSONObject(TENANT);
+            ConsoleWriter.writeln("UC4RB_OPS_TENANT_ID ::="
+                    + tenantJson.getString(Constants.ID));
+        }
+        Long expiryTokenTime = calcTokenExpiryTime(
+                tokenJson.getString(Constants.EXPIRES),
+                tokenJson.getString(Constants.ISSUED_AT), currentAETime);
+        AuthenticationToken authToken = new AuthenticationToken(baseUrl,
+                username, password, tenantName, tokenJson.getString(Constants.ID),
+                expiryTokenTime);
 
-		ConsoleWriter.writeln("UC4RB_OPS_AUTH_TOKEN ::="
-				+ CommonUtil.encrypt(authToken.toString()));
-	}
+        ConsoleWriter.writeln("UC4RB_OPS_AUTH_TOKEN ::="
+                + CommonUtil.encrypt(authToken.toString()));
+    }
 
 }

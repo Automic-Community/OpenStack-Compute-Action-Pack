@@ -50,10 +50,10 @@ public abstract class AbstractHttpAction extends AbstractAction {
     private int timeoutCriteria;
 
     public AbstractHttpAction() {
-    	addOption(Constants.READ_TIMEOUT, true, "Read timeout");
-        addOption(Constants.CONNECTION_TIMEOUT, true, "connection timeout");
-        addOption(Constants.CURRENT_AE_DATE, true, "Current Automation engine date");
-        addOption(Constants.TIMEOUT_CRITERIA, true, "Specify timeout criteria");
+    	addOption(Constants.READ_TIMEOUT, true, "Read Timeout");
+        addOption(Constants.CONNECTION_TIMEOUT, true, "Connection Timeout");
+        addOption(Constants.CURRENT_AE_DATE, true, "Current Automation Engine Date");
+        addOption(Constants.TIMEOUT_CRITERIA, true, "Timeout Criteria");
     }
 
     /**
